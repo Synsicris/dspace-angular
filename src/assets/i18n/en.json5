@@ -824,7 +824,7 @@
 
   "breadcrumb.entity-type.Project": "<i class=\"fas fa-shekel-sign\"></i> Consortium",
 
-  "breadcrumb.entity-type.Funding": "<i class=\"fas fa-cubes\"></i> Projects",
+  "breadcrumb.entity-type.Funding": "<i class=\"fas fa-cube\"></i> Projects",
 
   "breadcrumb.entity-type.OrgUnit": "OrgUnit",
 
@@ -9716,7 +9716,7 @@
 
   "query-builder.synsicris.label.entityType.open_researchquestion": "Open research questions",
 
-  "query-builder.synsicris.introduction.alert": "Help",
+  "query-builder.synsicris.introduction.alert": "Help 2-step-search",
 
   "layout.tab.header.Projekttraeger": "Programme and Funding information",
 
@@ -11352,6 +11352,14 @@
 
   "search.filters.filter.dctermsDateaccepted.min.label": "Start",
 
-  "search.filters.filter.dctermsDateaccepted.max.label": "End"
+  "search.filters.filter.dctermsDateaccepted.max.label": "End",
+
+  "search.filters.applied.charts.graphpubldate.x_label": "Count",
+
+  "search.filters.applied.charts.graphpubldate.y_label": "Year",
+
+  "search.filters.applied.charts.grapheventdate.x_label": "Count",
+
+  "search.filters.applied.charts.grapheventdate.y_label": "Year"
 
 }

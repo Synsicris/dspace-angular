@@ -15068,7 +15068,7 @@
   "breadcrumb.entity-type.Project": "<i class=\"fas fa-shekel-sign\"></i> Verbund",
 
   // "breadcrumb.entity-type.Funding": "<i class="fas fa-cubes"></i> Project",
-  "breadcrumb.entity-type.Funding": "<i class=\"fas fa-cubes\"></i> Projekte",
+  "breadcrumb.entity-type.Funding": "<i class=\"fas fa-cube\"></i> Projekte",
 
   // "breadcrumb.entity-type.impactpathway": "Impact Pathway",
   "breadcrumb.entity-type.impactpathway": "Wirkungspfad",
@@ -16974,6 +16974,21 @@
   "search.filters.filter.dctermsDateaccepted.min.label": "Start",
 
   // "search.filters.filter.dctermsDateaccepted.max.label": "End",
-  "search.filters.filter.dctermsDateaccepted.max.label": "Ende"
+  "search.filters.filter.dctermsDateaccepted.max.label": "Ende",
+
+  // "search.filters.applied.charts.graphpubldate.x_label": "Count",
+  "search.filters.applied.charts.graphpubldate.x_label": "Anzahl",
+
+  // "search.filters.applied.charts.graphpubldate.y_label": "Year",
+  "search.filters.applied.charts.graphpubldate.y_label": "Jahr",
+
+  // "search.filters.applied.charts.grapheventdate.x_label": "Count",
+  "search.filters.applied.charts.grapheventdate.x_label": "Anzahl",
+
+  // "search.filters.applied.charts.grapheventdate.y_label": "Year",
+  "search.filters.applied.charts.grapheventdate.y_label": "Jahr",
+
+  // "query-builder.synsicris.introduction.alert": "Help 2-step-search",
+  "query-builder.synsicris.introduction.alert": "Diese 2-Schritt Suche bietet vielfältige Such- und Filterfunktionen. Diese Suche findet in den freigegebenen Informationen der im Monitoring-Tool erfassten Vorhaben (Verbünde und Einzelprojekte) statt.</br>In <b>Schritt 1</b> legen Sie fest, in welchen Vorhaben gesucht werden soll.</br>In <b>Schritt 2</b> können Sie dann die Informationen filtern und/oder die Freitextsuche verwenden."
 
 }
