@@ -520,7 +520,7 @@ function addImpactPathwayTaskToImpactPathwayStep(state: ImpactPathwayState, acti
   const newStep = Object.assign(new ImpactPathwayStep(), step, {
     tasks: [...step.tasks, action.payload.task]
   });
-  return mapIPWState(state, newState, action.payload.impactPathwayId, stepIndex, newStep);
+  return mapIPWState(state, newState, action.payload.impactPathwayId, stepIndex, newStep, false);
 }
 
 function normalizeImpactPathwayObjectsOnRehydrate(state: ImpactPathwayState) {
@@ -615,7 +615,8 @@ function addImpactPathwaySubTaskToImpactPathwayTask(state: ImpactPathwayState, a
   return Object.assign({}, state, {
     objects: Object.assign({}, state.objects, {
       [action.payload.impactPathwayId]: newImpactPathway
-    })
+    }),
+    processing: false
   });
 }
 

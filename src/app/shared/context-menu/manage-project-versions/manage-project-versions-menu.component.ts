@@ -89,7 +89,14 @@ export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponen
 
     this.isCoordinatorOfProject$ = this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, this.contextMenuObject.self);
     this.isFounderOfProject$ = this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, this.contextMenuObject.self);
-    this.isReaderOfProject$ = this.authorizationService.isAuthorized(FeatureID.isReaderOfProject, this.contextMenuObject.self);
+    this.isReaderOfProject$ =
+      forkJoin([
+        this.authorizationService.isAuthorized(FeatureID.isReaderOfProject, this.contextMenuObject.self),
+        this.authorizationService.isAuthorized(FeatureID.isExternalreaderOfProject, this.contextMenuObject.self)
+      ])
+        .pipe(
+          map(([reader, externalReader]) => reader || externalReader)
+        );
     this.isAuthorized$ =
       forkJoin([
         this.isCoordinatorOfProject$.pipe(take(1)),

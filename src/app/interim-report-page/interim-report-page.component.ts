@@ -35,6 +35,11 @@ export class InterimReportPageComponent implements OnInit {
   isFunderProject$: Observable<boolean>;
 
   /**
+   * If the current user is a project reader
+   */
+  isProjectReader$: Observable<boolean>;
+
+  /**
    * The project displayed on this page
    */
   interimReportRD$: Observable<RemoteData<Item>>;
@@ -70,6 +75,10 @@ export class InterimReportPageComponent implements OnInit {
 
     this.isFunderProject$ = this.route.data.pipe(
       map((data) => (data.isFunderProject) as boolean)
+    );
+
+    this.isProjectReader$ = this.route.data.pipe(
+      map((data) => (data.isProjectReader) as boolean)
     );
 
     this.fundingCommunity$ = this.route.data.pipe(

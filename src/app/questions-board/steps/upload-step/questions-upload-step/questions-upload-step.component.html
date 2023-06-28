@@ -9,17 +9,17 @@
   <ng-container ngProjectAs="panelContent">
     <div class="container py-2">
 
-      <ng-container *ngIf="!hasAnyFunderRole">
+      <ng-container *ngIf="!isProjectReader && !hasAnyFunderRole">
         <ds-alert [content]="'submission.sections.upload.info'"
-        [dismissible]="true"
-        [type]="AlertTypeEnum.Info"></ds-alert>
+                  [dismissible]="true"
+                  [type]="AlertTypeEnum.Info"></ds-alert>
 
         <ds-uploader *ngIf="(initializedUploaderOptions | async)"
-                      [dropMsg]="dropMsg"
-                      [dropOverDocumentMsg]="dropOverDocumentMsg"
-                      [enableDragOverDocument]="true"
-                      [uploadFilesOptions]="uploadFilesOptions"
-                      (onCompleteItem)="onCompleteItem($event)"
+                     [dropMsg]="dropMsg"
+                     [dropOverDocumentMsg]="dropOverDocumentMsg"
+                     [enableDragOverDocument]="true"
+                     [uploadFilesOptions]="uploadFilesOptions"
+                     (onCompleteItem)="onCompleteItem($event)"
                       (onUploadError)="onUploadError()"></ds-uploader>
       </ng-container>
 
@@ -52,20 +52,20 @@
 
         <ng-container *ngFor="let fileEntry of fileList">
           <ds-submission-upload-section-file
-                                            [singleAccessCondition]="singleAccessCondition"
-                                            [availableAccessConditionOptions]="availableAccessConditionOptions"
-                                            [collectionId]="(getCollection() | async)"
-                                            [configMetadataForm]="(configMetadataForm$ | async)"
-                                            [collectionPolicyType]="collectionPolicyType"
-                                            [fileId]="fileIndexes[fileList.indexOf(fileEntry)]"
-                                            [fileIndex]="fileList.indexOf(fileEntry)"
-                                            [fileName]="fileNames[fileList.indexOf(fileEntry)]"
-                                            [sectionId]="uploadConfigId"
-                                            [questionBoardId]="questionsBoardObject.id"
-                                            [disableActions]="hasAnyFunderRole"
-                                            [questionsBoardEditMode]="questionsBoardEditMode"
-                                            (deleteUploadedFile)="onFileEventChanges($event)"
-                                            (editUploadedFile)="onFileEventChanges($event)"
+            [singleAccessCondition]="singleAccessCondition"
+            [availableAccessConditionOptions]="availableAccessConditionOptions"
+            [collectionId]="(getCollection() | async)"
+            [configMetadataForm]="(configMetadataForm$ | async)"
+            [collectionPolicyType]="collectionPolicyType"
+            [fileId]="fileIndexes[fileList.indexOf(fileEntry)]"
+            [fileIndex]="fileList.indexOf(fileEntry)"
+            [fileName]="fileNames[fileList.indexOf(fileEntry)]"
+            [sectionId]="uploadConfigId"
+            [questionBoardId]="questionsBoardObject.id"
+            [disableActions]="isProjectReader || hasAnyFunderRole"
+            [questionsBoardEditMode]="questionsBoardEditMode"
+            (deleteUploadedFile)="onFileEventChanges($event)"
+            (editUploadedFile)="onFileEventChanges($event)"
                                             ></ds-submission-upload-section-file>
           <div class="row">
             <div class="col-md-12">

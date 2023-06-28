@@ -1,6 +1,7 @@
 import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 import { ComparedVersionItemStatus } from 'src/app/core/project/project-version.service';
 import { hasValue } from '../empty.util';
+import { TranslateService } from '@ngx-translate/core';
 import { DirectiveAttributes } from '../utils/directive-attributes.interface';
 import { addClassesAndTitle } from '../utils/renderer-utils';
 
@@ -15,7 +16,8 @@ export class IpwItemMetadataStatusDirective implements OnChanges {
 
   constructor(
     private elem: ElementRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private translate: TranslateService
   ) {
   }
 
@@ -32,37 +34,37 @@ export class IpwItemMetadataStatusDirective implements OnChanges {
         case ComparedVersionItemStatus.New:
           attributes = {
             classNames: ['far', 'fa-plus-square'],
-            title: '(title)IPW staus: New'
+            title: this.translate.instant('impact-pathway.metadata-status.icon.title.status.new')
           };
           break;
         case ComparedVersionItemStatus.Changed:
           attributes = {
             classNames: ['fas', 'fa-redo-alt'],
-            title: '(title)IPW staus: Changed'
+            title: this.translate.instant('impact-pathway.metadata-status.icon.title.status.changed')
           };
           break;
         case ComparedVersionItemStatus.Done:
           attributes = {
             classNames: ['far', 'fa-check-circle'],
-            title: '(title)IPW staus: Done'
+            title: this.translate.instant('impact-pathway.metadata-status.icon.title.status.done')
           };
           break;
         case ComparedVersionItemStatus.Canceled:
           attributes = {
             classNames: ['fas', 'fa-ban'],
-            title: '(title)IPW staus: Canceled'
+            title: this.translate.instant('impact-pathway.metadata-status.icon.title.status.canceled')
           };
           break;
         case ComparedVersionItemStatus.Archieved:
           attributes = {
             classNames: ['fas', 'fa-check-circle'],
-            title: '(title)IPW staus: Archieved'
+            title: this.translate.instant('impact-pathway.metadata-status.icon.title.status.archieved')
           };
           break;
         case ComparedVersionItemStatus.PartlyArchieved:
           attributes = {
             classNames: ['fas', 'fa-hourglass-half'],
-            title: '(title)IPW staus: PartlyArchieved'
+            title: this.translate.instant('impact-pathway.metadata-status.icon.title.status.partly-archieved')
           };
           break;
       }

@@ -55,6 +55,11 @@ export class QuestionsBoardStepComponent implements OnInit {
   @Input() isFunderProject: boolean;
 
   /**
+   * If the current user is project reader
+   */
+  @Input() isProjectReader: boolean;
+
+  /**
    * The prefix to use for the i19n keys
    */
   @Input() messagePrefix: string;

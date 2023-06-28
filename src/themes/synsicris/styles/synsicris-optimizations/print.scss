@@ -2,15 +2,22 @@
 PRINT STYLES
 an !important is necessary in many places to overwrite the standard styles
 Maybe a more elegant, generic solution can be found for it
+
+HINT: 230603 
+deactivated for the time being, until the styles, if still necessary, 
+have been added to the new print styles created by 4Science. 
+Then this file will be deleted.
 ---------------------------------------------------------------------------- */
+
+/* 
 
 @media print {
 
-  /* navbar is hidden by default in bootstrap
-  see https://getbootstrap.com/docs/4.0/components/navbar/
-  don't find the bootstrap print file
-  so it has to become visible, and the navigation-contents that are not needed
-  have to be hidden afterwards */
+  // navbar is hidden by default in bootstrap
+  // see https://getbootstrap.com/docs/4.0/components/navbar/
+  // don't find the bootstrap print file
+  // so it has to become visible, and the navigation-contents that are not needed
+  // have to be hidden afterwards
   header ds-themed-navbar .navbar {  
     display:block !important;       // make navbar with logo visible
     border-bottom:none !important;  // hides the border
@@ -83,3 +90,5 @@ Maybe a more elegant, generic solution can be found for it
   } // end #impact-pathway
 
 } // end @media print
+
+*/

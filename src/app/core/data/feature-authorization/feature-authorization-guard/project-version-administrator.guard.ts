@@ -30,7 +30,7 @@ export class ProjectVersionAdministratorGuard extends SomeFeatureAuthorizationGu
    * Check group management rights
    */
   getFeatureIDs(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FeatureID[]> {
-    return observableOf([FeatureID.isCoordinatorOfProject, FeatureID.isFunderOfProject, FeatureID.isReaderOfProject]);
+    return observableOf([FeatureID.isCoordinatorOfProject, FeatureID.isFunderOfProject, FeatureID.isReaderOfProject, FeatureID.isExternalreaderOfProject]);
   }
 
   getObjectUrl(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<string> {

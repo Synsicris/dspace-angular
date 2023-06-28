@@ -1,5 +1,6 @@
 import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 import { InternalItemStatus } from '../../../core/submission/edititem-data.service';
+import { TranslateService } from '@ngx-translate/core';
 import { isExploitationPlan, QuestionBoardEntityType } from '../../core/models/questions-board-entity-type.model';
 import { addClassesAndTitle } from '../../../shared/utils/renderer-utils';
 import { DirectiveAttributes } from '../../../shared/utils/directive-attributes.interface';
@@ -23,7 +24,8 @@ export class QbItemMetadataInternalDirective implements OnChanges {
 
   constructor(
     private elem: ElementRef,
-    private renderer: Renderer2) {
+    private renderer: Renderer2,
+    private translate: TranslateService) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -44,13 +46,13 @@ export class QbItemMetadataInternalDirective implements OnChanges {
         case InternalItemStatus.Done:
           attributes = {
             classNames: [],
-            title: '(title)EP staus: done'
+            title: this.translate.instant('questions-board.exploitation-plan.metadata-internal.icon.title.status.done')
           };
           break;
         case InternalItemStatus.Exchange:
           attributes = {
-            classNames: ['fas', 'fa-info-circle', 'text-warning'],
-            title: '(title)EP staus: exchange'
+            classNames: ['fas', 'fa-comment', 'text-warning'], // changed icon (rex 230602)
+            title: this.translate.instant('questions-board.exploitation-plan.metadata-internal.icon.title.status.exchange'),
           };
           break;
       }
@@ -69,13 +71,13 @@ export class QbItemMetadataInternalDirective implements OnChanges {
         case InternalItemStatus.Done:
           attributes = {
             classNames: [],
-            title: '(title)IR staus: done'
+            title: this.translate.instant('questions-board.interim-report.metadata-internal.icon.title.status.done')
           };
           break;
         case InternalItemStatus.Exchange:
           attributes = {
-            classNames: ['fas', 'fa-info-circle', 'text-warning'],
-            title: '(title)IR staus: exchange'
+            classNames: ['fas', 'fa-comment', 'text-warning'], // changed icon (rex 230602)
+            title: this.translate.instant('questions-board.interim-report.metadata-internal.icon.title.status.exchange')
           };
           break;
       }

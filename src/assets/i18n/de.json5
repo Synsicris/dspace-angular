@@ -3521,7 +3521,7 @@
 
   // "form.copy": "Copy",
   // TODO New key - Add a translation
-  "form.copy": "Copy",
+  "form.copy": "Dublizieren",
 
   // "form.discard": "Discard",
   "form.discard": "Verwerfen",
@@ -3628,7 +3628,7 @@
 
   // "form.scrollable-input.search": "Search",
   // TODO New key - Add a translation
-  "form.scrollable-input.search": "Search",
+  "form.scrollable-input.search": "Suche",
 
   // "form.search-help": "Click here to look for an existing correspondence",
   "form.search-help": "Klicken Sie hier, um eine Übereinstimmung zu suchen",
@@ -5140,7 +5140,7 @@
 
   // "item.submission.create": "Create Item",
   // TODO New key - Add a translation
-  "item.submission.create": "Create Item",
+  "item.submission.create": "Kommentar anlegen",
 
   // "item.submission.create.successfully": "Item Created successfully",
   // TODO New key - Add a translation
@@ -5286,7 +5286,7 @@
 
   // "item.version.delete.modal.button.confirm.tooltip": "Delete this version",
   // TODO New key - Add a translation
-  "item.version.delete.modal.button.confirm.tooltip": "Delete this version",
+  "item.version.delete.modal.button.confirm.tooltip": "Diese Version löschen",
 
   // "item.version.delete.modal.button.cancel": "Cancel",
   // TODO New key - Add a translation
@@ -5294,7 +5294,7 @@
 
   // "item.version.delete.modal.button.cancel.tooltip": "Do not delete this version",
   // TODO New key - Add a translation
-  "item.version.delete.modal.button.cancel.tooltip": "Do not delete this version",
+  "item.version.delete.modal.button.cancel.tooltip": "Löschen dieser Version abbrechen",
 
   // "item.version.delete.notification.success": "Version number {{version}} has been deleted",
   // TODO New key - Add a translation
@@ -5322,15 +5322,15 @@
 
   // "item.version.list.remove-text": "Remove selection",
   // TODO New key - Add a translation
-  "item.version.list.remove-text": "Remove selection",
+  "item.version.list.remove-text": "Vergleich beenden",
 
   // "item.version.list.selected-text": "Version selected : ",
   // TODO New key - Add a translation
-  "item.version.list.base-text": "Base : ",
+  "item.version.list.base-text": "Ausgangs-",
 
   // "item.version.list.comparing-text": "Compared : ",
   // TODO New key - Add a translation
-  "item.version.list.comparing-text": "Compared : ",
+  "item.version.list.comparing-text": "Vergleichs-",
 
   // "item-export.modal-launcher.single.btn": "Export",
   // TODO New key - Add a translation
@@ -6245,7 +6245,7 @@
   "mydspace.new-submission-external-short": "Importieren von Metadaten",
 
   // "mydspace.results.head": "Your submissions",
-  "mydspace.results.head": "Ihre Veröffentlichungen",
+  "mydspace.results.head": "Ihre Einträge",
 
   // "mydspace.results.no-abstract": "No Abstract",
   "mydspace.results.no-abstract": "Keine Zusammenfassung",
@@ -7262,11 +7262,11 @@
 
   // "process.new.notification.process.processing": "Processing...",
   // TODO New key - Add a translation
-  "process.new.notification.process.processing": "Processing...",
+  "process.new.notification.process.processing": "Verarbeitung läuft…",
 
   // "process.new.notification.process.files": "Output Files: ",
   // TODO New key - Add a translation
-  "process.new.notification.process.files": "Output Files: ",
+  "process.new.notification.process.files": "Ausgabe-Dateien:",
 
   // "process.new.notification.process.see-results": "See the results",
   // TODO New key - Add a translation
@@ -8433,7 +8433,7 @@
 
   // "search.filters.applied.f.language": "Language",
   // TODO New key - Add a translation
-  "search.filters.applied.f.language": "Language",
+  "search.filters.applied.f.language": "Sprache",
 
   // "search.filters.applied.f.namedresourcetype": "Status",
   "search.filters.applied.f.namedresourcetype": "Status",
@@ -8563,7 +8563,7 @@
 
   // "search.filters.applied.charts.grapheventduration.tab": "Event duration",
   // TODO New key - Add a translation
-  "search.filters.applied.charts.grapheventduration.tab": "Dauer",
+  "search.filters.applied.charts.grapheventduration.tab": "Dauer (Stunden)",
 
   // "search.filters.applied.charts.grapheventparticipant.tab": "Event participant",
   // TODO New key - Add a translation
@@ -8575,7 +8575,7 @@
 
   // "search.filters.applied.charts.show.hide": "Show/Hide",
   // TODO New key - Add a translation
-  "search.filters.applied.charts.show.hide": "Anzeigen/Verbergen",
+  "search.filters.applied.charts.show.hide": "Diagramm anzeigen/verbergen",
 
   // "search.filters.filter.author.head": "Author",
   "search.filters.filter.author.head": "Autor:in",
@@ -8725,11 +8725,11 @@
   "search.filters.filter.itemtype.head": "Typ",
 
   // "search.filters.filter.itemtype.placeholder": "Type",
-  "search.filters.filter.itemtype.placeholder": "Kategorie",
+  "search.filters.filter.itemtype.placeholder": "Art",
 
   // "search.filters.filter.itemtype.label": "Search type",
   // TODO New key - Add a translation
-  "search.filters.filter.itemtype.label": "Search type",
+  "search.filters.filter.itemtype.label": "Suche Art",
 
   // "search.filters.filter.investigators.head": "Researcher",
   // TODO New key - Add a translation
@@ -9011,7 +9011,7 @@
 
   // "search.filters.filter.synsicrisrelationtargetgroup.head": "Search Stakeholder group",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisrelationtargetgroup.head": "Suche Akteursgruppe",
+  "search.filters.filter.synsicrisrelationtargetgroup.head": "Akteursgruppe",
 
   // "search.filters.filter.synsicrisrelationtargetgroup.placeholder": "Stakeholder group",
   // TODO New key - Add a translation
@@ -9019,7 +9019,7 @@
 
   // "search.filters.filter.synsicrisrelationtargetgroup.label": "Search target group",
   // TODO New key - Add a translation
-  "search.filters.filter.synsicrisrelationtargetgroup.label": "Search target group",
+  "search.filters.filter.synsicrisrelationtargetgroup.label": "Suche Akteursgruppe",
 
   // "search.filters.filter.oairecerifeventcountry.head": "Event country",
   // TODO New key - Add a translation
@@ -9199,7 +9199,7 @@
 
   // "search.filters.search.submit": "Submit",
   // TODO New key - Add a translation
-  "search.filters.search.submit": "Submit",
+  "search.filters.search.submit": "Los",
 
   // "search.form.search": "Search",
   "search.form.search": "Suche",
@@ -9282,7 +9282,7 @@
 
   // "search.sidebar.show.hide": "Show/Hide",
   // TODO New key - Add a translation
-  "search.sidebar.show.hide": "Anzeigen/Verbergen",
+  "search.sidebar.show.hide": "Filter anzeigen/verbergen",
 
   // "search.sidebar.show.hide.filters.tooltip": "Show/Hide filters sidebar",
   // TODO New key - Add a translation
@@ -11237,19 +11237,19 @@
 
   // "submission.sections.accesses.form.access-condition-label": "Access condition type",
   // TODO New key - Add a translation
-  "submission.sections.accesses.form.access-condition-label": "Access condition type",
+  "submission.sections.accesses.form.access-condition-label": "Zugriffbedingung",
 
   // "submission.sections.accesses.form.access-condition-hint": "Select an access condition to apply on the item once it is deposited",
   // TODO New key - Add a translation
-  "submission.sections.accesses.form.access-condition-hint": "Select an access condition to apply on the item once it is deposited",
+  "submission.sections.accesses.form.access-condition-hint": "Wählen Sie eine Zugriffsbedingung aus, die auf die Datei angewendet werden soll, sobald sie hinterlegt ist",
 
   // "submission.sections.accesses.form.date-required": "Date is required.",
   // TODO New key - Add a translation
-  "submission.sections.accesses.form.date-required": "Date is required.",
+  "submission.sections.accesses.form.date-required": "Datumsangabe erforderlich",
 
   // "submission.sections.accesses.form.date-required-from": "Grant access from date is required.",
   // TODO New key - Add a translation
-  "submission.sections.accesses.form.date-required-from": "Grant access from date is required.",
+  "submission.sections.accesses.form.date-required-from": "Zugriff ab Datum ist erforderlich",
 
   // "submission.sections.accesses.form.date-required-until": "Grant access until date is required.",
   // TODO New key - Add a translation
@@ -11257,15 +11257,15 @@
 
   // "submission.sections.accesses.form.from-label": "Grant access from",
   // TODO New key - Add a translation
-  "submission.sections.accesses.form.from-label": "Grant access from",
+  "submission.sections.accesses.form.from-label": "Zugriff gewähren ab",
 
   // "submission.sections.accesses.form.from-hint": "Select the date from which the related access condition is applied",
   // TODO New key - Add a translation
-  "submission.sections.accesses.form.from-hint": "Select the date from which the related access condition is applied",
+  "submission.sections.accesses.form.from-hint": "Wählen Sie das Datum, ab dem die entsprechende Zugriffsbedingung gilt.",
 
   // "submission.sections.accesses.form.from-placeholder": "From",
   // TODO New key - Add a translation
-  "submission.sections.accesses.form.from-placeholder": "From",
+  "submission.sections.accesses.form.from-placeholder": "ab",
 
   // "submission.sections.accesses.form.group-label": "Group",
   // TODO New key - Add a translation
@@ -11277,15 +11277,15 @@
 
   // "submission.sections.accesses.form.until-label": "Grant access until",
   // TODO New key - Add a translation
-  "submission.sections.accesses.form.until-label": "Grant access until",
+  "submission.sections.accesses.form.until-label": "Zugriff gewähren bis",
 
   // "submission.sections.accesses.form.until-hint": "Select the date until which the related access condition is applied",
   // TODO New key - Add a translation
-  "submission.sections.accesses.form.until-hint": "Select the date until which the related access condition is applied",
+  "submission.sections.accesses.form.until-hint": "Wählen Sie das Datum, bis zu dem die entsprechende Zugriffsbedingung gilt.",
 
   // "submission.sections.accesses.form.until-placeholder": "Until",
   // TODO New key - Add a translation
-  "submission.sections.accesses.form.until-placeholder": "Until",
+  "submission.sections.accesses.form.until-placeholder": "bis",
 
   // "submission.submit.breadcrumbs": "New submission",
   // TODO New key - Add a translation
@@ -11493,7 +11493,7 @@
   "virtual-metadata.delete-relationship.modal-head": "Wählen Sie die Items aus, deren virtuelle Metadaten Sie als echte Metadaten speichern möchten.",
 
   // "workspace.search.results.head": "Your submissions",
-  "workspace.search.results.head": "Ihre Veröffentlichungen",
+  "workspace.search.results.head": "Ihre Einträge",
 
   // "workflowAdmin.search.results.head": "Administer Workflow",
   "workflowAdmin.search.results.head": "Workflow verwalten",
@@ -11637,7 +11637,7 @@
   "working-plan.breadcrumbs": "Arbeitsplan",
 
   // "working-plan.chart.button.add": "Add",
-  "working-plan.chart.button.add": "Hinzufügen",
+  "working-plan.chart.button.add": "Eintrag hinzufügen",
 
   // "working-plan.chart.column.dates": "Dates",
   "working-plan.chart.column.dates": "Daten",
@@ -11772,7 +11772,7 @@
   "working-plan.chart.column.sortBy.option.dc.date.end": "Enddatum",
 
   // "working-plan.chart.page.description": "<p><b><i>Structure the work of the project here via work packages and milestones and define time periods and responsibilities.</br>Use the <i class="fas fa-plus-circle"></i> button above the working plan to add new (or existing) work packages and milestones.</br>Use the <i class="fas fa-plus-circle"></i> button in the work package to assign new or existing work.</p></b></i>",",
-  "working-plan.chart.page.description": "Der Arbeitsplan enthält alle <b>Informationen über die Arbeitspakete</b>, die <b>Reihenfolge</b> der dazugehörigen Arbeiten und deren <b>Zeitbedarf</b> sowie die <b>Meilensteinplanung</b> eines Verbundes.</br></br><b><i>Erstellen Sie hier den Arbeitsplan mit Arbeitspaketen und den dazugehörigen Arbeiten sowie Meilensteinen und legen Sie Zeiträume und Verantwortlichkeiten fest.</br>Über die Schaltfläche <i class=\"fas fa-plus-circle\"></i> oberhalb des Arbeitsplans fügen Sie neue Arbeitspakete und Meilensteine hinzu. Über die Schaltfläche <i class=\"fas fa-plus-circle\"></i> im Arbeitspaket ordnen Sie neue oder vorhandene Arbeiten hinzu.</i></b></br></br><b>Wichtige Hinweise:</b><ul><li><b>Arbeitspakete</b>, die bereits im Wirkungspfad oder anderer Stelle angelegt wurden, werden <b>hier direkt angezeigt</b>.</li><li><b>Meilensteine</b> können auf <b>Ebene von Arbeitspaketen</b> und auf <b>Ebene von Arbeiten</b> angelegt werden.</li><li>Über <i class=\"fas fa-thumbtack\"></i> können <b>Einträge</b> aus dem Arbeitsplan <b>entfernt</b> werden. Diese können über <i class=\"fas fa-plus-circle\"></i> wieder <b>hinzugefügt</b> werden.</li><li>Über <i class=\"fas fa-edit\"></i> wird die <b>Detailseite eines Eintrags</b> aufgerufen.</li><li>Wird <i class=\"fas fa-info-circle\"></i> auf einer Karte angezeigt, gibt es eine Nachricht von Ihren Kolleg:innen auf der Detailseite des Eintrags. Öffnen Sie die Detailseite über <i class=\"fas fa-edit\"></i>.</li></ul><b>Darstellungsmöglichkeiten:</b><ul><li>Mit <i class=\"fas fa-grip-vertical\"></i> können <b>Einträge verschoben</b> und damit individuell angeordnet werden.</li><li>Über <b>Sortiert nach</b> können Einträge unterhalb der Arbeitspakete nach verschiedenen Merkmalen sortiert weden. Die Sortierung lässt sich jederzeit wieder auf die <b>indivduelle Anordnung zurücksetzen</b>.</li><li>Über <b>Monat</b>, <b>Quartal</b> und <b>Jahr</b> kann die Darstellung der Zeitachse angepasst werden.</li></ul>Im <b>Verlauf des Vorhabens</b> ist die Arbeitsplanung regelmäßig zu aktualisieren, z. B. für den Zwischenbericht oder genehmigte Änderungsanträge:<ul><li>Über <b>Status</b> können Veränderungen im Arbeitsplan gekennzeichnet werden, die im Verlauf des Vorhabens eingetreten sind.</li><li>Über <b>Zeitraum verschieben</b> kann das Startdatum für alle Einträge angepasst, wenn der Beginn von der Antragstellung abweicht.</li><li>Über <b>Vergleich mit...</b> läßt sich der aktuelle Stand mit einer Version (z. B. der Antragsversion) vergleichen.</li></ul><b>Tipps:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.php\" target=\"_blank\">Einträge strukturieren - Pinwandprinzip</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-wp-help.php\" target=\"_blank\">Tipps und Beispiel zum Arbeitsplan</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-versioning.php\"target=\"_blank\">Informationen zur Versionierung</a></li></ul>",
+  "working-plan.chart.page.description": "Der Arbeitsplan enthält alle <b>Informationen über die Arbeitspakete</b>, die <b>Reihenfolge</b> der dazugehörigen Arbeiten und deren <b>Zeitbedarf</b> sowie die <b>Meilensteinplanung</b> eines Verbundes.</br></br><b><i>Erstellen Sie hier den Arbeitsplan mit Arbeitspaketen und den dazugehörigen Arbeiten sowie Meilensteinen und legen Sie Zeiträume und Verantwortlichkeiten fest.</br>Über die Schaltfläche <i class=\"fas fa-plus-circle\"></i> oberhalb des Arbeitsplans fügen Sie neue Arbeitspakete und Meilensteine hinzu. Über die Schaltfläche <i class=\"fas fa-plus-circle\"></i> im Arbeitspaket ordnen Sie neue oder vorhandene Arbeiten hinzu.</i></b></br></br><b>Wichtige Hinweise:</b><ul><li><b>Arbeitspakete</b>, die bereits im Wirkungspfad oder anderer Stelle angelegt wurden, werden <b>hier direkt angezeigt</b>.</li><li><b>Meilensteine</b> können auf <b>Ebene von Arbeitspaketen</b> und auf <b>Ebene von Arbeiten</b> angelegt werden.</li><li>Über <i class=\"fas fa-thumbtack\"></i> können <b>Einträge</b> aus dem Arbeitsplan <b>entfernt</b> werden. Diese können über <i class=\"fas fa-plus-circle\"></i> wieder <b>hinzugefügt</b> werden.</li><li>Über <i class=\"fas fa-edit\"></i> wird die <b>Detailseite eines Eintrags</b> aufgerufen.</li><li>Wird <i class=\"fas fa-info-circle\"></i> auf einer Karte angezeigt, gibt es eine Nachricht von Ihren Kolleg:innen auf der Detailseite des Eintrags. Öffnen Sie die Detailseite über <i class=\"fas fa-edit\"></i>.</li></ul><b>Darstellungsmöglichkeiten:</b><ul><li>Mit <i class=\"fas fa-grip-vertical\"></i> können <b>Einträge verschoben</b> und damit individuell angeordnet werden.</li><li>Über <b>Sortiert nach</b> können Einträge unterhalb der Arbeitspakete nach verschiedenen Merkmalen sortiert weden. Die Sortierung lässt sich jederzeit wieder auf die <b>indivduelle Anordnung zurücksetzen</b>.</li><li>Über <b>Monat</b>, <b>Quartal</b> und <b>Jahr</b> kann die Darstellung der Zeitachse angepasst werden.</li></ul>Im <b>Verlauf des Vorhabens</b> ist die Arbeitsplanung regelmäßig zu aktualisieren, z. B. für den Zwischenbericht oder genehmigte Änderungsanträge:<ul><li>Über <b>Status</b> können Veränderungen im Arbeitsplan gekennzeichnet werden, die im Verlauf des Vorhabens eingetreten sind.</li><li>Über <b>Zeitraum verschieben</b> kann das Startdatum für alle Einträge angepasst, wenn der Beginn von der Antragstellung abweicht.</li><li>Über <b>Vergleich mit...</b> läßt sich der aktuelle Stand mit einer Version (z. B. der Antragsversion) vergleichen.</li></ul><b>Tipps:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.php\" target=\"_blank\">Einträge strukturieren - Pinwandprinzip</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-wp-help.php\" target=\"_blank\">Tipps und Beispiel zum Arbeitsplan</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-livetime.php\"target=\"_blank\"> Aktualisierung im laufenden Vorhaben</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-versioning.php\"target=\"_blank\">Informationen zur Versionierung</a></li></ul>",
 
   // "submission.sections.submit.progressbar.working_plan_form.info": "missing",
   "submission.sections.submit.progressbar.working_plan_form.info": "<b><i> Legen Sie ein neues Arbeitspaket oder einen neuen Meilenstein an.</i></br><b>Kategorien:</b><ul><li><b>Arbeitspakete</b> dienen der Gliederung von Aufgaben im Arbeitsplan. Auf der Detailseite können im Verlauf des Vorhabens für Berichte auch Änderungen erläutert werden.</li><li><b>Meilensteine</b> sind überprüfbare Zeitpunkte im Verlauf des Vorhabens, die in Verbindung zu Arbeiten oder Entscheidungen stehen.</li></ul>",
@@ -12132,7 +12132,7 @@
   "submission.sections.submit.progressbar.describe.fundingobjectives": "Förderziel",
 
   // "submission.sections.submit.progressbar.describe.fundingobjectives.info": "Help",
-  "submission.sections.submit.progressbar.describe.fundingobjectives.info": "Hier geben Sie jedes Förderziel einer Bekanntmachung einzeln ein.</br></br>Die <b>korrekte Zuordnung</b> der Förderziele zu einer Bekanntmachung und einem Programm ist erforderlich, damit Antragstellenden die richtigen Förderziele zur Auswahl im Wirkungspfad angezeigt werden.<ul><li>Wenn es sich um ein <b>spezifisches Ziel der Bekanntmachung</b> handelt, bitte <b>nur die Bekanntmachung zuordnen</b>. Dieses Ziel wird dann nur in den Vorhaben dieser spezifischen Bekanntmachung angezeigt.</li><li>Wenn es sich um ein <b>Ziel des Programms</b> / der Fördermaßnahme handelt, bitte <b>nur das Programm zuordnen</b>. Dieses Ziel wird dann in den Vorhaben aller Bekanntmachungen innerhalb dieses Programms angezeigt.</li></ul></br>Ziele für nachhaltige Entwicklung (SDGs) brauchen Sie nur dann zuzuordnen, wenn dies für die Bekanntmachung so vorgesehen ist. Alternativ kann jedes Verbundprojekt durch den/die Projektbetreuer:in den SDGs zugeordnet werden.",
+  "submission.sections.submit.progressbar.describe.fundingobjectives.info": "Hier geben Sie jedes Förderziel einer Bekanntmachung einzeln ein.</br>Die <b>korrekte Zuordnung</b> der Förderziele zu einer Bekanntmachung und einem Programm ist erforderlich, damit Antragstellenden die richtigen Förderziele zur Auswahl im Wirkungspfad angezeigt werden.<ul><li>Wenn es sich um ein <b>spezifisches Ziel der Bekanntmachung</b> handelt, bitte <b>nur die Bekanntmachung zuordnen</b>. Dieses Ziel wird dann nur in den Vorhaben dieser spezifischen Bekanntmachung angezeigt.</li><li>Wenn es sich um ein <b>Ziel des Programms</b> / der Fördermaßnahme handelt, bitte <b>nur das Programm zuordnen</b>. Dieses Ziel wird dann in den Vorhaben aller Bekanntmachungen innerhalb dieses Programms angezeigt.</li></ul>Ziele für nachhaltige Entwicklung (SDGs) brauchen Sie nur dann zuzuordnen, wenn dies für die Bekanntmachung so vorgesehen ist. Alternativ kann jedes Verbundprojekt durch den/die Projektbetreuer:in den SDGs zugeordnet werden.",
 
   // "submission.sections.upload.drop-message": "Drop files to attach them to the item",
   "submission.sections.upload.drop-message": "Dateien herüberziehen, um sie dem Eintrag hinzuzufügen",
@@ -12252,10 +12252,10 @@
   "layout.box.help-text.Person_details_h_funder": "Über <i class=\"fas fa-user-circle\"></i> können Sie Ihr Personenprofil bearbeiten und die Sichtbarkeit festlegen. Außerdem können Sie dort Ihre Anmeldedaten anpassen.",
 
   // "layout.box.help-text.default_h_1": "missing",
-  "layout.box.help-text.default_h_1": "<b>Bedienung - Erste Schritte - Weitere Hilfen</b></br>Es gibt eine <b>Hilfe mit Abbildungen</b>. Sie öffnet sich in einem neuen Tab und lässt sich am leichtesten nutzen, wenn Sie sie in ein zweites Browserfenster ziehen und neben das Fenster mit dem Monitoring-Tool legen.<ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about.php\" target=\"_blank\"> Das Monitoring-Tool </a></li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use.php\" target=\"_blank\">Bedienungshinweise kurz und knapp</a></li></ul><b>Erste Schritte:</b><ul><li> Als <b>Koordinator:</b><b>in des Verbundes</b> laden Sie über <b>Aktionen: <i class=\"fas fa-toolbox\"></i> Koordinator:innen verwalten</b> die Koordinator:innen der beteiligten (Teil-)Projekte/Zuwendungsempfänger ein. Alle weiteren Personen werden von diesen Koordinator:innen im Arbeitsbereich der jeweiligen (Teil-)Projekte/Zuwendungsempfänger eingeladen. </li><li>Arbeiten Sie anschließend entlang der Reihenfolge in der Navigationsleiste. </li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-proposal.php\" target=\"_blank\">Schritt-für-Schritt-Anleitung für die Antragstellung</a> </li></ul><b>Weitere Hilfen:</b><ul><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-proj.php\" target=\"_blank\">Verbund und beteiligte Projekte unterscheiden</a> </li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-versioning.php\" target=\"_blank\">Informationen zur Versionierung</a></li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-livetime.php\" target=\"_blank\"> Aktualisierung im laufenden Vorhaben</a> </li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-completion.php\" target=\"_blank\">Abschluß des Vorhabens</a> </li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-update.php\" target=\"_blank\">Aktualisierung nach Abschluß des Vorhabens</a> </li></ul>",
+  "layout.box.help-text.default_h_1": "<b>Bedienung - Erste Schritte - Weitere Hilfen</b></br>Es gibt eine <b>Hilfe mit Abbildungen</b>. Sie öffnet sich in einem neuen Tab und lässt sich am leichtesten nutzen, wenn Sie sie in ein zweites Browserfenster ziehen und neben das Fenster mit dem Monitoring-Tool legen.<ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-about.php\" target=\"_blank\"> Das Monitoring-Tool </a></li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use.php\" target=\"_blank\">Bedienungshinweise kurz und knapp</a></li></ul><b>Erste Schritte:</b><ul><li> Als <b>Koordinator:</b><b>in des Verbundes</b> laden Sie über <b>Aktionen: <i class=\"fas fa-toolbox\"></i> Koordinator:innen verwalten</b> die Koordinator:innen der beteiligten (Teil-)Projekte/Zuwendungsempfänger ein. Alle weiteren Personen werden von diesen Koordinator:innen im Arbeitsbereich der jeweiligen (Teil-)Projekte/Zuwendungsempfänger eingeladen. </li><li>Arbeiten Sie anschließend entlang der Reihenfolge in der Navigationsleiste. </li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-proposal.php\" target=\"_blank\">Schritt-für-Schritt-Anleitung für die Antragstellung</a> </li><li>Über <b>Aktionen: <i class=\"fas fa-file-export\"></i> Informationen exportieren</b> können Sie einen Report für den Verbund erzeugen.</li></ul><b>Weitere Hilfen:</b><ul><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-proj.php\" target=\"_blank\">Verbund und beteiligte Projekte unterscheiden</a> </li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-versioning.php\" target=\"_blank\">Informationen zur Versionierung</a></li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-livetime.php\" target=\"_blank\"> Aktualisierung im laufenden Vorhaben</a> </li><li> <i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-completion.php\" target=\"_blank\">Abschluß des Vorhabens</a> </li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-step-update.php\" target=\"_blank\">Aktualisierung nach Abschluß des Vorhabens</a> </li></ul>",
 
   // "layout.box.help-text.default_h_1_funder": "missing",
-  "layout.box.help-text.default_h_1_funder": "<b>Erste Schritte zur Betreuung von Vorhaben:</b><ul><li>Öffnen Sie über <b><i class=\"fas fa-edit\"></i> Bearbeiten</b> die Verbund-Informationen und vervollständigen die Angaben.</li><li>Anschließend laden Sie über <b>Aktionen: <i class=\"fas fa-toolbox\"></i> Koordinator-/Lese-Rolle verwalten</b> den/die Verbund-Koordinator:in ein.</li><li>Um eine Version aufzurufen oder zu verwalten, gehen Sie über <b>Aktionen: <i class=\"fas fa-sync-alt\"></i> Versionen verwalten</b>.</li></ul><b>Wichtige Hinweise:</b><ul><li>Es gibt eine <b>Hilfe mit Abbildungen</b>. Sie öffnet sich in einem neuen Tab und lässt sich am leichtesten nutzen, wenn Sie sie in ein zweites Browserfenster ziehen und neben das Fenster mit dem Monitoring-Tool legen.</li><li>Die linke Navigationsleiste ermöglicht Ihnen erst in einer freigeschalteten Version in die detaillierten Inhalte des Vorhabens zu navigieren. Vorher haben Sie nur Zugang zu den (von Ihnen editierbaren) Verbundinformationen und den Kommentaren.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-synsicrishelp_index.php\" target=\"_blank\"> SynSICRIS-Hilfe </a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-versioning.php\" target=\"_blank\">Informationen zur Versionierung</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-role.php\" target=\"_blank\">Rollen und Rechte verwalten</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-comment.php\" target=\"_blank\">Kommentarfunktion</a></li></ul>",
+  "layout.box.help-text.default_h_1_funder": "<b>Erste Schritte zur Betreuung von Vorhaben:</b><ul><li>Öffnen Sie über <b><i class=\"fas fa-edit\"></i> Bearbeiten</b> die Verbund-Informationen und vervollständigen die Angaben.</li><li>Anschließend laden Sie über <b>Aktionen: <i class=\"fas fa-toolbox\"></i> Koordinator-/Lese-Rolle verwalten</b> den/die Verbund-Koordinator:in ein.</li><li>Um eine Version aufzurufen oder zu verwalten, gehen Sie über <b>Aktionen: <i class=\"fas fa-sync-alt\"></i> Versionen verwalten</b>.</li><li>Über <b>Aktionen: <i class=\"fas fa-file-export\"></i> Informationen exportieren</b> können Sie einen Report für den Verbund erzeugen.</li></ul><b>Wichtige Hinweise:</b><ul><li>Es gibt eine <b>Hilfe mit Abbildungen</b>. Sie öffnet sich in einem neuen Tab und lässt sich am leichtesten nutzen, wenn Sie sie in ein zweites Browserfenster ziehen und neben das Fenster mit dem Monitoring-Tool legen.</li><li>Die <b>linke Navigationsleiste</b> ermöglicht Ihnen <b>erst in einer freigeschalteten Version</b> in die detaillierten Inhalte des Vorhabens zu navigieren. Vorher haben Sie nur Zugang zu den (von Ihnen editierbaren) Verbundinformationen und den Kommentaren.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-synsicrishelp_index.php\" target=\"_blank\"> SynSICRIS-Hilfe </a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-versioning.php\" target=\"_blank\">Informationen zur Versionierung</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-role.php\" target=\"_blank\">Rollen und Rechte verwalten</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-comment.php\" target=\"_blank\">Kommentarfunktion</a></li></ul>",
 
   // "layout.box.help-text.projectpartner_h": "missing",
   "layout.box.help-text.projectpartner_h": "<b>Projektpartner</b>  sind die Organisationseinheit(en), die als Antragssteller in den jeweiligen <b> Projekten</b> mitwirken.</br></br><b>Diese Liste dient nur der Übersicht. Legen Sie die Projektpartner ausschließlich in den jeweiligen Projekten an. </br>Zum Bearbeiten wählen Sie Ihre Organisationseinheit aus.</b>",
@@ -13671,7 +13671,7 @@
   "layout.field.label.Event.oairecerif.event.endDate": "Enddatum",
 
   // "layout.field.label.Event.synsicris.duration": "Duration (hours)",
-  "layout.field.label.Event.synsicris.duration": "Gesamtdauer (h)",
+  "layout.field.label.Event.synsicris.duration": "Gesamtdauer (Stunden)",
 
   // "layout.field.label.Event.synsicris.participantnumber": "Number of participants",
   "layout.field.label.Event.synsicris.participantnumber": "Anzahl Teilnehmende",
@@ -14196,7 +14196,7 @@
   "layout.field.label.process_event.oairecerif.event.endDate": "Ende",
 
   // "layout.field.label.process_event.synsicris.duration": "Duration (hours)",
-  "layout.field.label.process_event.synsicris.duration": "Dauer (h)",
+  "layout.field.label.process_event.synsicris.duration": "Dauer (Stunden)",
 
   // "layout.field.label.process_event.synsicris.participantnumber": "Number of participants",
   "layout.field.label.process_event.synsicris.participantnumber": "Anzahl Teilnehmende",
@@ -14868,7 +14868,7 @@
   "item.version.history.table.clickToOpen": "Öffnen",
 
   // "item.version.history.table.activeVersion": "Active Instance",
-  "item.version.history.table.activeVersion": "Aktive Instanz",
+  "item.version.history.table.activeVersion": "Aktive Instanz*",
 
   // "item.version.history.table.notes": "Notes",
   "item.version.history.table.notes": "Anmerkungen",
@@ -14955,13 +14955,13 @@
   "programme.manage.members.project.managers-group": "Programmmanager:innen",
 
   // "programme.manage.members.managers-group-help": "Help PT-Programme manager",
-  "programme.manage.members.managers-group-help": "<b>Laden Sie hier Personen ein, die für das Programm die Rolle des/der Programmanager:in erhalten sollen.</b><br>Wenn Sie eine andere Rolle zuweisen möchten, wechseln Sie in den Reiter <Projektbetreuer:innen</b> oder <b>Mitarbeitende mit Lese-Rolle für Programm</b>.<ul><li>Prüfen Sie zunächst über <b>Personensuche</b>, ob die Person bereits im Tool registriert ist.</li><li>Falls ja, fügen Sie sie über <b>Einladung senden</b> hinzu.</li><li>Falls nein, senden Sie eine Einladung über <b>Nicht-registrierte Person einladen</b>.</li></ul>Unter <b>Aktuelle Mitglieder</b> sind alle Personen gelistet, die die Rolle Programmmanager:in haben. Die Rolle kann über <b>Rolle entziehen</b> jederzeit entzogen und damit der <b>Zugang zum Programm geschlossen</b> werden.</br></br><b>Wichtiger Hinweis:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-role.php\" target=\"_blank\">Rollen und Rechte verwalten</a></li></ul>",
+  "programme.manage.members.managers-group-help": "<b>Laden Sie hier Personen ein, die für das Programm die Rolle des/der Programmanager:in erhalten sollen.</b><br>Wenn Sie eine andere Rolle zuweisen möchten, wechseln Sie in den Reiter <Projektbetreuer:innen</b> oder <b>Mitarbeitende mit Lese-Rolle für Programm</b>.<ul><li>Prüfen Sie zunächst über <b>Personensuche</b>, ob die Person bereits im Tool registriert ist.</li><li>Falls ja, fügen Sie sie über <b>Einladung senden</b> hinzu.</li><li>Falls nein, senden Sie eine Einladung über <b>Nicht-registrierte Person einladen</b>.</li></ul>Unter <b>Aktuelle Mitglieder</b> sind alle Personen gelistet, die die Rolle Programmmanager:in haben. Die Rolle kann über <b>Rolle entziehen</b> jederzeit entzogen und damit der <b>Zugang zum Programm geschlossen</b> werden.</br></br><b>Wichtiger Hinweis:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-role.php\"target=\"_blank\">Rollen und Rechte der Förderer verwalten</a></li></ul>",
 
   // "programme.manage.members.project.members-group": "Invitation and management of programme members",
   "programme.manage.members.project.members-group": "Mitarbeitende mit Lese-Rolle für Programm",
 
   // "programme.manage.members.members-group-help": "Help PT-Read",
-  "programme.manage.members.members-group-help": "<b>Laden Sie hier Personen ein, die für alle Verbünde des Programms eine Lese-Rolle erhalten sollen.</b></br>Wenn Sie eine andere Rolle zuweisen möchten, wechseln Sie in den Reiter Projektbetreuer:innen. <ul><li>Prüfen Sie zunächst über <b>Personensuche</b>, ob die Person bereits im Tool registriert ist.</li><li>Falls ja, fügen Sie sie über <b>Einladung senden</b> hinzu.</li><li>Falls nein, senden Sie eine Einladung über <b>Nicht-registrierte Person einladen</b>.</li></ul>Unter <b>Aktuelle Mitglieder</b> sind alle Personen gelistet, die die Lese-Rolle im Programm haben. Die Rolle kann über <b>Rolle entziehen</b> jederzeit entzogen und damit der <b>Zugang zum Programm geschlossen</b> werden.</br></br><b>Wichtiger Hinweis:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-use-role.php\" target=\"_blank\">Rollen und Rechte verwalten</a></li></ul>",
+  "programme.manage.members.members-group-help": "<b>Laden Sie hier Personen ein, die für alle Verbünde des Programms eine Lese-Rolle erhalten sollen.</b></br>Wenn Sie eine andere Rolle zuweisen möchten, wechseln Sie in den Reiter Projektbetreuer:innen. <ul><li>Prüfen Sie zunächst über <b>Personensuche</b>, ob die Person bereits im Tool registriert ist.</li><li>Falls ja, fügen Sie sie über <b>Einladung senden</b> hinzu.</li><li>Falls nein, senden Sie eine Einladung über <b>Nicht-registrierte Person einladen</b>.</li></ul>Unter <b>Aktuelle Mitglieder</b> sind alle Personen gelistet, die die Lese-Rolle im Programm haben. Die Rolle kann über <b>Rolle entziehen</b> jederzeit entzogen und damit der <b>Zugang zum Programm geschlossen</b> werden.</br></br><b>Wichtiger Hinweis:</b><ul><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-role.php\"target=\"_blank\">Rollen und Rechte der Förderer verwalten</a></li></ul>",
 
   // "project.manage.members.project.admin-group-help": "Help message here",
   "project.manage.members.project.admin-group-help": "Hilfetext hier für admin_group Verbund",
@@ -15219,7 +15219,7 @@
   "explore.index.synsicrisTypePatentuse": "Art der Verwertung",
 
   // "explore.index.synsicrisDuration": "Duration",
-  "explore.index.synsicrisDuration": "Dauer",
+  "explore.index.synsicrisDuration": "Dauer (Monate)",
 
   // "explore.index.synsicrisProjectStatus": "Status",
   "explore.index.synsicrisProjectStatus": "Status",
@@ -15327,7 +15327,7 @@
   "layout.box.help-text.call_h": "Hier sehen Sie die Ihnen zugewiesenen Bekanntmachungen. Informationen werden aus profi importiert, daher ist es nicht erforderlich, sie zu bearbeiten.",
 
   // "layout.box.help-text.fundingobjective_h": "missing",
-  "layout.box.help-text.fundingobjective_h": "Hier legen Sie die Förderziele an und ordnen sie der zugehörigen Bekanntmachung und dem Programm zu. (Wenn gewünscht können Sie dort auch Ziele für nachhaltige Entwicklung (SDGs) zuordnen).",
+  "layout.box.help-text.fundingobjective_h": "Hier legen Sie die Förderziele an und ordnen das jeweilige Ziel einer spezifischen Bekanntmachung <b>oder</b> einem spezifischen Programm zu. (Wenn gewünscht können Sie dort auch Ziele für nachhaltige Entwicklung (SDGs) zuordnen).",
 
   // "search.filters.entityType.neg_sideeffect": "Possible negative side effects",
   "search.filters.entityType.neg_sideeffect": "Mögliche negative Nebenwirkungen",
@@ -15720,13 +15720,13 @@
   "search.filters.filter.dctermsDateaccepted.label": "Suche Datum der Zulassung",
 
   // "search.filters.filter.synsicrisDuration.head": "Duration",
-  "search.filters.filter.synsicrisDuration.head": "Dauer",
+  "search.filters.filter.synsicrisDuration.head": "Dauer (Stunden)",
 
   // "search.filters.filter.synsicrisDuration.placeholder": "Duration",
-  "search.filters.filter.synsicrisDuration.placeholder": "Dauer",
+  "search.filters.filter.synsicrisDuration.placeholder": "Dauer (Stunden)",
 
   // "search.filters.filter.synsicrisDuration.label": "Search Duration",
-  "search.filters.filter.synsicrisDuration.label": "Suche Dauer",
+  "search.filters.filter.synsicrisDuration.label": "Suche Dauer (Stunden)",
 
   // "search.filters.filter.oairecerifFundingParent.head": "Programme",
   "search.filters.filter.oairecerifFundingParent.head": "Förderprogramm",
@@ -15780,13 +15780,13 @@
   "search.filters.filter.synsicrisParticipantnumber.label": "Suche Anzahl Teilnehmende",
 
   // "search.filters.filter.synsicrisOairecerifEventStartdate.head": "Start date",
-  "search.filters.filter.synsicrisOairecerifEventStartdate.head": "Startdatum",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.head": "Datum",
 
   // "search.filters.filter.synsicrisOairecerifEventStartdate.placeholder": "Start date",
-  "search.filters.filter.synsicrisOairecerifEventStartdate.placeholder": "Startdatum",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.placeholder": "Datum",
 
   // "search.filters.filter.synsicrisOairecerifEventStartdate.label": "Search Start date",
-  "search.filters.filter.synsicrisOairecerifEventStartdate.label": "Suche Startdatum",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.label": "Suche Datum",
 
   // "search.filters.filter.synsicrisOairecerifEventCounty.head": "Country",
   "search.filters.filter.synsicrisOairecerifEventCounty.head": "Land",
@@ -15837,7 +15837,7 @@
   "query-builder.synsicris.accordion.step1.alert": "Diese 2-Schritt Suche bietet Ihnen vielfältige Such- und Filterfunktionen. </br>In <b>Schritt 1</b> legen Sie fest, ob Sie <b>in allen Einträgen</b> suchen <b>oder</b> die Gruppe der Vorhaben in denen gesucht wird <b>eingrenzen</b> möchten.</br>In <b>Schritt 2</b> können Sie filtern und/oder die Freitextsuche verwenden.</br></br><b>Schritt 1:</b></br>Für die <b>Eingrenzung</b> können Sie Filter aus allen Kategorien verwenden. Wenn Sie innerhalb einer Kategorie weitere Filter verwenden, grenzt sich die Suche immer weiter ein (da die einzelnen Filter mit AND verbunden sind).</br>Wenn Sie mit einer <b>weiteren Kategorie</b> filtern möchten, legen Sie eine <b>neue Filtergruppe</b> an. Diese kann wahlweise mit der vorhergehenden Filtergruppe über AND (= weitere Eingrenzung) oder OR (= Erweiterung) verknüpft werden. Als Suchergebnis werden Ihnen die Vorhaben angezeigt, die die Suchbedingungen erfüllen.</br></br><b>Wichtige Hinweise zum Filter:</b><ul><li>Filter und Merkmale werden nur angezeigt, wenn Daten dazu vorhanden sind.</li><li>AND = weitere Eingrenzung der Suche/ Filterung, da Merkmal aus dem ersten UND aus allen weiteren Filtern erfüllt sein müssen.</li><li>OR = Erweiterung der Suche/Filterung, da Merkmale aus der ersten ODER der zweiten Filtergruppe erfüllt sein müssen.</li></ul>",
 
   // "query-builder.synsicris.accordion.step2.alert": "Help",
-  "query-builder.synsicris.accordion.step2.alert": "<b>Schritt 2:</b></br>In der <b>Freitextsuche</b> können einfache Suchoperatoren eingesetzt werden (s.u.).Die <b>Filter</b> sind hier alle mit <b>AND</b> verknüpft und <b>reagieren sofort</b> nach der Eingabe. D.h. durch die Wahl der Filter grenzen Sie das Suchergebnis immer weiter ein. Die <b>Reihenfolge</b>, in der Sie die Filter setzen, <b>beeinflusst</b> daher das <b>Suchergebnis</b>.</br>Der wichtigste Filter ist die <b>Kategorie</b> des Eintrags.</br>Das Suchergebnis wird in Diagrammen dargestellt, die Sie über <b><i class=\"fas fa-chart-line\"></i> Anzeigen/Verbergen</b> anzeigen und verbergen können.</br></br><b>Suchoperatoren in der Freitextsuche:</b><ul><li>Wenn Sie nach Teilen von Worten suchen, verwenden Sie * als Platzhalter. Z.B. Weizen*</li><li>Wenn Sie nach bestimmten Ausdrücken aus mehreren Worten suchen möchten, setzten Sie sie in „Anführungszeichen“. Z.B. „Universität Musterstadt“</li><li>Um Begriffe auszuschließen verwenden sie – z.B. Weizen -Mehl</li><li>Weitere Suchoperatoren finden Sie unter <a href=\"https://www.solrtutorial.com/solr-query-syntax.html\">SolrTutorial</a></li></ul>",
+  "query-builder.synsicris.accordion.step2.alert": "<b>Schritt 2:</b></br>In der <b>Freitextsuche</b> können einfache Suchoperatoren eingesetzt werden (s.u.). Die <b>Filter</b> sind hier alle mit <b>AND</b> verknüpft und <b>reagieren sofort</b> nach der Eingabe. D.h. durch die Wahl der Filter grenzen Sie das Suchergebnis immer weiter ein. Die <b>Reihenfolge</b>, in der Sie die Filter setzen, <b>beeinflusst</b> daher das <b>Suchergebnis</b>.</br>Der wichtigste Filter ist die <b>Kategorie</b> des Eintrags.</br>Das Suchergebnis wird in Diagrammen dargestellt, die Sie über <b><i class=\"fas fa-chart-line\"></i> Anzeigen/Verbergen</b> anzeigen und verbergen können.</br></br><b>Suchoperatoren in der Freitextsuche:</b><ul><li>Wenn Sie nach Teilen von Worten suchen, verwenden Sie * als Platzhalter. Z.B. Weizen*</li><li>Wenn Sie nach bestimmten Ausdrücken aus mehreren Worten suchen möchten, setzten Sie sie in „Anführungszeichen“. Z.B. „Universität Musterstadt“</li><li>Um Begriffe auszuschließen verwenden sie – z.B. Weizen -Mehl</li><li>Weitere Suchoperatoren finden Sie unter <a href=\"https://www.solrtutorial.com/solr-query-syntax.html\">SolrTutorial</a></li></ul>",
 
   // "working-plan.chart.button.delete": "Delete item",
   "working-plan.chart.button.delete": "Eintrag löschen",
@@ -16159,49 +16159,49 @@
   "search.filters.filter.synsicrisLevelEnd.label": "Suche Readiness-Level zum Ende",
 
   // "impact-pathway.wrapper.info.funder-project": "Help funder project mananger",
-  "impact-pathway.wrapper.info.funder-project": "Im Wirkungspfad können die Zuwendungsempfänger <b>Einträge anpinnen</b> und eine <b>Beschreibung ergänzen, um in übersichtlicher Form Hintergründe, Arbeiten und Wirkungen des Vorhaben darzustellen</b>. Die Einträge werden von allen Zuwendungsempfängern gemeinsam genutzt und können somit auch im Arbeitsplan und in den Verwertungsplänen der jeweiligen Zuwendungsempfänger angepinnt werden.<ul><li>Der Wirkungspfad gibt einen Überblick zur Nutzung der Ergebnisse und die Wirkung des gesamten Vorhabens.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.html\"target=_blank\"> Einträge strukturieren - Pinnwandprinzip</a></li></ul><b>Arbeitsweise zur Prüfung:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Im Kommentar-Bereich können Sie über <i class=\"fas fa-plus-circle\"></i> zu jeder Säule Kommentare hinzufügen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-comment.php\"target=\"_blank\">Kommentarfunktion</a></li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über den <b>Button Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul>",
+  "impact-pathway.wrapper.info.funder-project": "Im Wirkungspfad können die Zuwendungsempfänger <b>Einträge anpinnen</b> und eine <b>Beschreibung ergänzen, um in übersichtlicher Form Hintergründe, Arbeiten und Wirkungen des Vorhaben darzustellen</b>. Die Einträge werden von allen Zuwendungsempfängern gemeinsam genutzt und können somit auch im Arbeitsplan und in den Verwertungsplänen der jeweiligen Zuwendungsempfänger angepinnt werden.<ul><li>Der Wirkungspfad gibt einen Überblick zur Nutzung der Ergebnisse und die Wirkung des gesamten Vorhabens.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.html\"target=_blank\"> Einträge strukturieren - Pinnwandprinzip</a></li></ul><b>Arbeitsweise zur Prüfung:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Im Kommentar-Bereich können Sie über <i class=\"fas fa-plus-circle\"></i> zu jeder Säule Kommentare hinzufügen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-comment.php\"target=\"_blank\">Kommentarfunktion</a></li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul>",
 
   // "impact-pathway.wrapper.info.funder-manager": "Help funder organisational manager",
-  "impact-pathway.wrapper.info.funder-manager": "Im Wirkungspfad können die Zuwendungsempfänger <b>Einträge anpinnen</b> und eine <b>Beschreibung ergänzen, um in übersichtlicher Form Hintergründe, Arbeiten und Wirkungen des Vorhaben darzustellen</b>. Die Einträge werden von allen Zuwendungsempfängern gemeinsam genutzt und können somit auch im Arbeitsplan und in den Verwertungsplänen der jeweiligen Zuwendungsempfänger angepinnt werden.<ul><li>Der Wirkungspfad gibt einen Überblick zur Nutzung der Ergebnisse und die Wirkung des gesamten Vorhabens.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.html\"target=_blank\"> Einträge strukturieren - Pinnwandprinzip</a></li></ul><b>Arbeitsweise:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über den <b>Button Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul>",
+  "impact-pathway.wrapper.info.funder-manager": "Im Wirkungspfad können die Zuwendungsempfänger <b>Einträge anpinnen</b> und eine <b>Beschreibung ergänzen, um in übersichtlicher Form Hintergründe, Arbeiten und Wirkungen des Vorhaben darzustellen</b>. Die Einträge werden von allen Zuwendungsempfängern gemeinsam genutzt und können somit auch im Arbeitsplan und in den Verwertungsplänen der jeweiligen Zuwendungsempfänger angepinnt werden.<ul><li>Der Wirkungspfad gibt einen Überblick zur Nutzung der Ergebnisse und die Wirkung des gesamten Vorhabens.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.html\"target=_blank\"> Einträge strukturieren - Pinnwandprinzip</a></li></ul><b>Arbeitsweise:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul>",
 
   // "impact-pathway.wrapper.info.funder-reader": "Help funder reader",
-  "impact-pathway.wrapper.info.funder-reader": "Im Wirkungspfad können die Zuwendungsempfänger <b>Einträge anpinnen</b> und eine <b>Beschreibung ergänzen, um in übersichtlicher Form Hintergründe, Arbeiten und Wirkungen des Vorhaben darzustellen</b>. Die Einträge werden von allen Zuwendungsempfängern gemeinsam genutzt und können somit auch im Arbeitsplan und in den Verwertungsplänen der jeweiligen Zuwendungsempfänger angepinnt werden.<ul><li>Der Wirkungspfad gibt einen Überblick zur Nutzung der Ergebnisse und die Wirkung des gesamten Vorhabens.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.html\"target=_blank\"> Einträge strukturieren - Pinnwandprinzip</a></li></ul><b>Arbeitsweise:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über den <b>Button Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul>",
+  "impact-pathway.wrapper.info.funder-reader": "Im Wirkungspfad können die Zuwendungsempfänger <b>Einträge anpinnen</b> und eine <b>Beschreibung ergänzen, um in übersichtlicher Form Hintergründe, Arbeiten und Wirkungen des Vorhaben darzustellen</b>. Die Einträge werden von allen Zuwendungsempfängern gemeinsam genutzt und können somit auch im Arbeitsplan und in den Verwertungsplänen der jeweiligen Zuwendungsempfänger angepinnt werden.<ul><li>Der Wirkungspfad gibt einen Überblick zur Nutzung der Ergebnisse und die Wirkung des gesamten Vorhabens.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.html\"target=_blank\"> Einträge strukturieren - Pinnwandprinzip</a></li></ul><b>Arbeitsweise:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul>",
 
   // "impact-pathway.objectives.step_type_2.info.panel.funder-project": "Help funder project mananger",
-  "impact-pathway.objectives.step_type_2.info.panel.funder-project": "Hier sind die <b>wichtigsten Arbeiten</b> des Verbundes dargestellt, die zu den jeweiligen Zielen beitragen.</br></br><b>Arbeitsweise zur Prüfung:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Im Kommentar-Bereich können Sie über <i class=\"fas fa-plus-circle\"></i> Kommentare hinzufügen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-comment.php\"target=\"_blank\">Kommentarfunktion</a></li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über den <b>Button Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul><b>Wichtige Hinweise:</b><ul><li>Es sind hier nur die wirkungsrelevanten Arbeiten aufgelistet. Die vollständige und gegliederte Darstellung der Arbeitspakete und Aufgaben erfolgt im Arbeitsplan.</li><li>Detaillierte Beschreibungen zu<b> Material und Methoden</b> sind in einem Dokument auf der Verbundseite hochgeladen.</li></ul>",
+  "impact-pathway.objectives.step_type_2.info.panel.funder-project": "Hier sind die <b>wichtigsten Arbeiten</b> des Verbundes dargestellt, die zu den jeweiligen Zielen beitragen.</br></br><b>Arbeitsweise zur Prüfung:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Im Kommentar-Bereich können Sie über <i class=\"fas fa-plus-circle\"></i> Kommentare hinzufügen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-comment.php\"target=\"_blank\">Kommentarfunktion</a></li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul><b>Wichtige Hinweise:</b><ul><li>Es sind hier nur die wirkungsrelevanten Arbeiten aufgelistet. Die vollständige und gegliederte Darstellung der Arbeitspakete und Aufgaben erfolgt im Arbeitsplan.</li><li>Detaillierte Beschreibungen zu<b> Material und Methoden</b> sind in einem Dokument auf der Verbundseite hochgeladen.</li></ul>",
 
   // "impact-pathway.objectives.step_type_2.info.panel.funder-manager": "Help funder organisational manager",
-  "impact-pathway.objectives.step_type_2.info.panel.funder-manager": "Hier sind die <b>wichtigsten Arbeiten</b> des Verbundes dargestellt, die zu den jeweiligen Zielen beitragen.</br></br><b>Arbeitsweise:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über den <b>Button Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul></br><b>Wichtige Hinweise:</b><ul><li>Es sind hier nur die wirkungsrelevanten Arbeiten aufgelistet. Die vollständige und gegliederte Darstellung der Arbeitspakete und Aufgaben erfolgt im Arbeitsplan.</li><li>Detaillierte Beschreibungen zu<b> Material und Methoden</b> sind in einem Dokument auf der Verbundseite hochgeladen.</li></ul>",
+  "impact-pathway.objectives.step_type_2.info.panel.funder-manager": "Hier sind die <b>wichtigsten Arbeiten</b> des Verbundes dargestellt, die zu den jeweiligen Zielen beitragen.</br></br><b>Arbeitsweise:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul></br><b>Wichtige Hinweise:</b><ul><li>Es sind hier nur die wirkungsrelevanten Arbeiten aufgelistet. Die vollständige und gegliederte Darstellung der Arbeitspakete und Aufgaben erfolgt im Arbeitsplan.</li><li>Detaillierte Beschreibungen zu<b> Material und Methoden</b> sind in einem Dokument auf der Verbundseite hochgeladen.</li></ul>",
 
   // "impact-pathway.objectives.step_type_2.info.panel.funder-reader": "Help funder reader",
-  "impact-pathway.objectives.step_type_2.info.panel.funder-reader": "Hier sind die <b>wichtigsten Arbeiten</b> des Verbundes dargestellt, die zu den jeweiligen Zielen beitragen.</br></br><b>Arbeitsweise:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über den <b>Button Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul><b>Wichtige Hinweise:</b><ul><li>Es sind hier nur die wirkungsrelevanten Arbeiten aufgelistet. Die vollständige und gegliederte Darstellung der Arbeitspakete und Aufgaben erfolgt im Arbeitsplan.</li><li>Detaillierte Beschreibungen zu<b> Material und Methoden</b> sind in einem Dokument auf der Verbundseite hochgeladen.</li></ul>",
+  "impact-pathway.objectives.step_type_2.info.panel.funder-reader": "Hier sind die <b>wichtigsten Arbeiten</b> des Verbundes dargestellt, die zu den jeweiligen Zielen beitragen.</br></br><b>Arbeitsweise:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul><b>Wichtige Hinweise:</b><ul><li>Es sind hier nur die wirkungsrelevanten Arbeiten aufgelistet. Die vollständige und gegliederte Darstellung der Arbeitspakete und Aufgaben erfolgt im Arbeitsplan.</li><li>Detaillierte Beschreibungen zu<b> Material und Methoden</b> sind in einem Dokument auf der Verbundseite hochgeladen.</li></ul>",
 
   // "impact-pathway.objectives.step_type_3.info.panel.funder-project": "Help funder project mananger",
-  "impact-pathway.objectives.step_type_3.info.panel.funder-project": "Hier sind die Einträge zu den Arbeiten dargestellt, mit denen das jeweilige Ziel für Interaktion und Transfer erreicht werden soll.</br></br><b>Arbeitsweise zur Prüfung:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Im Kommentar-Bereich können Sie über <i class=\"fas fa-plus-circle\"></i> Kommentare hinzufügen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-comment.php\"target=\"_blank\">Kommentarfunktion</a></li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über den <b>Button Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul><b>Wichtige Hinweise:</b><ul><li>Es sind hier nur die wirkungsrelevanten Arbeiten aufgelistet. Die vollständige und gegliederte Darstellung der Arbeitspakete und Aufgaben erfolgt im Arbeitsplan.</li><li>Detaillierte Beschreibungen zu<b> Material und Methoden</b> sind in einem Dokument auf der Verbundseite hochgeladen.</li>></ul>",
+  "impact-pathway.objectives.step_type_3.info.panel.funder-project": "Hier sind die Einträge zu den Arbeiten dargestellt, mit denen das jeweilige Ziel für Interaktion und Transfer erreicht werden soll.</br></br><b>Arbeitsweise zur Prüfung:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Im Kommentar-Bereich können Sie über <i class=\"fas fa-plus-circle\"></i> Kommentare hinzufügen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-comment.php\"target=\"_blank\">Kommentarfunktion</a></li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul><b>Wichtige Hinweise:</b><ul><li>Es sind hier nur die wirkungsrelevanten Arbeiten aufgelistet. Die vollständige und gegliederte Darstellung der Arbeitspakete und Aufgaben erfolgt im Arbeitsplan.</li><li>Detaillierte Beschreibungen zu<b> Material und Methoden</b> sind in einem Dokument auf der Verbundseite hochgeladen.</li>></ul>",
 
   // "impact-pathway.objectives.step_type_3.info.panel.funder-manager": "Help funder organisational manager",
-  "impact-pathway.objectives.step_type_3.info.panel.funder-manager": "Hier sind die Einträge zu den Arbeiten dargestellt, mit denen das jeweilige Ziel für Interaktion und Transfer erreicht werden soll.</br></br><b>Arbeitsweise:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über den <b>Button Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul><b>Wichtige Hinweise:</b><ul><li>Es sind hier nur die wirkungsrelevanten Arbeiten aufgelistet. Die vollständige und gegliederte Darstellung der Arbeitspakete und Aufgaben erfolgt im Arbeitsplan.</li><li>Detaillierte Beschreibungen zu<b> Material und Methoden</b> sind in einem Dokument auf der Verbundseite hochgeladen.</li>></ul>",
+  "impact-pathway.objectives.step_type_3.info.panel.funder-manager": "Hier sind die Einträge zu den Arbeiten dargestellt, mit denen das jeweilige Ziel für Interaktion und Transfer erreicht werden soll.</br></br><b>Arbeitsweise:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul><b>Wichtige Hinweise:</b><ul><li>Es sind hier nur die wirkungsrelevanten Arbeiten aufgelistet. Die vollständige und gegliederte Darstellung der Arbeitspakete und Aufgaben erfolgt im Arbeitsplan.</li><li>Detaillierte Beschreibungen zu<b> Material und Methoden</b> sind in einem Dokument auf der Verbundseite hochgeladen.</li>></ul>",
 
   // "impact-pathway.objectives.step_type_3.info.panel.funder-reader": "Help funder reader",
-  "impact-pathway.objectives.step_type_3.info.panel.funder-reader": "Hier sind die Einträge zu den Arbeiten dargestellt, mit denen das jeweilige Ziel für Interaktion und Transfer erreicht werden soll.</br></br><b>Arbeitsweise:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über den <b>Button Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul><b>Wichtige Hinweise:</b><ul><li>Es sind hier nur die wirkungsrelevanten Arbeiten aufgelistet. Die vollständige und gegliederte Darstellung der Arbeitspakete und Aufgaben erfolgt im Arbeitsplan.</li><li>Detaillierte Beschreibungen zu<b> Material und Methoden</b> sind in einem Dokument auf der Verbundseite hochgeladen.</li>></ul>",
+  "impact-pathway.objectives.step_type_3.info.panel.funder-reader": "Hier sind die Einträge zu den Arbeiten dargestellt, mit denen das jeweilige Ziel für Interaktion und Transfer erreicht werden soll.</br></br><b>Arbeitsweise:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul><b>Wichtige Hinweise:</b><ul><li>Es sind hier nur die wirkungsrelevanten Arbeiten aufgelistet. Die vollständige und gegliederte Darstellung der Arbeitspakete und Aufgaben erfolgt im Arbeitsplan.</li><li>Detaillierte Beschreibungen zu<b> Material und Methoden</b> sind in einem Dokument auf der Verbundseite hochgeladen.</li>></ul>",
 
   // "working-plan.chart.page.description.funder-project": "Help funder project mananger",
-  "working-plan.chart.page.description.funder-project": "Im Arbeitsplan können die Zuwendungsempfänger <b>Einträge anpinnen</b> und eine <b>Beschreibung ergänzen</b>, um alle <b>Informationen über die Arbeitspakete</b>, die <b>Reihenfolge</b> der dazugehörigen Arbeiten und deren <b>Zeitbedarf</b> sowie die <b>Meilensteinplanung</b> eines Verbundes darzustellen. Die Einträge werden von allen Zuwendungsempfängern gemeinsam genutzt und können somit auch im Wirkungspfad und in den Verwertungsplänen der jeweiligen Zuwendungsempfänger angepinnt werden.</br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.html\"target=_blank\"> Einträge strukturieren - Pinnwandprinzip</a></br></br><b>Arbeitsweise zur Prüfung:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Im Kommentar-Bereich können Sie über <i class=\"fas fa-plus-circle\"></i> Kommentare hinzufügen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-comment.php\"target=\"_blank\">Kommentarfunktion</a></li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über den <b>Button Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul>",
+  "working-plan.chart.page.description.funder-project": "Im Arbeitsplan können die Zuwendungsempfänger <b>Einträge anpinnen</b> und eine <b>Beschreibung ergänzen</b>, um alle <b>Informationen über die Arbeitspakete</b>, die <b>Reihenfolge</b> der dazugehörigen Arbeiten und deren <b>Zeitbedarf</b> sowie die <b>Meilensteinplanung</b> eines Verbundes darzustellen. Die Einträge werden von allen Zuwendungsempfängern gemeinsam genutzt und können somit auch im Wirkungspfad und in den Verwertungsplänen der jeweiligen Zuwendungsempfänger angepinnt werden.</br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.html\"target=_blank\"> Einträge strukturieren - Pinnwandprinzip</a></br></br><b>Arbeitsweise zur Prüfung:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Im Kommentar-Bereich können Sie über <i class=\"fas fa-plus-circle\"></i> Kommentare hinzufügen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-comment.php\"target=\"_blank\">Kommentarfunktion</a></li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul>",
 
   // "working-plan.chart.page.description.funder-manager": "Help funder organisational manager",
-  "working-plan.chart.page.description.funder-manager": "Im Arbeitsplan können die Zuwendungsempfänger <b>Einträge anpinnen</b> und eine <b>Beschreibung ergänzen</b>, um alle <b>Informationen über die Arbeitspakete</b>, die <b>Reihenfolge</b> der dazugehörigen Arbeiten und deren <b>Zeitbedarf</b> sowie die <b>Meilensteinplanung</b> eines Verbundes darzustellen. Die Einträge werden von allen Zuwendungsempfängern gemeinsam genutzt und können somit auch im Wirkungspfad und in den Verwertungsplänen der jeweiligen Zuwendungsempfänger angepinnt werden.</br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.html\"target=_blank\"> Einträge strukturieren - Pinnwandprinzip</a></br></br><b>Arbeitsweise:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über den <b>Button Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul>",
+  "working-plan.chart.page.description.funder-manager": "Im Arbeitsplan können die Zuwendungsempfänger <b>Einträge anpinnen</b> und eine <b>Beschreibung ergänzen</b>, um alle <b>Informationen über die Arbeitspakete</b>, die <b>Reihenfolge</b> der dazugehörigen Arbeiten und deren <b>Zeitbedarf</b> sowie die <b>Meilensteinplanung</b> eines Verbundes darzustellen. Die Einträge werden von allen Zuwendungsempfängern gemeinsam genutzt und können somit auch im Wirkungspfad und in den Verwertungsplänen der jeweiligen Zuwendungsempfänger angepinnt werden.</br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.html\"target=_blank\"> Einträge strukturieren - Pinnwandprinzip</a></br></br><b>Arbeitsweise:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über  <b>Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul>",
 
   // "working-plan.chart.page.description.funder-reader": "Help funder reader",
-  "working-plan.chart.page.description.funder-reader": "Im Arbeitsplan können die Zuwendungsempfänger <b>Einträge anpinnen</b> und eine <b>Beschreibung ergänzen</b>, um alle <b>Informationen über die Arbeitspakete</b>, die <b>Reihenfolge</b> der dazugehörigen Arbeiten und deren <b>Zeitbedarf</b> sowie die <b>Meilensteinplanung</b> eines Verbundes darzustellen. Die Einträge werden von allen Zuwendungsempfängern gemeinsam genutzt und können somit auch im Wirkungspfad und in den Verwertungsplänen der jeweiligen Zuwendungsempfänger angepinnt werden.</br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.html\"target=_blank\"> Einträge strukturieren - Pinnwandprinzip</a></br></br><b>Arbeitsweise:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über den <b>Button Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul>",
+  "working-plan.chart.page.description.funder-reader": "Im Arbeitsplan können die Zuwendungsempfänger <b>Einträge anpinnen</b> und eine <b>Beschreibung ergänzen</b>, um alle <b>Informationen über die Arbeitspakete</b>, die <b>Reihenfolge</b> der dazugehörigen Arbeiten und deren <b>Zeitbedarf</b> sowie die <b>Meilensteinplanung</b> eines Verbundes darzustellen. Die Einträge werden von allen Zuwendungsempfängern gemeinsam genutzt und können somit auch im Wirkungspfad und in den Verwertungsplänen der jeweiligen Zuwendungsempfänger angepinnt werden.</br><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.html\"target=_blank\"> Einträge strukturieren - Pinnwandprinzip</a></br></br><b>Arbeitsweise:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul>",
 
   // "exploitation-plan.info.text.funder-project": "Help funder project mananger",
-  "exploitation-plan.info.text.funder-project": "Im Verwertungsplan können die Zuwendungsempfänger <b>Einträge anpinnen</b> und eine <b>Beschreibung ergänzen, um die Fragen des Verwertungsplans zu beantworten</b>. Die Einträge werden von allen Zuwendungsempfängern gemeinsam genutzt und können somit auch im Wirkungspfad, im Arbeitsplan und in den Verwertungsplänen der anderen Zuwendungsempfänger angepinnt werden.<ul><li>Der Wirkungspfad gibt einen Überblick zur Nutzung der Ergebnisse und die Wirkung des gesamten Vorhabens.</li><li>Dagegen wird im Verwertungsplan separat von jedem Zuwendungsempfänger (Teilprojekt) spezifisch die konkrete Verwertung der Ergebnisse beschrieben.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.html\"target=_blank\"> Einträge strukturieren - Pinnwandprinzip</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-details-ep.html\"target=_blank\"> Informationen zum Verwertungsplan für den Zuwendungsempfänger</a></li></ul><b>Arbeitsweise zur Prüfung:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Im Kommentar-Bereich können Sie über <i class=\"fas fa-plus-circle\"></i> zu jedem der vier Aspekte Kommentare hinzufügen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-comment.php\"target=\"_blank\">Kommentarfunktion</a></li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über den <b>Button Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul>",
+  "exploitation-plan.info.text.funder-project": "Im Verwertungsplan können die Zuwendungsempfänger <b>Einträge anpinnen</b> und eine <b>Beschreibung ergänzen, um die Fragen des Verwertungsplans zu beantworten</b>. Die Einträge werden von allen Zuwendungsempfängern gemeinsam genutzt und können somit auch im Wirkungspfad, im Arbeitsplan und in den Verwertungsplänen der anderen Zuwendungsempfänger angepinnt werden.<ul><li>Der Wirkungspfad gibt einen Überblick zur Nutzung der Ergebnisse und die Wirkung des gesamten Vorhabens.</li><li>Dagegen wird im Verwertungsplan separat von jedem Zuwendungsempfänger (Teilprojekt) spezifisch die konkrete Verwertung der Ergebnisse beschrieben.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.html\"target=_blank\"> Einträge strukturieren - Pinnwandprinzip</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-details-ep.html\"target=_blank\"> Informationen zum Verwertungsplan für den Zuwendungsempfänger</a></li></ul><b>Arbeitsweise zur Prüfung:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Im Kommentar-Bereich können Sie über <i class=\"fas fa-plus-circle\"></i> zu jedem der vier Aspekte Kommentare hinzufügen.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-funder-comment.php\"target=\"_blank\">Kommentarfunktion</a></li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul>",
 
   // "exploitation-plan.info.text.funder-manager": "Help funder organisational manager",
-  "exploitation-plan.info.text.funder-manager": "Im Verwertungsplan können die Zuwendungsempfänger <b>Einträge anpinnen</b> und eine <b>Beschreibung ergänzen, um die Fragen des Verwertungsplans zu beantworten</b>. Die Einträge werden von allen Zuwendungsempfängern gemeinsam genutzt und können somit auch im Wirkungspfad, im Arbeitsplan und in den Verwertungsplänen der anderen Zuwendungsempfänger angepinnt werden.<ul><li>Der Wirkungspfad gibt einen Überblick zur Nutzung der Ergebnisse und die Wirkung des gesamten Vorhabens.</li><li>Dagegen wird im Verwertungsplan separat von jedem Zuwendungsempfänger (Teilprojekt) spezifisch die konkrete Verwertung der Ergebnisse beschrieben.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.html\"target=_blank\"> Einträge strukturieren - Pinnwandprinzip</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-details-ep.html\"target=_blank\"> Informationen zum Verwertungsplan für den Zuwendungsempfänger</a></li></ul><b>Arbeitsweise:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über den <b>Button Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul>",
+  "exploitation-plan.info.text.funder-manager": "Im Verwertungsplan können die Zuwendungsempfänger <b>Einträge anpinnen</b> und eine <b>Beschreibung ergänzen, um die Fragen des Verwertungsplans zu beantworten</b>. Die Einträge werden von allen Zuwendungsempfängern gemeinsam genutzt und können somit auch im Wirkungspfad, im Arbeitsplan und in den Verwertungsplänen der anderen Zuwendungsempfänger angepinnt werden.<ul><li>Der Wirkungspfad gibt einen Überblick zur Nutzung der Ergebnisse und die Wirkung des gesamten Vorhabens.</li><li>Dagegen wird im Verwertungsplan separat von jedem Zuwendungsempfänger (Teilprojekt) spezifisch die konkrete Verwertung der Ergebnisse beschrieben.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.html\"target=_blank\"> Einträge strukturieren - Pinnwandprinzip</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-details-ep.html\"target=_blank\"> Informationen zum Verwertungsplan für den Zuwendungsempfänger</a></li></ul><b>Arbeitsweise:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul>",
 
   // "exploitation-plan.info.text.funder-reader": "Help funder reader",
-  "exploitation-plan.info.text.funder-reader": "Im Verwertungsplan können die Zuwendungsempfänger <b>Einträge anpinnen</b> und eine <b>Beschreibung ergänzen, um die Fragen des Verwertungsplans zu beantworten</b>. Die Einträge werden von allen Zuwendungsempfängern gemeinsam genutzt und können somit auch im Wirkungspfad, im Arbeitsplan und in den Verwertungsplänen der anderen Zuwendungsempfänger angepinnt werden.<ul><li>Der Wirkungspfad gibt einen Überblick zur Nutzung der Ergebnisse und die Wirkung des gesamten Vorhabens.</li><li>Dagegen wird im Verwertungsplan separat von jedem Zuwendungsempfänger (Teilprojekt) spezifisch die konkrete Verwertung der Ergebnisse beschrieben.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.html\"target=_blank\"> Einträge strukturieren - Pinnwandprinzip</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-details-ep.html\"target=_blank\"> Informationen zum Verwertungsplan für den Zuwendungsempfänger</a></li></ul><b>Arbeitsweise:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über den <b>Button Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul>",
+  "exploitation-plan.info.text.funder-reader": "Im Verwertungsplan können die Zuwendungsempfänger <b>Einträge anpinnen</b> und eine <b>Beschreibung ergänzen, um die Fragen des Verwertungsplans zu beantworten</b>. Die Einträge werden von allen Zuwendungsempfängern gemeinsam genutzt und können somit auch im Wirkungspfad, im Arbeitsplan und in den Verwertungsplänen der anderen Zuwendungsempfänger angepinnt werden.<ul><li>Der Wirkungspfad gibt einen Überblick zur Nutzung der Ergebnisse und die Wirkung des gesamten Vorhabens.</li><li>Dagegen wird im Verwertungsplan separat von jedem Zuwendungsempfänger (Teilprojekt) spezifisch die konkrete Verwertung der Ergebnisse beschrieben.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-structure.html\"target=_blank\"> Einträge strukturieren - Pinnwandprinzip</a></li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-details-ep.html\"target=_blank\"> Informationen zum Verwertungsplan für den Zuwendungsempfänger</a></li></ul><b>Arbeitsweise:</b><ul><li>Rufen Sie die Detailinformationen zu jedem Eintrag auf, indem Sie die Bezeichnung anklicken.</li><li>Wenn mehrere Versionen vorliegen, können Sie die aktuelle Version über <b>Vergleich mit …</b> einer älteren Version vergleichen. Gelöschte Einträge werden rot und neue Einträge werden grün hervorgehoben.</li><li>Über <i class=\"fas fa-not-equal\"></i> können Sie die Detailinformationen zu einem Eintrag in beiden Versionen vergleichen.</li></ul>",
 
   // "exploitation-plan.step_type_1.info.text.funder-project": "Help funder project mananger",
   "exploitation-plan.step_type_1.info.text.funder-project": "Schutzrechte sind Patente oder Gebrauchsmuster. Sie dienen dazu, die ausschließlichen Nutzungsrechte an den Ergebnissen oder Erfindungen zu sichern.",
@@ -16261,7 +16261,7 @@
   "search.filters.applied.charts.graph-synsicris_type_project.tab": "Art des Vorhabens",
 
   // "search.filters.applied.charts.graph-synsicris_duration.tab": "Duration",
-  "search.filters.applied.charts.graph-synsicris_duration.tab": "Dauer",
+  "search.filters.applied.charts.graph-synsicris_duration.tab": "Dauer (Stunden)",
 
   // "search.filters.applied.charts.graph-oairecerif_project_status.tab": "Project Status",
   "search.filters.applied.charts.graph-oairecerif_project_status.tab": "Status",
@@ -16489,16 +16489,148 @@
   "search.filters.filter.synsicrisTypeStatus.label": "Suche Status",
 
   // "search.filters.filter.synsicrisDateFilled.head": "Year of filling",
-  "search.filters.filter.synsicrisDateFilled.head": "Jahr der Anmeldung",
+  "search.filters.filter.synsicrisDateFilled.head": "Jahr",
 
   // "search.filters.filter.synsicrisDateFilled.placeholder": "Year of filling",
-  "search.filters.filter.synsicrisDateFilled.placeholder": "Jahr der Anmeldung",
+  "search.filters.filter.synsicrisDateFilled.placeholder": "Jahr",
 
   // "search.filters.filter.synsicrisDateFilled.label": "Search Year of filling",
-  "search.filters.filter.synsicrisDateFilled.label": "Suche Jahr der Anmeldung",
+  "search.filters.filter.synsicrisDateFilled.label": "Suche Jahr",
 
   // "submission.import-external.help-message": "Help Import",
   "submission.import-external.help-message": "Hilfe Import",
+
+  // "questions-board.exploitation-plan.metadata-internal.icon.title.status.exchange": "Exchange",
+  // TODO New key - Add a translation
+  "questions-board.exploitation-plan.metadata-internal.icon.title.status.exchange": "Nachricht (intern)",
+
+  // "questions-board.exploitation-plan.metadata-internal.icon.title.status.done": "Done",
+  // TODO New key - Add a translation
+  "questions-board.exploitation-plan.metadata-internal.icon.title.status.done": "Erledigt",
+
+  // "questions-board.exploitation-plan.metadata-internal.icon.title.status.exchange": "Exchange",
+  // TODO New key - Add a translation
+  "questions-board.interim-report.metadata-internal.icon.title.status.exchange": "Nachricht (intern)",
+
+  // "questions-board.interim-report.metadata-internal.icon.title.status.done": "Done",
+  // TODO New key - Add a translation
+  "questions-board.interim-report.metadata-internal.icon.title.status.done": "Erledigt",
+
+  // "questions-board.exploitation-plan.metadata-status.icon.title.status.new": "New",
+  // TODO New key - Add a translation
+  "questions-board.exploitation-plan.metadata-status.icon.title.status.new": "Neu",
+
+  // "questions-board.exploitation-plan.metadata-status.icon.title.status.changed": "Changed",
+  // TODO New key - Add a translation
+  "questions-board.exploitation-plan.metadata-status.icon.title.status.changed": "Geändert",
+
+  // "questions-board.exploitation-plan.metadata-status.icon.title.status.done": "Done",
+  // TODO New key - Add a translation
+  "questions-board.exploitation-plan.metadata-status.icon.title.status.done": "Erledigt",
+
+  // "questions-board.exploitation-plan.metadata-status.icon.title.status.canceled": "Canceled",
+  // TODO New key - Add a translation
+  "questions-board.exploitation-plan.metadata-status.icon.title.status.canceled": "Gestrichen",
+
+  // "questions-board.exploitation-plan.metadata-status.icon.title.status.archieved": "Archieved",
+  // TODO New key - Add a translation
+  "questions-board.exploitation-plan.metadata-status.icon.title.status.archieved": "Erreicht",
+
+  // "questions-board.exploitation-plan.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
+  // TODO New key - Add a translation
+  "questions-board.exploitation-plan.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
+
+  // "questions-board.interim-report.metadata-status.icon.title.status.new": "New",
+  // TODO New key - Add a translation
+  "questions-board.interim-report.metadata-status.icon.title.status.new": "New",
+
+  // "questions-board.interim-report.metadata-status.icon.title.status.changed": "Changed",
+  // TODO New key - Add a translation
+  "questions-board.interim-report.metadata-status.icon.title.status.changed": "Changed",
+
+  // "questions-board.interim-report.metadata-status.icon.title.status.done": "Done",
+  // TODO New key - Add a translation
+  "questions-board.interim-report.metadata-status.icon.title.status.done": "Done",
+
+  // "questions-board.interim-report.metadata-status.icon.title.status.canceled": "Canceled",
+  // TODO New key - Add a translation
+  "questions-board.interim-report.metadata-status.icon.title.status.canceled": "Canceled",
+
+  // "questions-board.interim-report.metadata-status.icon.title.status.archieved": "Archieved",
+  // TODO New key - Add a translation
+  "questions-board.interim-report.metadata-status.icon.title.status.archieved": "Archieved",
+
+  // "questions-board.interim-report.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
+  // TODO New key - Add a translation
+  "questions-board.interim-report.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
+
+  // "impact-pathway.metadata-internal.icon.title.status.done": "Done",
+  // TODO New key - Add a translation
+  "impact-pathway.metadata-internal.icon.title.status.done": "Done",
+
+  // "impact-pathway.metadata-internal.icon.title.status.edit": "Edit",
+  // TODO New key - Add a translation
+  "impact-pathway.metadata-internal.icon.title.status.edit": "Edit",
+
+  // "impact-pathway.metadata-internal.icon.title.status.exchange": "Exchange",
+  // TODO New key - Add a translation
+  "impact-pathway.metadata-internal.icon.title.status.exchange": "Nachricht (intern)",
+
+  // "impact-pathway.metadata-status.icon.title.status.new": "New",
+  // TODO New key - Add a translation
+  "impact-pathway.metadata-status.icon.title.status.new": "Neu",
+
+  // "impact-pathway.metadata-status.icon.title.status.changed": "Changed",
+  // TODO New key - Add a translation
+  "impact-pathway.metadata-status.icon.title.status.changed": "Geändert",
+
+  // "impact-pathway.metadata-status.icon.title.status.done": "Done",
+  // TODO New key - Add a translation
+  "impact-pathway.metadata-status.icon.title.status.done": "Erledigt",
+
+  // "impact-pathway.metadata-status.icon.title.status.canceled": "Canceled",
+  // TODO New key - Add a translation
+  "impact-pathway.metadata-status.icon.title.status.canceled": "Gestrichen",
+
+  // "impact-pathway.metadata-status.icon.title.status.archieved": "Archieved",
+  // TODO New key - Add a translation
+  "impact-pathway.metadata-status.icon.title.status.archieved": "Erreicht",
+
+  // "impact-pathway.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
+  // TODO New key - Add a translation
+  "impact-pathway.metadata-status.icon.title.status.partly-archieved": "Teilweise erreicht",
+
+  // "working-plan.item.metadata-internal.icon.title.status.done": "Done",
+  // TODO New key - Add a translation
+  "working-plan.item.metadata-internal.icon.title.status.done": "Erledigt",
+
+  // "working-plan.item.metadata-internal.icon.title.status.exchange": "Exchange",
+  // TODO New key - Add a translation
+  "working-plan.item.metadata-internal.icon.title.status.exchange": "Nachricht (intern)",
+
+  // "working-plan.metadata-status.icon.title.status.new": "New",
+  // TODO New key - Add a translation
+  "working-plan.metadata-status.icon.title.status.new": "Neu",
+
+  // "working-plan.metadata-status.icon.title.status.changed": "Changed",
+  // TODO New key - Add a translation
+  "working-plan.metadata-status.icon.title.status.changed": "Geändert",
+
+  // "working-plan.metadata-status.icon.title.status.done": "Done",
+  // TODO New key - Add a translation
+  "working-plan.metadata-status.icon.title.status.done": "Erledigt",
+
+  // "working-plan.metadata-status.icon.title.status.canceled": "Canceled",
+  // TODO New key - Add a translation
+  "working-plan.metadata-status.icon.title.status.canceled": "Gestrichen",
+
+  // "working-plan.metadata-status.icon.title.status.archieved": "Archieved",
+  // TODO New key - Add a translation
+  "working-plan.metadata-status.icon.title.status.archieved": "Erreicht",
+
+  // "working-plan.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
+  // TODO New key - Add a translation
+  "working-plan.metadata-status.icon.title.status.partly-archieved": "Teilweise erreicht",
 
   // "layout.tab.header.milestone": "Milestones",
   "layout.tab.header.milestone": "Meilensteine",
@@ -16681,6 +16813,159 @@
   "view.version.badges.official": "offiziell",
 
   // "view.version.badges.nonOfficial": "non-official",
-  "view.version.badges.nonOfficial": "nicht-offiziell"
+  "view.version.badges.nonOfficial": "nicht-offiziell",
+
+  // "tree.description.sdg": "Selection Sustainable Development Goal (SDG)",
+  "tree.description.sdg": "Auswahl Ziel für nachhaltige Entwicklung (SDG)",
+
+  // "vocabulary-treeview.tree.description.sdg": "missing",
+  "vocabulary-treeview.tree.description.sdg": "<i>Wählen Sie das Ziel für nachhaltige Entwicklung bitte so spezifisch wie möglich aus. </br>Nutzen Sie die <b>Pfeile</b>, um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein.</br><b>Auswählbar</b> sind nur die <b>schwarzen</b> Begriffe.</i>",
+
+  // "search.filters.applied.charts.graph-fundingobjective-synsicris_type_sdg.tab": "Related SDG",
+  "search.filters.applied.charts.graph-fundingobjective-synsicris_type_sdg.tab": "Ziel für nachhaltige Entwicklung (SDG)",
+
+  // "search.filters.filter.synsicrisTypeSdg.head": "Sustainable development goal (SDG)",
+  "search.filters.filter.synsicrisTypeSdg.head": "Ziel für nachhaltige Entwicklung (SDG)",
+
+  // "search.filters.filter.synsicrisTypeSdg.placeholder": "Sustainable development goal (SDG)",
+  "search.filters.filter.synsicrisTypeSdg.placeholder": "Ziel für nachhaltige Entwicklung (SDG)",
+
+  // "search.filters.filter.synsicrisTypeSdg.label": "Search Sustainable development goal (SDG)",
+  "search.filters.filter.synsicrisTypeSdg.label": "Suche Ziel für nachhaltige Entwicklung (SDG)",
+
+  // "search.filters.filter.synsicrisRelationProgramme.head": "Programme",
+  "search.filters.filter.synsicrisRelationProgramme.head": "Förderprogramm",
+
+  // "search.filters.filter.synsicrisRelationProgramme.placeholder": "Programme",
+  "search.filters.filter.synsicrisRelationProgramme.placeholder": "Förderprogramm",
+
+  // "search.filters.filter.synsicrisRelationProgramme.label": "Search Programme",
+  "search.filters.filter.synsicrisRelationProgramme.label": "Suche Förderprogramm",
+
+  // "item.version.list.stop-comparing-text": "Stop comparing",
+  "item.version.list.stop-comparing-text": "Vergleich beenden",
+
+  // "metadata-export-search.tooltip": "Export search results as CSV",
+  "metadata-export-search.tooltip": "Suchergebnisse als CSV exportieren",
+
+  // "impact-pathway.description.jump-marker": "To the description of the overall goals of the project",
+  "impact-pathway.description.jump-marker": "Zur Beschreibung der Gesamtziele des Vorhabens",
+
+  // "ubmission.sections.accesses.form.date-required-until": "Grant access until date is required.",
+  "ubmission.sections.accesses.form.date-required-until": "Zugriff gewähren bis Datum ist erforderlich",
+
+  // "search.filters.applied.charts.graph-proc-even-synsicris_relation_targetgroup.tab": "Stakeholder group",
+  "search.filters.applied.charts.graph-proc-even-synsicris_relation_targetgroup.tab": "Akteursgruppe",
+
+  // "search.filters.applied.charts.graph-proc-event-dc_type_targetgroup.tab": "Type of Stakeholder group",
+  "search.filters.applied.charts.graph-proc-event-dc_type_targetgroup.tab": "Art der Akteursgruppe",
+
+  // "search.filters.applied.charts.graph-proc-event-synsicris_subject_nace.tab": "Economic sector",
+  "search.filters.applied.charts.graph-proc-event-synsicris_subject_nace.tab": "Wirtschaftszweig",
+
+  // "search.filters.applied.charts.graph-proc-event-synsicris_subject_political.tab": "Policy level",
+  "search.filters.applied.charts.graph-proc-event-synsicris_subject_political.tab": "Politikebene",
+
+  // "search.filters.applied.charts.graph-proc-event-synsicris_subject_enterprise.tab": "Company size",
+  "search.filters.applied.charts.graph-proc-event-synsicris_subject_enterprise.tab": "Unternehmensgröße",
+
+  // "search.filters.applied.charts.graph-proc-event-synsicris_subject_urbanrural.tab": "Locating",
+  "search.filters.applied.charts.graph-proc-event-synsicris_subject_urbanrural.tab": "Verortung",
+
+  // "search.filters.applied.charts.graph-proc-event-synsicris_type_purpose.tab": "Purpose",
+  "search.filters.applied.charts.graph-proc-event-synsicris_type_purpose.tab": "Ziel",
+
+  // "search.filters.applied.charts.graph-event-type_target_group.tab": "Type of Stakeholder group",
+  "search.filters.applied.charts.graph-event-type_target_group.tab": "Art der Akteursgruppe",
+
+  // "search.filters.applied.charts.graph-event-synsicris_subject_nace.tab": "Economic sector",
+  "search.filters.applied.charts.graph-event-synsicris_subject_nace.tab": "Wirtschaftszweig",
+
+  // "search.filters.applied.charts.graph-event-synsicris_subject_enterprise.tab": "Size of business",
+  "search.filters.applied.charts.graph-event-synsicris_subject_enterprise.tab": "Unternehmensgröße",
+
+  // "search.filters.applied.charts.graph-event-synsicris_subject_urbanrural.tab": "Locating",
+  "search.filters.applied.charts.graph-event-synsicris_subject_urbanrural.tab": "Verortung",
+
+  // "search.filters.applied.charts.graph-event-synsicris_type_contribution.tab": "Type of Contribution",
+  "search.filters.applied.charts.graph-event-synsicris_type_contribution.tab": "Art der Beteiligung",
+
+  // "search.filters.applied.charts.RELATION.Project.Product.title": "Graph",
+  "search.filters.applied.charts.RELATION.Project.Product.title": "Diagramm",
+
+  // "search.filters.applied.charts.RELATION.Project.neg_sideeffect.title": "Graph",
+  "search.filters.applied.charts.RELATION.Project.neg_sideeffect.title": "Diagramm",
+
+  // "search.filters.applied.charts.graph-product-dc_subject.tab": "Keyword",
+  "search.filters.applied.charts.graph-product-dc_subject.tab": "Schlagwort",
+
+  // "search.filters.applied.charts.graph-inn-pot-synsicris_relation_targetgroup.tab": "Stakeholder group(s)",
+  "search.filters.applied.charts.graph-inn-pot-synsicris_relation_targetgroup.tab": "Akteursgruppe(n)",
+
+  // "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_transform.tab": "Area of transition",
+  "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_transform.tab": "Adressierter Transformationsbereich",
+
+  // "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_intensity.tab": "Influence on the impact",
+  "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_intensity.tab": "Einfluss auf die Wirkung",
+
+  // "search.filters.applied.charts.graphprojpart_synsicris_subject_political.tab": "Policy level",
+  "search.filters.applied.charts.graphprojpart_synsicris_subject_political.tab": "Politikebene",
+
+  // "search.filters.applied.charts.graph-multiple-entities-dc_type.tab": "Type",
+  "search.filters.applied.charts.graph-multiple-entities-dc_type.tab": "Art",
+
+  // "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_nace.tab": "Economic sector",
+  "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_nace.tab": "Wirtschaftszweig",
+
+  // "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_enterprise.tab": "Company size",
+  "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_enterprise.tab": "Unternehmensgröße",
+
+  // "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_political.tab": "Policy level",
+  "search.filters.applied.charts.graph-multiple-entities-synsicris_subject_political.tab": "Politikebene",
+
+  // "search.filters.applied.charts.graph-synsicris_subject_destatis.tab": "Discipline",
+  "search.filters.applied.charts.graph-synsicris_subject_destatis.tab": "Disziplin / Fachgebiet",
+
+  // "search.filters.filter.synsicrisDcContributorAuthor.head": "Author",
+  "search.filters.filter.synsicrisDcContributorAuthor.head": "Autor:in",
+
+  // "search.filters.filter.synsicrisDcContributorAuthor.label": "Search Author",
+  "search.filters.filter.synsicrisDcContributorAuthor.label": "Suche Autor:in",
+
+  // "search.filters.applied.charts.graph-synsicris_address_addressCountry.tab": "Country/Federal state",
+  "search.filters.applied.charts.graph-synsicris_address_addressCountry.tab": "Land/Bundesland",
+
+  // "search.filters.applied.charts.graph-proc-event-dc_type.tab": "Type of Cooperation / Participation / Exchange process",
+  "search.filters.applied.charts.graph-proc-event-dc_type.tab": "Art der Kooperation / Partizipation / Austauschprozess",
+
+  // "search.filters.filter.synsicrisTypeIntensity.head": "Intensity/duration of cooperation",
+  "search.filters.filter.synsicrisTypeIntensity.head": "Wirkungsintensität",
+
+  // "search.filters.filter.synsicrisTypeIntensity.label": "Search Intensity/duration of cooperation",
+  "search.filters.filter.synsicrisTypeIntensity.label": "Suche Wirkungsintensität",
+
+  // "search.filters.filter.synsicrisDcSubject.head": "Keyword",
+  "search.filters.filter.synsicrisDcSubject.head": "Schlagwort",
+
+  // "search.filters.filter.synsicrisDcSubject.label": "Search Keyword",
+  "search.filters.filter.synsicrisDcSubject.label": "Suche Schlagwort (Agrovoc)",
+
+  // "search.filters.filter.filter-synsicris_type_visiblity.head": "Public visibility",
+  "search.filters.filter.filter-synsicris_type_visiblity.head": "öffentliche Sichtbarkeit",
+
+  // "search.filters.filter.filter-synsicris_type_visiblity.label": "Search Public visibility",
+  "search.filters.filter.filter-synsicris_type_visiblity.label": "Suche öffentliche Sichtbarkeit",
+
+  // "search.filters.applied.f.synsicrisDateFilled.min": "Start",
+  "search.filters.applied.f.synsicrisDateFilled.min": "Start",
+
+  // "search.filters.applied.f.synsicrisDateFilled.max": "End",
+  "search.filters.applied.f.synsicrisDateFilled.max": "Ende",
+
+  // "search.filters.filter.synsicrisDateFilled.min.label": "Start",
+  "search.filters.filter.synsicrisDateFilled.min.label": "Start",
+
+  // "search.filters.filter.synsicrisDateFilled.max.label": "End",
+  "search.filters.filter.synsicrisDateFilled.max.label": "Ende"
 
 }

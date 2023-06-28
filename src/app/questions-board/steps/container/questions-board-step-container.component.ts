@@ -15,6 +15,8 @@ import { ProjectGroupService } from '../../../core/project/project-group.service
 import { Community } from '../../../core/shared/community.model';
 import { DragAndDropContainerComponent } from '../../shared/drag-and-drop/drag-and-drop-container.component';
 import { filter, map } from 'rxjs/operators';
+import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
+import { of } from 'rxjs/internal/observable/of';
 
 @Component({
   selector: 'ds-questions-board-step-container',
@@ -57,6 +59,11 @@ export class QuestionsBoardStepContainerComponent extends DragAndDropContainerCo
   @Input() questionEntityType: string;
 
   /**
+   * If the user is a project reader
+   */
+  @Input() isProjectReader: boolean;
+
+  /**
    * A boolean representing if compare mode is active
    */
   compareMode$ = new BehaviorSubject(false);
@@ -92,7 +99,8 @@ export class QuestionsBoardStepContainerComponent extends DragAndDropContainerCo
     protected cdr: ChangeDetectorRef,
     protected questionsBoardStateService: QuestionsBoardStateService,
     protected modalService: NgbModal,
-    protected projectGroupService: ProjectGroupService
+    protected projectGroupService: ProjectGroupService,
+    protected authorizationService: AuthorizationDataService,
   ) {
     super();
   }
@@ -108,10 +116,11 @@ export class QuestionsBoardStepContainerComponent extends DragAndDropContainerCo
 
   canAdd(): Observable<boolean> {
     return combineLatest([
+      of(this.isProjectReader),
       this.isVersionOfAnItem$.asObservable(),
       this.compareMode$.asObservable()
     ]).pipe(
-      map(([isVersionOfAnItem, compareMode]) => !(isVersionOfAnItem || compareMode))
+      map(([isProjectReader, isVersionOfAnItem, compareMode]) => !isProjectReader && !(isVersionOfAnItem || compareMode))
     );
   }
 
