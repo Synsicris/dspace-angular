@@ -128,7 +128,8 @@ export class NotificationsService {
     return new NotificationOptions(
       environment.notifications.timeOut,
       environment.notifications.clickToClose,
-      environment.notifications.animate
+      environment.notifications.animate,
+      environment.notifications.position
     );
   }
 }
