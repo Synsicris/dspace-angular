@@ -10,15 +10,13 @@ export class NotificationOptions implements INotificationOptions {
   public timeOut: number;
   public clickToClose: boolean;
   public animate: any;
-  public position: string[];
 
   constructor(timeOut = 5000,
               clickToClose = true,
-              animate: NotificationAnimationsType | string = NotificationAnimationsType.Scale, position: string[] = ['top', 'right']) {
+              animate: NotificationAnimationsType | string = NotificationAnimationsType.Scale) {
 
     this.timeOut = timeOut;
     this.clickToClose = clickToClose;
     this.animate = animate;
-    this.position = position;
   }
 }
