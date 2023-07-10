@@ -9,7 +9,7 @@
   </ds-notification>
 </div>
 
-<div class="notifications-wrapper position-fixed bottom right">
+<div class="notifications-wrapper position-fixed" [ngClass]="position">
   <ds-process-notification
     class="notification"
     *ngFor="let procNotification of processNotifications; let ix = index"
