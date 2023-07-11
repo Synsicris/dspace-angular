@@ -2582,7 +2582,7 @@
 
   "impact-pathway.checkbox.savebutton": "Save & back",
 
-  "impact-pathway.create.bidirectional-link": "Create bidirectional arrow",
+  "impact-pathway.create.bidirectional-link": "Create bidirectional arrow to highlight important links in the impact logic",
 
   "impact-pathway.create.btn": "Create Impact Pathway",
 
@@ -2590,7 +2590,7 @@
 
   "impact-pathway.create.head": "New Impact Pathway",
 
-  "impact-pathway.create.outcome-link": "Create arrow",
+  "impact-pathway.create.outcome-link": "Create arrow to highlight important links in the impact logic",
 
   "impact-pathway.create.placeholder": "Enter the name of the new Impact Pathway.",
 
@@ -4620,7 +4620,7 @@
 
   "process.new.notification.process.see-results": "To version history",
 
-  "process.new.notification.process.create-version": "Creating version has failed",
+  "process.new.notification.process.create-version": "Create Version",
 
   "process.new.notification.process.create-failed": "Creating version has failed",
 
@@ -5682,13 +5682,13 @@
 
   "search.filters.applied.charts.RELATION.parentproject.Publication.title": "Publication",
 
-  "search.filters.applied.charts.grapheventtype.tab": "Event type",
+  "search.filters.applied.charts.grapheventtype.tab": "Type",
 
-  "search.filters.applied.charts.grapheventpurpose.tab": "Event prupose",
+  "search.filters.applied.charts.grapheventpurpose.tab": "Prupose",
 
   "search.filters.applied.charts.grapheventpartner.tab": "Event partner",
 
-  "search.filters.applied.charts.grapheventtarget.tab": "Event target",
+  "search.filters.applied.charts.grapheventtarget.tab": "Stakeholder group",
 
   "search.filters.applied.charts.grapheventdate.tab": "Event date",
 
@@ -6152,11 +6152,11 @@
 
   "search.filters.entityType.exploitationplanstep.step_type_4": "ExploitationPlan",
 
-  "questions-board.exploitation-plan.metadata-internal.icon.title.status.exchange": "Exchange",
+  "questions-board.exploitation-plan.metadata-internal.icon.title.status.exchange": "Note for further editing (internal)",
 
   "questions-board.exploitation-plan.metadata-internal.icon.title.status.done": "Done",
 
-  "questions-board.interim-report.metadata-internal.icon.title.status.exchange": "Exchange",
+  "questions-board.interim-report.metadata-internal.icon.title.status.exchange": "Note for further editing (internal)",
 
   "questions-board.interim-report.metadata-internal.icon.title.status.done": "Done",
 
@@ -6188,7 +6188,7 @@
 
   "impact-pathway.metadata-internal.icon.title.status.edit": "Edit",
 
-  "impact-pathway.metadata-internal.icon.title.status.exchange": "Exchange",
+  "impact-pathway.metadata-internal.icon.title.status.exchange": "Note for further editing (internal)",
 
   "impact-pathway.metadata-status.icon.title.status.new": "New",
 
@@ -6204,7 +6204,7 @@
 
   "working-plan.item.metadata-internal.icon.title.status.done": "Done",
 
-  "working-plan.item.metadata-internal.icon.title.status.exchange": "Exchange",
+  "working-plan.item.metadata-internal.icon.title.status.exchange": "Note for further editing (internal)",
 
   "working-plan.metadata-status.icon.title.status.new": "New",
 
@@ -9220,7 +9220,7 @@
 
   "layout.field.label.Event.synsicris.type.project-contribution": "Participation of the project",
 
-  "layout.field.label.Event.dc.type": "Format",
+  "layout.field.label.Event.dc.type": "Type",
 
   "layout.field.label.Event.synsicris.type.purpose": "Aims of the event",
 
@@ -10094,7 +10094,7 @@
 
   "layout.box.header.neg_sideeffect": "Possible negative side effects",
 
-  "layout.box.header.neg_sideeffect_m": "Possible negative side effects",
+  "layout.box.header.neg_sideeffect_m": "Possible negative side effect",
 
   "layout.field.label.subcontractor.dc.title": "Organisation",
 
@@ -10604,7 +10604,7 @@
 
   "item.version.create.modal.info": "to be deltetd",
 
-  "search.filters.entityType.neg_sideeffect": "Possible negative side effects",
+  "search.filters.entityType.neg_sideeffect": "Possible negative side effect",
 
   "register-page.create-profile.security.error.password-length": "The password should be at least 6 characters long.",
 
@@ -11128,7 +11128,7 @@
 
   "search.filters.applied.charts.RELATION.Project.exp_societalimpact.title": "Graph",
 
-  "search.filters.applied.charts.graphexpsocimptype.tab": "Core elements",
+  "search.filters.applied.charts.graphexpsocimptype.tab": "Type",
 
   "search.filters.applied.charts.RELATION.Project.multiple_involved.title": "Graph",
 
