@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { BehaviorSubject, from, Observable, Subscription } from 'rxjs';
-import { mergeMap, reduce, take } from 'rxjs/operators';
+import { map, mergeMap, reduce, take } from 'rxjs/operators';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -18,6 +18,7 @@ import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { EPersonDataService } from '../../core/eperson/eperson-data.service';
 import { EPerson } from '../../core/eperson/models/eperson.model';
 import { ProjectAuthorizationService } from '../../core/project/project-authorization.service';
+import { isEqual } from 'lodash';
 
 @Component({
   selector: 'ds-project-members',
@@ -168,12 +169,14 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
 
   /**
    * Remove eperson from all groups needed for the current role
+   * When the eperson is removed from the coordinators group, it should not be removed from other groups
    * @param ePerson
    */
   deleteMemberToMultipleGroups(ePerson: EPerson) {
     const processedGroups: Group[] = [];
     this.getGroups().pipe(
       take(1),
+      map((groups: string[]) => (this.isCoordinatorsGroup && groups) ? groups.filter(groupId => isEqual(groupId, this.targetGroup.uuid)) : groups),
       mergeMap((groups: string[]) => from(groups).pipe(
         mergeMap((groupId: string) => this.getGroupEntity(groupId)),
         mergeMap((groupRD: RemoteData<Group>) => {
