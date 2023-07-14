@@ -824,7 +824,7 @@
 
   "breadcrumb.entity-type.Project": "<i class=\"fas fa-shekel-sign\"></i> Consortium",
 
-  "breadcrumb.entity-type.Funding": "<i class=\"fas fa-cubes\"></i> Projects",
+  "breadcrumb.entity-type.Funding": "<i class=\"fas fa-cube\"></i> Projects",
 
   "breadcrumb.entity-type.OrgUnit": "OrgUnit",
 
@@ -2582,7 +2582,7 @@
 
   "impact-pathway.checkbox.savebutton": "Save & back",
 
-  "impact-pathway.create.bidirectional-link": "Create bidirectional arrow",
+  "impact-pathway.create.bidirectional-link": "Create bidirectional arrow to highlight important links in the impact logic",
 
   "impact-pathway.create.btn": "Create Impact Pathway",
 
@@ -2590,7 +2590,7 @@
 
   "impact-pathway.create.head": "New Impact Pathway",
 
-  "impact-pathway.create.outcome-link": "Create arrow",
+  "impact-pathway.create.outcome-link": "Create arrow to highlight important links in the impact logic",
 
   "impact-pathway.create.placeholder": "Enter the name of the new Impact Pathway.",
 
@@ -4620,7 +4620,7 @@
 
   "process.new.notification.process.files": "Output Files",
 
-  "process.new.notification.process.see-results": "See the results",
+  "process.new.notification.process.see-results": "To version history",
 
   "process.new.notification.process.create-version": "Create Version",
 
@@ -5684,13 +5684,13 @@
 
   "search.filters.applied.charts.RELATION.parentproject.Publication.title": "Publication",
 
-  "search.filters.applied.charts.grapheventtype.tab": "Event type",
+  "search.filters.applied.charts.grapheventtype.tab": "Type",
 
-  "search.filters.applied.charts.grapheventpurpose.tab": "Event prupose",
+  "search.filters.applied.charts.grapheventpurpose.tab": "Prupose",
 
   "search.filters.applied.charts.grapheventpartner.tab": "Event partner",
 
-  "search.filters.applied.charts.grapheventtarget.tab": "Event target",
+  "search.filters.applied.charts.grapheventtarget.tab": "Stakeholder group",
 
   "search.filters.applied.charts.grapheventdate.tab": "Event date",
 
@@ -5756,15 +5756,15 @@
 
   "search.filters.filter.synsicrisDateReferenceyear.head": "Reference Year",
 
-  "search.filters.filter.synsicrisCoverageRegional.head": "Coverage Regional",
+  "search.filters.filter.synsicrisCoverageRegional.head": "Regional localisation/outreach",
 
-  "search.filters.filter.synsicrisType.head": "Access Type",
+  "search.filters.filter.synsicrisType.head": "Type",
 
   "search.filters.filter.synsicrisDateReferenceyear.label": "Search Reference Year",
 
-  "search.filters.filter.synsicrisCoverageRegional.label": "Search Coverage Regional",
+  "search.filters.filter.synsicrisCoverageRegional.label": "Search Regional localisation/outreach",
 
-  "search.filters.filter.synsicrisType.label": "Search Access Type",
+  "search.filters.filter.synsicrisType.label": "Search Type",
 
   "search.filters.filter.synsicrisRelationFundingobjective.head": "Funding Objective",
 
@@ -5808,7 +5808,7 @@
 
   "search.filters.filter.creativeWorkPublisher.label": "Search publisher",
 
-  "search.filters.filter.dateIssued.head": "Date",
+  "search.filters.filter.dateIssued.head": "Date issued",
 
   "search.filters.filter.dateIssued.max.placeholder": "Maximum Date",
 
@@ -6154,11 +6154,11 @@
 
   "search.filters.entityType.exploitationplanstep.step_type_4": "ExploitationPlan",
 
-  "questions-board.exploitation-plan.metadata-internal.icon.title.status.exchange": "Exchange",
+  "questions-board.exploitation-plan.metadata-internal.icon.title.status.exchange": "Note for further editing (internal)",
 
   "questions-board.exploitation-plan.metadata-internal.icon.title.status.done": "Done",
 
-  "questions-board.interim-report.metadata-internal.icon.title.status.exchange": "Exchange",
+  "questions-board.interim-report.metadata-internal.icon.title.status.exchange": "Note for further editing (internal)",
 
   "questions-board.interim-report.metadata-internal.icon.title.status.done": "Done",
 
@@ -6190,7 +6190,7 @@
 
   "impact-pathway.metadata-internal.icon.title.status.edit": "Edit",
 
-  "impact-pathway.metadata-internal.icon.title.status.exchange": "Exchange",
+  "impact-pathway.metadata-internal.icon.title.status.exchange": "Note for further editing (internal)",
 
   "impact-pathway.metadata-status.icon.title.status.new": "New",
 
@@ -6206,7 +6206,7 @@
 
   "working-plan.item.metadata-internal.icon.title.status.done": "Done",
 
-  "working-plan.item.metadata-internal.icon.title.status.exchange": "Exchange",
+  "working-plan.item.metadata-internal.icon.title.status.exchange": "Note for further editing (internal)",
 
   "working-plan.metadata-status.icon.title.status.new": "New",
 
@@ -7650,15 +7650,15 @@
 
   "submission.workflow.generic.edit-help": "Select this option to change the item's metadata.",
 
-  "submission.workflow.generic.edit-grants": "Edit permissions",
+  "submission.workflow.generic.edit-grants": "Edit permission",
 
   "submission.workflow.generic.edit-grants-help": "Select this option to change the item's editable options.",
 
   "submission.workflow.generic.edit-grants.error": "There was an issue when chancing the item permissions, please try again later.",
 
-  "submission.workflow.generic.edit-grants.head": "Change item edit permissions",
+  "submission.workflow.generic.edit-grants.head": "Change edit permission",
 
-  "submission.workflow.generic.edit-grants.label": "Please select editable permissions",
+  "submission.workflow.generic.edit-grants.label": "Please select editable permission",
 
   "submission.workflow.generic.edit-grants.success": "Operations successful",
 
@@ -9222,7 +9222,7 @@
 
   "layout.field.label.Event.synsicris.type.project-contribution": "Participation of the project",
 
-  "layout.field.label.Event.dc.type": "Format",
+  "layout.field.label.Event.dc.type": "Type",
 
   "layout.field.label.Event.synsicris.type.purpose": "Aims of the event",
 
@@ -9634,9 +9634,9 @@
 
   "query-builder.synsicris.accordion.step2.header": "Step 2",
 
-  "query-builder.synsicris.accordion.step1.alert": "Help",
+  "query-builder.synsicris.accordion.step1.alert": "Help step 1",
 
-  "query-builder.synsicris.accordion.step2.alert": "Help",
+  "query-builder.synsicris.accordion.step2.alert": "Help step 2",
 
   "query-builder.synsicris.label.entityType.Person": "Person",
 
@@ -9718,7 +9718,7 @@
 
   "query-builder.synsicris.label.entityType.open_researchquestion": "Open research questions",
 
-  "query-builder.synsicris.introduction.alert": "Help",
+  "query-builder.synsicris.introduction.alert": "Help 2-step-search",
 
   "layout.tab.header.Projekttraeger": "Programme and Funding information",
 
@@ -10096,7 +10096,7 @@
 
   "layout.box.header.neg_sideeffect": "Possible negative side effects",
 
-  "layout.box.header.neg_sideeffect_m": "Possible negative side effects",
+  "layout.box.header.neg_sideeffect_m": "Possible negative side effect",
 
   "layout.field.label.subcontractor.dc.title": "Organisation",
 
@@ -10416,7 +10416,7 @@
 
   "explore.index.synsicrisTypePurpose": "Purpose",
 
-  "explore.index.synsicrisrelationtargetgroup": "Targetgroup",
+  "explore.index.synsicrisrelationtargetgroup": "Stakeholder group",
 
   "explore.index.synsicrisTypeContribution": "Type of participation of the consortium",
 
@@ -10448,7 +10448,7 @@
 
   "explore.index.synsicrisTypeTransform": "Area of transition",
 
-  "explore.index.synsicrisTypeInfluence": "Identification of  influence",
+  "explore.index.synsicrisTypeInfluence": "Identification of influence",
 
   "explore.index.synsicrisTypeIntensity": "Intensity of impact",
 
@@ -10606,7 +10606,7 @@
 
   "item.version.create.modal.info": "to be deltetd",
 
-  "search.filters.entityType.neg_sideeffect": "Possible negative side effects",
+  "search.filters.entityType.neg_sideeffect": "Possible negative side effect",
 
   "register-page.create-profile.security.error.password-length": "The password should be at least 6 characters long.",
 
@@ -10896,11 +10896,11 @@
 
   "search.filters.filter.synsicrisParticipantnumber.label": "Suche Number of participants",
 
-  "search.filters.filter.synsicrisOairecerifEventStartdate.head": "Date",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.head": "Start date",
 
-  "search.filters.filter.synsicrisOairecerifEventStartdate.placeholder": "Date",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.placeholder": "Start date",
 
-  "search.filters.filter.synsicrisOairecerifEventStartdate.label": "Search Date",
+  "search.filters.filter.synsicrisOairecerifEventStartdate.label": "Search Start date",
 
   "search.filters.filter.synsicrisOairecerifEventCounty.head": "Country",
 
@@ -11080,7 +11080,7 @@
 
   "search.filters.filter.synsicrisTypeEvidence.placeholder": "Evidence Type",
 
-  "search.filters.filter.synsicrisType.placeholder": "Access Type",
+  "search.filters.filter.synsicrisType.placeholder": "Type",
 
   "search.filters.filter.synsicrisRelationFundingobjective.placeholder": "Funding Objective",
 
@@ -11130,7 +11130,7 @@
 
   "search.filters.applied.charts.RELATION.Project.exp_societalimpact.title": "Graph",
 
-  "search.filters.applied.charts.graphexpsocimptype.tab": "Core elements",
+  "search.filters.applied.charts.graphexpsocimptype.tab": "Type",
 
   "search.filters.applied.charts.RELATION.Project.multiple_involved.title": "Graph",
 
@@ -11350,6 +11350,18 @@
 
   "search.filters.filter.synsicrisDateFilled.min.label": "Start",
 
-  "search.filters.filter.synsicrisDateFilled.max.label": "End"
+  "search.filters.filter.synsicrisDateFilled.max.label": "End",
+
+  "search.filters.filter.dctermsDateaccepted.min.label": "Start",
+
+  "search.filters.filter.dctermsDateaccepted.max.label": "End",
+
+  "search.filters.applied.charts.graphpubldate.x_label": "Count",
+
+  "search.filters.applied.charts.graphpubldate.y_label": "Year",
+
+  "search.filters.applied.charts.grapheventdate.x_label": "Count",
+
+  "search.filters.applied.charts.grapheventdate.y_label": "Year"
 
 }
