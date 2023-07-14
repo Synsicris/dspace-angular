@@ -29,6 +29,15 @@
             </option>
           </select>
         </div>
+
+        <!-- Update screenshots -->
+        <div class="form-check" *ngIf="canUpdateScreenshots">
+          <input class="form-check-input" type="checkbox" formControlName="screenshot" id="screenshot">
+          <label class="form-check-label" for="screenshot">
+            {{ 'item-export.update-screenshots.label' | translate}}
+          </label>
+        </div>
+
         <div *ngIf="showListSelection" class="form-group" data-test="selection-radio">
           <label>Export mode</label>
           <div class="custom-control custom-radio">

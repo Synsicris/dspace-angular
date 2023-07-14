@@ -18,6 +18,7 @@ import { ProcessParameter } from '../../process-page/processes/process-parameter
 import {
   BULK_ITEM_EXPORT_SCRIPT_NAME,
   ITEM_EXPORT_SCRIPT_NAME,
+  ITEM_EXPORT_SYNSICRIS_SCRIPT_NAME,
   ScriptDataService
 } from '../data/processes/script-data.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -111,11 +112,16 @@ export class ItemExportFormatService extends IdentifiableDataService<ItemExportF
    *
    * @return an Observable containing the processNumber if the script starts successfully, or null in case of errors
    */
-  public doExport(uuid: string, format: ItemExportFormat): Observable<number> {
+  public doExport(uuid: string, format: ItemExportFormat, updateScreenshots: boolean): Observable<number> {
 
     let parameterValues = [];
     parameterValues = this.uuidParameter(uuid, parameterValues);
     parameterValues = this.formatParameter(format, parameterValues);
+
+    if (updateScreenshots) {
+      parameterValues = this.updateScreenshotsParameter(updateScreenshots, parameterValues);
+      return this.launchScript(ITEM_EXPORT_SYNSICRIS_SCRIPT_NAME, parameterValues);
+    }
 
     return this.launchScript(ITEM_EXPORT_SCRIPT_NAME, parameterValues);
   }
@@ -175,6 +181,10 @@ export class ItemExportFormatService extends IdentifiableDataService<ItemExportF
 
   private formatParameter(format: ItemExportFormat, parameterValues: ProcessParameter[]): ProcessParameter[] {
     return [...parameterValues, Object.assign(new ProcessParameter(), { name: '-f', value: format.id })];
+  }
+
+  private updateScreenshotsParameter(updateScreenshots: boolean, parameterValues: ProcessParameter[]): ProcessParameter[] {
+    return [...parameterValues, Object.assign(new ProcessParameter(), { name: '-s', value: updateScreenshots })];
   }
 
   private listUUIDParameter(list: string, parameterValues: ProcessParameter[]): ProcessParameter[] {
