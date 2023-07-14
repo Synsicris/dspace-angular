@@ -176,7 +176,7 @@ export class ProjectMembersComponent implements OnInit, OnDestroy {
     const processedGroups: Group[] = [];
     this.getGroups().pipe(
       take(1),
-      map((groups: string[]) => (this.isCoordinatorsGroup && groups) ? groups.filter(groupId => isEqual(groupId, this.targetGroup.uuid)) : groups),
+      map((groups: string[]) => (this.isCoordinatorsGroup && this.isFunding && groups) ? groups.filter(groupId => isEqual(groupId, this.targetGroup.uuid)) : groups),
       mergeMap((groups: string[]) => from(groups).pipe(
         mergeMap((groupId: string) => this.getGroupEntity(groupId)),
         mergeMap((groupRD: RemoteData<Group>) => {
