@@ -7,3 +7,7 @@
 ::ng-deep svg.ngx-charts {
   padding-left: 7%;
 }
+
+::ng-deep ngx-charts-pie-chart .chart-legend {
+  display: block !important;
+}
