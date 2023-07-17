@@ -1,0 +1,36 @@
+/* TODO: Remove comment when styles need to be applied only on print command  
+Please avoid to use "!important" for styles, that are overwritten again in @media print!
+*/
+
+/* --------------------------- General rules --------------------------- */
+
+ds-alert-role,
+ds-loading,
+button:not(.sidebar-panel-toggle),
+nav ds-link-menu-item,
+nav ds-auth-nav-menu,
+nav .navbar-nav a,
+.dropdown-toggle,
+//.mat-select-arrow-wrapper,        // arrow in dropdown
+header,                           // header with SynSICRIS-Logo  
+footer, 
+ds-themed-breadcrumbs,            // breadcrumbs
+ds-alert,                         // helptext
+ds-cris-layout-leading,           // complete headerbox (not necessary, because project and funding is visible in the breadcrumb)
+span[tooltipclass] {
+  display: none;
+}
+
+p {
+  font-size: 12pt !important; /* recommended */
+}
+
+a {
+  text-decoration: none !important;
+}
+
+//inactiates the light grey of standard background
+.inner-wrapper {
+  background-color:transparent;
+}
+

@@ -1,3 +1,61 @@
+//NOTE: The order of the stylesheets is important. The stylesheets are applied in the order they are imported.
+
+/* 
+Styles for body.print-mode
+--------------------------
+// class: .print-mode
+// The class is used to override the styles of the elements in the print mode.
+// This class is added to the body tag in the following files:
+// The class is added to the body tag only when the view=print parameter is present in the URL.
+
+see https://github.com/Synsicris/synsicris-project/issues/684#issuecomment-1594790517:
+This definition applies to all three approaches to creating a print view:
+- normal printout from the browser via command + p
+- print view on the monitor by appending the ?view=print parameter to the URL
+- Generation of screenshots for the report
+
+*/
+.print-mode {
+  @import './print.general.scss';
+
+  @import './print.exploitation-plan.scss';
+  @import './print.impact-pathway.scss';
+  @import './print.interim-report.scss';
+  @import './print.working-plan.scss';
+}
+
+/* Styles especially when the print command is executed (ctrl+p) or from the browser
+-----------------------------------------------
+In @media print again the identical styles are inserted as above for .print-mode, 
+although they are effective there for all three print approaches als described 
+in https://github.com/Synsicris/synsicris-project/issues/684#issuecomment-1594790517. 
+
+The order of first including the more extensive styles, and then make visible again vor @media print what was hidden for the report-screenshots, 
+is not quite clear to me (rex 230626). Normally the order would be the general styles first, 
+and afterwards the more specific ones for the report-screenshots. This probably has angular-technical reasons.
+
+Therefore, please note that elements here are first generally hidden and those that should appear in the normal printout, 
+however, such as the Synsicris logo or the breadcrumb, must be shown again in a second step in @media print!
+CSS files for such additional definitions, additionally get the name element "(normal-name).media-print(.scss)".
+*/
+@media print {
+  @import './print.general.scss';
+
+  @import './print.exploitation-plan.scss';
+  @import './print.impact-pathway.scss';
+  @import './print.interim-report.scss';
+  @import './print.working-plan.scss';
+
+  // The following stylesheets are applied only on print command.
+  @import './print.impact-pathway.media-print.scss';
+  @import './print.working-plan.media-print.scss';
+  @import './print.general.media-print.scss';
+}
+
+
+/*
+Original from 4Science
+
 // class: .print-mode
 // The class is used to override the styles of the elements in the print mode.
 // This class is added to the body tag in the following files:
@@ -20,3 +78,5 @@
   // The following stylesheets are applied only on print command.
   @import './print.working-plan.media-print.scss';
 }
+
+*/

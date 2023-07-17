@@ -1,19 +1,36 @@
-<!-- calendar for months -->
+<!-- rex: working plan calendar table, added classes with prefix "sy-" -->
+
+<!-- ............ -->
+<!-- monthly view -->
+<!-- ............ -->
+
+<!-- complete calender block with headers and content -->
 <div *ngIf="chartDateView.value === ChartDateViewType.month" class="sidenav-content calendar w-100" fxLayout="column">
-  <div fxLayout="row">
-    <div fxLayout="column" class="flex-fill" *ngFor="let year of datesYear">
-      <div class="calendar-cell-heading w-100 d-flex flex-wrap justify-content-center tree-node-end-of-the-year-customization">{{year}}</div>
-      <div fxLayout="row" class="calendar-head-border">
+  
+  <!-- complete header with 2 rows (year and month) -->
+  <div fxLayout="row" class="sy-calendar-header-rows sy-monthly">  
+    <div fxLayout="column" class="flex-fill sy-block-year" *ngFor="let year of datesYear">
+      <!-- row years -->
+      <div class="sy-row-years calendar-cell-heading w-100 d-flex flex-wrap justify-content-center tree-node-end-of-the-year-customization">{{year}}</div>
+      <!-- row months -->
+      <div fxLayout="row" class="sy-row-months">
+        <!-- cells months -->
         <div *ngFor="let date of monthDatesByYear.get(year)" class="calendar-cell-heading w-100{{(chartCheckEndOfTheYear(date, 'month'))?' tree-node-end-of-the-year-customization':''}}">{{formatDate(date)}}</div>
       </div>
     </div>
   </div>
-  <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
+
+  <!-- All rows of third column (monthly)-->
+  <mat-tree class="tree sy-monthly" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
+    
+    <!-- Single Row : Complete Row with all columns -->
     <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100"
                    [class.calendar-title-cell-over]="chartChangeColorIsOver.get(node.id)"
                    [class.calendar-title-cell-now-added]="(hasBeenNowAdded(node.id) | async)"
                    (mouseover)="chartChangeColor(node.id, true)"
                    (mouseout)="chartChangeColor(node.id, false)">
+     
+      <!-- single cell -->
       <ng-container *ngIf="!(compareMode | async)">
         <div *ngFor="let date of datesMonth; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization{{(chartCheckEndOfTheYear(date, 'month'))?' tree-node-end-of-the-year-customization':''}}">
           <div *ngFor="let day of daysByMonth.get(date);" class="d-flex flex-fill calendar-node-customization"
@@ -28,6 +45,7 @@
           </div>
         </div>
       </ng-container>
+
       <ng-container *ngIf="(compareMode | async)">
         <div *ngFor="let date of datesMonth; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization{{(chartCheckEndOfTheYear(date, 'month'))?' tree-node-end-of-the-year-customization':''}}">
           <div *ngFor="let day of daysByMonth.get(date);" class="d-flex flex-fill calendar-node-customization"
@@ -47,27 +65,43 @@
           </div>
         </div>
       </ng-container>
+
     </mat-tree-node>
   </mat-tree>
-</div>
-<!-- calendar for quarters -->
+</div><!-- end .sidenav-content -->
+
+<!-- .............. -->
+<!-- quarterly view -->
+<!-- .............. -->
+
+<!-- complete calender block with headers and content -->
 <div *ngIf="chartDateView.value === ChartDateViewType.quarter" class="sidenav-content calendar w-100" fxLayout="column">
-  <div fxLayout="row">
-    <div fxLayout="column" class="flex-fill" *ngFor="let year of datesYear">
-      <div class="calendar-cell-heading w-100 d-flex flex-wrap justify-content-center tree-node-end-of-the-year-customization">{{year}}</div>
-      <div fxLayout="row" class="calendar-head-border">
+
+  <!-- complete header with 2 rows for years and quarters -->
+  <div fxLayout="row" class="sy-calendar-header-rows sy-quarterly">
+    <div fxLayout="column" class="flex-fill sy-block-year" *ngFor="let year of datesYear">
+      <!-- row years -->
+      <div class="sy-row-years calendar-cell-heading w-100 d-flex flex-wrap justify-content-center tree-node-end-of-the-year-customization">{{year}}</div>
+      <!-- row quarters -->
+      <div fxLayout="row" class="sy-row-quarters calendar-head-border">
+        <!-- cells quarters -->
         <div *ngFor="let date of quarterDatesByYear.get(year)" class="calendar-cell-heading w-100{{(chartCheckEndOfTheYear(date, 'quarter'))?' tree-node-end-of-the-year-customization':''}}">{{formatDate(date)}}</div>
       </div>
     </div>
   </div>
-  <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
+
+  <!-- All rows of third column (quarterly)-->
+  <mat-tree class="tree sy-quarterly" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
+
+    <!-- Single Row -->
     <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100"
                    [class.calendar-title-cell-over]="chartChangeColorIsOver.get(node.id)"
                    [class.calendar-title-cell-now-added]="(hasBeenNowAdded(node.id) | async)"
                    (mouseover)="chartChangeColor(node.id, true)"
                    (mouseout)="chartChangeColor(node.id, false)">
+
       <ng-container *ngIf="!(compareMode | async)">
-        <div *ngFor="let quarter of datesQuarter; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization{{(chartCheckEndOfTheYear(quarter, 'quarter'))?' tree-node-end-of-the-year-customization':''}}">
+        <div  *ngFor="let quarter of datesQuarter; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization{{(chartCheckEndOfTheYear(quarter, 'quarter'))?' tree-node-end-of-the-year-customization':''}}">
           <ng-container *ngFor="let month of monthsByQuarter.get(quarter);">
             <div *ngFor="let day of daysByMonthAndQuarter.get(getQaurterYear(quarter) + '-' + month);" class="d-flex flex-fill calendar-node-customization"
                  [class.tree-node-milestone-customization]="chartCheckMilestone(getQaurterYear(quarter) + '-' + month + '-' + day)">
@@ -82,6 +116,7 @@
           </ng-container>
         </div>
       </ng-container>
+
       <ng-container *ngIf="(compareMode | async)">
         <div *ngFor="let quarter of datesQuarter; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization{{(chartCheckEndOfTheYear(quarter, 'quarter'))?' tree-node-end-of-the-year-customization':''}}">
           <ng-container *ngFor="let month of monthsByQuarter.get(quarter);">
@@ -103,20 +138,34 @@
           </ng-container>
         </div>
       </ng-container>
+
     </mat-tree-node>
   </mat-tree>
-</div>
-<!-- calendar for years -->
+</div><!-- end .sidenav-content -->
+
+<!-- ............. -->
+<!-- annually view -->
+<!-- ............. -->
+
+<!-- complete calender block with headers and content -->
 <div *ngIf="chartDateView.value === ChartDateViewType.year" class="sidenav-content calendar w-100" fxLayout="column">
-  <div fxLayout="row" class="calendar-head-year-sub-border">
-    <div *ngFor="let date of datesYear" class="calendar-cell w-100 calendar-head-year-border tree-node-end-of-the-year-customization">{{formatDate(date)}}</div>
+
+  <!-- complete header with only 1 row for years -->
+  <div fxLayout="row" class="sy-calendar-header-rows sy-annually sy-row-years calendar-head-year-sub-border">
+    <!-- cells years -->
+    <div *ngFor="let date of datesYear" class="sy-block-year calendar-cell w-100 calendar-head-year-border tree-node-end-of-the-year-customization">{{formatDate(date)}}</div>
   </div>
-  <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
+
+  <!-- All rows of third column (yearly)-->
+  <mat-tree class="tree sy-annually" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
+
+    <!-- Single Row -->
     <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100"
                    [class.calendar-title-cell-over]="chartChangeColorIsOver.get(node.id)"
                    [class.calendar-title-cell-now-added]="(hasBeenNowAdded(node.id) | async)"
                    (mouseover)="chartChangeColor(node.id, true)"
                    (mouseout)="chartChangeColor(node.id, false)">
+
       <ng-container *ngIf="!(compareMode | async)">
         <div *ngFor="let year of datesYear; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization{{(chartCheckEndOfTheYear(year, 'year'))?' tree-node-end-of-the-year-customization':''}}">
           <ng-container *ngFor="let month of getMonthInYear();">
@@ -133,6 +182,7 @@
           </ng-container>
         </div>
       </ng-container>
+
       <ng-container *ngIf="(compareMode | async)">
         <div *ngFor="let year of datesYear; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization{{(chartCheckEndOfTheYear(year, 'year'))?' tree-node-end-of-the-year-customization':''}}">
           <ng-container *ngFor="let month of getMonthInYear();">
@@ -154,6 +204,7 @@
           </ng-container>
         </div>
       </ng-container>
+
     </mat-tree-node>
   </mat-tree>
-</div>
+</div><!-- end .sidenav-content -->

@@ -1,0 +1,20 @@
+/* -----------------------------------------------------------
+LEGEND FOR SYMBOLS (rex 230621)
+----------------------------------------------------------- */
+
+  // legend provisionally defined in src/app/impact-pathway-board/shared/impact-path-way/impact-path-way.component.html
+  div.legend-symbols {
+    border:1px solid var(--sy-color-blue-89);
+    background-color:var(--sy-color-blue-96);
+    font-size:92%;
+    // overwrites bootstrap-styles for .list-group-item
+    ul li {
+      border-color:var(--sy-color-blue-89);
+      background-color:transparent;
+      border-top:none;
+      border-bottom:none;
+      border-right:none;
+      border:none;
+      &:first-child {border-left:none;}
+    }
+  }

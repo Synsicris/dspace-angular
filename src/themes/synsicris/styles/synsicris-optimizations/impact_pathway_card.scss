@@ -6,8 +6,8 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
 .task-container {
 
   box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-  /* doesn't work, although rgba(rgb(0,0,0),0.5) works
-  box-shadow: 2px 2px 4px rgba(var(--sy-color-gray-0),0,5); */
+  /* box-shadow: 2px 2px 4px rgba(var(--sy-color-gray-0),0,5); 
+  doesn't work, although rgba(rgb(0,0,0),0.5) works */
   
   min-width:10rem; //underneath there are misrepresentations d
   /* the original white background color of the cards does not come from the cards themselves, 
@@ -57,6 +57,7 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
         .task-type {
           font-size:0.8rem;
           font-family:'Nunito-ExtraLight';
+          line-height:1rem;
         }
 
       } // end  div.task-content

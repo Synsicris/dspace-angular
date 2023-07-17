@@ -1,7 +1,10 @@
+// rex: additional definitions in src/themes/synsicris/styles/synsicris-optimizations/working-plan.scss
+
 // variables
 $toolbarHeight: 64px;
 $nodeWidth: 100px;
-$calendarCellWidth: 60px;
+//$calendarCellWidth: 60px;
+$calendarCellWidth: 40px !important; // changed rex 230628
 $nodeHeight: 50px;
 $activeColor: #89b34d;
 $versionedColor: #B8BBBD;
@@ -13,6 +16,7 @@ $recentGrey: #fffef5;
 $borderColor: #BDBDBD;
 $highlightBorderColor: #FF9800;
 
+// td
 ::ng-deep .calendar-cell {
   text-align: center;
   line-height: $nodeHeight - 1px;
@@ -24,6 +28,7 @@ $highlightBorderColor: #FF9800;
   border-style: solid;
 }
 
+// th with the two rows for year- and month names
 .calendar-cell-heading {
   text-align: center;
   line-height: ($nodeHeight / 2) - 1px;
@@ -65,15 +70,15 @@ $highlightBorderColor: #FF9800;
 }
 
 .calendar-head-border {
-  border-bottom: solid 2px $borderColor;
+  //border-bottom: solid 2px $borderColor;
 }
 
 .calendar-head-year-border {
-  border-bottom: solid 3px $borderColor;
+  //border-bottom: solid 3px $borderColor;
 }
 
 .calendar-head-year-sub-border {
-  border-bottom: solid 1px $borderColor;
+  //border-bottom: solid 1px $borderColor;
 }
 
 .calendar-node-customization {
@@ -104,7 +109,7 @@ $highlightBorderColor: #FF9800;
 }
 
 .calendar-cell-heading {
-  border-bottom-width: 2px !important;
+  //border-bottom-width: 2px !important;
 }
 
 // incompleted cell

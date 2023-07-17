@@ -19,15 +19,15 @@ Unfortunately I haven't found a solution to also style the placeholder to visual
 In Angular, the pseudo-selector ::placeholder does not work because it is not part of the DOM structure. 
 In Angular, pseudo-selectors exist only as attributes that are bound to an element. 
 Therefore, it seems not to be possible to specifically style the placeholder text in Angular.
+
+Addendum 230626: it was possible by defining the selectors not bundled, but for each browser individually!
 */
 ds-editable-textarea textarea {
-  &::placeholder,
-  &::-webkit-input-placeholder,  // Chrome/Opera/Safari
-  &::-moz-placeholder,           // Firefox 19+
-  &:-ms-input-placeholder,       // IE 10+
-  &:-moz-placeholder             // Firefox 18-
-    {
-      opacity:1 !important; // because the placeholder has an opacity-value in Firefox default
-      font-family:"Nunito-MediumItalic", italic !important;
-    }
+    // opacity:1, because the placeholder has an opacity-value in Firefox default
+    &::-webkit-input-placeholder {opacity:1 !important; font-family:"Nunito-MediumItalic", italic !important;font-style:italic !important;}  /* WebKit browsers */
+    &:-moz-placeholder {opacity:1 !important; font-family:"Nunito-MediumItalic", italic !important;font-style:italic !important;} /* Mozilla Firefox 4 to 18 */
+    &::-moz-placeholder {opacity:1 !important; font-family:"Nunito-MediumItalic", italic !important;font-style:italic !important;}  /* Mozilla Firefox 19+ */
+    &:-ms-input-placeholder {opacity:1 !important; font-family:"Nunito-MediumItalic", italic !important;font-style:italic !important;}  /* Internet Explorer 10+ */
+    &::placeholder {opacity:1 !important; font-family:"Nunito-MediumItalic", italic !important;font-style:italic !important;}
+ 
 }
