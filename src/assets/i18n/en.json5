@@ -3446,9 +3446,9 @@
 
   "item.preview.dc.subject": "Subjects: ",
 
-  "item.preview.dc.title": "Title: ",
+  "item.preview.dc.title": "Title:",
 
-  "item.preview.dc.type": "Type: ",
+  "item.preview.dc.type": "Type:",
 
   "item.preview.oaire.citation.issue": "Issue",
 
@@ -3606,7 +3606,7 @@
 
   "item.version.notice": "This is not the latest version of this item. The latest version can be found <a href=\'{{destination}}\'>here</a>.",
 
-  "item.version.create.modal.header": "New version",
+  "item.version.create.modal.header": "Create version",
 
   "item.version.create.modal.text": "modal window",
 
@@ -7294,7 +7294,7 @@
 
   "submission.sections.submit.progressbar.describe.patents": "#1 Patent or utility patent",
 
-  "submission.sections.submit.progressbar.describe.patents.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Enter those information at the time of application and update in the course of the project as needed.</br></br><i><b>Enter here a planned patent or utility patent and the form of its planned application</b></i></br></br><b>Important notice:</b><ul><li>This information is <b>only accessible to the funder.</b></li><li>Enter a <b>preliminary description</b> and update the description as soon as the application has been filed with the patent office (copy the description from the application form at the patent office).</li><li>If the patent or utility patent is being used, please note in the category <b>application of a solution / change / innovation</b>.</ul></li>",
+  "submission.sections.submit.progressbar.describe.patents.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Enter those information at the time of application and update in the course of the project as needed.</br></br><i><b>Enter here a planned patent or utility patent and the form of its planned application</b></i></br></br><b>Important notice:</b><ul><li>This information is <b>only accessible to the funder.</b></li><li>If the patent or utility patent is being used, please add an item in the category <b>application of a solution / change / innovation</b>.</ul></li>",
 
   "submission.sections.submit.progressbar.describe.patents_result": "#2 Information from application at the Patent Office",
 
@@ -8212,7 +8212,7 @@
 
   "working-plan.chart.button.collapse": "Collapse node",
 
-  "working-plan.chart.button.add": "Add item",
+  "working-plan.chart.button.add": "Add work or milestone",
 
   "working-plan.chart.button.compare": "Show difference",
 
@@ -8290,7 +8290,7 @@
 
   "working-plan.chart.toggle.expand.btn": "Expand",
 
-  "working-plan.chart.toolbar.add-btn": "Add item",
+  "working-plan.chart.toolbar.add-btn": "Add milestone or work package",
 
   "working-plan.chart.toolbar.date-view.month": "Month",
 
@@ -11360,8 +11360,10 @@
 
   "search.filters.applied.charts.graphpubldate.y_label": "Year",
 
-  "search.filters.applied.charts.grapheventdate.x_label": "Count",
+  "search.filters.applied.charts.grapheventdate.x_label": "Year",
 
-  "search.filters.applied.charts.grapheventdate.y_label": "Year"
+  "search.filters.applied.charts.grapheventdate.y_label": "Count",
+
+  "impact-pathway.legend-icons.title": "Legend of symbols"
 
 }
