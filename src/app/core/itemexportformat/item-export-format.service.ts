@@ -30,7 +30,7 @@ import { IdentifiableDataService } from '../data/base/identifiable-data.service'
 import { SearchDataImpl } from '../data/base/search-data';
 import { DSONameService } from '../breadcrumbs/dso-name.service';
 import { isEmpty, isNotEmpty } from '../../shared/empty.util';
-import { findIndex } from 'lodash';
+import findIndex from 'lodash/findIndex';
 
 export enum ItemExportFormatMolteplicity {
   SINGLE = 'SINGLE',

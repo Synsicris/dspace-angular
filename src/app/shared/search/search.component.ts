@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
-import { uniqueId } from 'lodash';
+import uniqueId from 'lodash/uniqueId';
 
 import { PaginatedList } from '../../core/data/paginated-list.model';
 import { RemoteData } from '../../core/data/remote-data';
@@ -43,6 +43,7 @@ import { CollectionElementLinkType } from '../object-collection/collection-eleme
 import { environment } from 'src/environments/environment';
 import { SubmissionObject } from '../../core/submission/models/submission-object.model';
 import { SearchFilterConfig } from './models/search-filter-config.model';
+import { WorkspaceItem } from '../../core/submission/models/workspaceitem.model';
 import { SearchManager } from '../../core/browse/search-manager';
 import { AlertType } from '../alert/aletr-type';
 
@@ -538,6 +539,17 @@ export class SearchComponent implements OnInit, OnDestroy {
   private retrieveSearchResults(searchOptions: PaginatedSearchOptions, useCachedVersionIfAvailable?: boolean) {
     this.resultsRD$.next(null);
     this.lastSearchOptions = searchOptions;
+    let followLinks = [
+      followLink<Item>('thumbnail', { isOptional: true }),
+      followLink<SubmissionObject>('item', { isOptional: true },
+        followLink<Item>('thumbnail', { isOptional: true }),
+        followLink<Item>('accessStatus', { isOptional: true, shouldEmbed: environment.item.showAccessStatuses })
+      ) as any
+    ];
+
+    if (this.configuration === 'supervision') {
+      followLinks.push(followLink<WorkspaceItem>('supervisionOrders', { isOptional: true }) as any);
+    }
 
     if (this.projection) {
       searchOptions = Object.assign(new PaginatedSearchOptions({}), searchOptions, {
@@ -551,12 +563,8 @@ export class SearchComponent implements OnInit, OnDestroy {
       undefined,
       useCachedVersionIfAvailable ?? this.useCachedVersionIfAvailable,
       true,
-      followLink<Item>('thumbnail', { isOptional: true }),
-      followLink<SubmissionObject>('item', { isOptional: true },
-        followLink<Item>('thumbnail', { isOptional: true }),
-        followLink<Item>('accessStatus', { isOptional: true, shouldEmbed: environment.item.showAccessStatuses })
-      ) as any
-    ).pipe(getFirstCompletedRemoteData())
+      ...followLinks
+      ).pipe(getFirstCompletedRemoteData())
       .subscribe((results: RemoteData<SearchObjects<DSpaceObject>>) => {
         if (results.hasSucceeded) {
           if (this.trackStatistics) {

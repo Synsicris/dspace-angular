@@ -90,21 +90,26 @@ export const collectionFormModels: DynamicFormControlModel[] = [
   new DynamicTextAreaModel({
     id: 'description',
     name: 'dc.description',
+    spellCheck: environment.form.spellCheck,
   }),
   new DynamicTextAreaModel({
     id: 'abstract',
     name: 'dc.description.abstract',
+    spellCheck: environment.form.spellCheck,
   }),
   new DynamicTextAreaModel({
     id: 'rights',
     name: 'dc.rights',
+    spellCheck: environment.form.spellCheck,
   }),
   new DynamicTextAreaModel({
     id: 'tableofcontents',
     name: 'dc.description.tableofcontents',
+    spellCheck: environment.form.spellCheck,
   }),
   new DynamicTextAreaModel({
     id: 'license',
     name: 'dc.rights.license',
+    spellCheck: environment.form.spellCheck,
   })
 ];
