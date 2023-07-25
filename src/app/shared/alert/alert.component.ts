@@ -40,7 +40,7 @@ export class AlertComponent implements OnInit {
   /**
    * A boolean representing if alert is collapsible
    */
-  @Input() collapsible = false;
+  @Input() collapsible = true;
 
   /**
    * A boolean representing if alert is rendered already collapsed
