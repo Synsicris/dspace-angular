@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 
-import { combineLatest, from as observableFrom, Observable, of as observableOf } from 'rxjs';
+import { combineLatest, forkJoin, from as observableFrom, Observable, of as observableOf } from 'rxjs';
 import {
   catchError,
   concatMap,
@@ -15,8 +15,7 @@ import {
   take,
   tap
 } from 'rxjs/operators';
-import { extendMoment } from 'moment-range';
-import * as Moment from 'moment';
+import { format } from 'date-fns';
 
 import { SubmissionFormModel } from '../../core/config/models/config-submission-form.model';
 import { SubmissionFormsConfigDataService } from '../../core/config/submission-forms-config-data.service';
@@ -71,9 +70,8 @@ import { SearchConfigurationService } from '../../core/shared/search/search-conf
 import { SearchManager } from '../../core/browse/search-manager';
 import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
 import { FindListOptions } from '../../core/data/find-list-options.model';
-import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 
-export const moment = extendMoment(Moment);
+// export const moment = extendMoment(Moment);
 
 export interface WpMetadata {
   nestedNodeId: string;
@@ -564,9 +562,9 @@ export class WorkingPlanService {
     const dates: any = {};
     const startDate = item.firstMetadataValue(environment.workingPlan.workingPlanStepDateStartMetadata);
     if (isNotEmpty(startDate)) {
-      start = moment(startDate).format('YYYY-MM-DD');
-      startMonth = moment(startDate).format('YYYY-MM');
-      startYear = moment(startDate).format('YYYY');
+      start = format(new Date(startDate),'yyyy-MM-dd');
+      startMonth = format(new Date(startDate),'yyyy-MM');
+      startYear = format(new Date(startDate),'yyyy');
       dates.start = {
         full: start,
         month: startMonth,
@@ -576,9 +574,9 @@ export class WorkingPlanService {
 
     const endDate = item.firstMetadataValue(environment.workingPlan.workingPlanStepDateEndMetadata);
     if (isNotEmpty(endDate)) {
-      end = moment(endDate).format('YYYY-MM-DD');
-      endMonth = moment(endDate).format('YYYY-MM');
-      endyear = moment(endDate).format('YYYY');
+      end = format(new Date(endDate),'yyyy-MM-dd');
+      endMonth = format(new Date(endDate),'yyyy-MM');
+      endyear = format(new Date(endDate),'yyyy');
       dates.end = {
         full: end,
         month: endMonth,

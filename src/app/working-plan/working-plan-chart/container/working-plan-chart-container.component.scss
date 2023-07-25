@@ -1,356 +1,361 @@
-.auto-width {
-  flex: 1 1 0%;
-  box-sizing: border-box;
-  font-size: .85rem;
-}
-
-.block-ellipsis {
-  display: block;
-  display: -webkit-box;
-  max-width: 100%;
-  height: 43px;
-  margin: 0 auto;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.block-ellipsis > span:hover {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.block-change-start-date {
-  width: 300px;
-  line-height: 1.15;
-}
-
-.block-change-start-date-radio {
-  display: flex;
-  flex-direction: column;
-  margin: 5px 0;
-}
-
-.ml-05 {
-  margin-left: .5rem;
-}
-
-.mr-05 {
-  margin-right: .5rem;
-}
-
-.font-size-07 {
-  font-size: .7rem;
-}
-
-.min-width-large {
-  min-width: 300px;
-}
-
-.min-width-small {
-  min-width: 100px;
-}
-
-.opacity-50 {
-  opacity: 0.5;
-}
-
-// Tree
-.task-placeholder {
-  min-height: 100px;
-}
-
-.placeholder-allowed {
-  background-color: #92c642;
-}
-
-.placeholder-denied {
-  background-color: #CF4444;
-}
-
-// Buttons styles
-.button-move {
-  cursor: move;
-}
-
-button.btn:focus {
-  outline: none;
-}
-
-.mat-icon-button {
-  width: 26px;
-  height: 26px;
-}
-
-::ng-deep .mat-form-field-underline {
-  display: none;
-}
-
-::ng-deep .mat-form-field-flex {
-  padding: 0 !important;
-}
-
-::ng-deep .mat-form-field-wrapper {
-  padding-bottom: 2px;
-}
-
-::ng-deep .mat-select-arrow-wrapper {
-  transform: none !important;
-}
-
-// Extra small buttons
-.btn-group-xs > .btn, .btn-xs {
-  padding: .4rem .35rem;
-  font-size: .875rem;
-  line-height: .5;
-  border-radius: .2rem;
-}
-
-// distance edit to delete button (230317 red)
-ds-working-plan-chart-item-edit-button {
-  margin-right:1rem;
-}
-
-// Document wide tree-node adjustment
-.mat-tree-node {
-  min-height: 100px;
-}
-
-// variables
-$toolbarHeight: 64px;
-$nodeWidth: 100px;
-$calendarCellWidth: 60px;
-$nodeHeight: 50px;
-$completeColor: #89b34d;
-$incompleteColor: #89b34d;
-$overColor: #245016;
-$overGrey: #fffde7;
-$recentGrey: #fffef5;
-$borderColor: #BDBDBD;
-$highlightBorderColor: #FF9800;
-
-.root-node-style {
-  background-color: #e9ecef;
-  border-right: 1px solid $borderColor;
-  cursor:pointer;
-}
-
-.calendar-head-border {
-  border-bottom: solid 2px $borderColor;
-}
-
-.calendar-head-year-border {
-  border-bottom: solid 3px $borderColor;
-}
-
-.calendar-head-year-sub-border {
-  border-bottom: solid 1px $borderColor;
-}
-
-// column adjustment
-.tree-node-customization {
-  align-items: normal;
-  border-bottom: solid 1px $borderColor;
-  border-right: solid 1px $borderColor;
-  background-color: white;
-}
-
-.tree-node-end-of-the-year-customization {
-  border-right: solid 2px #666666 !important;
-}
-
-.tree-node-milestone-customization {
-  width: 1px;
-  border-right: solid 1px blue;
-  background-color: #adbb97;
-  box-shadow: -4px 0px 10px 0px #59870e;
-}
-
-.tree-node-milestone-rhombus {
-  width: 8px;
-  height: 8px !important;
-  border: solid 1px #347798;
-  background-color: #347798 !important;
-  margin-left: -2px;
-  transform: rotate(45deg);
-  min-width: 8px !important;
-  min-height: 8px !important;
-}
-
-// entire columns both first and second
-.sidenav {
-  width: 400px;
-  height: fit-content;
-}
-
-// table content
-.sidenav-content {
-  height: fit-content;
-  overflow-x: auto;
-}
-
-// resizable border
-[mwlResizable] {
-  border-right: 1px solid $borderColor;
-  box-sizing: border-box;
-  z-index: 1000;
-}
-
-// sidenav header(not calendar)
-.sidenav-header {
-  line-height: $nodeHeight;
-  height: $nodeHeight;
-  min-height: $nodeHeight;
-  border-width: 0 0px 4px 0;
-  border-color: $borderColor;
-  border-style: solid; 
-}
-
-// tree node height for sidebar
-::ng-deep mat-tree-node {
-  height: $nodeHeight;
-  min-height: $nodeHeight;
-}
-
-/** names */
-
-/* complete first column, 
-added "important" so that the expand-icon also still fits inside 
-since this measure was probably overwritten again at another place and thus did not work (230311 rex) */
-.names {
-  //width: 25rem; // original CSS, causes the expand arrow for the time column to disappeared
-  min-width: 25rem !important;
-}
-
-// both columns: first and second
-.sidenav.chart-column {
-  background-color: #FFFFFF;
-
-  // header of first column, enlarged 
-  mat-tree.tree {
-    padding-top: 14px; // align the lines of input and table
+:host {
+  .auto-width {
+    flex: 1 1 0;
+    box-sizing: border-box;
+    font-size: .85rem;
   }
-}
 
-/** date picker */
+  .block-ellipsis {
+    display: block;
+    display: -webkit-box;
+    max-width: 100%;
+    height: 43px;
+    margin: 0 auto;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-.sidenav.date-pickers {
-  flex: 0 0 300px;
-  mat-tree.tree {
-    padding-top: 14px; // align the lines and table
-    border-width: 0 1px 0 0;
-    border-color: $borderColor;
+  .block-ellipsis > span:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .block-change-start-date {
+    width: 300px;
+    line-height: 1.15;
+  }
+
+  .block-change-start-date-radio {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+  }
+
+  .ml-05 {
+    margin-left: .5rem;
+  }
+
+  .mr-05 {
+    margin-right: .5rem;
+  }
+
+  .font-size-07 {
+    font-size: .7rem;
+  }
+
+  .min-width-large {
+    min-width: 300px;
+  }
+
+  .min-width-small {
+    min-width: 100px;
+  }
+
+  .opacity-50 {
+    opacity: 0.5;
+  }
+
+  // Tree
+  .task-placeholder {
+    min-height: 100px;
+  }
+
+  .placeholder-allowed {
+    background-color: #92c642;
+  }
+
+  .placeholder-denied {
+    background-color: #CF4444;
+  }
+
+  // Buttons styles
+  .button-move {
+    cursor: move;
+  }
+
+  button.btn:focus {
+    outline: none;
+  }
+
+  .mat-icon-button {
+    width: 26px;
+    height: 26px;
+  }
+
+  ::ng-deep .mat-form-field-underline {
+    display: none;
+  }
+
+  ::ng-deep .mat-form-field-flex {
+    padding: 0 !important;
+  }
+
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 2px;
+  }
+
+  ::ng-deep .mat-select-arrow-wrapper {
+    transform: none !important;
+  }
+
+  // Extra small buttons
+  .btn-group-xs > .btn, .btn-xs {
+    padding: .4rem .35rem;
+    font-size: .875rem;
+    line-height: .5;
+    border-radius: .2rem;
+  }
+
+  // distance edit to delete button (230317 red)
+  ds-working-plan-chart-item-edit-button {
+    margin-right: 1rem;
+  }
+
+  // Document wide tree-node adjustment
+  .mat-tree-node {
+    min-height: 100px;
+  }
+
+  // variables
+  --toolbarHeight: 64px;
+  --nodeWidth: 100px;
+  --calendarCellWidth: 60px;
+  --nodeHeight: 50px;
+  --completeColor: #89b34d;
+  --incompleteColor: #89b34d;
+  --overColor: #245016;
+  --overGrey: #fffde7;
+  --recentGrey: #fffef5;
+  --borderColor: #BDBDBD;
+  --highlightBorderColor: #FF9800;
+
+  .root-node-style {
+    background-color: #e9ecef;
+    border-right: 1px solid var(--borderColor);
+    cursor: pointer;
+  }
+
+  .calendar-head-border {
+    border-bottom: solid 2px var(--borderColor);
+  }
+
+  .calendar-head-year-border {
+    border-bottom: solid 3px var(--borderColor);
+  }
+
+  .calendar-head-year-sub-border {
+    border-bottom: solid 1px var(--borderColor);
+  }
+
+  // column adjustment
+  .tree-node-customization {
+    align-items: normal;
+    border-bottom: solid 1px var(--borderColor);
+    border-right: solid 1px var(--borderColor);
+    background-color: white;
+  }
+
+  .tree-node-end-of-the-year-customization {
+    border-right: solid 2px #666666 !important;
+  }
+
+  .tree-node-milestone-customization {
+    width: 1px;
+    border-right: solid 1px blue;
+    background-color: #adbb97;
+    box-shadow: -4px 0px 10px 0px #59870e;
+  }
+
+  .tree-node-milestone-rhombus {
+    width: 8px;
+    height: 8px !important;
+    border: solid 1px #347798;
+    background-color: #347798 !important;
+    margin-left: -2px;
+    transform: rotate(45deg);
+    min-width: 8px !important;
+    min-height: 8px !important;
+  }
+
+  // entire columns both first and second
+  .sidenav {
+    width: 400px;
+    height: fit-content;
+  }
+
+  // table content
+  .sidenav-content {
+    height: fit-content;
+    overflow-x: auto;
+  }
+
+  // resizable border
+  [mwlResizable] {
+    border-right: 1px solid var(--borderColor);
+    box-sizing: border-box;
+    z-index: 1000;
+  }
+
+  // sidenav header(not calendar)
+  .sidenav-header {
+    line-height: var(--nodeHeight);
+    height: var(--nodeHeight);
+    min-height: var(--nodeHeight);
+    border-width: 0 0 4px 0;
+    border-color: var(--borderColor);
     border-style: solid;
-    mat-tree-node {
-      justify-content: center;
-      mat-form-field {
-        width: 120px;
+  }
+
+  // tree node height for sidebar
+  ::ng-deep mat-tree-node {
+    height: var(--nodeHeight);
+    min-height: var(--nodeHeight);
+  }
+
+  /** names */
+
+  /* complete first column,
+  added "important" so that the expand-icon also still fits inside
+  since this measure was probably overwritten again at another place and thus did not work (230311 rex) */
+  .names {
+    //width: 25rem; // original CSS, causes the expand arrow for the time column to disappeared
+    min-width: 25rem !important;
+  }
+
+  // both columns: first and second
+  .sidenav.chart-column {
+    background-color: #FFFFFF;
+
+    // header of first column, enlarged
+    mat-tree.tree {
+      padding-top: 14px; // align the lines of input and table
+    }
+  }
+
+  /** date picker */
+
+  .sidenav.date-pickers {
+    flex: 0 0 300px;
+
+    mat-tree.tree {
+      padding-top: 14px; // align the lines and table
+      border-width: 0 1px 0 0;
+      border-color: var(--borderColor);
+      border-style: solid;
+
+      mat-tree-node {
+        justify-content: center;
+
+        mat-form-field {
+          width: 120px;
+        }
       }
     }
   }
-}
 
-/** progress */
+  /** progress */
 
-.sidenav.progress-bars {
-  flex: 0 0 200px;
-  mat-tree.tree {
-    padding-top: 8px; // align the sliders and table
-    border-width: 0 3px 0 0;
-    border-color: $borderColor;
+  .sidenav.progress-bars {
+    flex: 0 0 200px;
+
+    mat-tree.tree {
+      padding-top: 8px; // align the sliders and table
+      border-width: 0 3px 0 0;
+      border-color: var(--borderColor);
+      border-style: solid;
+    }
+  }
+
+  ::ng-deep mat-slider.progress {
+    margin: 0 10px;
+    width: 100%;
+    height: unset;
+  }
+
+  /** responsible */
+
+  .responsible {
+    width: 35rem;
+  }
+
+  .responsible-field {
+    overflow: inherit !important;
+  }
+
+  // header
+  ::ng-deep .calendar-header {
+    height: var(--nodeHeight);
+    min-height: var(--nodeHeight);
+  }
+
+  // row
+  ::ng-deep mat-tree-node.calendar-row {
+    overflow: unset; // allow the row to overflow
+  }
+
+  // cell
+  ::ng-deep .mat-form-field-infix {
+    width: var(--nodeWidth) - 20px !important;
+  }
+
+  ::ng-deep .calendar-cell {
+    text-align: center;
+    line-height: var(--nodeHeight) - 1px;
+    height: var(--nodeHeight) - 1px;
+    min-width: var(--calendarCellWidth);
+    min-height: var(--nodeHeight) - 1px;
+    border-width: 0.5px 1px;
+    border-color: var(--borderColor);
     border-style: solid;
   }
-}
 
-::ng-deep mat-slider.progress {
-  margin: 0 10px;
-  width: 100%;
-  height: unset;
-}
+  .calendar-cell-heading {
+    text-align: center;
+    line-height: calc((var(--nodeHeight) / 2) - 1px);
+    height: calc((var(--nodeHeight) / 2) - 1px);
+    min-width: var(--calendarCellWidth);
+    min-height: calc((var(--nodeHeight) / 2) - 1px);
+    border-width: 0.5px;
+    border-color: var(--borderColor);
+    border-style: solid;
+  }
 
-/** responsible */
+  ::ng-deep .calendar-cell.today {
+    border-color: var(--highlightBorderColor);
+    border-width: 0.5px 5px;
+  }
 
-.responsible {
-  width: 35rem;
-}
-
-.responsible-field {
-  overflow: inherit !important;
-}
-
-// header
-::ng-deep .calendar-header {
-  height: $nodeHeight;
-  min-height: $nodeHeight;
-}
-
-// row
-::ng-deep mat-tree-node.calendar-row {
-  overflow: unset; // allow the row to overflow
-}
-
-// cell
-::ng-deep .mat-form-field-infix {
-  width: $nodeWidth - 20px !important;
-}
-
-::ng-deep .calendar-cell {
-  text-align: center;
-  line-height: $nodeHeight - 1px;
-  height: $nodeHeight - 1px;
-  min-width: $calendarCellWidth;
-  min-height: $nodeHeight - 1px;
-  border-width: 0.5px 1px;
-  border-color: $borderColor;
-  border-style: solid;
-}
-
-.calendar-cell-heading {
-  text-align: center;
-  line-height: ($nodeHeight / 2) - 1px;
-  height: ($nodeHeight / 2) - 1px;
-  min-width: $calendarCellWidth;
-  min-height: ($nodeHeight / 2) - 1px;
-  border-width: 0.5px;
-  border-color: $borderColor;
-  border-style: solid;
-}
-
-::ng-deep .calendar-cell.today {
-  border-color: $highlightBorderColor;
-  border-width: 0.5px 5px;
-}
-
-// completed cell
-::ng-deep .calendar-cell[date-filled=true][date-inside=true] {
-  background-color: $completeColor;
-}
+  // completed cell
+  ::ng-deep .calendar-cell[date-filled=true][date-inside=true] {
+    background-color: var(--completeColor);
+  }
 
 
+  // MouseOver effect on the title cells on the left
+  .calendar-title-cell-over {
+    background-color: var(--overGrey);
+  }
 
-// MouseOver effect on the title cells on the left
-.calendar-title-cell-over {
-  background-color: $overGrey;
-}
+  // Background color for new added nodes
+  // changed 230603 rex (provisional until the new color concept)
+  .calendar-title-cell-now-added {
+    //background-color: $recentGrey;
+    background-color: #F1FF9E;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+  }
 
-// Background color for new added nodes
-// changed 230603 rex (provisional until the new color concept)
-.calendar-title-cell-now-added {
-  //background-color: $recentGrey;
-  background-color:#F1FF9E;
-  border-top:1px solid black;
-  border-bottom:1px solid black;
-}
+  .cursor-pointer {
+    cursor: pointer;
+  }
 
-.cursor-pointer {
-  cursor: pointer;
-}
+  .compare-node-status-new {
+    background-color: rgb(146, 198, 66, 0.3);
+  }
 
-.compare-node-status-new {
-  background-color: rgb(146, 198, 66, 0.3);
-}
-
-.compare-node-status-deleted {
-  background-color: rgb(207, 68, 68, 0.3);
+  .compare-node-status-deleted {
+    background-color: rgb(207, 68, 68, 0.3);
+  }
 }

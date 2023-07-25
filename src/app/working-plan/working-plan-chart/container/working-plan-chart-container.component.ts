@@ -10,7 +10,7 @@ import { ResizeEvent } from 'angular-resizable-element';
 import { NgbDate, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { CdkDragDrop, CdkDragSortEvent, CdkDragStart } from '@angular/cdk/drag-drop';
-import { findIndex } from 'lodash';
+import findIndex from 'lodash/findIndex';
 import {
   CreateSimpleItemModalComponent
 } from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
@@ -22,7 +22,7 @@ import {
   WorkpackageStep,
   WorkpackageTreeObject
 } from '../../core/models/workpackage-step.model';
-import { moment, WorkingPlanService, WpMetadata, WpStepMetadata } from '../../core/working-plan.service';
+import { WorkingPlanService, WpMetadata, WpStepMetadata } from '../../core/working-plan.service';
 import { WorkingPlanStateService } from '../../core/working-plan-state.service';
 import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { hasValue, isEmpty, isNotEmpty, isNotNull } from '../../../shared/empty.util';
@@ -37,6 +37,7 @@ import { CompareItemComponent } from '../../../shared/compare-item/compare-item.
 import { ActivatedRoute } from '@angular/router';
 import { ItemDetailPageModalComponent } from 'src/app/item-detail-page-modal/item-detail-page-modal.component';
 import { ScrollToConfigOptions, ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
+import { add, endOfMonth, endOfQuarter, endOfYear, format, max, min, subDays } from 'date-fns';
 
 export const MY_FORMATS = {
   parse: {
@@ -117,21 +118,20 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   private defaultDates: any = {
     start: {
-      full: moment().format('YYYY-MM-DD'),
-      month: moment().format('YYYY-MM'),
-      year: moment().format('YYYY')
+      full: format(new Date(), 'yyyy-MM-dd'),
+      month: format(new Date(), 'yyyy-MM'),
+      year: format(new Date(), 'yyyy-MM')
     },
     end: {
-      full: moment().add(7, 'days').format('YYYY-MM-DD'),
-      month: moment().add(7, 'days').format('YYYY-MM'),
-      year: moment().add(7, 'days').format('YYYY')
+      full: format(add(new Date(), {days: 7}),'yyyy-MM-dd'),
+      month: format(add(new Date(), {days: 7}),'yyyy-MM'),
+      year: format(add(new Date(), {days: 7}),'yyyy')
     },
   };
 
-  dateFormat = 'YYYY-MM-DD';
-  dateMonthFormat = 'YYYY-MM';
-  dateYearFormat = 'YYYY';
-  moment = moment;
+  dateFormat = 'yyyy-MM-dd';
+  dateMonthFormat = 'yyyy-MM';
+  dateYearFormat = 'yyyy';
   dates: string[] = []; // all days in chart
   datesMonth: string[] = []; // all months in chart
   datesQuarter: string[] = []; // all quarters in chart
@@ -508,11 +508,11 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       }
 
       if (node.type === 'milestone') {
-        startDate = this.moment(node.dates.end.full, this.dateFormat);
+        startDate = format(new Date(node.dates.end.full), this.dateFormat);
       } else {
-        startDate = this.moment(node.dates.start.full, this.dateFormat);
+        startDate = format(new Date(node.dates.start.full), this.dateFormat);
       }
-      endDate = this.moment(node.dates.end.full, this.dateFormat);
+      endDate = format(new Date(node.dates.end.full), this.dateFormat);
       if (this.changeStartDateDirection === 'later') {
         startStringDate = startDate.add(this.changeStartDateDays, 'days').format(this.dateFormat);
         endStringDate = endDate.add(this.changeStartDateDays, 'days').format(this.dateFormat);
@@ -628,41 +628,43 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
     stepToProcess
       .forEach((step: any) => {
-        let start;
-        let compareStart;
-        let compareEnd;
-        const end = this.moment(step.dates.end.full, this.dateFormat);
+        let start: Date;
+        let compareStart: Date;
+        let compareEnd: Date;
+        const end = new Date(step.dates.end.full);
         if (isNotEmpty(step.dates.compareEnd)) {
-          compareEnd = this.moment(step.dates.compareEnd.full, this.dateFormat);
+          compareEnd = step.dates.compareEnd.full;
         }
 
         if (step.type === 'milestone') {
-          start = this.moment(this.moment(step.dates.end.full, this.dateFormat).subtract(1, 'days').format(this.dateFormat), this.dateFormat);
+          start = subDays(new Date(step.dates.end.full), 1);
+          // start = this.moment(this.moment(step.dates.end.full, this.dateFormat).subtract(1, 'days').format(this.dateFormat), this.dateFormat);
           if (isNotEmpty(step.dates.compareStart)) {
-            compareStart = this.moment(this.moment(step.dates.compareEnd.full, this.dateFormat).subtract(1, 'days').format(this.dateFormat), this.dateFormat);
+            compareStart = subDays(new Date(step.dates.compareEnd.full), 1);
+            // compareStart = this.moment(this.moment(step.dates.compareEnd.full, this.dateFormat).subtract(1, 'days').format(this.dateFormat), this.dateFormat);
           }
         } else {
-          start = this.moment(step.dates.start.full, this.dateFormat);
+          start = new Date(step.dates.start.full);
           if (isNotEmpty(step.dates.compareStart)) {
-            compareStart = this.moment(step.dates.compareStart.full, this.dateFormat);
+            compareStart = new Date(step.dates.compareStart.full);
           }
         }
 
-        const rangeMinDate = isNotEmpty(step.dates.compareStart) ? moment.min(start, compareStart) : start;
-        const rangeMaxDate = isNotEmpty(step.dates.compareEnd) ? moment.max(end, compareEnd) : end;
-        const maxEndDate = rangeMaxDate.format(this.dateFormat);
+        const rangeMinDate = isNotEmpty(step.dates.compareStart) ? min([start, compareStart]) : start;
+        const rangeMaxDate = isNotEmpty(step.dates.compareEnd) ? max([end, compareEnd]) : end;
+        const maxEndDate = format(new Date(rangeMaxDate), this.dateFormat);
         const dateRange = moment.range(rangeMinDate, rangeMaxDate);
 
         // Moment range sometimes does not include all the months, so use the end of the month to get the correct range
-        const endForMonth = this.datesMonth.length > 0 ? this.moment(this.datesMonth[this.datesMonth.length - 1]) : this.moment(maxEndDate).endOf('month');
+        const endForMonth = this.datesMonth.length > 0 ? new Date(this.datesMonth[this.datesMonth.length - 1]) : endOfMonth(new Date(maxEndDate));
         const dateRangeForMonth = this.moment.range(start, endForMonth);
 
         // Moment range sometimes does not include all the quarters, so use the end of the quarter to get the correct range
-        const endForQuarter = this.moment(maxEndDate).endOf('quarter');
+        const endForQuarter = endOfQuarter(new Date(maxEndDate));
         const dateRangeForQuarter = this.moment.range(start, endForQuarter);
 
         // Moment range sometimes does not include all the years, so use the end of the year to get the correct range
-        const endForYear = this.moment(maxEndDate, this.dateFormat).endOf('year');
+        const endForYear = endOfYear(new Date(maxEndDate));
         const dateRangeForYear = this.moment.range(start, endForYear);
 
         const days = Array.from(dateRange.by('days'));
@@ -798,14 +800,14 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   getDatesMonthByYear(year: string): string[] {
     return this.datesMonth.filter((date) => {
-      const dateYear = moment(date).format('YYYY');
+      const dateYear = format(new Date(date), 'yyyy');
       return dateYear === year;
     });
   }
 
   getDatesQuarterByYear(year: string) {
     return this.datesQuarter.filter((date) => {
-      const dateYear = moment(date).format('YYYY');
+      const dateYear = format(new Date(date), 'yyyy');
       return dateYear === year;
     });
   }
@@ -836,21 +838,19 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     let startDateObj: WorkpackageChartDate;
     let endDateObj: WorkpackageChartDate;
     if (endDate) {
-      const endMoment = this.moment(endDate); // create start moment
       endDateObj = {
-        full: endMoment.format(this.dateFormat),
-        month: endMoment.format(this.dateMonthFormat),
-        year: endMoment.format(this.dateYearFormat)
+        full: format(new Date(endDate), this.dateFormat),
+        month: format(new Date(endDate), this.dateMonthFormat),
+        year: format(new Date(endDate), this.dateYearFormat)
       };
       dates.end = endDateObj;
     }
 
     if (flatNode.type !== 'milestone' && startDate) {
-      startMoment = this.moment(startDate); // create start moment
       startDateObj = {
-        full: startMoment.format(this.dateFormat),
-        month: startMoment.format(this.dateMonthFormat),
-        year: startMoment.format(this.dateYearFormat)
+        full: format(new Date(startDate), this.dateFormat),
+        month: format(new Date(startDate), this.dateMonthFormat),
+        year: format(new Date(startDate), this.dateYearFormat)
       };
       dates.start = startDateObj;
     }

@@ -6,7 +6,7 @@ import { distinctUntilChanged, map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 
 import { ChartDateViewType } from '../../../core/working-plan.reducer';
-import { moment, WorkingPlanService } from '../../../core/working-plan.service';
+import { WorkingPlanService } from '../../../core/working-plan.service';
 
 import { WorkpacakgeFlatNode } from '../../../core/models/workpackage-step-flat-node.model';
 import { Workpackage } from '../../../core/models/workpackage-step.model';
@@ -14,6 +14,7 @@ import { isEmpty, isNotEmpty } from '../../../../shared/empty.util';
 import { range } from '../../../../shared/array.util';
 import { WorkingPlanStateService } from '../../../core/working-plan-state.service';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { format, getDaysInMonth } from 'date-fns';
 
 @Component({
   selector: 'ds-working-plan-chart-dates',
@@ -46,9 +47,10 @@ export class WorkingPlanChartDatesComponent implements OnInit {
   chartDateView: BehaviorSubject<ChartDateViewType> = new BehaviorSubject<ChartDateViewType>(null);
   ChartDateViewType = ChartDateViewType;
 
-  dateFormat = 'YYYY-MM-DD';
-  dateMonthFormat = 'YYYY-MM';
-  dateYearFormat = 'YYYY';
+  dateFormat = 'yyyy-MM-dd';
+  dateMonthFormat = 'yyyy-MM';
+  dateYearFormat = 'yyyy';
+  dateQuarterFormat = 'Q';
 
   monthDatesByYear: Map<string, string[]> = new Map<string, string[]>();
   daysByMonth: Map<string, string[]> = new Map<string, string[]>();
@@ -57,7 +59,7 @@ export class WorkingPlanChartDatesComponent implements OnInit {
   monthsByQuarter: Map<string, string[]> = new Map<string, string[]>();
   daysByMonthAndQuarter: Map<string, string[]> = new Map<string, string[]>();
 
-  today = moment().format(this.dateFormat);
+  today = format(new Date(), this.dateFormat);
 
   constructor(
     private translate: TranslateService,
@@ -136,8 +138,7 @@ export class WorkingPlanChartDatesComponent implements OnInit {
     let output = false;
     let momentDate;
     if (type === 'month') {
-      momentDate = moment(date, 'YYYY-MM');
-      if (momentDate.format('MM') === '12') {
+      if (format(new Date(date), 'MM') === '12') {
         output = true;
       }
     } else if (type === 'quarter') {
@@ -205,32 +206,33 @@ export class WorkingPlanChartDatesComponent implements OnInit {
 
   formatDate(date: string): string {
     if (this.chartDateView.value === ChartDateViewType.day) {
-      return moment(date).format('DD MMM');
+      return format(new Date(date), 'dd MMM');
     } else if (this.chartDateView.value === ChartDateViewType.month) {
-      return moment(date).format('MMM');
+      return format(new Date(date), 'MMM');
     } else if (this.chartDateView.value === ChartDateViewType.quarter) {
       const parts = date.split('-');
       return this.getQuarterLabel(parts[1]);
     } else {
-      return moment(date).format('YYYY');
+      return format(new Date(date), 'yyyy');
     }
   }
 
-  getDaysInMonth(date: string) {
-    return range(1, moment(date, this.dateMonthFormat).daysInMonth(), 1)
+  getDaysInMonth(date: string) { // getDaysInMonth(new Date(2000, 1))
+    const formatDate = format(new Date(date), 'yyyy-MM');
+    return range(1, getDaysInMonth(new Date(formatDate)), 1)
       .map((entry: number) => entry.toString().padStart(2, '0'));
   }
 
   getDatesQuarterByYear(year: string) {
     return this.datesQuarter.filter((date) => {
-      const dateYear = moment(date).format('YYYY');
+      const dateYear = format(new Date(date), 'yyyy');
       return dateYear === year;
     });
   }
 
   getDatesMonthByYear(year: string): string[] {
     return this.datesMonth.filter((date) => {
-      const dateYear = moment(date).format('YYYY');
+      const dateYear = format(new Date(date), 'yyyy');
       return dateYear === year;
     });
   }
@@ -310,11 +312,11 @@ export class WorkingPlanChartDatesComponent implements OnInit {
     if (this.chartDateView.value === ChartDateViewType.day) {
       return date === this.today;
     } else if (this.chartDateView.value === ChartDateViewType.month) {
-      return moment(date).format(this.dateMonthFormat) === moment(this.today).format(this.dateMonthFormat);
+      return format(new Date(date), this.dateMonthFormat) === format(new Date(this.today), this.dateMonthFormat);
     } else if (this.chartDateView.value === ChartDateViewType.quarter) {
-      return moment(date).quarter() === moment(this.today).quarter();
+      return format(new Date(date), this.dateQuarterFormat) === format(new Date(this.today), this.dateQuarterFormat);
     } else {
-      return moment(date).format(this.dateYearFormat) === moment(this.today).format(this.dateYearFormat);
+      return format(new Date(date), this.dateYearFormat) === format(new Date(this.today), this.dateYearFormat);
     }
   }
 
