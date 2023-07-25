@@ -5,6 +5,7 @@
     </button>
   </div>
   <div class="modal-body">
+    <ds-alert  [content]="'submission.workflow.generic.edit-grants.alert.info'"></ds-alert>
     <form *ngIf="editForm" (ngSubmit)="editGrants();" [formGroup]="editForm" >
       <label>{{'submission.workflow.generic.edit-grants.label' | translate}}</label>
       <div class="form-group" ngbRadioGroup (change)="onChange($event?.target?.value)">

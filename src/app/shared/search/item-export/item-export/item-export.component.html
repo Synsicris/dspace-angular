@@ -1,8 +1,8 @@
 <div class="modal-header">
-  <h4 class="modal-title">Item Export Process Launcher</h4>
+  <h4 class="modal-title"> {{'item-export.modal.header' | translate}}</h4>
 </div>
 <div class="modal-body">
-
+  <ds-alert [type]="AlertTypeEnum.Info" [content]="'item-export.modal.alert.info'"></ds-alert>
   <ng-container *ngIf="!selectCollection; else selectCollectionForm">
 
     <ds-item-export-alert *ngIf="showListSelection" [item]="item" [bulkExportLimit]="bulkExportLimit"></ds-item-export-alert>

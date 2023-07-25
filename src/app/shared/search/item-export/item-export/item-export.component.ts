@@ -1,3 +1,4 @@
+import { AlertType } from './../../../alert/aletr-type';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -78,6 +79,8 @@ export class ItemExportComponent implements OnInit, OnDestroy {
   currentUrl: string;
 
   listId = 'export-list';
+
+  AlertTypeEnum = AlertType;
 
   constructor(
     protected itemExportService: ItemExportService,
