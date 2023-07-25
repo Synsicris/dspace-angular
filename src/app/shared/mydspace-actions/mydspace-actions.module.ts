@@ -14,7 +14,6 @@ import { ClaimedTaskActionsReturnToPoolComponent } from './claimed-task/return-t
 import { ClaimedTaskActionsEditMetadataComponent } from './claimed-task/edit-metadata/claimed-task-actions-edit-metadata.component';
 import { ClaimedTaskActionsComponent } from './claimed-task/claimed-task-actions.component';
 import { ClaimedTaskActionsLoaderComponent } from './claimed-task/switcher/claimed-task-actions-loader.component';
-import { ItemActionsComponent } from './item/item-actions.component';
 import { PoolTaskActionsComponent } from './pool-task/pool-task-actions.component';
 import { WorkflowitemActionsComponent } from './workflowitem/workflowitem-actions.component';
 import { WorkspaceitemActionsComponent } from './workspaceitem/workspaceitem-actions.component';
@@ -30,7 +29,6 @@ const DECLARATIONS = [
   ...ENTRY_COMPONENTS,
   ClaimedTaskActionsComponent,
   ClaimedTaskActionsLoaderComponent,
-  ItemActionsComponent,
   PoolTaskActionsComponent,
   WorkflowitemActionsComponent,
   WorkspaceitemActionsComponent,

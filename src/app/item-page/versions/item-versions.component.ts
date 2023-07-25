@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Item } from '../../core/shared/item.model';
 import { Version } from '../../core/shared/version.model';
 import { RemoteData } from '../../core/data/remote-data';
@@ -25,7 +25,7 @@ import { VersionHistoryDataService } from '../../core/data/version-history-data.
 import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
 import { AlertType } from '../../shared/alert/aletr-type';
 import { followLink } from '../../shared/utils/follow-link-config.model';
-import { hasValue, hasValueOperator } from '../../shared/empty.util';
+import { hasValue, hasValueOperator, isEmpty, isNull, isUndefined } from '../../shared/empty.util';
 import { PaginationService } from '../../core/pagination/pagination.service';
 import {
   getItemEditVersionhistoryRoute,
@@ -48,12 +48,12 @@ import { WorkspaceItem } from '../../core/submission/models/workspaceitem.model'
 import { WorkspaceitemDataService } from '../../core/submission/workspaceitem-data.service';
 import { WorkflowItemDataService } from '../../core/submission/workflowitem-data.service';
 import { ConfigurationDataService } from '../../core/data/configuration-data.service';
-import { ConfirmationModalComponent } from '../../confirmation-modal/confirmation-modal.component';
+import { ConfirmationModalComponent } from '../../shared/confirmation-modal/confirmation-modal.component';
 import {
   ItemVersionsVisibilityModalComponent
-} from './item-versions-visibility-modal/item-versions-visibility-modal.component';
-import { MetadataMap, MetadataValue } from '../../../core/shared/metadata.models';
-import { environment } from '../../../../environments/environment';
+} from '../../shared/item/item-versions/item-versions-visibility-modal/item-versions-visibility-modal.component';
+import { MetadataMap, MetadataValue } from '../../core/shared/metadata.models';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'ds-item-versions',

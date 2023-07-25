@@ -325,7 +325,7 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
         switchMap((submissionUploader: SubmissionUploadFilesComponent) => {
           this.submissionUploader = submissionUploader;
           return this.submissionUploader?.uploader?.onCompleteItem.pipe(
-            map((completeItems) => {
+            map((completeItems: any) => {
               if (hasValue(completeItems) && isNotEmpty(completeItems) && !this.editBitstreamModalOpenedOnce) {
                 const fileEntries = this.fileEntryRef.toArray();
                 if (isNotEmpty(fileEntries)) {

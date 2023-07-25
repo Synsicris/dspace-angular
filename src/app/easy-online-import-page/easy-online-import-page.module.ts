@@ -6,6 +6,7 @@ import { EasyOnlineImportPageComponent } from './easy-online-import-page.compone
 import { EasyOnlineImportService } from '../core/easy-online-import/easy-online-import.service';
 import { EasyOnlineImportRoutingModule } from './easy-online-import.routing.module';
 import { EasyOnlineImportResultComponent } from './easy-online-import-result/easy-online-import-result.component';
+import { UploadModule } from '../shared/upload/upload.module';
 
 @NgModule({
   declarations: [
@@ -13,11 +14,12 @@ import { EasyOnlineImportResultComponent } from './easy-online-import-result/eas
     EasyOnlineImportPageComponent,
     EasyOnlineImportResultComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    EasyOnlineImportRoutingModule
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        EasyOnlineImportRoutingModule,
+        UploadModule
+    ],
   providers: [
     EasyOnlineImportService
   ]

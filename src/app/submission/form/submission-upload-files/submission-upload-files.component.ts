@@ -14,7 +14,7 @@ import parseSectionErrors from '../../utils/parseSectionErrors';
 import { SubmissionJsonPatchOperationsService } from '../../../core/submission/submission-json-patch-operations.service';
 import { WorkspaceItem } from '../../../core/submission/models/workspaceitem.model';
 import { SectionsType } from '../../sections/sections-type';
-import { UploaderComponent } from '../../../shared/uploader/uploader.component';
+import { UploaderComponent } from '../../../shared/upload/uploader/uploader.component';
 
 /**
  * This component represents the drop zone that provides to add files to the submission.

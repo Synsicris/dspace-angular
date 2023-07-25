@@ -60,7 +60,7 @@ export class EpersonRegistrationService {
     const registration = new Registration();
     registration.email = email;
 
-    return this.fetchRegister(registration);
+    return this.fetchRegister(registration, captchaToken, type);
   }
 
   /**
@@ -76,7 +76,7 @@ export class EpersonRegistrationService {
     return this.fetchRegister(registration);
   }
 
-  private fetchRegister(registration: Registration, captchaToken: string = null): Observable<RemoteData<Registration>> {
+  private fetchRegister(registration: Registration, captchaToken: string = null, type?: string): Observable<RemoteData<Registration>> {
     const requestId = this.requestService.generateRequestId();
 
     const href$ = this.getRegistrationEndpoint();

@@ -7,7 +7,7 @@ import { WorkspaceItem } from '../../../core/submission/models/workspaceitem.mod
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { VersionDataService } from '../../../core/data/version-data.service';
 import { VersionHistoryDataService } from '../../../core/data/version-history-data.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { WorkspaceitemDataService } from '../../../core/submission/workspaceitem-data.service';
 import { ItemDataService } from '../../../core/data/item-data.service';
 import { Injectable } from '@angular/core';
@@ -27,6 +27,7 @@ export class DsoVersioningModalService {
 
 
   constructor(
+    protected activatedRoute: ActivatedRoute,
     protected modalService: NgbModal,
     protected versionService: VersionDataService,
     protected versionHistoryService: VersionHistoryDataService,
@@ -72,9 +73,10 @@ export class DsoVersioningModalService {
       switchMap((newVersionItem: Item) => this.workspaceItemDataService.findByItem(newVersionItem.uuid, true, false)),
       getFirstSucceededRemoteDataPayload<WorkspaceItem>(),
     ).subscribe((wsItem) => {
-      const wsiId = wsItem.id;
-      const route = 'workspaceitems/' + wsiId + '/edit';
-      this.router.navigateByUrl(route);
+      // const wsiId = wsItem.id;
+      // const route = 'workspaceitems/' + wsiId + '/edit';
+      // this.router.navigateByUrl(route);
+      this.router.navigate(['..', 'manageversions'], { relativeTo: this.activatedRoute });
     });
   }
 

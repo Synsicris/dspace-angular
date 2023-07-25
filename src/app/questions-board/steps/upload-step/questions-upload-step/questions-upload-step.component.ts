@@ -1,48 +1,49 @@
 import {
   POLICY_DEFAULT_NO_LIST,
   POLICY_DEFAULT_WITH_LIST
-} from './../../../../submission/sections/upload/section-upload.component';
-import { SubmissionUploadsModel } from './../../../../core/config/models/config-submission-uploads.model';
-import { SectionsType } from './../../../../submission/sections/sections-type';
+} from '../../../../submission/sections/upload/section-upload.component';
+import { SubmissionUploadsModel } from '../../../../core/config/models/config-submission-uploads.model';
+import { SectionsType } from '../../../../submission/sections/sections-type';
 import { mergeMap, tap } from 'rxjs/operators';
-import { SubmissionDefinitionsModel } from './../../../../core/config/models/config-submission-definitions.model';
-import { RequestParam } from './../../../../core/cache/models/request-param.model';
-import { Collection } from './../../../../core/shared/collection.model';
-import { followLink } from './../../../../shared/utils/follow-link-config.model';
+import isUndefined from 'lodash/isUndefined';
+
+import { SubmissionDefinitionsModel } from '../../../../core/config/models/config-submission-definitions.model';
+import { RequestParam } from '../../../../core/cache/models/request-param.model';
+import { Collection } from '../../../../core/shared/collection.model';
+import { followLink } from '../../../../shared/utils/follow-link-config.model';
 import {
   WorkspaceitemSectionUploadObject
-} from './../../../../core/submission/models/workspaceitem-section-upload.model';
-import { RemoteData } from './../../../../core/data/remote-data';
-import { EditItem } from './../../../../core/submission/models/edititem.model';
-import { EditItemDataService } from './../../../../core/submission/edititem-data.service';
-import { QuestionsBoardStateService } from './../../../core/questions-board-state.service';
-import { NotificationsService } from './../../../../shared/notifications/notifications.service';
-import { SubmissionService } from './../../../../submission/submission.service';
-import { AuthService } from './../../../../core/auth/auth.service';
-import { RestRequestMethod } from './../../../../core/data/rest-request-method';
-import { UploaderOptions } from './../../../../shared/uploader/uploader-options.model';
-import { Item } from './../../../../core/shared/item.model';
+} from '../../../../core/submission/models/workspaceitem-section-upload.model';
+import { RemoteData } from '../../../../core/data/remote-data';
+import { EditItem } from '../../../../core/submission/models/edititem.model';
+import { EditItemDataService } from '../../../../core/submission/edititem-data.service';
+import { QuestionsBoardStateService } from '../../../core/questions-board-state.service';
+import { NotificationsService } from '../../../../shared/notifications/notifications.service';
+import { SubmissionService } from '../../../../submission/submission.service';
+import { AuthService } from '../../../../core/auth/auth.service';
+import { RestRequestMethod } from '../../../../core/data/rest-request-method';
+import { UploaderOptions } from '../../../../shared/upload/uploader/uploader-options.model';
+import { Item } from '../../../../core/shared/item.model';
 import {
   getFirstSucceededRemoteData,
   getFirstSucceededRemoteDataPayload,
   getRemoteDataPayload,
-} from './../../../../core/shared/operators';
-import { SubmissionUploadsConfigDataService } from './../../../../core/config/submission-uploads-config-data.service';
-import { AccessConditionOption } from './../../../../core/config/models/config-access-condition-option.model';
+} from '../../../../core/shared/operators';
+import { SubmissionUploadsConfigDataService } from '../../../../core/config/submission-uploads-config-data.service';
+import { AccessConditionOption } from '../../../../core/config/models/config-access-condition-option.model';
 import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, map, Observable, switchMap, } from 'rxjs';
-import { AlertType } from './../../../../shared/alert/aletr-type';
+import { AlertType } from '../../../../shared/alert/aletr-type';
 import { ChangeDetectorRef, Component, Input, OnInit, } from '@angular/core';
-import { QuestionsBoardService } from './../../../../questions-board/core/questions-board.service';
-import { HALEndpointService } from './../../../../core/shared/hal-endpoint.service';
-import { hasValue, isNotEmpty, isNotUndefined } from './../../../../shared/empty.util';
-import { EasyOnlineImportService } from './../../../../core/easy-online-import/easy-online-import.service';
+import { QuestionsBoardService } from '../../../core/questions-board.service';
+import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service';
+import { hasValue, isNotEmpty, isNotUndefined } from '../../../../shared/empty.util';
+import { EasyOnlineImportService } from '../../../../core/easy-online-import/easy-online-import.service';
 import { TranslateService } from '@ngx-translate/core';
 import {
   WorkspaceitemSectionUploadFileObject
-} from './../../../../core/submission/models/workspaceitem-section-upload-file.model';
-import { SubmissionSectionModel } from './../../../../core/config/models/config-submission-section.model';
-import { SubmissionFormsModel } from './../../../../core/config/models/config-submission-forms.model';
-import { isUndefined } from 'lodash';
+} from '../../../../core/submission/models/workspaceitem-section-upload-file.model';
+import { SubmissionSectionModel } from '../../../../core/config/models/config-submission-section.model';
+import { SubmissionFormsModel } from '../../../../core/config/models/config-submission-forms.model';
 
 @Component({
   selector: 'ds-questions-upload-step',
@@ -272,12 +273,10 @@ export class QuestionsUploadStepComponent implements OnInit {
                     this.uploadConfigId = payload.id;
                     const section: SubmissionSectionModel = { ...payload };
                     // retrieve submission's upload configuration
-                    const config$ = this.uploadsConfigService.findByHref(section._links.config.href, true, false, followLink('metadata')).pipe(
+                    return this.uploadsConfigService.findByHref(section._links.config.href, true, false, followLink('metadata')).pipe(
                       getFirstSucceededRemoteDataPayload(),
                       map((submissionConfig: SubmissionUploadsModel) => submissionConfig)
                     );
-
-                    return config$;
                   }));
               })
             );

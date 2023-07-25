@@ -17,6 +17,8 @@ import {
   MembersListComponent,
   EPersonListActionConfig,
 } from '../../../../access-control/group-registry/group-form/members-list/members-list.component';
+import { AuthorizationDataService } from '../../../../core/data/feature-authorization/authorization-data.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 /**
  * Keys to keep track of specific subscriptions
@@ -57,8 +59,10 @@ export class ReviewersListComponent extends MembersListComponent implements OnIn
               notificationsService: NotificationsService,
               formBuilder: FormBuilder,
               paginationService: PaginationService,
+              modalService: NgbModal,
+              authorizationService: AuthorizationDataService,
               router: Router) {
-    super(groupService, ePersonDataService, translateService, notificationsService, formBuilder, paginationService, router);
+    super(groupService, ePersonDataService, translateService, notificationsService, formBuilder, paginationService, modalService, authorizationService, router);
   }
 
   ngOnInit() {

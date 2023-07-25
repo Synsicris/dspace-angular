@@ -338,7 +338,6 @@ import {
   CreateImpactPathwayComponent
 } from '../impact-pathway-board/create-impact-pathway/create-impact-pathway.component';
 import { TaskColorDirective } from '../impact-pathway-board/shared/impact-path-way/impact-path-way-task/task.directive';
-import { AuthorityTypeaheadComponent } from './authority-typeahead/authority-typeahead.component';
 import { MaterialModule } from './material/material.module';
 import { CreateProjectComponent } from '../projects/create-project/create-project.component';
 import { InvitationModalComponent } from './invitation-modal/invitation-modal.component';
@@ -355,6 +354,14 @@ import { IpwItemMetadataStatusDirective } from './ipw-helpers/ipw-item-metadata-
 import { IpwItemMetadataInternalDirective } from './ipw-helpers/ipw-item-metadata-internal.directive';
 import { EntityTypeTranslatePipe } from './utils/entity-type-translate-pipe';
 import { AlertRoleComponent } from './alert/alert-role/alert-role.component';
+import { ItemCreateComponent } from './item/item-create/item-create.component';
+import {
+  ItemImportMetadataExternalComponent
+} from './item/item-import-metadata-external/item-import-metadata-external.component';
+import {
+  MetadataValuePairComponent
+} from './object-list/search-result-list-element/item-search-result/item-types/metadata/metadata-value-pair/metadata-value-pair.component';
+import { ItemActionsComponent } from './mydspace-actions/item/item-actions.component';
 
 const MODULES = [
   CommonModule,
@@ -499,7 +506,6 @@ const COMPONENTS = [
   ThemedBrowseMostElementsComponent,
   SearchChartBarHorizontalComponent,
   CreateImpactPathwayComponent,
-  AuthorityTypeaheadComponent,
   AuthorityDropdownComponent,
   CreateProjectComponent,
   InvitationModalComponent,
@@ -509,6 +515,10 @@ const COMPONENTS = [
   GrantBadgeComponent,
   ItemVersionsVisibilityModalComponent,
   ViewVersionBadgesComponent,
+  ItemCreateComponent,
+  ItemImportMetadataExternalComponent,
+  MetadataValuePairComponent,
+  ItemActionsComponent,
 ];
 
 const ENTRY_COMPONENTS = [

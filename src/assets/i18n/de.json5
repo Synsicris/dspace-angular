@@ -20803,7 +20803,7 @@
   "search.filters.applied.charts.grapheventdate.y_label": "Jahr",
 
   // "query-builder.synsicris.introduction.alert": "Help 2-step-search",
-  "query-builder.synsicris.introduction.alert": "Diese 2-Schritt Suche bietet vielfältige Such- und Filterfunktionen. Diese Suche findet in den freigegebenen Informationen der im Monitoring-Tool erfassten Vorhaben (Verbünde und Einzelprojekte) statt.</br>In <b>Schritt 1</b> legen Sie fest, in welchen Vorhaben gesucht werden soll.</br>In <b>Schritt 2</b> können Sie dann die Informationen filtern und/oder die Freitextsuche verwenden."
+  "query-builder.synsicris.introduction.alert": "Diese 2-Schritt Suche bietet vielfältige Such- und Filterfunktionen. Diese Suche findet in den freigegebenen Informationen der im Monitoring-Tool erfassten Vorhaben (Verbünde und Einzelprojekte) statt.</br>In <b>Schritt 1</b> legen Sie fest, in welchen Vorhaben gesucht werden soll.</br>In <b>Schritt 2</b> können Sie dann die Informationen filtern und/oder die Freitextsuche verwenden.",
 
   // "researcherprofile.error.claim.body" : "An error occurred while claiming the profile, please try again later",
   // TODO New key - Add a translation
