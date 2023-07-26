@@ -3,6 +3,7 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { MatSelectChange } from '@angular/material/select';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
 import { filter, map, take, withLatestFrom } from 'rxjs/operators';
@@ -11,6 +12,9 @@ import { NgbDate, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { CdkDragDrop, CdkDragSortEvent, CdkDragStart } from '@angular/cdk/drag-drop';
 import findIndex from 'lodash/findIndex';
+import { add, endOfMonth, endOfQuarter, endOfYear, format, max, min, subDays, eachQuarterOfInterval, getQuarter, eachDayOfInterval, eachYearOfInterval, eachMonthOfInterval } from 'date-fns';
+import { ScrollToConfigOptions, ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
+
 import {
   CreateSimpleItemModalComponent
 } from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
@@ -34,10 +38,7 @@ import { Item } from '../../../core/shared/item.model';
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
 import { ComparedVersionItemStatus } from '../../../core/project/project-version.service';
 import { CompareItemComponent } from '../../../shared/compare-item/compare-item.component';
-import { ActivatedRoute } from '@angular/router';
 import { ItemDetailPageModalComponent } from 'src/app/item-detail-page-modal/item-detail-page-modal.component';
-import { ScrollToConfigOptions, ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
-import { add, endOfMonth, endOfQuarter, endOfYear, format, max, min, subDays, eachQuarterOfInterval, getQuarter, eachDayOfInterval, eachYearOfInterval, eachMonthOfInterval } from 'date-fns';
 
 export const MY_FORMATS = {
   parse: {
@@ -638,10 +639,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
         if (step.type === 'milestone') {
           start = subDays(new Date(step.dates.end.full), 1);
-          // start = this.moment(this.moment(step.dates.end.full, this.dateFormat).subtract(1, 'days').format(this.dateFormat), this.dateFormat);
           if (isNotEmpty(step.dates.compareStart)) {
             compareStart = subDays(new Date(step.dates.compareEnd.full), 1);
-            // compareStart = this.moment(this.moment(step.dates.compareEnd.full, this.dateFormat).subtract(1, 'days').format(this.dateFormat), this.dateFormat);
           }
         } else {
           start = new Date(step.dates.start.full);

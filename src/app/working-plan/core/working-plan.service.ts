@@ -71,8 +71,6 @@ import { SearchManager } from '../../core/browse/search-manager';
 import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
 import { FindListOptions } from '../../core/data/find-list-options.model';
 
-// export const moment = extendMoment(Moment);
-
 export interface WpMetadata {
   nestedNodeId: string;
   nestedNode: WorkpackageTreeObject;

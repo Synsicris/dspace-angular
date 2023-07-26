@@ -573,11 +573,11 @@ export class DefaultAppConfig implements AppConfig {
               filterType: 'range',
               minValue: {
                 operator: '-',
-                value: { day: 10 }
+                value: { days: 10 }
               },
               maxValue: {
                 operator: '+',
-                value: { day: 10 }
+                value: { days: 10 }
               }
             }
           },
@@ -586,11 +586,11 @@ export class DefaultAppConfig implements AppConfig {
               filterType: 'range',
               minValue: {
                 operator: '-',
-                value: { day: 10 }
+                value: { days: 10 }
               },
               maxValue: {
                 operator: '+',
-                value: { day: 10 }
+                value: { days: 10 }
               }
             }
           }
