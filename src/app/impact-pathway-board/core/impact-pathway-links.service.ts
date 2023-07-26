@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { combineLatest as observableCombineLatest, Observable } from 'rxjs';
 import { delay, distinctUntilChanged, filter, map, mergeMap, startWith, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
-import { difference, findIndex, union } from 'lodash';
+import difference from 'lodash/difference';
+import findIndex from 'lodash/findIndex';
+import union from 'lodash/union';
 
 import { isEmpty, isNotEmpty } from '../../shared/empty.util';
 import { ItemDataService } from '../../core/data/item-data.service';

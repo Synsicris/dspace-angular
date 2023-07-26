@@ -42,7 +42,7 @@ import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { RemoteData } from '../../../core/data/remote-data';
 import { administratorRole, AlertRole, getProgrammeRoles } from '../../../shared/alert/alert-role/alert-role';
 import { ProjectAuthorizationService } from '../../../core/project/project-authorization.service';
-import { isEqual } from 'lodash';
+import isEqual from 'lodash/isEqual';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 
 @Component({

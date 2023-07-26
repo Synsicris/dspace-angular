@@ -1,7 +1,7 @@
-import { isEqual } from 'lodash';
+import isEqual from 'lodash/isEqual';
 import {
   WorkspaceitemSectionUploadFileObject
-} from './../../../core/submission/models/workspaceitem-section-upload-file.model';
+} from '../../../core/submission/models/workspaceitem-section-upload-file.model';
 import { ChangeDetectorRef, Component, Inject, QueryList, ViewChildren } from '@angular/core';
 
 import { BehaviorSubject, combineLatest as observableCombineLatest, Observable, Subscription } from 'rxjs';

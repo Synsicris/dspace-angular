@@ -8,7 +8,9 @@ import {
   FormGroupDirective,
   Validators,
 } from '@angular/forms';
-import { isEqual, isNil, isNull } from 'lodash';
+import isEqual from 'lodash/isEqual';
+import isNil from 'lodash/isNil';
+import isNull from 'lodash/isNull';
 
 import { SearchOptions } from '../../shared/search/models/search-options.model';
 import { SearchService } from '../../core/shared/search/search.service';

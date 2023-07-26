@@ -1,7 +1,10 @@
 import { AfterContentChecked, AfterViewInit, ChangeDetectorRef, Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { BehaviorSubject, combineLatest, fromEvent, Observable, OperatorFunction, Subscription } from 'rxjs';
 import { delay, filter, map, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
+import isEqual from 'lodash/isEqual';
 
 import { environment } from '../../environments/environment';
 import { Workpackage } from './core/models/workpackage-step.model';
@@ -15,10 +18,7 @@ import { getFirstSucceededRemoteWithNotEmptyData } from '../core/shared/operator
 import { hasValue, isEmpty, isNotEmpty } from '../shared/empty.util';
 import { Item } from '../core/shared/item.model';
 import { ProjectVersionService } from '../core/project/project-version.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { NativeWindowRef, NativeWindowService } from '../core/services/window.service';
-import { fromPromise } from 'rxjs/internal/observable/innerFrom';
-import { isEqual } from 'lodash';
 
 @Component({
   selector: 'ds-working-plan',

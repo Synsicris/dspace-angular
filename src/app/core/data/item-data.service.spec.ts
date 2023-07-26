@@ -22,8 +22,6 @@ import { testPatchDataImplementation } from './base/patch-data.spec';
 import { testDeleteDataImplementation } from './base/delete-data.spec';
 import { RestRequestMethod } from './rest-request-method';
 import objectContaining = jasmine.objectContaining;
-import { JsonPatchOperationsBuilder } from '../json-patch/builder/json-patch-operations-builder';
-import { ItemJsonPatchOperationsService } from './item-json-patch-operations.service';
 
 describe('ItemDataService', () => {
   let scheduler: TestScheduler;

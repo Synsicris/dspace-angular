@@ -176,8 +176,7 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
             return this.impactPathwayService.getImpactPathwayTaskById(impactPathwayStep.parentId, impactPathwayStep.id, item.id).pipe(take(1));
           })
         )
-        .subscribe((task: ImpactPathwayTask) => {
-        });
+        .subscribe();
     });
   }
 

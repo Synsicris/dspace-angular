@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ItemDetailPageModalComponent } from './item-detail-page-modal.component';
 import { CrisLayoutModule } from '../cris-layout/cris-layout.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({

@@ -3,7 +3,6 @@ import {
   DynamicFormArrayModelConfig,
   DynamicFormControlLayout,
   DynamicFormControlModel,
-  DynamicInputModel,
   DynamicTextAreaModel
 } from '@ng-dynamic-forms/core';
 import { DynamicSelectModelConfig } from '@ng-dynamic-forms/core/lib/model/select/dynamic-select.model';

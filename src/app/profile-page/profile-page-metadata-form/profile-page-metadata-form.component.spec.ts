@@ -1,7 +1,7 @@
 import { ProfilePageMetadataFormComponent } from './profile-page-metadata-form.component';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { VarDirective } from '../../shared/utils/var.directive';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { EventEmitter, NO_ERRORS_SCHEMA } from '@angular/core';
 import { EPerson } from '../../core/eperson/models/eperson.model';

@@ -8,7 +8,7 @@ import {
   throwError as observableThrowError,
 } from 'rxjs';
 import { catchError, concatMap, delay, map, mapTo, mergeMap, reduce, tap } from 'rxjs/operators';
-import { findIndex } from 'lodash';
+import findIndex from 'lodash/findIndex';
 
 import { Item } from './item.model';
 import { getFirstSucceededRemoteDataPayload } from './operators';

@@ -1,5 +1,4 @@
 import { NotificationsService } from './../../../shared/notifications/notifications.service';
-import { Observable } from 'rxjs/internal/Observable';
 import { ChangeDetectorRef, Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';

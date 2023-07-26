@@ -1,4 +1,3 @@
-import { Item } from '../../../core/shared/item.model';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CommentListComponent } from './comment-list.component';

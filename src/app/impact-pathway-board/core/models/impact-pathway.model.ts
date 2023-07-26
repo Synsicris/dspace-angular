@@ -1,4 +1,4 @@
-import { findIndex } from 'lodash';
+import findIndex from 'lodash/findIndex';
 
 import { ImpactPathwayStep } from './impact-pathway-step.model';
 
