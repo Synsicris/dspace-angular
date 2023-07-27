@@ -649,16 +649,15 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
           }
         }
 
-        const rangeMinDate = isNotEmpty(step.dates.compareStart) ? min([start, compareStart]) : start;
-        const rangeMaxDate = isNotEmpty(step.dates.compareEnd) ? max([end, compareEnd]) : end;
-        const maxEndDate = format(new Date(rangeMaxDate), this.dateFormat);
+        const rangeMinDate: Date = isNotEmpty(step.dates.compareStart) ? min([start, compareStart]) : start;
+        const rangeMaxDate: Date = isNotEmpty(step.dates.compareEnd) ? max([end, compareEnd]) : end;
 
         // Moment range sometimes does not include all the months, so use the end of the month to get the correct range
-        const endForMonth = this.datesMonth.length > 0 ? endOfMonth(new Date(this.datesMonth[this.datesMonth.length - 1])) : endOfMonth(new Date(maxEndDate));
+        const endForMonth = this.datesMonth.length > 0 ? endOfMonth(new Date(this.datesMonth[this.datesMonth.length - 1])) : endOfMonth(rangeMaxDate);
         // Moment range sometimes does not include all the quarters, so use the end of the quarter to get the correct range
-        const endForQuarter = endOfQuarter(new Date(maxEndDate));
+        const endForQuarter = endOfQuarter(rangeMaxDate);
         // Moment range sometimes does not include all the years, so use the end of the year to get the correct range
-        const endForYear = endOfYear(new Date(maxEndDate));
+        const endForYear = endOfYear(rangeMaxDate);
 
         const days = eachDayOfInterval({ start: rangeMinDate, end: rangeMaxDate });
         const months = eachMonthOfInterval({ start: start, end: endForMonth });
