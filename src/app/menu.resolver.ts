@@ -278,7 +278,7 @@ export class MenuResolver implements Resolve<boolean> {
           id: 'new_community',
           parentID: 'new',
           active: false,
-          visible: isCommunityAdmin,
+          visible: isSiteAdmin,
           model: {
             type: MenuItemType.ONCLICK,
             text: 'menu.section.new_community',
@@ -291,7 +291,7 @@ export class MenuResolver implements Resolve<boolean> {
           id: 'new_collection',
           parentID: 'new',
           active: false,
-          visible: isCommunityAdmin,
+          visible: isSiteAdmin,
           model: {
             type: MenuItemType.ONCLICK,
             text: 'menu.section.new_collection',
@@ -331,7 +331,7 @@ export class MenuResolver implements Resolve<boolean> {
           id: 'edit_community',
           parentID: 'edit',
           active: false,
-          visible: isCommunityAdmin,
+          visible: isSiteAdmin,
           model: {
             type: MenuItemType.ONCLICK,
             text: 'menu.section.edit_community',
@@ -344,7 +344,7 @@ export class MenuResolver implements Resolve<boolean> {
           id: 'edit_collection',
           parentID: 'edit',
           active: false,
-          visible: isCollectionAdmin,
+          visible: isSiteAdmin,
           model: {
             type: MenuItemType.ONCLICK,
             text: 'menu.section.edit_collection',
@@ -357,7 +357,7 @@ export class MenuResolver implements Resolve<boolean> {
           id: 'edit_item',
           parentID: 'edit',
           active: false,
-          visible: canEditItem,
+          visible: isSiteAdmin,
           model: {
             type: MenuItemType.ONCLICK,
             text: 'menu.section.edit_item',
