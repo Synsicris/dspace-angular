@@ -1,10 +1,12 @@
 <div class="container">
-  <ds-questions-board [hasAnyFunderRole]="(hasAnyFunderRole$ | async)"
-                      [isFunderProject]="(isFunderProject$ | async)"
-                      [isProjectReader]="(isProjectReader$ | async)"
-                      [fundingCommunity]="(fundingCommunity$ | async)"
+  <ds-questions-board *ngIf="(initialized | async) && interimReport"
+                      [hasAnyFunderRole]="hasAnyFunderRole"
+                      [isAdmin]="isAdmin"
+                      [isProjectReader]="isProjectReader"
+                      [isFunderProject]="isFunderProject"
+                      [fundingCommunity]="fundingCommunity"
                       [messagePrefix]="'interim-report'"
-                      [projectCommunityId]="(projectCommunityId$ | async)"
-                      [questionsBoardObject]="(interimReportRD$ | async)?.payload"
+                      [projectCommunityId]="projectCommunityId"
+                      [questionsBoardObject]="interimReport"
                       [showUploadStep]="true"></ds-questions-board>
 </div>

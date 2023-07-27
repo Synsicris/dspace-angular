@@ -77,7 +77,7 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
       })
     );
 
-    this.editItemDataService.checkEditModeByIdAndType(this.impactPathwayStepId, environment.impactPathway.impactPathwaysEditMode).pipe(
+    this.editItemDataService.checkEditModeByIdAndType(this.impactPathwayStepId, this.impactPathwayService.getImpactPathwaysEditMode()).pipe(
       take(1)
     ).subscribe((canEdit: boolean) => {
       this.canEditButton$.next(canEdit);

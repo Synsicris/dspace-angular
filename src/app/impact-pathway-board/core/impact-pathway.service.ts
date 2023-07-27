@@ -113,6 +113,9 @@ import { FindListOptions } from '../../core/data/find-list-options.model';
 export class ImpactPathwayService {
 
   private _currentSelectedTask: BehaviorSubject<ImpactPathwayTask> = new BehaviorSubject<ImpactPathwayTask>(null);
+
+  private _isAdmin: boolean;
+
   private _onTheirWayToBeRemoved: string[] = [];
 
   constructor(
@@ -133,6 +136,14 @@ export class ImpactPathwayService {
     private collectionDataService: CollectionDataService,
     private store: Store<AppState>
   ) {
+  }
+
+  get isAdmin(): boolean {
+    return this._isAdmin;
+  }
+
+  set isAdmin(value: boolean) {
+    this._isAdmin = value;
   }
 
   addImpactPathwayToBeRemovedList(id: string) {
@@ -1200,7 +1211,7 @@ export class ImpactPathwayService {
   }
 
   getImpactPathwaysEditMode(): string {
-    return environment.impactPathway.impactPathwaysEditMode;
+    return this.isAdmin ? environment.impactPathway.impactPathwaysAdminEditMode :  environment.impactPathway.impactPathwaysEditMode;
   }
 
   private getImpactPathwaysFormSection(): Observable<string> {

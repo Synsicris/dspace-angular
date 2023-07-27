@@ -36,6 +36,7 @@ import { SearchResultConfig } from './search-result-config.interface';
 import { DisplayItemMetadataType } from './display-search-result-config.interface';
 import { WorkingPlanConfig } from './working-plan-config.interface';
 import { ProjectsConfig } from './projects-config.interface';
+import { ImpactPathwayConfig } from './impact-pathway-config.interface';
 
 export class DefaultAppConfig implements AppConfig {
   production = false;
@@ -736,13 +737,15 @@ export class DefaultAppConfig implements AppConfig {
     additionalMetadataFields: []
   };
 
-  impactPathway = {
+  impactPathway: ImpactPathwayConfig = {
     impactPathwaysFormSection: 'impact_pathway_form',
     impactPathwayStepsFormSection: 'impact_pathway_step_form',
     impactPathwayTasksFormSection: 'impact_pathway_task_form',
     impactPathwaysEditFormSection: 'impact_pathway-edit_form',
     impactPathwaysLinksEditFormSection: 'impact_pathway-edit_link_form',
+    impactPathwaysAdminEditMode: 'ADMIN_IMPACTPATHWAY',
     impactPathwaysEditMode: 'IMPACTPATHWAY',
+    impactPathwaysLinkAdminEditMode: 'ADMIN_IMPACTPATHWAY_LINK',
     impactPathwaysLinkEditMode: 'IMPACTPATHWAY_LINK',
     impactPathwayEntity: 'impactpathway',
     impactPathwayStepEntity: 'impactpathwaystep',
@@ -764,6 +767,7 @@ export class DefaultAppConfig implements AppConfig {
     workingPlanRelationMetadata: 'synsicris.relation.workingplan',
     workingPlanFormName: 'working_plan_form',
     workingPlanStepsFormName: 'working_plan_step_form',
+    workingPlanAdminEditMode: 'ADMIN_WORKINGPLAN',
     workingPlanEditMode: 'WORKINGPLAN',
     workingPlanEditFormSection: 'working_plan-edit_form',
     workingPlanStepStatusMetadata: 'synsicris.type.status',
@@ -836,6 +840,7 @@ export class DefaultAppConfig implements AppConfig {
     questionsBoardPartnerMetadata: '',
     questionsBoardTaskFormSection: 'exploitation_plan_task_form',
     questionsBoardEditFormSection: 'exploitation_plan-edit_form',
+    questionsBoardAdminEditMode: 'ADMIN_EXPLOITATIONPLAN',
     questionsBoardEditMode: 'EXPLOITATIONPLAN',
     questionsBoardStepIcon: true
   };
@@ -850,6 +855,7 @@ export class DefaultAppConfig implements AppConfig {
     questionsBoardPartnerMetadata: '',
     questionsBoardTaskFormSection: 'interim_report_task_form',
     questionsBoardEditFormSection: 'interim_report-edit_form',
+    questionsBoardAdminEditMode: 'ADMIN_INTERIMREPORT',
     questionsBoardEditMode: 'INTERIMREPORT',
     questionsBoardStepIcon: false
   };

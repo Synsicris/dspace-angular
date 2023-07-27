@@ -4,6 +4,7 @@ export interface WorkingPlanConfig extends Config {
   workingPlanRelationMetadata: string;
   workingPlanFormName: string;
   workingPlanStepsFormName: string;
+  workingPlanAdminEditMode: string;
   workingPlanEditMode: string;
   workingPlanEditFormSection: string;
   workingPlanStepStatusMetadata: string;

@@ -1,4 +1,13 @@
-import { AfterContentChecked, AfterViewInit, ChangeDetectorRef, Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { BehaviorSubject, combineLatest, fromEvent, Observable, OperatorFunction, Subscription } from 'rxjs';
@@ -19,6 +28,7 @@ import { hasValue, isEmpty, isNotEmpty } from '../shared/empty.util';
 import { Item } from '../core/shared/item.model';
 import { ProjectVersionService } from '../core/project/project-version.service';
 import { NativeWindowRef, NativeWindowService } from '../core/services/window.service';
+import { WorkingPlanService } from './core/working-plan.service';
 
 @Component({
   selector: 'ds-working-plan',
@@ -31,6 +41,11 @@ export class WorkingPlanComponent implements OnInit, AfterViewInit, AfterContent
    * If the current user is a funder Organizational/Project manager
    */
   @Input() hasAnyFunderRole: boolean;
+
+  /**
+   * If the current user is a funder project manager
+   */
+  @Input() isAdmin: boolean;
 
   /**
    * If the current user is a funder project manager
@@ -70,6 +85,7 @@ export class WorkingPlanComponent implements OnInit, AfterViewInit, AfterContent
     private cdr: ChangeDetectorRef,
     private collectionDataService: CollectionDataService,
     private projectVersionService: ProjectVersionService,
+    private workingPlanService: WorkingPlanService,
     private workingPlanStateService: WorkingPlanStateService,
     private router: Router,
     private aroute: ActivatedRoute,
@@ -77,6 +93,7 @@ export class WorkingPlanComponent implements OnInit, AfterViewInit, AfterContent
   }
 
   ngOnInit(): void {
+    this.workingPlanService.isAdmin = this.isAdmin;
     this.retrieveCollections();
 
     this.subs.push(

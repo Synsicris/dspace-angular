@@ -34,6 +34,7 @@ import { ItemAuthorityRelationService } from '../../core/shared/item-authority-r
 
 @Injectable()
 export class ImpactPathwayLinksService {
+  private _isAdmin: boolean;
 
   constructor(
     private formConfigService: SubmissionFormsConfigDataService,
@@ -45,6 +46,14 @@ export class ImpactPathwayLinksService {
     private rdbService: RemoteDataBuildService,
     private store: Store<AppState>
   ) {
+  }
+
+  get isAdmin(): boolean {
+    return this._isAdmin;
+  }
+
+  set isAdmin(value: boolean) {
+    this._isAdmin = value;
   }
 
   dispatchAddRelation(
@@ -327,7 +336,7 @@ export class ImpactPathwayLinksService {
   }
 
   private getImpactPathwaysLinksEditMode(): string {
-    return environment.impactPathway.impactPathwaysLinkEditMode;
+    return this.isAdmin ? environment.impactPathway.impactPathwaysLinkAdminEditMode : environment.impactPathway.impactPathwaysLinkEditMode;
   }
 
 }

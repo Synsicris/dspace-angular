@@ -185,7 +185,7 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
         )
     );
 
-    this.editItemDataService.checkEditModeByIdAndType(this.impactPathway.id, environment.impactPathway.impactPathwaysEditMode).pipe(
+    this.editItemDataService.checkEditModeByIdAndType(this.impactPathway.id, this.impactPathwayService.getImpactPathwaysEditMode()).pipe(
       take(1)
     ).subscribe((canEdit: boolean) => {
       this.canEditButton$.next(canEdit);

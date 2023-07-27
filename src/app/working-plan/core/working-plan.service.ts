@@ -90,6 +90,7 @@ export interface WpStepMetadata {
 
 @Injectable()
 export class WorkingPlanService {
+  private _isAdmin: boolean;
 
   constructor(
     private collectionService: CollectionDataService,
@@ -112,6 +113,13 @@ export class WorkingPlanService {
     @Inject(APP_CONFIG) public appConfig: AppConfig
   ) {
     this.searchService.setServiceOptions(MyDSpaceResponseParsingService, MyDSpaceRequest);
+  }
+
+  get isAdmin(): boolean {
+    return this._isAdmin;
+  }
+  set isAdmin(value: boolean) {
+    this._isAdmin = value;
   }
 
   public canCreateWorkingPlan(projectCommunityId: string): Observable<boolean> {
@@ -232,7 +240,7 @@ export class WorkingPlanService {
   }
 
   getWorkingPlanEditMode(): string {
-    return environment.workingPlan.workingPlanEditMode;
+    return this.isAdmin ? environment.workingPlan.workingPlanAdminEditMode :  environment.workingPlan.workingPlanEditMode;
   }
 
   getWorkingPlanEditFormName(): string {

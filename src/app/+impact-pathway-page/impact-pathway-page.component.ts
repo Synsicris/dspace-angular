@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Observable } from 'rxjs';
-import { filter, map, mergeMap, take, tap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { BehaviorSubject, combineLatest } from 'rxjs';
+import { map, mergeMap, take, tap } from 'rxjs/operators';
 
 import { RemoteData } from '../core/data/remote-data';
 import { Item } from '../core/shared/item.model';
 import { redirectOn4xx } from '../core/shared/authorized.operators';
-import { getFirstSucceededRemoteDataPayload, getRemoteDataPayload } from '../core/shared/operators';
+import { getFirstCompletedRemoteData, getFirstSucceededRemoteDataPayload } from '../core/shared/operators';
 import { ImpactPathwayService } from '../impact-pathway-board/core/impact-pathway.service';
-import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
 import { InitImpactPathwayAction } from '../impact-pathway-board/core/impact-pathway.actions';
 import { ProjectDataService } from '../core/project/project-data.service';
@@ -23,6 +23,8 @@ import { AuthService } from '../core/auth/auth.service';
 })
 export class ImpactPathwayPageComponent implements OnInit, OnDestroy {
 
+  initialized: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   /**
    * The item's id
    */
@@ -31,33 +33,37 @@ export class ImpactPathwayPageComponent implements OnInit, OnDestroy {
   /**
    * The impact-pathway item's id
    */
-  impactPathwayId$: Observable<string>;
+  impactPathwayId: string;
 
   /**
    * The impact-pathway item
    */
-  impactPathWayItem$: Observable<Item>;
+  impactPathWayItem: Item;
 
   /**
    * If the current user is a funder Organizational/Project manager
    */
-  hasAnyFunderRole$: Observable<boolean>;
+  hasAnyFunderRole: boolean;
+
+  /**
+   * If the current user is an administrator
+   */
+  isAdmin: boolean;
 
   /**
    * If the current user is a funder Organizational/Project manager
    */
-  isFunderProject$: Observable<boolean>;
-
+  isFunderProject: boolean;
 
   /**
    * The project community's id
    */
-  projectCommunityId$: Observable<string>;
+  projectCommunityId: string;
 
   /**
    * The project item's id
    */
-  projectItemId$: Observable<string>;
+  projectItemId: string;
 
   constructor(
     private authService: AuthService,
@@ -66,33 +72,37 @@ export class ImpactPathwayPageComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private store: Store<AppState>
-  ) { }
+  ) {
+  }
 
   /**
    * Initialize instance variables
    */
   ngOnInit(): void {
-    this.hasAnyFunderRole$ = this.route.data.pipe(
+    const hasAnyFunderRole$ = this.route.data.pipe(
       map((data) => (data.isFunderOrganizationalManger || data.isFunderProject || data.isFunderReader) as boolean)
     );
 
-    this.isFunderProject$ = this.route.data.pipe(
+    const isAdmin$ = this.route.data.pipe(
+      map((data) => data.isAdmin as boolean)
+    );
+
+    const isFunderProject$ = this.route.data.pipe(
       map((data) => data.isFunderProject as boolean)
     );
 
-    const impactPathWayItem$ = this.route.data.pipe(
+    const impactPathWayItemRD$ = this.route.data.pipe(
       map((data) => data.impactPathwayItem as RemoteData<Item>),
       redirectOn4xx(this.router, this.authService),
-      filter((itemRD: RemoteData<Item>) => itemRD.hasSucceeded && !itemRD.isResponsePending),
-      take(1)
+      getFirstCompletedRemoteData()
     );
 
-    this.impactPathWayItem$ = impactPathWayItem$.pipe(
-      map((itemRD: RemoteData<Item>) => itemRD.payload)
+    const impactPathWayItem$ = impactPathWayItemRD$.pipe(
+      map((itemRD: RemoteData<Item>) => itemRD.hasSucceeded ? itemRD.payload : null)
     );
 
-    this.impactPathwayId$ = impactPathWayItem$.pipe(
-      mergeMap((itemRD: RemoteData<Item>) => this.impactPathwayService.isImpactPathwayLoadedById(itemRD.payload.id).pipe(
+    const impactPathwayId$ = impactPathWayItemRD$.pipe(
+      mergeMap((itemRD: RemoteData<Item>) => this.impactPathwayService.isImpactPathwayLoadedById(itemRD?.payload?.id).pipe(
         map((loaded) => [itemRD, loaded])
       )),
       tap(([itemRD, loaded]: [RemoteData<Item>, boolean]) => {
@@ -103,17 +113,29 @@ export class ImpactPathwayPageComponent implements OnInit, OnDestroy {
       map(([itemRD, loaded]: [RemoteData<Item>, boolean]) => itemRD.payload.id)
     );
 
-    this.projectCommunityId$ = this.route.data.pipe(
+    const projectCommunityId$ = this.route.data.pipe(
       map((data) => data.projectCommunity as RemoteData<Community>),
       redirectOn4xx(this.router, this.authService),
       getFirstSucceededRemoteDataPayload(),
       map((project: Community) => project.id)
     );
 
-    this.projectItemId$ = impactPathWayItem$.pipe(
-      getRemoteDataPayload(),
+    const projectItemId$ = impactPathWayItem$.pipe(
       map((item: Item) => this.projectService.getProjectItemIdByRelationMetadata(item))
     );
+
+    combineLatest([projectItemId$, projectCommunityId$, impactPathWayItem$, impactPathwayId$, hasAnyFunderRole$, isFunderProject$, isAdmin$])
+      .pipe(take(1)
+    ).subscribe(([projectItemId, projectCommunityId, impactPathWayItem, impactPathwayId, hasAnyFunderRole, isFunderProject, isAdmin]) => {
+      this.projectItemId = projectItemId;
+      this.projectCommunityId = projectCommunityId;
+      this.impactPathWayItem = impactPathWayItem;
+      this.impactPathwayId = impactPathwayId;
+      this.hasAnyFunderRole = hasAnyFunderRole;
+      this.isFunderProject = isFunderProject;
+      this.isAdmin = isAdmin;
+      this.initialized.next(true);
+    });
   }
 
   ngOnDestroy(): void {
