@@ -35,6 +35,11 @@ export class BrowseMostElementsComponent implements OnInit {
   @Input() elementsPerPage = 5;
 
   /**
+   * Whether or not to show the item actions
+   */
+  @Input() showItemActions = true;
+
+  /**
    * Whether to show the metrics badges
    */
   @Input() showMetrics;
