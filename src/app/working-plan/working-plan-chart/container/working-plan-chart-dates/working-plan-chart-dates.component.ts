@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 
 import { Observable } from 'rxjs';
@@ -21,7 +21,7 @@ import { format, getDaysInMonth } from 'date-fns';
   templateUrl: './working-plan-chart-dates.component.html',
   styleUrls: ['./working-plan-chart-dates.component.scss', '../working-plan-chart-container.component.scss']
 })
-export class WorkingPlanChartDatesComponent implements OnInit {
+export class WorkingPlanChartDatesComponent implements OnInit, OnChanges {
 
   /**
    * The map with the MouseOver statuses of the nodes (rows). Used to change the filled row color on MouseOver.
@@ -75,6 +75,12 @@ export class WorkingPlanChartDatesComponent implements OnInit {
       this.chartDateView.next(view);
       this.initDates();
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.datesMonth && isNotEmpty(changes.datesMonth.currentValue)) {
+      this.initDates();
+    }
   }
 
   /**
