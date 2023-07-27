@@ -109,7 +109,7 @@
 <!-- calendar for years -->
 <div *ngIf="chartDateView.value === ChartDateViewType.year" class="sidenav-content calendar w-100" fxLayout="column">
   <div fxLayout="row" class="calendar-head-year-sub-border">
-    <div *ngFor="let date of datesYear" class="calendar-cell w-100 calendar-head-year-border tree-node-end-of-the-year-customization">{{formatDate(date)}}</div>
+    <div *ngFor="let date of datesYear" class="calendar-cell w-100 calendar-head-year-border tree-node-end-of-the-year-customization justify-content-center align-items-center d-flex">{{formatDate(date)}}</div>
   </div>
   <mat-tree class="tree" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
     <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100"

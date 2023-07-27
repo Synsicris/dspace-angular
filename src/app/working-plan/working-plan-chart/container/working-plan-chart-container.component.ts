@@ -977,7 +977,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       let afterStart = parseInt(lastDateQuarter[1], 10);
       const afterLimit = 4;
       for (beforeStart; beforeStart < beforeLimit; beforeStart++) {
-        this.datesQuarter.unshift(firstDateQuarter[0] + '-' + beforeStart);
+        this.datesQuarter.unshift(firstDateQuarter[0] + '-' + (+firstDateQuarter[1] - beforeStart));
       }
       for (afterStart++; afterStart <= afterLimit; afterStart++) {
         this.datesQuarter.push(lastDateQuarter[0] + '-' + afterStart);
