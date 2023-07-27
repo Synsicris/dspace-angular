@@ -253,7 +253,7 @@ export class ImpactPathwayEffects {
   @Effect() addTask$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_TASK),
     concatMap((action: AddImpactPathwayTaskAction) => {
-      return this.itemAuthorityRelationService.addLinkedItemToParent(
+      return this.itemAuthorityRelationService.addLinkedItemToParentAndReturnChild(
         this.impactPathwayService.getImpactPathwaysEditFormSection(),
         this.impactPathwayService.getImpactPathwaysEditMode(),
         action.payload.stepId,
@@ -332,7 +332,7 @@ export class ImpactPathwayEffects {
   @Effect() addSubTask$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.ADD_IMPACT_PATHWAY_SUB_TASK),
     concatMap((action: AddImpactPathwaySubTaskAction) => {
-      return this.itemAuthorityRelationService.addLinkedItemToParent(
+      return this.itemAuthorityRelationService.addLinkedItemToParentAndReturnChild(
         this.impactPathwayService.getImpactPathwaysEditFormSection(),
         this.impactPathwayService.getImpactPathwaysEditMode(),
         action.payload.parentTaskId,

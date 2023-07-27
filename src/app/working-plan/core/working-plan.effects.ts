@@ -126,19 +126,31 @@ export class WorkingPlanEffects {
     ofType(WorkpackageActionTypes.ADD_WORKPACKAGE),
     withLatestFrom(this.store$),
     concatMap(([action, state]: [AddWorkpackageAction, any]) => {
-      return this.workingPlanService.linkWorkingPlanObject(
+
+      const workingplan$ = this.itemAuthorityRelationService.addLinkedItemToParentAndReturnParent(
+        this.workingPlanService.getWorkingPlanEditSectionName(),
+        this.workingPlanService.getWorkingPlanEditMode(),
         state.workingplan.workingplanId,
         action.payload.workpackageId,
+        environment.workingPlan.workingPlanStepRelationMetadata
+      );
+      const task$ = this.workingPlanService.linkWorkingPlanTask(
+        action.payload.workpackageId,
         action.payload.place
-      ).pipe(
+      );
+
+      return workingplan$.pipe(
+        switchMap((workingplan: Item) => task$.pipe(
+            map((task: Item) => [workingplan, task])
+        )),
         debounceTime(200),
-        map((item: Item) => {
+        map(([workingplan, task]: [Item, Item]) => {
           return new RetrieveAllLinkedWorkingPlanObjectsAction(
             action.payload.projectId,
-            state.workingplan.workingplanId,
+            workingplan,
             state.workingplan.sortOption,
             state.workingplan.readMode,
-            item.uuid);
+            task.uuid);
         }),
         tap(() => {
           this.store$.dispatch(new AddWorkpackageSuccessAction());
@@ -217,7 +229,7 @@ export class WorkingPlanEffects {
   @Effect() addStep$ = this.actions$.pipe(
     ofType(WorkpackageActionTypes.ADD_WORKPACKAGE_STEP),
     concatMap((action: AddWorkpackageStepAction) => {
-      return this.itemAuthorityRelationService.addLinkedItemToParent(
+      return this.itemAuthorityRelationService.addLinkedItemToParentAndReturnChild(
         this.workingPlanService.getWorkingPlanEditSectionName(),
         this.workingPlanService.getWorkingPlanEditMode(),
         action.payload.parentId,

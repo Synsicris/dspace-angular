@@ -631,36 +631,26 @@ export class WorkingPlanService {
     return result;
   }
 
-  linkWorkingPlanObject(workingplanId: string, itemId: string, place?: string): Observable<Item> {
-    return this.itemAuthorityRelationService.addLinkedItemToParent(
-      this.getWorkingPlanEditSectionName(),
-      this.getWorkingPlanEditMode(),
-      workingplanId,
-      itemId,
-      environment.workingPlan.workingPlanStepRelationMetadata
-    ).pipe(
-      switchMap(() => {
-        return this.itemService.findById(itemId).pipe(
-          getFirstSucceededRemoteDataPayload(),
-          tap((item: Item) => {
-            const value = {
-              value: 'linked'
-            };
-            this.projectItemService.createReplaceMetadataPatchOp(
-              this.getWorkingPlanEditSectionName(),
-              environment.workingPlan.workingPlanLinkMetadata,
-              0,
-              value
-            );
-            if (isNotEmpty(place)) {
-              this.projectItemService.createAddMetadataPatchOp(this.getWorkingPlanEditSectionName(), environment.workingPlan.workingPlanPlaceMetadata, place);
-            }
-          }),
-          delay(100),
-          mergeMap((taskItem: Item) => this.itemService.executeEditItemPatch(itemId, this.getWorkingPlanEditMode(), this.getWorkingPlanEditSectionName())),
-          getRemoteDataPayload()
+  linkWorkingPlanTask(itemId: string, place?: string): Observable<Item> {
+    return this.itemService.findById(itemId).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      tap((item: Item) => {
+        const value = {
+          value: 'linked'
+        };
+        this.projectItemService.createReplaceMetadataPatchOp(
+          this.getWorkingPlanEditSectionName(),
+          environment.workingPlan.workingPlanLinkMetadata,
+          0,
+          value
         );
-      })
+        if (isNotEmpty(place)) {
+          this.projectItemService.createAddMetadataPatchOp(this.getWorkingPlanEditSectionName(), environment.workingPlan.workingPlanPlaceMetadata, place);
+        }
+      }),
+      delay(100),
+      mergeMap((taskItem: Item) => this.itemService.executeEditItemPatch(itemId, this.getWorkingPlanEditMode(), this.getWorkingPlanEditSectionName())),
+      getRemoteDataPayload()
     );
   }
 

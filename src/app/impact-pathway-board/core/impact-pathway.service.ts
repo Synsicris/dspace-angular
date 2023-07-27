@@ -791,7 +791,7 @@ export class ImpactPathwayService {
       previousParentTaskId,
       taskId,
       environment.impactPathway.impactPathwayTaskRelationMetadata).pipe(
-        mergeMap(() => this.itemAuthorityRelationService.addLinkedItemToParent(
+        mergeMap(() => this.itemAuthorityRelationService.addLinkedItemToParentAndReturnChild(
           'metadata',
           null,
           newParentTaskId,
