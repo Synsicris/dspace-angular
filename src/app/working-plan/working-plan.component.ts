@@ -6,12 +6,14 @@ import {
   Inject,
   Input,
   OnDestroy,
-  OnInit
+  OnInit,
+  PLATFORM_ID
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { BehaviorSubject, combineLatest, fromEvent, Observable, of, OperatorFunction, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, fromEvent, Observable, OperatorFunction, Subscription } from 'rxjs';
 import { delay, filter, map, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import isEqual from 'lodash/isEqual';
 
 import { environment } from '../../environments/environment';
@@ -28,6 +30,7 @@ import { Item } from '../core/shared/item.model';
 import { ProjectVersionService } from '../core/project/project-version.service';
 import { NativeWindowRef, NativeWindowService } from '../core/services/window.service';
 import { WorkingPlanService } from './core/working-plan.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'ds-working-plan',
@@ -81,6 +84,7 @@ export class WorkingPlanComponent implements OnInit, AfterViewInit, AfterContent
 
   constructor(
     @Inject(NativeWindowService) protected _window: NativeWindowRef,
+    @Inject(PLATFORM_ID) protected platformId: Object,
     private cdr: ChangeDetectorRef,
     private collectionDataService: CollectionDataService,
     private projectVersionService: ProjectVersionService,
@@ -115,7 +119,7 @@ export class WorkingPlanComponent implements OnInit, AfterViewInit, AfterContent
         .subscribe(() => this._window.nativeWindow.print())
     );
 
-    if (this._window && hasValue(this._window.nativeWindow)) {
+    if (isPlatformBrowser(this.platformId)) {
         this.subs.push(
           fromEvent(this._window.nativeWindow, 'beforeprint')
             .subscribe((event: Event) => {
@@ -128,7 +132,7 @@ export class WorkingPlanComponent implements OnInit, AfterViewInit, AfterContent
               delay(100),
               withLatestFrom(this.isPrinting$),
               filter(([, isPrinting]) => isPrinting === true),
-              switchMap(() => of(this.router.navigate([], { queryParams: { view: 'default' } }))),
+              switchMap(() => fromPromise(this.router.navigate([], { queryParams: { view: 'default' } }))),
               this.reloadPage(),
             ).subscribe(() => this.isPrinting$.next(false))
         );

@@ -6,6 +6,7 @@ import {
   Input,
   OnDestroy,
   OnInit,
+  PLATFORM_ID,
   ViewChild
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,11 +17,11 @@ import {
   fromEvent,
   Observable,
   of as observableOf,
-  of,
   OperatorFunction,
   Subscription
 } from 'rxjs';
 import { delay, filter, map, mergeMap, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { NgbAccordion, NgbModal, NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathway } from '../../core/models/impact-pathway.model';
@@ -44,6 +45,7 @@ import { RemoteData } from '../../../core/data/remote-data';
 import { administratorRole, AlertRole, getProgrammeRoles } from '../../../shared/alert/alert-role/alert-role';
 import { ProjectAuthorizationService } from '../../../core/project/project-authorization.service';
 import isEqual from 'lodash/isEqual';
+import { isPlatformBrowser } from '@angular/common';
 
 
 @Component({
@@ -127,6 +129,7 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
   public isCommentAccordionOpen = false;
 
   constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
+              @Inject(PLATFORM_ID) protected platformId: Object,
               private authorizationService: AuthorizationDataService,
               private projectAuthorizationService: ProjectAuthorizationService,
               private cdr: ChangeDetectorRef,
@@ -215,7 +218,7 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
         .subscribe(() => this._window.nativeWindow.print())
     );
 
-    if (this._window && hasValue(this._window.nativeWindow)) {
+    if (isPlatformBrowser(this.platformId)) {
       this.subs.push(
         fromEvent(this._window.nativeWindow, 'beforeprint')
           .subscribe((event: Event) => {
@@ -228,7 +231,7 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
             delay(100),
             withLatestFrom(this.isPrinting$),
             filter(([, isPrinting]) => isPrinting === true),
-            switchMap(() => of(this.router.navigate([], { queryParams: { view: 'default' } }))),
+            switchMap(() => fromPromise(this.router.navigate([], { queryParams: { view: 'default' } }))),
             this.reloadArrows()
           ).subscribe(() => this.isPrinting$.next(false))
       );
