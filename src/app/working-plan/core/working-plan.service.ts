@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 
-import { combineLatest, forkJoin, from as observableFrom, Observable, of as observableOf } from 'rxjs';
+import { combineLatest, forkJoin, from as observableFrom, interval, Observable, of as observableOf, race } from 'rxjs';
 import {
   catchError,
   concatMap,
@@ -43,7 +43,7 @@ import { WorkpackageEntries } from './working-plan.reducer';
 import { MetadataMap, MetadataValue, MetadatumViewModel } from '../../core/shared/metadata.models';
 import { JsonPatchOperationsBuilder } from '../../core/json-patch/builder/json-patch-operations-builder';
 import {
-  getAllSucceededRemoteData,
+  getAllSucceededNotStaledRemoteData,
   getFinishedRemoteData,
   getFirstCompletedRemoteData,
   getFirstSucceededRemoteDataPayload,
@@ -315,8 +315,16 @@ export class WorkingPlanService {
       scope: projectId
     });
 
-    return this.searchManager.search(searchOptions, null, false).pipe(
-      getAllSucceededRemoteData(),
+    // This is a workaround to solve cache issue, for which sometimes the response is not retrieved and the interface get stucked
+    const searchWithoutCache$ = this.searchManager.search(searchOptions, null, false).pipe(
+      getAllSucceededNotStaledRemoteData(),
+    );
+    const searchWithCache$ = interval(200).pipe(
+      switchMap(() => this.searchManager.search(searchOptions, null, true)),
+      getAllSucceededNotStaledRemoteData(),
+    );
+
+    return race(searchWithoutCache$, searchWithCache$).pipe(
       map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
         const dsoPage: any[] = rd.payload.page
           .filter((result) => hasValue(result))
