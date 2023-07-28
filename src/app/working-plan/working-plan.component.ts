@@ -10,9 +10,8 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { BehaviorSubject, combineLatest, fromEvent, Observable, OperatorFunction, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, fromEvent, Observable, of, OperatorFunction, Subscription } from 'rxjs';
 import { delay, filter, map, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
-import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import isEqual from 'lodash/isEqual';
 
 import { environment } from '../../environments/environment';
@@ -116,22 +115,24 @@ export class WorkingPlanComponent implements OnInit, AfterViewInit, AfterContent
         .subscribe(() => this._window.nativeWindow.print())
     );
 
-    this.subs.push(
-      fromEvent(this._window.nativeWindow, 'beforeprint')
-        .subscribe((event: Event) => {
-          event.preventDefault();
-          event.stopImmediatePropagation();
-          this.onPrint();
-        }),
-      fromEvent(this._window.nativeWindow, 'afterprint')
-        .pipe(
-          delay(100),
-          withLatestFrom(this.isPrinting$),
-          filter(([, isPrinting]) => isPrinting === true),
-          switchMap(() => fromPromise(this.router.navigate([], { queryParams: { view: 'default' } }))),
-          this.reloadPage(),
-        ).subscribe(() => this.isPrinting$.next(false))
-    );
+    if (this._window && hasValue(this._window.nativeWindow)) {
+        this.subs.push(
+          fromEvent(this._window.nativeWindow, 'beforeprint')
+            .subscribe((event: Event) => {
+              event.preventDefault();
+              event.stopImmediatePropagation();
+              this.onPrint();
+            }),
+          fromEvent(this._window.nativeWindow, 'afterprint')
+            .pipe(
+              delay(100),
+              withLatestFrom(this.isPrinting$),
+              filter(([, isPrinting]) => isPrinting === true),
+              switchMap(() => of(this.router.navigate([], { queryParams: { view: 'default' } }))),
+              this.reloadPage(),
+            ).subscribe(() => this.isPrinting$.next(false))
+        );
+    }
 
     this.subs.push(
       params$

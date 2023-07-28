@@ -16,6 +16,7 @@ import {
   fromEvent,
   Observable,
   of as observableOf,
+  of,
   OperatorFunction,
   Subscription
 } from 'rxjs';
@@ -43,7 +44,7 @@ import { RemoteData } from '../../../core/data/remote-data';
 import { administratorRole, AlertRole, getProgrammeRoles } from '../../../shared/alert/alert-role/alert-role';
 import { ProjectAuthorizationService } from '../../../core/project/project-authorization.service';
 import isEqual from 'lodash/isEqual';
-import { fromPromise } from 'rxjs/internal/observable/innerFrom';
+
 
 @Component({
   selector: 'ds-impact-path-way',
@@ -214,22 +215,24 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
         .subscribe(() => this._window.nativeWindow.print())
     );
 
-    this.subs.push(
-      fromEvent(this._window.nativeWindow, 'beforeprint')
-        .subscribe((event: Event) => {
-          event.preventDefault();
-          event.stopImmediatePropagation();
-          this.onPrint();
-        }),
-      fromEvent(this._window.nativeWindow, 'afterprint')
-        .pipe(
-          delay(100),
-          withLatestFrom(this.isPrinting$),
-          filter(([, isPrinting]) => isPrinting === true),
-          switchMap(() => fromPromise(this.router.navigate([], { queryParams: { view: 'default' } }))),
-          this.reloadArrows()
-        ).subscribe(() => this.isPrinting$.next(false))
-    );
+    if (this._window && hasValue(this._window.nativeWindow)) {
+      this.subs.push(
+        fromEvent(this._window.nativeWindow, 'beforeprint')
+          .subscribe((event: Event) => {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            this.onPrint();
+          }),
+        fromEvent(this._window.nativeWindow, 'afterprint')
+          .pipe(
+            delay(100),
+            withLatestFrom(this.isPrinting$),
+            filter(([, isPrinting]) => isPrinting === true),
+            switchMap(() => of(this.router.navigate([], { queryParams: { view: 'default' } }))),
+            this.reloadArrows()
+          ).subscribe(() => this.isPrinting$.next(false))
+      );
+    }
 
     this.subs.push(
       params$
