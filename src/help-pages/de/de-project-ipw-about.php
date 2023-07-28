@@ -44,15 +44,11 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
     <p>Es werden i.d.R. <strong>Projektpartner</strong> und die <strong>relevanten Interessengruppen</strong> einbezogen. Dies dient dazu, den Wirkungspfad plausibel und durchführbar zu machen, Zustimmung und Engagement zu erzeugen sowie Transparenz über Aktivitäten, Verantwortliche und Beteiligte zu schaffen.
     </p>
 
-<br>
-
-    <p>Besonders empfehlenswerte Literatur ist die Participatory Impact Pathways Analysis (Douthwaite et al., 2009) und der ImpresS Leitfaden für die Erstellung von ex-ante Wirkungspfaden (Blundo Canto et al., 2018).</p>
+    <p>Besonders empfehlenswerte Literatur ist die Participatory Impact Pathways Analysis (Douthwaite et al., 2009) und der ImpresS Leitfaden für die Erstellung von ex-ante Wirkungspfaden (Blundo Canto et al., 2018) (siehe weiterführende Informationen weiter unten).</p>
 
 
-<p>Darüber hinausgehend bietet die <i>Theory of Change</i> ebenfalls Handwerkszeug für die Entwicklung von Wirkungspfaden. Dort steht insbesondere das kritische Hinterfragen der Wirkungsannahmen im Vordergrund, welches für die Überprüfung von Wirkungspfaden sehr nützlich ist. Eine kurze Einführung finden sie <a href="https://www.theoryofchange.org/wp-content/uploads/toco_library/pdf/ToCBasics.pdf">hier.</a>
+<p>Darüber hinausgehend bietet die Theory of Change ebenfalls Handwerkszeug für die Entwicklung von Wirkungspfaden. Dort steht insbesondere das kritische Hinterfragen der Wirkungsannahmen im Vordergrund, welches für die Überprüfung von Wirkungspfaden sehr nützlich ist.
 </p>
-
-<br>
 
   <p>Das allgemeine Impact-Output-Outcome-Impact Modell wurde für das SynSICRIS Monitoring-Tool angepasst, um den <strong>Forschungsprozessen</strong> und <strong>Interaktionen</strong> einen größeren Stellenwert einzuräumen. Zudem wurde der Bezug zu den <strong>förderpolitischen Zielen</strong> hinzugefügt, da diese im Förderkontext erforderlich sind.</p>
 
@@ -65,10 +61,12 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 <br>
 
 <article>
-  <h2>Literaturquellen</h2>
-  <p>Blundo Canto, G.; Barret, D.; Faure, G.; Hainzelin, E.; Monier, C.; Triomphe, B. (2018): ImpresS ex ante. An approach for building ex ante impact pathways: Cirad. DOI: 10.19182/agritrop/00013 <a href="https://agritrop.cirad.fr/587546/">https://agritrop.cirad.fr/587546/</a></p>
+  <h2>Weiterführende Informationen</h2>
+  <p>Blundo Canto, G.; Barret, D.; Faure, G.; Hainzelin, E.; Monier, C.; Triomphe, B. (2018): ImpresS ex ante. An approach for building ex ante impact pathways: Cirad. DOI: 10.19182/agritrop/00013 <a href="https://agritrop.cirad.fr/587546/">https://agritrop.cirad.fr/587546/</a>
+  <br>
+  <a href="https://www.youtube.com/watch?v=oleQDyotBjM">Video</a> zu ImpresS: understanding impact pathways to better think research interventions</p>
   <p>Douthwaite, B.; Alvarez, S.; Keatinge, J. D. H.; Mackay, R.; Thiele, G., Watts, J. (2009): Participatory impact pathways analysis (PIPA) and research priority assessment. <a href="https://www.researchgate.net/publication/287020432_Participatory_impact_pathways_analysis_PIPA_and_research_priority_assessment">https://www.researchgate.net/publication/287020432_Participatory_impact_pathways_analysis_PIPA_and_research_priority_assessment</a></p>
-
+  <p><a href="https://www.theoryofchange.org/wp-content/uploads/toco_library/pdf/ToCBasics.pdf">Kurze Einführung</a> zur Theory of Change </p>
 
 
     </main>
