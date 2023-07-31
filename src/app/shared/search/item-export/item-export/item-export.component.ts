@@ -1,3 +1,4 @@
+import { AlertType } from './../../../alert/aletr-type';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -98,6 +99,8 @@ export class ItemExportComponent implements OnInit, OnDestroy {
   initialized$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   listId = 'export-list';
+
+  AlertTypeEnum = AlertType;
 
   constructor(
     protected itemExportService: ItemExportService,

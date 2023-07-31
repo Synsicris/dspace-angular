@@ -3862,6 +3862,8 @@
 
   "item.version.visibility.modal.header": "Visibility version",
 
+  "item.version.visibility.modal.alert.info": "help",
+
   "item.version.visibility.modal.text": "Do you want to make version {{version}} visible?",
 
   "item.version.visibility.modal.button.confirm": "Visibile",
@@ -3896,6 +3898,10 @@
 
   "item.version.synsicris.version.not_official": "Not Official",
 
+  "item-export.modal.header": "Item Export Process Launcher",
+
+  "item-export.modal.alert.info": "help",
+
   "item-export.modal-launcher.single.btn": "Export",
 
   "item-export.modal-launcher.multiple.btn": "Export",
@@ -3927,8 +3933,6 @@
   "item-export.form.selection.all": "Export all",
 
   "item-export.form.selection.only-selected": "Export only selected",
-
-  "item-export.modal.title": "Item Export Process Launcher",
 
   "item-export.process.title": "Bulk export item",
 
@@ -5204,6 +5208,8 @@
 
   "programme.manage.members-list.modal.withdraw.title": "Withdraw role",
 
+  "programme.manage.members-list.modal.alert.info": "help",
+
   "programme.manage.members-list.modal.withdraw.body": "Are you sure?",
 
   "programme.manage.members-list.modal.withdraw.confirm": "Yes, I'm sure",
@@ -5311,6 +5317,8 @@
   "project.manage.members-list.table.email": "E-mail",
 
   "project.manage.members-list.modal.withdraw.title": "Withdraw role",
+
+  "project.manage.members-list.modal.alert.info": "help",
 
   "project.manage.members-list.modal.withdraw.body": "Are you sure?",
 
@@ -7970,6 +7978,8 @@
 
   "submission.workflow.generic.edit-grants.head": "Set access right to the workspace of the project",
 
+  "submission.workflow.generic.edit-grants.alert.info": "help",
+
   "submission.workflow.generic.edit-grants.label": "Set the access right",
 
   "submission.workflow.generic.edit-grants.success": "Operations successful",
@@ -8221,6 +8231,12 @@
   "supervisedWorkspace.search.results.head": "Supervised Items",
 
   "workspace.search.results.head": "Your submissions",
+
+  "workspace.alert.info": "help",
+
+  "otherworkspace.alert.info": "help",
+
+  "allProjectItems.alert.info": "help",
 
   "workflowAdmin.search.results.head": "Administer Workflow",
 

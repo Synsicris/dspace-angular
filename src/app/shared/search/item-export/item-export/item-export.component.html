@@ -1,10 +1,11 @@
 <div class="modal-header">
-  <h4 class="modal-title">{{'item-export.modal.title' | translate}}</h4>
+  <h4 class="modal-title"> {{'item-export.modal.header' | translate}}</h4>
 </div>
 <div class="modal-body">
   <ds-themed-loading *ngIf="!(initialized$ | async)"></ds-themed-loading>
   <ng-container *ngIf="(initialized$ | async)">
     <ng-container *ngIf="(canExport$ | async); else cannotExport">
+      <ds-alert [type]="AlertTypeEnum.Info" [content]="'item-export.modal.alert.info'"></ds-alert>
       <ng-container *ngIf="!selectCollection; else selectCollectionForm">
 
         <ds-item-export-alert [item]="item"
