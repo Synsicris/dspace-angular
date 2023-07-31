@@ -9,22 +9,32 @@ incl. headline and button, also used on second level
 
       <h5 class="mr-3 pt-1 align-self-start">{{fieldTitle}}</h5>
       <div>
-        <button *ngIf="compareMode" class="btn btn-lg btn-link p-0 flex-shrink-1 mr-2"
-                title="{{'impact-pathway.compare' | translate}}" (click)="openCompareModal()">
-          <i class="fas fa-not-equal"></i>
-        </button>
-        <button class="btn btn-outline-primary btn-sm align-self-start" [disabled]="disabled" (click)="$event.preventDefault();  $event.stopPropagation(); openEditModal();">
+
+        <!-- edit-button -->
+        <button 
+          class="btn btn-outline-primary btn-sm btn btn-outline-primary btn-sm ml-2 mr-3 align-self-start" 
+          [disabled]="disabled" 
+          (click)="$event.preventDefault();  $event.stopPropagation(); openEditModal();">
           <span>
             <i class="far fa-edit"></i> {{editTitle}}
           </span>
         </button>
+
+        <!-- compare-button -->
+        <button 
+          *ngIf="compareMode" 
+          class="btn btn-lg btn-link p-0 flex-shrink-1"
+          title="{{'impact-pathway.compare' | translate}}" 
+          (click)="openCompareModal()">
+            <i class="fas fa-code-compare"></i> <!-- changed compare-icon (230724 rex) -->
+        </button>
+
       </div>
     </div>
 
     <div class="clearfix"></div>
 
     <!-- added a placeholder(230428 rex)
-    Unfortunately I haven't found a solution to also style the placeholder to visually distinguish it from the normal input text,
     see src/themes/synsicris/styles/synsicris-optimizations/impact_pathway_editable_textarea.scss -->
     <textarea #textarea class="mt-2 form-control rounded-0 editor" placeholder="{{editPlaceholder}}" rows="{{rows}}" title="{{fieldTitle}}" disabled="true" [value]="content || ''"></textarea>
 

@@ -7,7 +7,7 @@
 
 #ipw ngx-domarrow .line {
   /* alternative solution to show the line, since the backgroud color is removed by print command */
-  border-bottom: 2px solid var(--sy-color-blueviolet-53) !important;
+  border-bottom: 2px solid var(--sy-impact-pathway-arrows) !important;
 }
 
 #ipw ds-impact-path-way-task {
@@ -77,7 +77,9 @@
       border:1px solid var(--sy-color-gray-36);
       box-shadow:0 0 3px rgba(0,0,0,0.5);
       
-      .task-header {margin:0 !important}
+      .task-header {
+        margin:0 !important
+      }
 
       // bottom bar with functional icon-buttons
       .task-actions {display:none;}
@@ -93,10 +95,20 @@
           display:none !important;
         }
 
-        // title of data
+        // title of entity-data
         div.task-header {
           margin-top:5px !important;
         }
+
+        // entity-name
+        div.task-content {
+          div.sy-entity-name p { 
+            font-size:0.8rem !important;
+            font-family:'Nunito-ExtraLight' !important;
+            line-height:1rem;
+          }
+        }
+
       }
       
 

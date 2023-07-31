@@ -93,9 +93,7 @@
         [treeControl]="treeControl"
         [ngStyle]="sidebarNamesStyle">
 
-        <!-- Single Row 
-        matTreeNodePaddingIndent is for the second level
-        -->
+        <!-- Single Row - matTreeNodePaddingIndent is for the second level -->
         <mat-tree-node *matTreeNodeDef="let node"
           [class.compare-node-status-new]="(compareMode | async) && node.compareStatus == ComparedVersionItemStatus.New"
           [class.compare-node-status-deleted]="(compareMode | async) && node.compareStatus == ComparedVersionItemStatus.Removed"
@@ -106,7 +104,7 @@
           [class.calendar-title-cell-now-added]="(hasBeenNowAdded(node.id) | async)"
           matTreeNodeToggle
           matTreeNodePadding
-          [matTreeNodePaddingIndent]="26"
+          [matTreeNodePaddingIndent]="27"
           (mouseover)="chartChangeColor(node.id, true)"
           (mouseout)="chartChangeColor(node.id, false)"
           (cdkDragStarted)="dragStarted($event)">
@@ -246,14 +244,15 @@
             </div> <!-- end .sy-status-icons -->
 
             <div class="d-flex sy-compare p-0">
-              <!-- button "not equal" -->
+              <!-- button for compare-mode -->
               <button *ngIf="(compareMode | async) && node.compareStatus === ComparedVersionItemStatus.Changed"
                       mat-icon-button
                       class="btn btn-xs btn-link p-0 text-primary button-compare"
                       [class.ml-1]="node.level !== 0"
                       title="{{'working-plan.chart.button.compare' | translate}}"
                       (click)="openCompareModal(node); $event.stopImmediatePropagation();">
-                <i class="fas fa-not-equal"></i>
+                <!-- <i class="fas fa-not-equal"></i> changed compare-icon (230724 rex)-->
+                <i class="fas fa-code-compare"></i>
               </button>
             </div>
             

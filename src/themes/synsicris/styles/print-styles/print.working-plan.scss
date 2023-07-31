@@ -78,6 +78,10 @@ Second Column: start and end dates, responsible organization and status
 ------------------------------------------------------------------------ */
 .chart-column.responsible.sidenav {
 
+  /* for the middle column min-width 450px is defined (where exactly is not clear)
+  reduced to 320px, because the status dropdown is hidden for print  */
+  min-width: 320px !important; 
+
   /* *********** */ 
   /*
   SPECIAL SOLUTION TO STYLE THE ORGANIZATION NAMES
@@ -124,7 +128,8 @@ Second Column: start and end dates, responsible organization and status
     } // end div.responsible-organization-block 
 
     div.sy-status-block {
-      font-size:12px !important;
+      display:none !important; // hide the complete status-dropdown, decision of Birge Wolf 20.7.23
+      //font-size:12px !important;
       p.sy-status-header { }
 
       // Dropdown for status

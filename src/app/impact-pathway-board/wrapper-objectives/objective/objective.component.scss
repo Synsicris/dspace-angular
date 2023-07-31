@@ -34,10 +34,12 @@
   width: 100%;
 }
 
-// Background of the second area of Impact Pathway column 2 and 3
+/* Background of the second area of Impact Pathway column 2 and 3
+replaced by .impact-pathway-pinboard-second-level, defined in src/themes/synsicris/styles/synsicris-optimizations/impact_pathway.scss
 .bg-step-green {
   background-color: rgba(38, 153, 0, 0.1);
 }
+*/
 
 .comment-box {
   width: 40%;

@@ -1,20 +1,35 @@
+<!-- First Accordeon of Exploitong Plan and Interim report (rex 230727) -->
+
 <div class="d-flex flex-column p-2 bg-light rounded">
-  <div class="d-flex justify-content-between">
+  
+  <div class="d-flex">
     <h5>{{fieldTitle}}</h5>
+
+      <!-- edit-button -->
+      <button
+        class="btn btn-outline-primary btn-sm ml-3 mr-3" 
+        [disabled]="disabled"
+        (click)="$event.preventDefault();  $event.stopPropagation(); openEditModal();">
+          <span><i class="far fa-edit"></i> {{editTitle}}</span>
+      </button>
+
+      <!-- compare-button -->
+      <button 
+        *ngIf="compareMode" 
+        class="btn btn-lg btn-link p-0 flex-shrink-1"
+        title="{{'impact-pathway.compare' | translate}}" 
+        (click)="openCompareModal()">
+          <!-- changed compare-icon (230724 rex)-->
+          <i class="fas fa-code-compare"></i>
+      </button>
+
     <div>
-      <button *ngIf="compareMode" class="btn btn-lg btn-link p-0 flex-shrink-1 mr-2"
-              title="{{'impact-pathway.compare' | translate}}" (click)="openCompareModal()">
-        <i class="fas fa-not-equal"></i>
-      </button>
-      <button class="btn btn-primary btn-sm" [disabled]="disabled"
-              (click)="$event.preventDefault();  $event.stopPropagation(); openEditModal();">
-      <span>
-        <i class="far fa-edit"></i> {{editTitle}}
-      </span>
-      </button>
+
     </div>
   </div>
-  <div class="clearfix"></div>
+
+  <div class="clearfix mb-3"></div>
+
   <ds-form *ngIf="formId && formModel?.length > 0" #formRef="formComponent"
            [formId]="formId"
            [formModel]="formModel"
@@ -22,4 +37,5 @@
            [displaySubmit]="false"
            [displayCancel]="false"
            [showContainer]="false"></ds-form>
+
 </div>

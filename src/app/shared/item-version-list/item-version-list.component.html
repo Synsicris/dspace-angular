@@ -1,12 +1,14 @@
+<!-- added semantic classes .badge-active-instance and .badge-compared-instance for the batches for active and compared old version (rex 230731) -->
+
 <div class="d-flex justify-content-between align-items-center">
   <div class="d-flex justify-content-between align-items-center flex-nowrap">
     <div class="d-flex flex-column mr-1">
-      <span *ngIf="(currentVersion | async)?.base as base"
-            class="badge badge-success mb-1 text-justify">
+      <!-- <span *ngIf="(currentVersion | async)?.base as base" class="badge badge-success mb-1 text-justify"> -->
+      <span *ngIf="(currentVersion | async)?.base as base" class="badge badge-success badge-active-instance mb-1 text-justify">   
         {{('item.version.list.base-text' | translate) + ((base.isActiveInstance ? 'item.version.list.active-option-text' : 'item.version.list.option-text') | translate) + (base?.title || '') + ' ' + (base?.date |  date:'medium')}}
       </span>
-      <span href="#" *ngIf="(currentVersion | async)?.comparing as comparing"
-            class="badge badge-secondary text-justify">
+      <!-- <span href="#" *ngIf="(currentVersion | async)?.comparing as comparing" class="badge badge-secondary text-justify"> -->
+      <span href="#" *ngIf="(currentVersion | async)?.comparing as comparing" class="badge badge-secondary badge-compared-instance text-justify">  
         {{('item.version.list.comparing-text' | translate) + ((comparing.isActiveInstance ? 'item.version.list.active-option-text' : 'item.version.list.option-text') | translate) + (comparing?.title || '') + ' ' + (comparing?.date |  date:'medium')}}
     </span>
     </div>

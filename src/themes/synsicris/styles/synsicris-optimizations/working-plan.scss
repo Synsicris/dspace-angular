@@ -31,13 +31,11 @@ ds-working-plan-page {
     // Single Row
     mat-tree-node {
 
-      //border-bottom:1px solid lime !important;
-
       // Strong highlighting of newly added data row
       &.calendar-title-cell-now-added {
-        background-color:var(--sy-color-neon-81);
-        border-top:1px solid var(--sy-color-gray-0);
-        border-bottom:1px solid var(--sy-color-gray-0);
+        background-color:var(--sy-table-cell-background-now-added);
+        border-top:1px solid var(--sy-table-border-color);
+        border-bottom:1px solid var(--sy-table-border-color);
       }
       
       // distinction first and second level of data rows: if first div is .rootnodestyle, it's a first level row
@@ -46,33 +44,37 @@ ds-working-plan-page {
         // all rows
         // left bar with drag'n drop button
         // stronger left border
-        border-left: 1px solid var(--sy-color-gray-68);
+        border-left: 1px solid var(--sy-table-border-color);
+        
         // softer right border
-        border-right: 1px solid var(--sy-color-gray-85);
+        border-right: 1px dotted var(--sy-table-border-color);
 
         // first level rows
         &.root-node-style {
-          background-color: var(--sy-color-gray-95); 
+          background-color: var(--sy-table-cell-background-darker-2);
         }
         // second level rows
         &:not(.root-node-style) {
-          background-color: var(--sy-color-gray-96); 
+          background-color: var(--sy-table-cell-background-darker-1);
           margin-right:10px;
         }
       }
 
       // Compare-Mode: New data
       &.compare-node-status-new > div:first-of-type {
-        background-color:var(--sy-color-green-89);
+        background-color:var(--sy-compare-data-new-background);
       }
       // Compare-Mode: Deleted data
       &.compare-node-status-deleted > div:first-of-type {
-        background-color:var(--sy-color-red-92);
+        background-color:var(--sy-compare-data-deleted-background);
       }
       
 
       // left sidebar of first level row with dragn'drop button and toggle open/close-button
-      .row-sidebar { }
+      .row-sidebar { 
+        // hides the disabled drag'n drop button in compare-mode (opacity instead of display to prevent to change positions of buttons)
+        .mat-button-disabled {opacity:0 !important;}
+      }
 
       // left part of row header with text and buttons
       div.row-header-left {
@@ -89,7 +91,7 @@ ds-working-plan-page {
         p.data-title-text.block-ellipsis {
           font-family:'Nunito-Bold';
           line-height:1.1rem;
-          color:var(--sy-color-blue-33); // is not a link in the HTML code, so it must be colored extra link-blue
+          color:var(--sy-links-color); // is not a link in the HTML code, so it must be colored extra link-blue
           margin-top:5px; // distance between entity-name and data-title
         }
 
@@ -188,14 +190,14 @@ Content (start and end dates, responsible organization and status)
           font-size:0.9rem !important; // so that the font size of the headline is not so oversized in relation to the small font of the content
         }
 
-        // not yet found a way to style or hide the background of start- and end-date;
+        // not yet found a way to style or hide the background of start- and end-date, so that the text does not stick to the edge
         mat-form-field.sy-start-date-form div.mat-form-field-wrapper mat-form-field-flex {
           /*
           padding:4px !important; 
           border:1px solid lime;
           border: 1px solid lime;
           */
-        } // so that the text does not stick to the edge
+        } 
         mat-form-field.sy-end-date-form div.mat-form-field-wrapper mat-form-field-flex {
           /*
           padding:4px !important; 
@@ -205,7 +207,7 @@ Content (start and end dates, responsible organization and status)
         }
         // calendar icon
         mat-icon {
-          color:var(--sy-color-blue-29) !important; // make iconbutton link-blue ...
+          color:var(--sy-link-icon-color) !important; // make iconbutton link-blue ...
           font-size:0.9rem; // ... and smaller
         } 
 
@@ -230,7 +232,6 @@ Content (start and end dates, responsible organization and status)
 
         // Dropdown for status
         mat-form-field.sy-status-form {
-          //display:block !important;
          
           mat-select {
             // status-icons
@@ -259,7 +260,7 @@ ds-working-plan-chart-dates {
 
   // formerly green data bars, now color-neutral grey
   .flex-fill .calendar-inner-cell[date-inside=true] {
-    background-color: var(--sy-color-gray-64) !important;
+    background-color: var(--sy-working-plan-compare-bar-active-instance-background) !important;
     height:8px !important;
   }
 
@@ -270,7 +271,7 @@ ds-working-plan-chart-dates {
     // header with one (by year or quartal) or two (monthly) rows
     div.sy-calendar-header-rows {
       // frames the calendar header with the same border as above the other two columns
-      border-color: var(--sy-color-gray-74);
+      border-color: var(--sy-table-border-color);
       border-style:solid;
       border-width:1px 0 0 1px;
       margin-left:-2px; // because header is shifted a bit to the right for some reason.
@@ -278,13 +279,13 @@ ds-working-plan-chart-dates {
       // repeating quartals and months for every year, stronger lines between years
       // the same for the table content in mat-tree.sy-monthly, .sy-quarterly and .sy-annually !
       div.sy-block-year {
-        border-right:1px solid var(--sy-color-gray-36) !important;
+        border-right:1px solid var(--sy-table-border-color) !important;
       }
       // is due to the special making of at annually necessary, so that border is displayed
       &.sy-annually.sy-row-years {
         background-color:var(--sy-color-gray-100) !important;
         div.sy-block-year.calendar-cell {
-          border-right:1px solid var(--sy-color-gray-36) !important;
+          border-right: 1px solid var(--sy-table-border-color) !important;
           display:block;  // is due to the special machart at annually necessary, so that border is displayed
         }
       }
@@ -303,41 +304,40 @@ ds-working-plan-chart-dates {
       &.sy-annually.sy-row-years .calendar-cell {
         border-left:none !important;
         border-right:none !important;
-        &:nth-child(odd) {background-color:rgba(150,150,150,0.1);}
+        &:nth-child(odd) {background-color:var(--sy-table-cell-background-darker-1);}
       }
 
     } // end div.sy-calendar-header-rows
 
-   /*
-    .sy-calendar-header-rows.sy-annually.sy-row-years {
-      //border:2px solid red !important;
-      div.sy-block-year.calendar-cell {
-        border-right:2px dotted var(--sy-color-gray-36) !important;
-        display:block;
-      }
-    }
-*/
+
     // Content with all table rows
     mat-tree.tree {
 
       // Single Row
       mat-tree-node {
         div.calendar-cell {
-          // replaces vertical borders with zebtratabelle
+          // replaces vertical borders with zebra table
           border-left:none !important;
           border-right:none !important;
-          &:nth-child(odd) {background-color:rgba(150,150,150,0.1);} // zebra table
+
+          // calendar bar for compared old version
+          //.calendar-node-customization .calendar-cell-wrapper .calendar-inner-cell .calendar-inner-cell-compare {
+          .calendar-inner-cell-compare {
+            background-color:var(--sy-working-plan-compare-bar-compared-instance-background) !important; 
+          }
+
+        &:nth-child(odd) {background-color:var(--sy-table-cell-background-darker-1);}
         }
       } // end mat-tree-node for single row
 
       &.sy-monthly mat-tree-node div.calendar-cell {
-        &:nth-child(12n){border-right:1px solid var(--sy-color-gray-36) !important;} // line after every twelfth cell -> after a year
+        &:nth-child(12n){border-right:1px solid var(--sy-table-border-color) !important;} // line after every twelfth cell -> after a year
       }
       &.sy-quarterly mat-tree-node div.calendar-cell {
-        &:nth-child(4n){border-right:1px solid var(--sy-color-gray-36) !important;} // line after every forth cell -> after a year
+        &:nth-child(4n){border-right:1px solid var(--sy-table-border-color) !important;} // line after every forth cell -> after a year
       }
       &.sy-annually mat-tree-node div.calendar-cell {
-        border-right:1px solid var(--sy-color-gray-36) !important; // line after every cell -> after a year
+        border-right:1px solid var(--sy-table-border-color) !important; // line after every cell -> after a year
       }
 
     } // end mat-tree for all rows

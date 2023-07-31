@@ -42,7 +42,8 @@ export class WpItemMetadataInternalDirective implements OnChanges {
           break;
         case InternalItemStatus.Exchange:
           attributes = {
-            classNames: ['fas', 'fa-comment', 'text-warning'], // changed icon (rex 230602)
+            //classNames: ['fas', 'fa-comment', 'text-warning'], // changed icon (rex 230602)
+            classNames: ['fas', 'fa-comment', 'status-icon-comment'], // changed color-class from text-warning to individual class for comment-icon (rex 230726)
             title: this.translate.instant('working-plan.item.metadata-internal.icon.title.status.exchange')
           };
           break;

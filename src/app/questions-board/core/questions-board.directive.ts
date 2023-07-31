@@ -21,20 +21,22 @@ export class QuestionsBoardDirective {
     });
   }
 
+  /* removed the colored icons for the exploitation plan */
+
   private getIconClassByType(): string[] {
     let iconClasses: string[];
     switch (this.questionsBoardType) {
       case QuestionsBoardType.Question1:
-        iconClasses = ['far', 'fa-copyright', 'text-danger'];
+        //iconClasses = ['far', 'fa-copyright', 'text-danger'];
         break;
       case QuestionsBoardType.Question2:
-        iconClasses = ['fas', 'fa-users', 'text-success'];
+        //iconClasses = ['fas', 'fa-users', 'text-success'];
         break;
       case QuestionsBoardType.Question3:
-        iconClasses = ['fas', 'fa-book', 'text-warning'];
+       //iconClasses = ['fas', 'fa-book', 'text-warning'];
         break;
       case QuestionsBoardType.Question4:
-        iconClasses = ['fas', 'fa-cube', 'text-primary'];
+        //iconClasses = ['fas', 'fa-cube', 'text-primary'];
         break;
       default:
         iconClasses = [];

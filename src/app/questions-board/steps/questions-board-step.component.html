@@ -15,7 +15,8 @@
             [collapsible]="true"
             [dismissRoles]="funderRoles$ | async"
           ></ds-alert-role>
-          <div class="p-0 m-0 mb-2 bg-light rounded">
+          <!-- removed the class for light grey background bg-light and insterted the class .background-pinboard for exploitation plan and interim report (rex 230717) -->
+          <div class="p-0 m-0 mb-2 rounded background-pinboard"> 
             <ds-questions-board-step-container [messagePrefix]="messagePrefix"
                                                [questionEntityType]="questionBoardEntityType"
                                                [questionsBoardStep]="questionsBoardStep"
@@ -24,6 +25,7 @@
                                                [fundingCommunity]="fundingCommunity"
                                                [compareMode]="compareMode"></ds-questions-board-step-container>
           </div>
+          <!-- here Accordeons of exploiting plan and interim report --> 
           <ds-view-simple-item-form *ngIf="hasCheckbox && questionsBoardStep"
                                     [compareMode]="compareMode"
                                     [editMode]="getEditMode()"
@@ -35,6 +37,7 @@
                                     [compareItemId]="questionsBoardStep.compareId"
                                     [disabled]="compareMode || isVersionOfAnItem"
                                     (itemUpdate)="updateQuestionsBoardStep($event)"></ds-view-simple-item-form>
+
           <ds-editable-textarea *ngIf="!hasCheckbox && questionsBoardStep"
                                 [compareMode]="compareMode"
                                 [editMode]="getEditMode()"

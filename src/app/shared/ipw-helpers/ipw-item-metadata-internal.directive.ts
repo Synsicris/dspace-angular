@@ -44,7 +44,8 @@ export class IpwItemMetadataInternalDirective implements OnChanges {
           break;
         case InternalItemStatus.Exchange:
           attributes = {
-            classNames: ['fas', 'fa-comment', 'text-warning'], // bubble without exclamation mark Version 5.15.4
+            //classNames: ['fas', 'fa-comment', 'text-warning'], // bubble without exclamation mark Version 5.15.4
+            classNames: ['fas', 'fa-comment', 'status-icon-comment'], // changed color-class from text-warning to individual class fpr comment-icon (rex 230726)
             title: this.translate.instant('impact-pathway.metadata-internal.icon.title.status.exchange')
           };
           break;

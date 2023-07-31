@@ -1,3 +1,5 @@
+<!-- Cards for Exploitation Plan and Interim Report (rex 230726) -->
+
 <div class="task-container d-flex"
      [class.task-focus]="(selectable && selectStatus.value) || (hasFocus$ | async)"
      [class.alert-success]="compareMode && !!data.compareStatus && data.compareStatus=== ComparedVersionItemStatus.New"
@@ -64,7 +66,8 @@
 
       <button *ngIf="compareMode && data.compareStatus === ComparedVersionItemStatus.Changed" class="btn btn-lg btn-link p-0 flex-shrink-1 mr-1"
               title="{{'impact-pathway.compare' | translate}}" (click)="openCompareModal()">
-        <i class="fas fa-not-equal"></i>
+        <!-- <i class="fas fa-not-equal"></i> changed compare-icon (230724 rex)-->
+        <i class="fas fa-code-compare"></i>
       </button>
     </div>
   </div>
