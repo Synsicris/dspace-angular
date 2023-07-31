@@ -6826,6 +6826,14 @@
   // TODO New key - Add a translation
   "item.version.list.comparing-text": "Vergleichs-",
 
+  //  "item-export.modal.header": "Item Export Process Launcher",
+  // TODO New key - Add a translation
+    "item-export.modal.header": "Item Export Process Launcher",
+
+  // "item-export.modal.alert.info": "help",
+  // TODO New key - Add a translation
+  "item-export.modal.alert.info": "help",
+
   // "item-export.modal-launcher.single.btn": "Export",
   // TODO New key - Add a translation
   "item-export.modal-launcher.single.btn": "Exportieren",
@@ -10127,6 +10135,10 @@
   // "project.manage.members-list.modal.withdraw.title": "Withdraw role",
   // TODO New key - Add a translation
   "project.manage.members-list.modal.withdraw.title": "Rolle entziehen",
+
+  //  "project.manage.members-list.modal.alert.info": "help",
+  // TODO New key - Add a translation
+  "project.manage.members-list.modal.alert.info": "help",
 
   // "project.manage.members-list.modal.withdraw.body": "Are you sure?",
   // TODO New key - Add a translation
@@ -14742,6 +14754,10 @@
   // TODO New key - Add a translation
   "submission.workflow.generic.edit-grants.head": "Zugangsrecht zum Arbeitsbereich des Projektes festlegen",
 
+  //  "submission.workflow.generic.edit-grants.alert.info": "help",
+  // TODO New key - Add a translation
+  "submission.workflow.generic.edit-grants.alert.info": "help",
+
   // "submission.workflow.generic.edit-grants.label": "Please select editable permissions",
   // TODO New key - Add a translation
   "submission.workflow.generic.edit-grants.label": "Legen Sie das Zugangsrecht fest",
@@ -15190,6 +15206,18 @@
 
   // "workspace.search.results.head": "Your submissions",
   "workspace.search.results.head": "Ihre Einträge",
+
+  // "workspace.alert.info": "help",
+  // TODO New key - Add a translation
+  "workspace.alert.info": "help",
+
+  // "otherworkspace.alert.info": "help",
+  // TODO New key - Add a translation
+  "otherworkspace.alert.info": "help",
+
+  // "allProjectItems.alert.info": "help",
+  // TODO New key - Add a translation
+  "allProjectItems.alert.info": "help",
 
   // "workflowAdmin.search.results.head": "Administer Workflow",
   "workflowAdmin.search.results.head": "Workflow verwalten",
@@ -18625,6 +18653,10 @@
   // "item.version.visibility.modal.header": "Visibility version",
   "item.version.visibility.modal.header": "Freigabe für Fördermittelgeber",
 
+  // "item.version.visibility.modal.alert.info": "help",
+  // TODO: New key - Add a translation
+  "item.version.visibility.modal.alert.info": "help",
+
   // "item.version.visibility.modal.text": "Do you want to make version {{version}} visible?",
   "item.version.visibility.modal.text": "Möchten Sie {{version}} freigeben?",
 
@@ -18843,6 +18875,10 @@
 
   // "programme.manage.members-list.modal.withdraw.title": "Withdraw role",
   "programme.manage.members-list.modal.withdraw.title": "Rolle entziehen",
+
+  //  "programme.manage.members-list.modal.alert.info": "help",
+  // TODO: New key - Add a translation
+   "programme.manage.members-list.modal.alert.info": "help",
 
   // "programme.manage.members-list.modal.withdraw.body": "Are you sure?",
   "programme.manage.members-list.modal.withdraw.body": "Sind Sie sicher?",
