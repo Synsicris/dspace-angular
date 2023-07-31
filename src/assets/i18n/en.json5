@@ -3948,8 +3948,6 @@
 
   "item-export.form.selection.only-selected": "Export only selected",
 
-  "item-export.modal.title": "Item Export Process Launcher",
-
   "item-export.process.title": "Bulk export item",
 
   "item-export-external-metadata.btn.label": "Import metadata",
