@@ -213,7 +213,8 @@
   "admin.registries.bitstream-formats.table.mimetype": "MIME Type",
 
   "admin.registries.bitstream-formats.table.name": "Name",
-  "admin.registries.bitstream-formats.table.id" : "ID",
+
+  "admin.registries.bitstream-formats.table.id": "ID",
 
   "admin.registries.bitstream-formats.table.return": "Back",
 
@@ -264,7 +265,8 @@
   "admin.registries.schema.fields.table.delete": "Delete selected",
 
   "admin.registries.schema.fields.table.field": "Field",
-  "admin.registries.schema.fields.table.id" : "ID",
+
+  "admin.registries.schema.fields.table.id": "ID",
 
   "admin.registries.schema.fields.table.scopenote": "Scope Note",
 
@@ -676,8 +678,6 @@
 
   "admin.workflow.item.supervision": "Supervision",
 
-
-
   "admin.metadata-import.breadcrumbs": "Import Metadata",
 
   "admin.batch-import.breadcrumbs": "Import Batch",
@@ -728,11 +728,9 @@
 
   "advanced-workflow-action.rating.description-requiredDescription": "Please select a rating below and also add a review",
 
-
   "advanced-workflow-action.select-reviewer.description-single": "Please select a single reviewer below before submitting",
 
   "advanced-workflow-action.select-reviewer.description-multiple": "Please select one or more reviewers below before submitting",
-
 
   "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.head": "EPeople",
 
@@ -1126,10 +1124,7 @@
 
   "browse.title.page": "Browsing {{ collection }} by {{ field }} {{ value }}",
 
-
   "search.browse.item-back": "Back to Results",
-
-
 
   "bulk-import.abort-on-error": "Abort on first error",
 
@@ -1162,7 +1157,6 @@
   "claimed-declined-search-result-list-element.title": "Rejected, sent back to submitter",
 
   "claimed-declined-task-search-result-list-element.title": "Declined, sent back to Review Manager's workflow",
-
 
   "collection.create.head": "Create a Collection",
 
@@ -1592,8 +1586,6 @@
 
   "comcol-role.edit.scorereviewers.description": "Reviewers are able to give a score to incoming submissions, this will define whether the submission will be rejected or not.",
 
-
-
   "community.form.abstract": "Short Description",
 
   "community.form.description": "Introductory text (HTML)",
@@ -1830,7 +1822,6 @@
 
   "cookies.consent.app.description.google-recaptcha": "We use google reCAPTCHA service during registration and password recovery",
 
-
   "cookies.consent.purpose.functional": "Functional",
 
   "cookies.consent.purpose.statistical": "Statistical",
@@ -1898,8 +1889,6 @@
   "curation-task.task.vscan.label": "Virus Scan",
 
   "curation-task.task.register-doi.label": "Register DOI",
-
-
 
   "curation.form.task-select.label": "Task: ",
 
@@ -2021,7 +2010,7 @@
 
   "supervision-group-selector.notification.create.failure.title": "Error",
 
-  "supervision-group-selector.notification.create.already-existing" : "A supervision order already exists on this item for selected group",
+  "supervision-group-selector.notification.create.already-existing": "A supervision order already exists on this item for selected group",
 
   "confirmation-modal.export-metadata.header": "Export metadata for {{ dsoName }}",
 
@@ -3487,11 +3476,9 @@
 
   "workflow-item.search.result.notification.deleted.failure": "Failed to delete supervision order \"{{name}}\"",
 
-  "workflow-item.search.result.list.element.supervised-by": "Supervised by:",
+  "workflow-item.search.result.list.element.supervised-by": "Supervised by: ",
 
   "workflow-item.search.result.list.element.supervised.remove-tooltip": "Remove supervision group",
-
-
 
   "item.page.abstract": "Abstract",
 
@@ -4003,8 +3990,6 @@
 
   "itemtemplate.edit.metadata.save-button": "Save",
 
-
-
   "journal.listelement.badge": "Journal",
 
   "journal.page.description": "Description",
@@ -4217,7 +4202,7 @@
 
   "menu.section.explore_projects": "Projects",
 
-  "menu.section.explore_fundings_and_projects": "Fundings & Projects",
+  "menu.section.explore_fundings_and_projects": "Projects",
 
   "menu.section.communities_and_collections": "Communities & Collections",
 
@@ -4617,13 +4602,11 @@
 
   "nav.stop-impersonating": "Stop impersonating EPerson",
 
-  "nav.subscriptions" : "Subscriptions",
+  "nav.subscriptions": "Subscriptions",
 
   "nav.toggle": "Toggle navigation",
 
   "nav.user.description": "User profile bar",
-
-  "nav.subscriptions": "Subscriptions",
 
   "none.listelement.badge": "Item",
 
@@ -5560,8 +5543,8 @@
   "register-page.registration.error.recaptcha": "Error when trying to authenticate with recaptcha",
 
   "register-page.registration.google-recaptcha.must-accept-cookies": "In order to register you must accept the <b>Registration and Password recovery</b> (Google reCaptcha) cookies.",
-  "register-page.registration.error.maildomain": "This email address is not on the list of domains who can register. Allowed domains are {{ domains }}",
 
+  "register-page.registration.error.maildomain": "This email address is not on the list of domains who can register. Allowed domains are {{ domains }}",
 
   "register-page.registration.google-recaptcha.open-cookie-settings": "Open cookie settings",
 
@@ -5570,6 +5553,7 @@
   "register-page.registration.google-recaptcha.notification.message.error": "An error occurred during reCaptcha verification",
 
   "register-page.registration.google-recaptcha.notification.message.expired": "Verification expired. Please verify again.",
+
   "register-page.registration.info.maildomain": "Accounts can be registered for mail addresses of the domains",
 
   "relationships.add.error.relationship-type.content": "No suitable match could be found for relationship type {{ type }} between the two items",
@@ -7382,7 +7366,7 @@
 
   "submission.sections.general.sections_not_valid": "There are incomplete sections.",
 
-  "submission.sections.identifiers.info": "The following identifiers will be created for your item:",
+  "submission.sections.identifiers.info": "The following identifiers will be created for your item: ",
 
   "submission.sections.identifiers.no_handle": "No handles have been minted for this item.",
 
@@ -7860,7 +7844,7 @@
 
   "submission.sections.upload.header.policy.default.withlist": "Please note that uploaded files in the {{collectionName}} collection will be accessible, in addition to what is explicitly decided for the single file, with the following group(s): ",
 
-  "submission.sections.upload.info": "Here you will find all the files currently in the item. You can update the file metadata and access conditions or <b>upload additional files by dragging & dropping them anywhere on the page.</b>",
+  "submission.sections.upload.info": "Here you will find all the files currently in the item. You can update the file metadata and access conditions or <b>upload additional files just dragging & dropping them everywhere in the page.</b>",
 
   "submission.sections.upload.no-entry": "No",
 
@@ -7994,16 +7978,13 @@
 
   "submission.workflow.generic.view-help": "Select this option to view the item's metadata.",
 
-
   "submission.workflow.generic.submit_select_reviewer": "Select Reviewer",
 
   "submission.workflow.generic.submit_select_reviewer-help": "",
 
-
   "submission.workflow.generic.submit_score": "Rate",
 
   "submission.workflow.generic.submit_score-help": "",
-
 
   "submission.workflow.tasks.claimed.approve": "Approve",
 
@@ -8052,7 +8033,6 @@
   "submission.workspace.generic.view": "View",
 
   "submission.workspace.generic.view-help": "Select this option to view the item's metadata.",
-
 
   "subscriptions.title": "Subscriptions",
 
@@ -8248,8 +8228,6 @@
 
   "supervision.search.results.head": "Workflow and Workspace tasks",
 
-
-
   "workflow-item.edit.breadcrumbs": "Edit workflowitem",
 
   "workflow-item.edit.title": "Edit workflowitem",
@@ -8292,9 +8270,7 @@
 
   "workspace-item.view.title": "Workspace View",
 
-
   "workflow-item.advanced.title": "Advanced workflow",
-
 
   "workflow-item.selectrevieweraction.notification.success.title": "Selected reviewer",
 
@@ -8311,7 +8287,6 @@
   "workflow-item.selectrevieweraction.button.cancel": "Cancel",
 
   "workflow-item.selectrevieweraction.button.confirm": "Confirm",
-
 
   "workflow-item.scorereviewaction.notification.success.title": "Rating review",
 
@@ -8645,7 +8620,6 @@
 
   "listable-notification-object.default-message": "This object couldn't be retrieved",
 
-
   "system-wide-alert-banner.retrieval.error": "Something went wrong retrieving the system-wide alert banner",
 
   "system-wide-alert-banner.countdown.prefix": "In",
@@ -8654,7 +8628,7 @@
 
   "system-wide-alert-banner.countdown.hours": "{{hours}} hour(s) and",
 
-  "system-wide-alert-banner.countdown.minutes": "{{minutes}} minute(s):",
+  "system-wide-alert-banner.countdown.minutes": "{{minutes}} minute(s): ",
 
   "menu.section.system-wide-alert": "System-wide Alert",
 
@@ -11868,6 +11842,10 @@
 
   "impact-pathway.legend-icons.title": "Legend of symbols",
 
-  "impact-pathway.compare": "Compare"
+  "impact-pathway.compare": "Compare",
+
+  "register-page.registration.email.error.pattern": "Please fill in a valid email address",
+
+  "forgot-email.form.email.error.pattern": "Please fill in a valid email address"
 
 }
