@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 import { VersionSelectedEvent } from '../shared/item-version-list/item-version-list.component';
 import { AlertRole, getProgrammeRoles } from '../shared/alert/alert-role/alert-role';
 import { ProjectAuthorizationService } from '../core/project/project-authorization.service';
+import { QuestionsBoardService } from './core/questions-board.service';
 
 @Component({
   selector: 'ds-questions-board',
@@ -24,6 +25,11 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
    * If the current user is a funder Organizational/Project manager
    */
   @Input() hasAnyFunderRole: boolean;
+
+  /**
+   * If the current user is a funder project manager
+   */
+  @Input() isAdmin: boolean;
 
   /**
    * If the current user is a funder project manager
@@ -84,6 +90,7 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
   public funderRoles: AlertRole[];
 
   constructor(
+    protected questionsBoardService: QuestionsBoardService,
     protected questionsBoardStateService: QuestionsBoardStateService,
     protected aroute: ActivatedRoute,
     private projectAuthorizationService: ProjectAuthorizationService
@@ -91,6 +98,7 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.questionsBoardService.isAdmin = this.isAdmin;
     this.questionsBoardObjectId = this.questionsBoardObject?.id;
     this.questionsBoardStep$ = this.questionsBoardStateService.getQuestionsBoardStep(this.questionsBoardObjectId);
     this.subs.push(

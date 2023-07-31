@@ -1,5 +1,4 @@
-import { AuthorizationDataService } from './../../../core/data/feature-authorization/authorization-data.service';
-import { ComponentFixture, TestBed, waitForAsync, async } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -13,8 +12,7 @@ import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model'
 import { TranslateLoaderMock } from '../../mocks/translate-loader.mock';
 import { Item } from '../../../core/shared/item.model';
 import { AuditItemMenuComponent } from './audit-item-menu.component';
-import { AuthService } from '../../../core/auth/auth.service';
-import { DebugElement } from '@angular/core';
+import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 
 describe('AuditItemMenuComponent', () => {
   let component: AuditItemMenuComponent;
@@ -22,18 +20,12 @@ describe('AuditItemMenuComponent', () => {
   let fixture: ComponentFixture<AuditItemMenuComponent>;
   let scheduler: TestScheduler;
   let dso: DSpaceObject;
-  let de: DebugElement;
 
-  const authorizationDataService: AuthorizationDataService = jasmine.createSpyObj('AuthorizationDataService', {
-    isAuthorized: observableOf(true)
+  const authorizationDataServiceStub = jasmine.createSpyObj('authorizationDataService', {
+    isAuthorized: jasmine.createSpy('isAuthorized')
   });
 
-  const authServiceStub = jasmine.createSpyObj('authorizationService', {
-    getAuthenticatedUserFromStore: jasmine.createSpy('getAuthenticatedUserFromStore'),
-    isAuthenticated: jasmine.createSpy('isAuthenticated')
-  });
-
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     dso = Object.assign(new Item(), {
       id: 'test-item',
       _links: {
@@ -42,7 +34,7 @@ describe('AuditItemMenuComponent', () => {
     });
 
     TestBed.configureTestingModule({
-      declarations: [AuditItemMenuComponent],
+      declarations: [ AuditItemMenuComponent ],
       imports: [
         RouterTestingModule.withRoutes([]),
         TranslateModule.forRoot({
@@ -55,8 +47,7 @@ describe('AuditItemMenuComponent', () => {
       providers: [
         { provide: 'contextMenuObjectProvider', useValue: dso },
         { provide: 'contextMenuObjectTypeProvider', useValue: DSpaceObjectType.ITEM },
-        { provide: AuthService, useValue: authServiceStub },
-        { provide: AuthorizationDataService, useValue: authorizationDataService }
+        { provide: AuthorizationDataService, useValue: authorizationDataServiceStub },
       ]
     }).compileComponents();
   }));
@@ -64,10 +55,8 @@ describe('AuditItemMenuComponent', () => {
   beforeEach(() => {
     scheduler = getTestScheduler();
     fixture = TestBed.createComponent(AuditItemMenuComponent);
-    de = fixture.debugElement;
     component = fixture.componentInstance;
     componentAsAny = fixture.componentInstance;
-    componentAsAny.authorizationDataService = authorizationDataService;
     component.contextMenuObject = dso;
   });
 
@@ -75,25 +64,25 @@ describe('AuditItemMenuComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('when the user is authenticated', () => {
+  describe('when the user is authorized', () => {
     beforeEach(() => {
-      (authServiceStub.isAuthenticated as jasmine.Spy).and.returnValue(observableOf(true));
+      (authorizationDataServiceStub.isAuthorized as jasmine.Spy).and.returnValue(observableOf(true));
       fixture.detectChanges();
     });
     it('should render a button', () => {
-      const link = de.query(By.css('button'));
+      const link = fixture.debugElement.query(By.css('button'));
       expect(link).not.toBeNull();
     });
 
   });
 
-  describe('when the user is not authenticated', () => {
+  describe('when the user is not authorized', () => {
     beforeEach(() => {
-      (authServiceStub.isAuthenticated as jasmine.Spy).and.returnValue(observableOf(false));
+      (authorizationDataServiceStub.isAuthorized as jasmine.Spy).and.returnValue(observableOf(false));
       fixture.detectChanges();
     });
-    it('should render a button', () => {
-      const link = de.query(By.css('button'));
+    it('should not render a button', () => {
+      const link = fixture.debugElement.query(By.css('button'));
       expect(link).toBeNull();
     });
 

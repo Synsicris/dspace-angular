@@ -7,7 +7,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ManageGroupComponent } from './manage-group.component';
 import { of } from 'rxjs';
 import { GroupDataService } from '../../core/eperson/group-data.service';
-import { createNoContentRemoteDataObject$, createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
+import { createNoContentRemoteDataObject$ } from '../../shared/remote-data.utils';
 import { ProjectGroupService } from '../../core/project/project-group.service';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { NotificationsService } from '../../shared/notifications/notifications.service';

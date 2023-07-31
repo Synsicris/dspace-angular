@@ -1,4 +1,5 @@
-import { difference, findIndex } from 'lodash';
+import difference from 'lodash/difference';
+import findIndex from 'lodash/findIndex';
 
 import { ImpactPathway } from './models/impact-pathway.model';
 import {

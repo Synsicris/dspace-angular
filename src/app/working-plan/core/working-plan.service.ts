@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 
-import { combineLatest, from as observableFrom, Observable, of as observableOf } from 'rxjs';
+import { combineLatest, forkJoin, from as observableFrom, interval, Observable, of as observableOf, race } from 'rxjs';
 import {
   catchError,
   concatMap,
@@ -15,8 +15,7 @@ import {
   take,
   tap
 } from 'rxjs/operators';
-import { extendMoment } from 'moment-range';
-import * as Moment from 'moment';
+import { format } from 'date-fns';
 
 import { SubmissionFormModel } from '../../core/config/models/config-submission-form.model';
 import { SubmissionFormsConfigDataService } from '../../core/config/submission-forms-config-data.service';
@@ -44,7 +43,7 @@ import { WorkpackageEntries } from './working-plan.reducer';
 import { MetadataMap, MetadataValue, MetadatumViewModel } from '../../core/shared/metadata.models';
 import { JsonPatchOperationsBuilder } from '../../core/json-patch/builder/json-patch-operations-builder';
 import {
-  getAllSucceededRemoteData,
+  getAllSucceededNotStaledRemoteData,
   getFinishedRemoteData,
   getFirstCompletedRemoteData,
   getFirstSucceededRemoteDataPayload,
@@ -71,9 +70,6 @@ import { SearchConfigurationService } from '../../core/shared/search/search-conf
 import { SearchManager } from '../../core/browse/search-manager';
 import { APP_CONFIG, AppConfig } from '../../../config/app-config.interface';
 import { FindListOptions } from '../../core/data/find-list-options.model';
-import { forkJoin } from 'rxjs/internal/observable/forkJoin';
-
-export const moment = extendMoment(Moment);
 
 export interface WpMetadata {
   nestedNodeId: string;
@@ -94,6 +90,7 @@ export interface WpStepMetadata {
 
 @Injectable()
 export class WorkingPlanService {
+  private _isAdmin: boolean;
 
   constructor(
     private collectionService: CollectionDataService,
@@ -116,6 +113,13 @@ export class WorkingPlanService {
     @Inject(APP_CONFIG) public appConfig: AppConfig
   ) {
     this.searchService.setServiceOptions(MyDSpaceResponseParsingService, MyDSpaceRequest);
+  }
+
+  get isAdmin(): boolean {
+    return this._isAdmin;
+  }
+  set isAdmin(value: boolean) {
+    this._isAdmin = value;
   }
 
   public canCreateWorkingPlan(projectCommunityId: string): Observable<boolean> {
@@ -236,7 +240,7 @@ export class WorkingPlanService {
   }
 
   getWorkingPlanEditMode(): string {
-    return environment.workingPlan.workingPlanEditMode;
+    return this.isAdmin ? environment.workingPlan.workingPlanAdminEditMode :  environment.workingPlan.workingPlanEditMode;
   }
 
   getWorkingPlanEditFormName(): string {
@@ -311,8 +315,16 @@ export class WorkingPlanService {
       scope: projectId
     });
 
-    return this.searchManager.search(searchOptions, null, false).pipe(
-      getAllSucceededRemoteData(),
+    // This is a workaround to solve cache issue, for which sometimes the response is not retrieved and the interface get stucked
+    const searchWithoutCache$ = this.searchManager.search(searchOptions, null, false).pipe(
+      getAllSucceededNotStaledRemoteData(),
+    );
+    const searchWithCache$ = interval(200).pipe(
+      switchMap(() => this.searchManager.search(searchOptions, null, true)),
+      getAllSucceededNotStaledRemoteData(),
+    );
+
+    return race(searchWithoutCache$, searchWithCache$).pipe(
       map((rd: RemoteData<PaginatedList<SearchResult<any>>>) => {
         const dsoPage: any[] = rd.payload.page
           .filter((result) => hasValue(result))
@@ -564,9 +576,9 @@ export class WorkingPlanService {
     const dates: any = {};
     const startDate = item.firstMetadataValue(environment.workingPlan.workingPlanStepDateStartMetadata);
     if (isNotEmpty(startDate)) {
-      start = moment(startDate).format('YYYY-MM-DD');
-      startMonth = moment(startDate).format('YYYY-MM');
-      startYear = moment(startDate).format('YYYY');
+      start = format(new Date(startDate),'yyyy-MM-dd');
+      startMonth = format(new Date(startDate),'yyyy-MM');
+      startYear = format(new Date(startDate),'yyyy');
       dates.start = {
         full: start,
         month: startMonth,
@@ -576,9 +588,9 @@ export class WorkingPlanService {
 
     const endDate = item.firstMetadataValue(environment.workingPlan.workingPlanStepDateEndMetadata);
     if (isNotEmpty(endDate)) {
-      end = moment(endDate).format('YYYY-MM-DD');
-      endMonth = moment(endDate).format('YYYY-MM');
-      endyear = moment(endDate).format('YYYY');
+      end = format(new Date(endDate),'yyyy-MM-dd');
+      endMonth = format(new Date(endDate),'yyyy-MM');
+      endyear = format(new Date(endDate),'yyyy');
       dates.end = {
         full: end,
         month: endMonth,
@@ -635,36 +647,26 @@ export class WorkingPlanService {
     return result;
   }
 
-  linkWorkingPlanObject(workingplanId: string, itemId: string, place?: string): Observable<Item> {
-    return this.itemAuthorityRelationService.addLinkedItemToParent(
-      this.getWorkingPlanEditSectionName(),
-      this.getWorkingPlanEditMode(),
-      workingplanId,
-      itemId,
-      environment.workingPlan.workingPlanStepRelationMetadata
-    ).pipe(
-      switchMap(() => {
-        return this.itemService.findById(itemId).pipe(
-          getFirstSucceededRemoteDataPayload(),
-          tap((item: Item) => {
-            const value = {
-              value: 'linked'
-            };
-            this.projectItemService.createReplaceMetadataPatchOp(
-              this.getWorkingPlanEditSectionName(),
-              environment.workingPlan.workingPlanLinkMetadata,
-              0,
-              value
-            );
-            if (isNotEmpty(place)) {
-              this.projectItemService.createAddMetadataPatchOp(this.getWorkingPlanEditSectionName(), environment.workingPlan.workingPlanPlaceMetadata, place);
-            }
-          }),
-          delay(100),
-          mergeMap((taskItem: Item) => this.itemService.executeEditItemPatch(itemId, this.getWorkingPlanEditMode(), this.getWorkingPlanEditSectionName())),
-          getRemoteDataPayload()
+  linkWorkingPlanTask(itemId: string, place?: string): Observable<Item> {
+    return this.itemService.findById(itemId).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      tap((item: Item) => {
+        const value = {
+          value: 'linked'
+        };
+        this.projectItemService.createReplaceMetadataPatchOp(
+          this.getWorkingPlanEditSectionName(),
+          environment.workingPlan.workingPlanLinkMetadata,
+          0,
+          value
         );
-      })
+        if (isNotEmpty(place)) {
+          this.projectItemService.createAddMetadataPatchOp(this.getWorkingPlanEditSectionName(), environment.workingPlan.workingPlanPlaceMetadata, place);
+        }
+      }),
+      delay(100),
+      mergeMap((taskItem: Item) => this.itemService.executeEditItemPatch(itemId, this.getWorkingPlanEditMode(), this.getWorkingPlanEditSectionName())),
+      getRemoteDataPayload()
     );
   }
 

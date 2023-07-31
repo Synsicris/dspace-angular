@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[dsShowTitleForTruncatedText]'

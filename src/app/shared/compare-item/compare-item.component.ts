@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { differenceWith, unionWith } from 'lodash';
+import differenceWith from 'lodash/differenceWith';
+import unionWith from 'lodash/unionWith';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ItemDataService } from '../../core/data/item-data.service';

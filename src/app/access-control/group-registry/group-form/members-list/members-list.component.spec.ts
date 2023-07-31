@@ -155,6 +155,7 @@ describe('MembersListComponent', () => {
     fixture.destroy();
     flush();
     component = null;
+    fixture.debugElement.nativeElement.remove();
   }));
 
   it('should create MembersListComponent', inject([MembersListComponent], (comp: MembersListComponent) => {

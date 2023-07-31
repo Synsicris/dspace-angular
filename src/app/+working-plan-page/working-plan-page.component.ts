@@ -28,6 +28,11 @@ export class WorkingPlanPageComponent implements OnInit {
   hasAnyFunderRole: boolean;
 
   /**
+   * If the current user is an administrator
+   */
+  isAdmin: boolean;
+
+  /**
    * If the current user is a funder project manager
    */
   isFunderProject: boolean;
@@ -50,7 +55,7 @@ export class WorkingPlanPageComponent implements OnInit {
   /**
    * The working-plan item to displayed on this page
    */
-  workingPlanRD: RemoteData<Item>;
+  workingPlan: Item;
 
   constructor(
     private authService: AuthService,
@@ -58,7 +63,8 @@ export class WorkingPlanPageComponent implements OnInit {
     private router: Router,
     private projectVersionService: ProjectVersionService,
     private workingPlanStateService: WorkingPlanStateService
-  ) { }
+  ) {
+  }
 
   /**
    * Initialize instance variables
@@ -68,6 +74,10 @@ export class WorkingPlanPageComponent implements OnInit {
 
     const hasAnyFunderRole$ = this.route.data.pipe(
       map((data) => (data.isFunderOrganizationalManger || data.isFunderProject || data.isFunderReader) as boolean)
+    );
+
+    const isAdmin$ = this.route.data.pipe(
+      map((data) => data.isAdmin as boolean)
     );
 
     const isFunderProject$ = this.route.data.pipe(
@@ -108,13 +118,14 @@ export class WorkingPlanPageComponent implements OnInit {
       })
     );
 
-    combineLatest([projectItemId$, projectCommunityId$, workingPlanRD$, hasAnyFunderRole$, isFunderProject$]).pipe(take(1))
-      .subscribe(([projectItemId, projectCommunityId, workingPlanRD, hasAnyFunderRole, isFunderProject]) => {
+    combineLatest([projectItemId$, projectCommunityId$, workingPlanRD$, hasAnyFunderRole$, isFunderProject$, isAdmin$]).pipe(take(1))
+      .subscribe(([projectItemId, projectCommunityId, workingPlanRD, hasAnyFunderRole, isFunderProject, isAdmin]) => {
         this.projectItemId = projectItemId;
         this.projectCommunityId = projectCommunityId;
-        this.workingPlanRD = workingPlanRD;
+        this.workingPlan = workingPlanRD.hasSucceeded ? workingPlanRD.payload : null;
         this.hasAnyFunderRole = hasAnyFunderRole;
         this.isFunderProject = isFunderProject;
+        this.isAdmin = isAdmin;
         this.initialized.next(true);
       });
   }

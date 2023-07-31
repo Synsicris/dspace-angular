@@ -1,7 +1,8 @@
-<ds-impact-pathway-board *ngIf="(impactPathWayItem$ | async)"
-               [hasAnyFunderRole]="(hasAnyFunderRole$ | async)"
-               [isFunderProject]="(isFunderProject$ | async)"
-               [projectCommunityId]="(projectCommunityId$ | async)"
-               [projectItemId]="(projectItemId$ | async)"
-               [impactPathwayId]="(impactPathwayId$ | async)"
-               [impactPathWayItem]="(impactPathWayItem$ | async)"></ds-impact-pathway-board>
+<ds-impact-pathway-board *ngIf="(initialized | async) && impactPathWayItem"
+                         [hasAnyFunderRole]="hasAnyFunderRole"
+                         [isAdmin]="isAdmin"
+                         [isFunderProject]="isFunderProject"
+                         [projectCommunityId]="projectCommunityId"
+                         [projectItemId]="projectItemId"
+                         [impactPathwayId]="impactPathwayId"
+                         [impactPathWayItem]="impactPathWayItem"></ds-impact-pathway-board>

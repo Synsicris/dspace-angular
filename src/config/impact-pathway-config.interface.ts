@@ -6,7 +6,9 @@ export interface ImpactPathwayConfig extends Config {
   impactPathwayTasksFormSection: string;
   impactPathwaysLinksEditFormSection: string;
   impactPathwaysEditFormSection: string;
+  impactPathwaysAdminEditMode: string;
   impactPathwaysEditMode: string;
+  impactPathwaysLinkAdminEditMode: string;
   impactPathwaysLinkEditMode: string;
   impactPathwayEntity: string;
   impactPathwayStepEntity: string;

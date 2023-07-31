@@ -15,10 +15,10 @@ import {
 } from '../../../../../../core/shared/search/search-filter.service';
 import { SearchService } from '../../../../../../core/shared/search/search.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import * as moment from 'moment';
 import { SEARCH_CONFIG_SERVICE } from '../../../../../../my-dspace-page/my-dspace-page.component';
 import { SearchConfigurationService } from '../../../../../../core/shared/search/search-configuration.service';
 import { hasValue, isNotEmpty } from '../../../../../empty.util';
+import { yearFromString } from 'src/app/shared/date.util';
 
 /**
  * The suffix for a range filters' minimum in the frontend URL
@@ -51,7 +51,7 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
   /**
    * The date formats that are possible to appear in a date filter
    */
-  protected readonly dateFormats = ['YYYY', 'YYYY-MM', 'YYYY-MM-DD'];
+  protected readonly dateFormats = ['yyyy', 'yyyy-MM', 'yyyy-MM-DD'];
 
   /**
    * Fallback minimum for the range
@@ -73,11 +73,6 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
    */
   sub: Subscription;
 
-  /**
-   * Whether the sider is being controlled by the keyboard.
-   * Supresses any changes until the key is released.
-   */
-  keyboardControl: boolean;
 
   constructor(
     protected searchService: SearchService,
@@ -110,7 +105,7 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
    * @param minmax
    * @protected
    */
-  protected initRange(minmax: [string, string]) {
+  protected initRange(minmax: [string | null, string | null]) {
     this.range = minmax;
   }
 
@@ -119,7 +114,7 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
    * @protected
    */
   protected initMax() {
-    this.max = moment(this.filterConfig.maxValue, this.dateFormats).year() || this.max;
+    this.max = yearFromString(this.filterConfig.maxValue) || this.max;
   }
 
   /**
@@ -127,7 +122,7 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
    * @protected
    */
   protected initMin() {
-    this.min = moment(this.filterConfig.minValue, this.dateFormats).year() || this.min;
+    this.min = yearFromString(this.filterConfig.minValue) || this.min;
   }
 
   /**
@@ -138,9 +133,9 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
     return this.route.queryParamMap
       .pipe(
         map(paramMaps => [
-          paramMaps.get(this.filterConfig.paramName + RANGE_FILTER_MIN_SUFFIX) || `${this.min}`,
-          paramMaps.get(this.filterConfig.paramName + RANGE_FILTER_MAX_SUFFIX) || `${this.max}`
-        ])
+          paramMaps.get(this.filterConfig.paramName + RANGE_FILTER_MIN_SUFFIX) ?? `${this.min}`,
+          paramMaps.get(this.filterConfig.paramName + RANGE_FILTER_MAX_SUFFIX) ?? `${this.max}`
+        ]),
       );
   }
 
@@ -148,21 +143,9 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
    * Submits new custom range values to the range filter from the widget
    */
   onSubmit() {
-    if (this.keyboardControl) {
-      return;  // don't submit if a key is being held down
-    }
-
     const newMin = this.range[0] !== this.min ? [this.range[0]] : null;
     const newMax = this.range[1] !== this.max ? [this.range[1]] : null;
     this.search(newMin, newMax);
-  }
-
-  startKeyboardControl(): void {
-    this.keyboardControl = true;
-  }
-
-  stopKeyboardControl(): void {
-    this.keyboardControl = false;
   }
 
   /**

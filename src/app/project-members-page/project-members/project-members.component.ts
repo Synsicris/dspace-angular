@@ -18,7 +18,7 @@ import { getFirstCompletedRemoteData } from '../../core/shared/operators';
 import { EPersonDataService } from '../../core/eperson/eperson-data.service';
 import { EPerson } from '../../core/eperson/models/eperson.model';
 import { ProjectAuthorizationService } from '../../core/project/project-authorization.service';
-import { isEqual } from 'lodash';
+import isEqual from 'lodash/isEqual';
 
 @Component({
   selector: 'ds-project-members',

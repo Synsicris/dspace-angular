@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { map, mergeMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest } from 'rxjs';
+import { map, mergeMap, take, tap } from 'rxjs/operators';
 
 import { RemoteData } from '../core/data/remote-data';
 import { Item } from '../core/shared/item.model';
@@ -24,39 +24,46 @@ import { environment } from '../../environments/environment';
 })
 export class InterimReportPageComponent implements OnInit {
 
+  initialized: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   /**
    * If the current user is a funder Organizational/Project manager
    */
-  hasAnyFunderRole$: Observable<boolean>;
+  hasAnyFunderRole: boolean;
+
+  /**
+   * If the current user is an administrator
+   */
+  isAdmin: boolean;
 
   /**
    * If the current user is a funder project manager
    */
-  isFunderProject$: Observable<boolean>;
+  isFunderProject: boolean;
 
   /**
    * If the current user is a project reader
    */
-  isProjectReader$: Observable<boolean>;
+  isProjectReader: boolean;
 
   /**
-   * The project displayed on this page
+   * The interimReport displayed on this page
    */
-  interimReportRD$: Observable<RemoteData<Item>>;
+  interimReport: Item;
 
   /**
    * The parent project community uuid which the subproject belong to
    */
-  projectCommunityId$: Observable<string>;
+  projectCommunityId: string;
 
   /**
    * The funding community which the exploitation Plan belong to
    */
-  fundingCommunity$: Observable<Community>;
+  fundingCommunity: Community;
 
   constructor(
     private authService: AuthService,
-    private questionsBoardStateService: QuestionsBoardStateService,
+    private exploitationPlanStateService: QuestionsBoardStateService,
     private projectService: ProjectDataService,
     private route: ActivatedRoute,
     private router: Router,
@@ -69,35 +76,39 @@ export class InterimReportPageComponent implements OnInit {
    */
   ngOnInit(): void {
 
-    this.hasAnyFunderRole$ = this.route.data.pipe(
+    const hasAnyFunderRole$ = this.route.data.pipe(
       map((data) => (data.isFunderOrganizationalManger || data.isFunderProject || data.isFunderReader) as boolean)
     );
 
-    this.isFunderProject$ = this.route.data.pipe(
+    const isAdmin$ = this.route.data.pipe(
+      map((data) => data.isAdmin as boolean)
+    );
+
+    const isFunderProject$ = this.route.data.pipe(
       map((data) => (data.isFunderProject) as boolean)
     );
 
-    this.isProjectReader$ = this.route.data.pipe(
+    const isProjectReader$ = this.route.data.pipe(
       map((data) => (data.isProjectReader) as boolean)
     );
 
-    this.fundingCommunity$ = this.route.data.pipe(
+    const fundingCommunity$ = this.route.data.pipe(
       map((data) => data.fundingCommunity as RemoteData<Community>),
       redirectOn4xx(this.router, this.authService),
       getFirstSucceededRemoteDataPayload()
     );
 
-    this.projectCommunityId$ = this.route.data.pipe(
+    const projectCommunityId$ = this.route.data.pipe(
       map((data) => data.projectCommunity as RemoteData<Community>),
       redirectOn4xx(this.router, this.authService),
       getFirstSucceededRemoteDataPayload(),
       map((project: Community) => project.id)
     );
 
-    this.interimReportRD$ = this.route.data.pipe(
+    const interimReportRD$ = this.route.data.pipe(
       map((data) => data.questionsBoard as RemoteData<Item>),
       redirectOn4xx(this.router, this.authService),
-      mergeMap((itemRD: RemoteData<Item>) => this.questionsBoardStateService.isQuestionsBoardLoadedById(itemRD.payload.id).pipe(
+      mergeMap((itemRD: RemoteData<Item>) => this.exploitationPlanStateService.isQuestionsBoardLoadedById(itemRD.payload.id).pipe(
         map((loaded) => [itemRD, loaded])
       )),
       tap(([itemRD, loaded]: [RemoteData<Item>, boolean]) => {
@@ -107,5 +118,18 @@ export class InterimReportPageComponent implements OnInit {
       }),
       map(([itemRD, loaded]: [RemoteData<Item>, boolean]) => itemRD)
     );
+
+    combineLatest([fundingCommunity$, projectCommunityId$, interimReportRD$, hasAnyFunderRole$, isFunderProject$, isProjectReader$, isAdmin$])
+      .pipe(take(1)
+      ).subscribe(([projectItemId, projectCommunityId, interimReportRD, hasAnyFunderRole, isFunderProject, isProjectReader, isAdmin]) => {
+      this.fundingCommunity = projectItemId;
+      this.projectCommunityId = projectCommunityId;
+      this.interimReport = interimReportRD.hasSucceeded ? interimReportRD.payload : null;
+      this.hasAnyFunderRole = hasAnyFunderRole;
+      this.isAdmin = isAdmin;
+      this.isFunderProject = isFunderProject;
+      this.isProjectReader = isProjectReader;
+      this.initialized.next(true);
+    });
   }
 }

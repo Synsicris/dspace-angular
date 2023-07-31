@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditSimpleItemModalComponent } from './edit-simple-item-modal.component';
-import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { getMockFormBuilderService } from '../mocks/form-builder-service.mock';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormBuilderService } from '../form/builder/form-builder.service';

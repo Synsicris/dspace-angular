@@ -32,7 +32,7 @@ import { hasValue, isEmpty, isNotEmpty, isNotNull } from '../empty.util';
 import { FormFieldMetadataValueObject } from '../form/builder/models/form-field-metadata-value.model';
 import { ConfidenceType } from '../../core/shared/confidence-type';
 import { Vocabulary } from '../../core/submission/vocabularies/models/vocabulary.model';
-import { VocabularyTreeviewComponent } from '../vocabulary-treeview/vocabulary-treeview.component';
+import { VocabularyTreeviewComponent } from '../form/vocabulary-treeview/vocabulary-treeview.component';
 import { VocabularyEntry } from '../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { getFirstSucceededRemoteDataPayload } from '../../core/shared/operators';
 import { buildPaginatedList, PaginatedList } from '../../core/data/paginated-list.model';

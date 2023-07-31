@@ -1,6 +1,4 @@
-import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { GraphRoutingModule } from './graph-routing.module';
 import { GraphPageComponent } from './graph-page.component';

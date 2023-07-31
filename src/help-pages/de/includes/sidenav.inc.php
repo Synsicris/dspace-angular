@@ -83,11 +83,11 @@
             <li><a href="de-project-pages-impacts.php" id="nav-pages-impacts"><span>Erwartete<!-- gesellschaftliche --> Wirkungen</span></a></li>
             <li><a href="de-project-pages-gender.php" id="nav-pages-gender"><span>Geschlechteraspekte</span></a></li>
 						<li><a href="de-project-pages-publication.php" id="nav-pages-publication"><span>Tipps zum Import</span></a></li>
-						<li><a href="de-project-pages-solution.php" id="nav-pages-solution"><span>Lösung/Veränderung/Innovation</span></a></li>
+						<li><a href="de-project-pages-solution.php" id="nav-pages-solution"><span>Lösung / Veränderung / Innovation</span></a></li>
         </ul>
     </li>
 
-    <li><a href="de-project-funder.php" id="nav-funder" class="folder"><span>Informationen für den Förderer</span></a>
+    <li><a href="de-project-funder.php" id="nav-funder" class="folder"><span>Informationen für Förderer</span></a>
 			<ul class="funder nav2">
 				<li><a href="de-project-funder-role.php" id="nav-funder-role"><span>Rollen und Rechte verwalten</span></a></li>
 				<li><a href="de-project-funder-comment.php" id="nav-funder-comment"><span>Kommentarfunktion</span></a></li>

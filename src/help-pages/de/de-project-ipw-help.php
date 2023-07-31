@@ -45,14 +45,14 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 		<h2>Tipps in Kürze:</h2>
 
 		<ul>
-		<li>Empfehlenswert ist es, den Wirkungspfad gemeinsam mit Praxispartnern und Akteursgruppen zu entwickeln und das (Teil-)Projekt von den erwünschten Wirkungen her zu planen.</li>
+		<li>Empfehlenswert ist es, den Wirkungspfad <strong>gemeinsam mit Praxispartnern und Akteursgruppen</strong> zu entwickeln und das Vorhaben von den erwünschten Wirkungen her zu planen.</li>
 		<li>Ein erstes Brainstorming zur Wirkungsplanung kann auch sehr gut an einer Pinnwand oder mit Hilfe von Haftnotizen stattfinden.</li>
-    <li>Verschaffen Sie sich einen Überblick über die Kategorien, indem Sie die Detailseiten der einzelnen Bereiche anschauen.</li>
+    <li>Verschaffen Sie sich einen Überblick über die Kategorien, indem Sie die <strong>Detailseiten der einzelnen Bereiche anschauen</strong>.</li>
 
     <li>Arbeiten Sie im Tool schrittweise: </li>
       <ul>
         <li>Beginnen Sie mit einer groben Planung und ergänzen Sie erst später die Details.</li>
-        <li>Wählen Sie zuerst Arbeitstitel für die Bezeichnung und passen Sie die Formulierungen schrittweise an, wenn mehr Klarheit zur Wirkungsplanung des (Teil-)Projektes vorliegt.</li>
+        <li>Wählen Sie zuerst Arbeitstitel für die Bezeichnung und passen Sie die Formulierungen schrittweise an, wenn mehr Klarheit zur Wirkungsplanung des Vorhabens vorliegt.</li>
       </ul>
     <li>Hinterfragen Sie zwischenzeitlich immer mal wieder, ob Ihre Annahmen dazu, welche Aktivitäten erforderlich sind, um die gewünschte Wirkung zu erzielen, realistisch sind.<//li>
     </ul>
@@ -63,27 +63,27 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
     <h2>Ausführliche Hinweise zur Arbeit mit dem Wirkungspfad</h2>
 
 
-      <strong>Beteiligen Sie Praxispartner, Zielgruppen und andere wichtige Akteure</strong> an der Entwicklung des Wirkungspfades. Dadurch erreichen Sie vielfältige positive Effekte für das (Teil-)Projekt:
+      <strong>Beteiligen Sie Praxispartner, Zielgruppen und andere wichtige Akteure</strong> an der Entwicklung des Wirkungspfades. Dadurch erreichen Sie vielfältige positive Effekte für das Vorhaben:
         <ul>
-          <li>Es wird klar, welche Akteure aus dem Handlungsfeld welche Wirkungen als wünschenswert einstufen und inwieweit Sie an Aktivitäten beteiligt werden möchten. So werden auch bisher unbekannte Interessenslagen oder verborgene Interessenskonflikte deutlich und können im (Teil-)Projekt berücksichtigt werden.</li>
-          <li>Das Arbeiten an einer gemeinsamen Zielsetzung stärkt die Motivation an einer Beteiligung, fördert die positive Kommunikation über das (Teil-)Projekt (Multiplikatorwirkung) und eine Ownership an den Projektergebnissen.</li>
-          <li>Je besser das Handlungsfeld verstanden wird, desto realistischer kann entwickelt werden, welche Aktivitäten es tatsächlich braucht, um eine Anwendung und positive Wirkungen zu erreichen. Dafür ist es wichtig, Anforderungen, Praktiken, Routinen, Strukturen, Machtverhältnisse und „Selbstverständlichkeiten“ aus dem Handlungsfeld zu kennen.</li>
-          <li>Alternativ: Wenn bei der Entwicklung des Antrags Zeitdruck besteht, so dass kein Austausch im Vorfeld stattfinden kann, ist es hilfreich, sich gut in die Akteure hineinzuversetzen und das (Teil-)Projekt aus ihrer Sicht von den erwünschten Wirkungen ausgehend zu planen. Zu einem späteren Zeitpunkt kann der Wirkungspfad dann mit den Akteuren präzisiert werden, um die oben genannten positiven Effekte zu erreichen.</li>
+          <li>Es wird klar, <strong>welche Akteure</strong> aus dem Handlungsfeld <strong>welche Wirkungen</strong> als wünschenswert einstufen und inwieweit Sie <strong>an Aktivitäten beteiligt werden möchten</strong>. So werden auch bisher unbekannte Interessenslagen oder verborgene Interessenskonflikte deutlich und können im Vorhaben berücksichtigt werden.</li>
+          <li>Das Arbeiten an einer gemeinsamen Zielsetzung stärkt die Motivation an einer Beteiligung, fördert die positive Kommunikation über das Vorhaben (Multiplikatorwirkung) und eine Ownership an den Projektergebnissen.</li>
+          <li>Je besser das Handlungsfeld verstanden wird, desto realistischer kann entwickelt werden, <strong>welche Aktivitäten</strong> es tatsächlich braucht, um eine <strong>Anwendung und positive Wirkungen zu erreichen</strong>. Dafür ist es wichtig, Anforderungen, Praktiken, Routinen, Strukturen, Machtverhältnisse und „Selbstverständlichkeiten“ aus dem Handlungsfeld zu kennen.</li>
+          <li>Alternativ: Wenn bei der Entwicklung des Antrags Zeitdruck besteht, so dass kein Austausch im Vorfeld stattfinden kann, ist es hilfreich, sich gut in die Akteure hineinzuversetzen und das Vorhaben aus ihrer Sicht von den erwünschten Wirkungen ausgehend zu planen. Zu einem späteren Zeitpunkt kann der Wirkungspfad dann mit den Akteuren präzisiert werden, um die oben genannten positiven Effekte zu erreichen.</li>
         </ul>
-      <strong>Denken Sie über die Grenzen des (Teil-)Projektes hinaus:</strong>
+      <strong>Denken Sie über die Grenzen des Verbundes hinaus:</strong>
         <ul>
-          <li>Welche Akteure und Projekte arbeiten noch daran, die gleichen oder ähnliche Wirkungen zu erzielen? Kann eine Kooperation dazu beitragen, mehr Wirkung mit weniger Aufwand zu erzielen? </li>
-          <li>Welche Multiplikatoren und Unterstützer gibt es außerhalb des (Teil-)Projektes, deren frühzeitige Einbindung die Wirkung im Handlungsfeld steigern kann?</li>
-          <li>Kann eine Zusammenarbeit mit den Transferstellen und anderen Services (z.B. Lehrtätigkeiten) der beteiligten Partnereinrichtungen Unterstützung bieten?</li>
+          <li>Welche <strong>Akteure und Projekte</strong> arbeiten noch daran, die gleichen oder ähnliche Wirkungen zu erzielen? Kann eine Kooperation dazu beitragen, mehr Wirkung mit weniger Aufwand zu erzielen? </li>
+          <li>Welche <strong>Multiplikatoren und Unterstützer</strong> gibt es außerhalb des Verbundes, deren frühzeitige Einbindung die Wirkung im Handlungsfeld steigern kann?</li>
+          <li>Kann eine Zusammenarbeit mit den <strong>Transferstellen</strong> und anderen Services (z.B. Lehrtätigkeiten) der beteiligten Partnereinrichtungen Unterstützung bieten?</li>
           <li>Hilfreich könnten auch Kreativtechniken sein, um den Blick zu weiten und über bereits sehr etablierte Vorgehensweisen zum Transfer hinauszugehen.</li>
         </ul>
       <strong>Führen Sie einen Realitätscheck durch. Hinterfragen Sie die Annahmen zur Entwicklung von Wirkungen und nehmen Sie die Umsetzbarkeit in den Blick</strong>…aber erst, wenn Sie bereits die wichtigsten Punkte geplant haben, weil Sie sonst Ihren Ideenreichtum stark einschränken.
         <ul>
-          <li>Wie weit ist die Entwicklung noch von einer Einsatzreife entfernt? Kann bereits die Zielgruppe im Handlungsfeld erreicht werden oder sind zunächst wichtige „Zwischenstationen“ zu erreichen?</li>
-          <li>Warum tragen die geplanten Interaktionen und Transfermaßnahmen dazu bei, die mögliche Anwendung zu fördern? Ist diese Vermutung zum Wirkungszusammenhang realistisch oder handelt es sich vielleicht um vereinfachte oder zu optimistische Annahmen?</li>
-          <li>Welche Voraussetzungen müssen noch gegeben sein, um eine Anwendung der Projektergebnisse zu fördern, die aber vielleicht nicht im direkten Einflussbereich des (Teil-)Projektes liegen?</li>
-          <li>Werden die Aktivitäten zum Transfer vom Fördermittelgeber finanziert? Sind Sie mit genügend Ressourcen eingeplant? Gäbe es weitere Finanzierungsquellen oder vorhandene Ressourcen, die genutzt werden können?</li>
-          <li>Sind genügend Kompetenzen und Interessen für die Transferaktivitäten im Team? Wäre Beratung oder Fortbildung sinnvoll? Können weitere kompetenten Personen eingebunden werden?</li>
+          <li>Wie weit ist die Entwicklung noch von einer <strong>Einsatzreife</strong> entfernt? Kann bereits die Zielgruppe im Handlungsfeld erreicht werden oder sind zunächst wichtige „Zwischenstationen“ zu erreichen?</li>
+          <li>Warum tragen die geplanten Interaktionen und Transfermaßnahmen dazu bei, die mögliche Anwendung zu fördern? Ist diese <strong>Vermutung zum Wirkungszusammenhang</strong> realistisch oder handelt es sich vielleicht um vereinfachte oder zu optimistische Annahmen?</li>
+          <li>Welche <strong>Voraussetzungen</strong> müssen noch gegeben sein, um eine Anwendung der Projektergebnisse zu fördern, die aber vielleicht nicht im direkten Einflussbereich des Verbundes liegen?</li>
+          <li>Werden die <strong>Aktivitäten zum Transfer</strong> vom Fördermittelgeber finanziert? Sind Sie mit genügend Ressourcen eingeplant? Gäbe es weitere Finanzierungsquellen oder vorhandene Ressourcen, die genutzt werden können?</li>
+          <li>Sind genügend <strong>Kompetenzen und Interessen</strong> für die Transferaktivitäten im Team? Wäre Beratung oder Fortbildung sinnvoll? Können weitere kompetenten Personen eingebunden werden?</li>
         </ul>
       <strong>Planen Sie langfristig:</strong> Wenn Sie über längere Zeit in einem Handlungsfeld arbeiten, lohnt es sich, einen generellen Wirkungspfad zu entwickeln, der über einzelne Projekte hinausgeht. Mit einer Pinnwand im Büro oder einem digitalen Tool können Sie Stück für Stück immer neue Details ergänzen.
 

@@ -14,7 +14,6 @@ import { Item } from '../../../core/shared/item.model';
 import { SubmissionFormModel } from '../../../core/config/models/config-submission-form.model';
 import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../../../core/shared/operators';
 import { EditItemDataService } from '../../../core/submission/edititem-data.service';
-import { environment } from '../../../../environments/environment';
 import { ItemDataService } from '../../../core/data/item-data.service';
 
 @Component({
@@ -100,7 +99,7 @@ export class ObjectiveComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.formConfig$ = this.impactPathwayService.getImpactPathwayTaskEditFormConfig(this.impactPathwayStep.type);
-    this.editItemDataService.checkEditModeByIdAndType(this.impactPathwayTask.id, environment.impactPathway.impactPathwaysEditMode).pipe(
+    this.editItemDataService.checkEditModeByIdAndType(this.impactPathwayTask.id, this.impactPathwayService.getImpactPathwaysEditMode()).pipe(
       take(1)
     ).subscribe((canEdit: boolean) => {
       this.canEditButton$.next(canEdit);

@@ -20,7 +20,7 @@
   <ng-template #breadcrumb let-text="text" let-url="url" let-cssClass="cssClass">
     <li class="breadcrumb-item" [ngClass]="cssClass">
       <div class="breadcrumb-item-limiter">
-        <a class="text-truncate" [routerLink]="url" [innerHTML]="text | translate"></a>
+        <a class="text-truncate" [routerLink]="url" [innerHTML]="text | translate" [ngbTooltip]="text | translate" placement="bottom"></a>
       </div>
     </li>
   </ng-template>

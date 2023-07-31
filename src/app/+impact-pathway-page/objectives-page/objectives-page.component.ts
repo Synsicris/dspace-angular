@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { combineLatest, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, Subscription } from 'rxjs';
 import { map, mergeMap, take, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
@@ -30,29 +30,31 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
   id: number;
 
   /**
+   * The impact-pathway item
+   */
+  objectivesItem: Item;
+
+  initialized: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
    * If the current user is a funder Organizational/Project manager
    */
-  hasAnyFunderRole$: Observable<boolean>;
+  hasAnyFunderRole: boolean;
 
   /**
-   * If the current user is a funder project manager
+   * If the current user is an administrator
    */
-  isFunderProject$: Observable<boolean>;
+  isAdmin: boolean;
 
   /**
-   * The objectives item
+   * If the current user is a funder Organizational/Project manager
    */
-  objectivesItem$: Observable<Item>;
-
-  /**
-   * The objectives item's id
-   */
-  objectivesItemId$: Observable<string>;
+  isFunderProject: boolean;
 
   /**
    * The project community's id
    */
-  projectCommunityId$: Observable<string>;
+  projectCommunityId: string;
 
   /**
    * Subscription to unsubscribe
@@ -73,11 +75,15 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
    * Initialize instance variables
    */
   ngOnInit(): void {
-    this.hasAnyFunderRole$ = this.route.data.pipe(
+    const hasAnyFunderRole$ = this.route.data.pipe(
       map((data) => (data.isFunderOrganizationalManger || data.isFunderProject || data.isFunderReader) as boolean)
     );
 
-    this.isFunderProject$ = this.route.data.pipe(
+    const isAdmin$ = this.route.data.pipe(
+      map((data) => data.isAdmin as boolean)
+    );
+
+    const isFunderProject$ = this.route.data.pipe(
       map((data) => (data.isFunderProject) as boolean)
     );
 
@@ -93,16 +99,16 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
       getFirstSucceededRemoteDataPayload()
     );
 
-    const objectivesItem$ = this.route.data.pipe(
+    const objectivesItemFromRoute$ = this.route.data.pipe(
       take(1),
       map((data) => data.objectivesItem as RemoteData<Item>),
       redirectOn4xx(this.router, this.authService),
       getFirstSucceededRemoteDataPayload()
     );
 
-    this.objectivesItem$ = combineLatest([
+    const objectivesItem$ = combineLatest([
       impactPathwayItem$,
-      objectivesItem$,
+      objectivesItemFromRoute$,
       targetItemId$
     ]).pipe(
       mergeMap(([impactPathwayItem, objectivesItem, targetItemId]: [Item, Item, string]) => this.impactPathwayService.isImpactPathwayLoadedById(impactPathwayItem.id).pipe(
@@ -117,13 +123,25 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
       map(([impactPathwayItem, objectivesItem, targetItemId, loaded]: [Item, Item, string, boolean]) => objectivesItem)
     );
 
-    this.projectCommunityId$ = this.route.data.pipe(
+    const projectCommunityId$ = this.route.data.pipe(
       take(1),
       map((data) => data.projectCommunity as RemoteData<Community>),
       redirectOn4xx(this.router, this.authService),
       getFirstSucceededRemoteDataPayload(),
       map((project: Community) => project.id)
     );
+
+    combineLatest([projectCommunityId$, objectivesItem$, hasAnyFunderRole$, isFunderProject$, isAdmin$])
+      .pipe(take(1)
+      ).subscribe(([projectCommunityId, objectivesItem, hasAnyFunderRole, isFunderProject, isAdmin]) => {
+
+      this.projectCommunityId = projectCommunityId;
+      this.objectivesItem = objectivesItem;
+      this.hasAnyFunderRole = hasAnyFunderRole;
+      this.isFunderProject = isFunderProject;
+      this.isAdmin = isAdmin;
+      this.initialized.next(true);
+    });
   }
 
   ngOnDestroy(): void {

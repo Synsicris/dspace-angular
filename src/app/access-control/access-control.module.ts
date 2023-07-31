@@ -12,6 +12,16 @@ import { GroupsRegistryComponent } from './group-registry/groups-registry.compon
 import { FormModule } from '../shared/form/form.module';
 import { ConfirmWithdrawComponent } from './group-registry/group-form/members-list/confirm-withdraw/confirm-withdraw.component';
 import { ManageGroupComponent } from './manage-group/manage-group.component';
+import { DYNAMIC_ERROR_MESSAGES_MATCHER, DynamicErrorMessagesMatcher } from '@ng-dynamic-forms/core';
+import { AbstractControl } from '@angular/forms';
+
+/**
+ * Condition for displaying error messages on email form field
+ */
+export const ValidateEmailErrorStateMatcher: DynamicErrorMessagesMatcher =
+  (control: AbstractControl, model: any, hasFocus: boolean) => {
+    return (control.touched && !hasFocus) || (control.errors?.emailTaken && hasFocus);
+  };
 
 @NgModule({
   imports: [
@@ -19,7 +29,16 @@ import { ManageGroupComponent } from './manage-group/manage-group.component';
     SharedModule,
     RouterModule,
     AccessControlRoutingModule,
-    FormModule
+    FormModule,
+  ],
+  exports: [
+    EPeopleRegistryComponent,
+    EPersonFormComponent,
+    GroupsRegistryComponent,
+    GroupFormComponent,
+    SubgroupsListComponent,
+    MembersListComponent,
+    ManageGroupComponent
   ],
   declarations: [
     EPeopleRegistryComponent,
@@ -31,14 +50,11 @@ import { ManageGroupComponent } from './manage-group/manage-group.component';
     ConfirmWithdrawComponent,
     ManageGroupComponent
   ],
-  exports: [
-    EPeopleRegistryComponent,
-    EPersonFormComponent,
-    GroupsRegistryComponent,
-    GroupFormComponent,
-    SubgroupsListComponent,
-    MembersListComponent,
-    ManageGroupComponent
+  providers: [
+    {
+      provide: DYNAMIC_ERROR_MESSAGES_MATCHER,
+      useValue: ValidateEmailErrorStateMatcher
+    },
   ]
 })
 /**
