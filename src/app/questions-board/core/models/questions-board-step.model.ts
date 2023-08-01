@@ -1,4 +1,5 @@
-import { findIndex, remove } from 'lodash';
+import findIndex  from 'lodash/findIndex';
+import remove from 'lodash/remove';
 
 import { QuestionsBoardTask } from './questions-board-task.model';
 import { ComparedVersionItemStatus } from '../../../core/project/project-version.service';

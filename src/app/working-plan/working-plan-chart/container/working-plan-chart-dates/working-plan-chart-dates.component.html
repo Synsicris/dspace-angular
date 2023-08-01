@@ -6,9 +6,9 @@
 
 <!-- complete calender block with headers and content -->
 <div *ngIf="chartDateView.value === ChartDateViewType.month" class="sidenav-content calendar w-100" fxLayout="column">
-  
+
   <!-- complete header with 2 rows (year and month) -->
-  <div fxLayout="row" class="sy-calendar-header-rows sy-monthly">  
+  <div fxLayout="row" class="sy-calendar-header-rows sy-monthly">
     <div fxLayout="column" class="flex-fill sy-block-year" *ngFor="let year of datesYear">
       <!-- row years -->
       <div class="sy-row-years calendar-cell-heading w-100 d-flex flex-wrap justify-content-center tree-node-end-of-the-year-customization">{{year}}</div>
@@ -22,14 +22,14 @@
 
   <!-- All rows of third column (monthly)-->
   <mat-tree class="tree sy-monthly" fxFlex [dataSource]="dataSource" [treeControl]="treeControl">
-    
+
     <!-- Single Row : Complete Row with all columns -->
     <mat-tree-node *matTreeNodeDef="let node" class="calendar-row w-100"
                    [class.calendar-title-cell-over]="chartChangeColorIsOver.get(node.id)"
                    [class.calendar-title-cell-now-added]="(hasBeenNowAdded(node.id) | async)"
                    (mouseover)="chartChangeColor(node.id, true)"
                    (mouseout)="chartChangeColor(node.id, false)">
-     
+
       <!-- single cell -->
       <ng-container *ngIf="!(compareMode | async)">
         <div *ngFor="let date of datesMonth; let i=index;" class="calendar-cell w-100 d-flex flex-wrap calendar-node-customization{{(chartCheckEndOfTheYear(date, 'month'))?' tree-node-end-of-the-year-customization':''}}">
@@ -153,7 +153,7 @@
   <!-- complete header with only 1 row for years -->
   <div fxLayout="row" class="sy-calendar-header-rows sy-annually sy-row-years calendar-head-year-sub-border">
     <!-- cells years -->
-    <div *ngFor="let date of datesYear" class="sy-block-year calendar-cell w-100 calendar-head-year-border tree-node-end-of-the-year-customization">{{formatDate(date)}}</div>
+    <div *ngFor="let date of datesYear" class="sy-block-year calendar-cell w-100 calendar-head-year-border tree-node-end-of-the-year-customization justify-content-center align-items-center d-flex">{{formatDate(date)}}</div>
   </div>
 
   <!-- All rows of third column (yearly)-->

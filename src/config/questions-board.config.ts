@@ -10,6 +10,7 @@ export interface QuestionsBoardConfig extends Config {
   questionsBoardPartnerMetadata: string;
   questionsBoardTaskFormSection: string;
   questionsBoardEditFormSection: string;
+  questionsBoardAdminEditMode: string;
   questionsBoardEditMode: string;
   questionsBoardStepIcon: boolean;
 }

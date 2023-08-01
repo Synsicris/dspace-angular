@@ -5,6 +5,7 @@
     </button>
   </div>
   <div class="modal-body">
+    <ds-alert  [content]="'item.version.visibility.modal.alert.info'"></ds-alert>
     <p class="pb-2">{{ "item.version.visibility.modal.text" | translate : {version: version.summary} }}</p>
     <div class="custom-control custom-checkbox">
       <input type="checkbox" class="custom-control-input" id="official" [(ngModel)]="official">

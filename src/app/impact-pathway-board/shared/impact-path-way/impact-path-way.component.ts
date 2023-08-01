@@ -6,6 +6,7 @@ import {
   Input,
   OnDestroy,
   OnInit,
+  PLATFORM_ID,
   ViewChild
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -20,6 +21,7 @@ import {
   Subscription
 } from 'rxjs';
 import { delay, filter, map, mergeMap, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { NgbAccordion, NgbModal, NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathway } from '../../core/models/impact-pathway.model';
@@ -42,8 +44,9 @@ import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { RemoteData } from '../../../core/data/remote-data';
 import { administratorRole, AlertRole, getProgrammeRoles } from '../../../shared/alert/alert-role/alert-role';
 import { ProjectAuthorizationService } from '../../../core/project/project-authorization.service';
-import { isEqual } from 'lodash';
-import { fromPromise } from 'rxjs/internal/observable/innerFrom';
+import isEqual from 'lodash/isEqual';
+import { isPlatformBrowser } from '@angular/common';
+
 
 @Component({
   selector: 'ds-impact-path-way',
@@ -126,6 +129,7 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
   public isCommentAccordionOpen = false;
 
   constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
+              @Inject(PLATFORM_ID) protected platformId: Object,
               private authorizationService: AuthorizationDataService,
               private projectAuthorizationService: ProjectAuthorizationService,
               private cdr: ChangeDetectorRef,
@@ -185,7 +189,7 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
         )
     );
 
-    this.editItemDataService.checkEditModeByIdAndType(this.impactPathway.id, environment.impactPathway.impactPathwaysEditMode).pipe(
+    this.editItemDataService.checkEditModeByIdAndType(this.impactPathway.id, this.impactPathwayService.getImpactPathwaysEditMode()).pipe(
       take(1)
     ).subscribe((canEdit: boolean) => {
       this.canEditButton$.next(canEdit);
@@ -214,22 +218,24 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
         .subscribe(() => this._window.nativeWindow.print())
     );
 
-    this.subs.push(
-      fromEvent(this._window.nativeWindow, 'beforeprint')
-        .subscribe((event: Event) => {
-          event.preventDefault();
-          event.stopImmediatePropagation();
-          this.onPrint();
-        }),
-      fromEvent(this._window.nativeWindow, 'afterprint')
-        .pipe(
-          delay(100),
-          withLatestFrom(this.isPrinting$),
-          filter(([, isPrinting]) => isPrinting === true),
-          switchMap(() => fromPromise(this.router.navigate([], { queryParams: { view: 'default' } }))),
-          this.reloadArrows()
-        ).subscribe(() => this.isPrinting$.next(false))
-    );
+    if (isPlatformBrowser(this.platformId)) {
+      this.subs.push(
+        fromEvent(this._window.nativeWindow, 'beforeprint')
+          .subscribe((event: Event) => {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            this.onPrint();
+          }),
+        fromEvent(this._window.nativeWindow, 'afterprint')
+          .pipe(
+            delay(100),
+            withLatestFrom(this.isPrinting$),
+            filter(([, isPrinting]) => isPrinting === true),
+            switchMap(() => fromPromise(this.router.navigate([], { queryParams: { view: 'default' } }))),
+            this.reloadArrows()
+          ).subscribe(() => this.isPrinting$.next(false))
+      );
+    }
 
     this.subs.push(
       params$

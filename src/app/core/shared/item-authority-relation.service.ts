@@ -7,8 +7,8 @@ import {
   of as observableOf,
   throwError as observableThrowError,
 } from 'rxjs';
-import { catchError, concatMap, delay, map, mapTo, mergeMap, reduce, tap } from 'rxjs/operators';
-import { findIndex } from 'lodash';
+import { catchError, concatMap, delay, map, mapTo, mergeMap, reduce, switchMap, tap } from 'rxjs/operators';
+import findIndex from 'lodash/findIndex';
 
 import { Item } from './item.model';
 import { getFirstSucceededRemoteDataPayload } from './operators';
@@ -43,7 +43,7 @@ export class ItemAuthorityRelationService {
    * @param relationMetadataName  The metadata that contains authority from parent to child
    * @return the linked Item
    */
-  addLinkedItemToParent(
+  addLinkedItemToParentAndReturnChild(
     patchPath: string,
     editMode: string,
     parentItemId: string,
@@ -66,6 +66,40 @@ export class ItemAuthorityRelationService {
   }
 
   /**
+   * Create a relation between two item by adding authority from parent to child
+   *
+   * @param patchPath             The path to metadata section to patch
+   * @param editMode              The item edit mode
+   * @param parentItemId          The parent item id
+   * @param linkedItemId          The linked child item id
+   * @param relationMetadataName  The metadata that contains authority from parent to child
+   * @return the parent Item
+   */
+  addLinkedItemToParentAndReturnParent(
+    patchPath: string,
+    editMode: string,
+    parentItemId: string,
+    linkedItemId: string,
+    relationMetadataName: string
+  ): Observable<Item> {
+    const parentItem$: Observable<Item> = this.itemService.findById(parentItemId).pipe(
+      getFirstSucceededRemoteDataPayload()
+    );
+    const linkedItem$: Observable<Item> = this.itemService.findById(linkedItemId).pipe(
+      getFirstSucceededRemoteDataPayload()
+    );
+    return combineLatest([parentItem$, linkedItem$]).pipe(
+      tap(([parentItem, linkedItem]: [Item, Item]) => this.addRelationPatch(patchPath, parentItem, this.dsoNameService.getName(linkedItem), linkedItemId, relationMetadataName)),
+      delay(100),
+      mergeMap(([parentItem, linkedItem]: [Item, Item]) => this.executeEditItemPatch(parentItem.id, editMode, patchPath).pipe(
+        switchMap(() => this.itemService.findById(parentItemId).pipe(
+          getFirstSucceededRemoteDataPayload()
+        ))
+      ))
+    );
+  }
+
+  /**
    * Create a relation between two item by adding authority from parent to child and from child to parent
    *
    * @param patchPath                  The path to metadata section to patch
@@ -74,9 +108,9 @@ export class ItemAuthorityRelationService {
    * @param linkedItemId               The linked child item id
    * @param relationParentMetadataName The metadata that contains authority from child to parent
    * @param relationMetadataName       The metadata that contains authority from parent to child
-   * @return the patched linked Item
+   * @return the parent linked Item
    */
-  linkItemToParent(
+  addBidirectionalLinkFromItemToParent(
     patchPath: string,
     editMode: string,
     parentItemId: string,

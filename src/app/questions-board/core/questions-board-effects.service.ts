@@ -64,7 +64,7 @@ export class QuestionsBoardEffects {
   addTask$ = createEffect(() => this.actions$.pipe(
     ofType(QuestionsBoardActionTypes.ADD_QUESTIONS_BOARD_TASK),
     concatMap((action: AddQuestionsBoardTaskAction) => {
-      return this.itemAuthorityRelationService.addLinkedItemToParent(
+      return this.itemAuthorityRelationService.addLinkedItemToParentAndReturnChild(
         this.questionsBoardService.getQuestionsBoardEditFormSection(),
         this.questionsBoardService.getQuestionsBoardEditMode(),
         action.payload.stepId,

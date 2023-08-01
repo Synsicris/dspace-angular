@@ -6,7 +6,7 @@ import {
   MetadataBoxCell,
   MetadataBoxRow
 } from '../../../../../../core/layout/models/box.model';
-import { isEmpty, isNotEmpty } from '../../../../../../shared/empty.util';
+import { isNotEmpty } from '../../../../../../shared/empty.util';
 
 /**
  * This component renders the rows of metadata boxes

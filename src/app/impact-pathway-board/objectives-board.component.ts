@@ -7,6 +7,7 @@ import { ImpactPathwayService } from './core/impact-pathway.service';
 import { ImpactPathwayStep } from './core/models/impact-pathway-step.model';
 import { isNotEmpty } from '../shared/empty.util';
 import { Item } from '../core/shared/item.model';
+import { ImpactPathwayLinksService } from './core/impact-pathway-links.service';
 
 @Component({
   selector: 'ds-objectives-board',
@@ -33,6 +34,11 @@ export class ObjectivesBoardComponent implements OnInit {
   /**
    * If the current user is a funder project manager
    */
+  @Input() isAdmin: boolean;
+
+  /**
+   * If the current user is a funder project manager
+   */
   @Input() isFunderProject: boolean;
 
   public impactPathwayStepId: string;
@@ -40,10 +46,14 @@ export class ObjectivesBoardComponent implements OnInit {
 
   private impactPathWayStep$: Observable<ImpactPathwayStep>;
 
-  constructor(private impactPathwayService: ImpactPathwayService) {
+  constructor(
+    private impactPathwayService: ImpactPathwayService,
+    private impactPathwayLinkService: ImpactPathwayLinksService) {
   }
 
   ngOnInit(): void {
+    this.impactPathwayService.isAdmin = this.isAdmin;
+    this.impactPathwayLinkService.isAdmin = this.isAdmin;
     this.impactPathwayStepId = this.impactPathwayStepItem.id;
     this.impactPathWayStep$ = this.impactPathwayService.getImpactPathwayStepById(this.impactPathwayStepId);
     this.targetImpactPathwayTaskId$ = this.impactPathwayService.getImpactPathwayTargetTask();

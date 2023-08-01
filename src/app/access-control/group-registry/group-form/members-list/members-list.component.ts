@@ -41,6 +41,35 @@ enum SubKey {
   SearchResultsDTO,
 }
 
+/**
+ * The layout config of the buttons in the last column
+ */
+export interface EPersonActionConfig {
+  /**
+   * The css classes that should be added to the button
+   */
+  css?: string;
+  /**
+   * Whether the button should be disabled
+   */
+  disabled: boolean;
+  /**
+   * The Font Awesome icon that should be used
+   */
+  icon: string;
+}
+
+/**
+ * The {@link EPersonActionConfig} that should be used to display the button. The remove config will be used when the
+ * {@link EPerson} is already a member of the {@link Group} and the remove config will be used otherwise.
+ *
+ * *See {@link actionConfig} for an example*
+ */
+export interface EPersonListActionConfig {
+  add: EPersonActionConfig;
+  remove: EPersonActionConfig;
+}
+
 @Component({
   selector: 'ds-members-list',
   templateUrl: './members-list.component.html',
@@ -53,6 +82,20 @@ export class MembersListComponent implements OnInit, OnDestroy {
 
   @Input()
   messagePrefix: string;
+
+  @Input()
+  actionConfig: EPersonListActionConfig = {
+    add: {
+      css: 'btn-outline-primary',
+      disabled: false,
+      icon: 'fas fa-plus fa-fw',
+    },
+    remove: {
+      css: 'btn-outline-danger',
+      disabled: false,
+      icon: 'fas fa-trash-alt fa-fw'
+    },
+  };
 
   /**
    * Boolean representing if to show the admin edit actions
@@ -154,20 +197,21 @@ export class MembersListComponent implements OnInit, OnDestroy {
    */
   @Output() deleteMemberToMultipleGroups: EventEmitter<EPerson> = new EventEmitter<EPerson>();
 
-  constructor(private groupDataService: GroupDataService,
+  constructor(
+    protected groupDataService: GroupDataService,
     public ePersonDataService: EPersonDataService,
-    private translateService: TranslateService,
-    private notificationsService: NotificationsService,
-    private formBuilder: FormBuilder,
-    private paginationService: PaginationService,
-    private modalService: NgbModal,
+    protected translateService: TranslateService,
+    protected notificationsService: NotificationsService,
+    protected formBuilder: FormBuilder,
+    protected paginationService: PaginationService,
+    protected modalService: NgbModal,
     protected authorizationService: AuthorizationDataService,
     private router: Router) {
     this.currentSearchQuery = '';
     this.currentSearchScope = 'metadata';
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.searchForm = this.formBuilder.group(({
       scope: 'metadata',
       query: '',
@@ -193,7 +237,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
    * @param page the number of the page to retrieve
    * @private
    */
-  private retrieveMembers(page: number) {
+  retrieveMembers(page: number): void {
     this.unsubFrom(SubKey.MembersDTO);
     this.subs.set(SubKey.MembersDTO,
       this.paginationService.getCurrentPagination(this.config.id, this.config).pipe(
@@ -233,7 +277,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Whether or not the given ePerson is a member of the group currently being edited
+   * Whether the given ePerson is a member of the group currently being edited
    * @param possibleMember  EPerson that is a possible member (being tested) of the group currently being edited
    */
   isMemberOfGroup(possibleMember: EPerson): Observable<boolean> {
@@ -262,7 +306,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
    * @param key The key of the subscription to unsubscribe from
    * @private
    */
-  private unsubFrom(key: SubKey) {
+  protected unsubFrom(key: SubKey) {
     if (this.subs.has(key)) {
       this.subs.get(key).unsubscribe();
       this.subs.delete(key);

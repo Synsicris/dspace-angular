@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators, } from '@angular/forms';
 
-import { isEqual } from 'lodash';
+import isEqual from 'lodash/isEqual';
 
 import {
   SearchSimpleItemService

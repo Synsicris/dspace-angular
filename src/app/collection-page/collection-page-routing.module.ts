@@ -18,6 +18,7 @@ import { CollectionPageAdministratorGuard } from './collection-page-administrato
 import { LinkMenuItemModel } from '../shared/menu/menu-item/models/link.model';
 import { ThemedCollectionPageComponent } from './themed-collection-page.component';
 import { MenuItemType } from '../shared/menu/menu-item-type.model';
+import { DSOEditMenuResolver } from '../shared/dso-page/dso-edit-menu.resolver';
 import { EditCollectionResolver } from '../core/shared/resolvers/edit-collection.resolver';
 
 @NgModule({
@@ -32,7 +33,8 @@ import { EditCollectionResolver } from '../core/shared/resolvers/edit-collection
         path: ':id',
         resolve: {
           dso: CollectionPageResolver,
-          breadcrumb: ProjectCollectionBreadcrumbResolver
+          breadcrumb: ProjectCollectionBreadcrumbResolver,
+          menu: DSOEditMenuResolver
         },
         runGuardsAndResolvers: 'always',
         children: [
@@ -72,7 +74,8 @@ import { EditCollectionResolver } from '../core/shared/resolvers/edit-collection
             public: [{
               id: 'statistics_collection_:id',
               active: true,
-              visible: true,
+              visible: false,
+              index: 2,
               model: {
                 type: MenuItemType.LINK,
                 text: 'menu.section.statistics',

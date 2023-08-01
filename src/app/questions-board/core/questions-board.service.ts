@@ -34,6 +34,9 @@ export const QUESTIONS_BOARD_CONFIG: InjectionToken<string> = new InjectionToken
 })
 export class QuestionsBoardService {
   private questionsBoardConfig: QuestionsBoardConfig;
+
+  private _isAdmin: boolean;
+
   constructor(
     @Inject(QUESTIONS_BOARD_CONFIG) private questionsBoardConfigName: string,
     protected collectionService: CollectionDataService,
@@ -45,6 +48,14 @@ export class QuestionsBoardService {
     protected vocabularyService: VocabularyService
   ) {
     this.questionsBoardConfig = Object.assign({}, environment[questionsBoardConfigName]);
+  }
+
+  get isAdmin(): boolean {
+    return this._isAdmin;
+  }
+
+  set isAdmin(value: boolean) {
+    this._isAdmin = value;
   }
 
   /**
@@ -74,7 +85,7 @@ export class QuestionsBoardService {
    * Return the edit mode used for editing the question board object
    */
   getQuestionsBoardEditMode(): string {
-    return this.questionsBoardConfig.questionsBoardEditMode;
+    return this.isAdmin ? this.questionsBoardConfig.questionsBoardAdminEditMode : this.questionsBoardConfig.questionsBoardEditMode;
   }
 
   /**

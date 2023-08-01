@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import {
   listableObjectComponent
 } from '../../../../../object-collection/shared/listable-object/listable-object.decorator';
@@ -28,7 +28,7 @@ import { APP_CONFIG, AppConfig } from '../../../../../../../config/app-config.in
 /**
  * The component for displaying a list element for an item search result of the type Publication
  */
-export class ItemSearchResultListElementComponent extends SearchResultListElementComponent<ItemSearchResult, Item> {
+export class ItemSearchResultListElementComponent extends SearchResultListElementComponent<ItemSearchResult, Item> implements OnInit {
 
   /**
    * Whether to show the metrics badges
@@ -76,4 +76,5 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
       this.displayConfigurations = null;
     }
   }
+
 }

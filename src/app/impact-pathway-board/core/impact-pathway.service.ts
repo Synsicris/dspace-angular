@@ -89,7 +89,8 @@ import { ErrorResponse } from '../../core/cache/response.models';
 import {
   getFinishedRemoteData,
   getFirstSucceededRemoteDataPayload,
-  getFirstSucceededRemoteListPayload
+  getFirstSucceededRemoteListPayload,
+  getRemoteDataPayload
 } from '../../core/shared/operators';
 import { ItemAuthorityRelationService } from '../../core/shared/item-authority-relation.service';
 import { VocabularyOptions } from '../../core/submission/vocabularies/models/vocabulary-options.model';
@@ -106,11 +107,15 @@ import { SearchService } from '../../core/shared/search/search.service';
 import { NoContent } from '../../core/shared/NoContent.model';
 import { ComparedVersionItem, ProjectVersionService } from '../../core/project/project-version.service';
 import { forkJoin } from 'rxjs/internal/observable/forkJoin';
+import { FindListOptions } from '../../core/data/find-list-options.model';
 
 @Injectable()
 export class ImpactPathwayService {
 
   private _currentSelectedTask: BehaviorSubject<ImpactPathwayTask> = new BehaviorSubject<ImpactPathwayTask>(null);
+
+  private _isAdmin: boolean;
+
   private _onTheirWayToBeRemoved: string[] = [];
 
   constructor(
@@ -128,8 +133,17 @@ export class ImpactPathwayService {
     private searchService: SearchService,
     private submissionService: SubmissionService,
     private projectVersionService: ProjectVersionService,
+    private collectionDataService: CollectionDataService,
     private store: Store<AppState>
   ) {
+  }
+
+  get isAdmin(): boolean {
+    return this._isAdmin;
+  }
+
+  set isAdmin(value: boolean) {
+    this._isAdmin = value;
   }
 
   addImpactPathwayToBeRemovedList(id: string) {
@@ -788,7 +802,7 @@ export class ImpactPathwayService {
       previousParentTaskId,
       taskId,
       environment.impactPathway.impactPathwayTaskRelationMetadata).pipe(
-        mergeMap(() => this.itemAuthorityRelationService.addLinkedItemToParent(
+        mergeMap(() => this.itemAuthorityRelationService.addLinkedItemToParentAndReturnChild(
           'metadata',
           null,
           newParentTaskId,
@@ -1040,6 +1054,17 @@ export class ImpactPathwayService {
     );
   }
 
+  public canCreateImpactPathwayItem(projectCommunityId: string): Observable<boolean> {
+    const findListOptions = Object.assign({}, new FindListOptions(), {
+      elementsPerPage: 1,
+      currentPage: 1,
+    });
+    return this.collectionDataService.getAuthorizedCollectionByCommunityAndEntityType(projectCommunityId, environment.impactPathway.impactPathwayEntity, findListOptions).pipe(
+      getRemoteDataPayload(),
+      map((collections: PaginatedList<Collection>) => collections?.totalElements === 1)
+    );
+  }
+
   private createImpactPathwayWorkspaceItem(projectId: string, impactPathwayName: string, impactPathwayDescription: string): Observable<SubmissionObject> {
     const submission$ = this.getCollectionIdByProjectAndEntity(projectId, environment.impactPathway.impactPathwayEntity).pipe(
       mergeMap((collectionId) => this.submissionService.createSubmission(collectionId, environment.impactPathway.impactPathwayEntity)),
@@ -1186,7 +1211,7 @@ export class ImpactPathwayService {
   }
 
   getImpactPathwaysEditMode(): string {
-    return environment.impactPathway.impactPathwaysEditMode;
+    return this.isAdmin ? environment.impactPathway.impactPathwaysAdminEditMode :  environment.impactPathway.impactPathwaysEditMode;
   }
 
   private getImpactPathwaysFormSection(): Observable<string> {

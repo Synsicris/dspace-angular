@@ -77,7 +77,7 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
       })
     );
 
-    this.editItemDataService.checkEditModeByIdAndType(this.impactPathwayStepId, environment.impactPathway.impactPathwaysEditMode).pipe(
+    this.editItemDataService.checkEditModeByIdAndType(this.impactPathwayStepId, this.impactPathwayService.getImpactPathwaysEditMode()).pipe(
       take(1)
     ).subscribe((canEdit: boolean) => {
       this.canEditButton$.next(canEdit);
@@ -176,8 +176,7 @@ export class ImpactPathWayStepComponent extends DragAndDropContainerComponent {
             return this.impactPathwayService.getImpactPathwayTaskById(impactPathwayStep.parentId, impactPathwayStep.id, item.id).pipe(take(1));
           })
         )
-        .subscribe((task: ImpactPathwayTask) => {
-        });
+        .subscribe();
     });
   }
 

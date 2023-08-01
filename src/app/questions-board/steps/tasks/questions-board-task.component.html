@@ -6,7 +6,7 @@
      [class.alert-danger]="compareMode && !!data.compareStatus && data.compareStatus === ComparedVersionItemStatus.Removed">
   <div class="task-left-bar">
     <button class="btn btn-xs btn-link p-0 text-primary button-move align-self-start" title="Drag & Drop"
-            [disabled]="isVersionOf">
+            [disabled]="!(canEdit() | async) || isVersionOf">
       <i class="fas fa-grip-vertical"></i>
     </button>
   </div>
@@ -42,7 +42,7 @@
             class='fas fa-circle-notch fa-spin'></i></span>
       </button>
 
-      <button class="btn btn-lg btn-link p-0 flex-shrink-1 text-danger"
+      <button *ngIf="(canEdit() | async)" class="btn btn-lg btn-link p-0 flex-shrink-1 text-danger"
               title="{{'impact-pathway.remove.item.title' | translate}}"
               [disabled]="compareMode || isVersionOf"
               (click)="removeTask(); $event.stopPropagation()">

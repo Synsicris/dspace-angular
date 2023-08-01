@@ -1,6 +1,6 @@
 /* Function of this file not clear
 QUESTION: why is the file "src/app/impact-pathway-board/shared/impact-path-way/impact-path-way-step/step.directive.ts
-repeated here, but with Color Definitions "Blue", "Green", "Red" instead of CSS-Classes? (230426 rex) 
+repeated here, but with Color Definitions "Blue", "Green", "Red" instead of CSS-Classes? (230426 rex)
 */
 
 import { Directive, ElementRef, Input, Renderer2, RendererStyleFlags2 } from '@angular/core';

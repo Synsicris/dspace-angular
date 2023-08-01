@@ -7,6 +7,7 @@ import { ImpactPathway } from './core/models/impact-pathway.model';
 import { ImpactPathwayService } from './core/impact-pathway.service';
 import { isNotEmpty } from '../shared/empty.util';
 import { Item } from '../core/shared/item.model';
+import { ImpactPathwayLinksService } from './core/impact-pathway-links.service';
 
 @Component({
   selector: 'ds-impact-pathway-board',
@@ -32,6 +33,11 @@ export class ImpactPathwayBoardComponent implements OnInit {
   /**
    * If the current user is a funder project manager
    */
+  @Input() isAdmin: boolean;
+
+  /**
+   * If the current user is a funder project manager
+   */
   @Input() isFunderProject: boolean;
 
   /**
@@ -47,10 +53,16 @@ export class ImpactPathwayBoardComponent implements OnInit {
   private impactPathWay$: BehaviorSubject<ImpactPathway> = new BehaviorSubject<ImpactPathway>(null);
   public isProcessing$: Observable<boolean>;
 
-  constructor(private impactPathwayService: ImpactPathwayService) {
+  constructor(
+    private impactPathwayService: ImpactPathwayService,
+    private impactPathwayLinkService: ImpactPathwayLinksService
+  ) {
   }
 
   ngOnInit(): void {
+    this.impactPathwayService.isAdmin = this.isAdmin;
+    this.impactPathwayLinkService.isAdmin = this.isAdmin;
+
     combineLatest([
       this.impactPathwayService.getImpactPathwayById(this.impactPathwayId),
       this.isLoading()

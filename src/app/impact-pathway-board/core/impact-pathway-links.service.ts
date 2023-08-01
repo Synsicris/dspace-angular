@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { combineLatest as observableCombineLatest, Observable } from 'rxjs';
 import { delay, distinctUntilChanged, filter, map, mergeMap, startWith, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
-import { difference, findIndex, union } from 'lodash';
+import difference from 'lodash/difference';
+import findIndex from 'lodash/findIndex';
+import union from 'lodash/union';
 
 import { isEmpty, isNotEmpty } from '../../shared/empty.util';
 import { ItemDataService } from '../../core/data/item-data.service';
@@ -32,6 +34,7 @@ import { ItemAuthorityRelationService } from '../../core/shared/item-authority-r
 
 @Injectable()
 export class ImpactPathwayLinksService {
+  private _isAdmin: boolean;
 
   constructor(
     private formConfigService: SubmissionFormsConfigDataService,
@@ -43,6 +46,14 @@ export class ImpactPathwayLinksService {
     private rdbService: RemoteDataBuildService,
     private store: Store<AppState>
   ) {
+  }
+
+  get isAdmin(): boolean {
+    return this._isAdmin;
+  }
+
+  set isAdmin(value: boolean) {
+    this._isAdmin = value;
   }
 
   dispatchAddRelation(
@@ -325,7 +336,7 @@ export class ImpactPathwayLinksService {
   }
 
   private getImpactPathwaysLinksEditMode(): string {
-    return environment.impactPathway.impactPathwaysLinkEditMode;
+    return this.isAdmin ? environment.impactPathway.impactPathwaysLinkAdminEditMode : environment.impactPathway.impactPathwaysLinkEditMode;
   }
 
 }

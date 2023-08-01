@@ -12,10 +12,8 @@ import { DSpaceObjectType } from '../../../core/shared/dspace-object-type.model'
 import { TranslateLoaderMock } from '../../mocks/translate-loader.mock';
 import { Item } from '../../../core/shared/item.model';
 import { ManageProjectVersionsMenuComponent } from './manage-project-versions-menu.component';
-import { Observable, of as observableOf } from 'rxjs';
+import { of as observableOf } from 'rxjs';
 import { ProjectVersionService } from '../../../core/project/project-version.service';
-import { Version } from 'src/app/core/shared/version.model';
-import { createSuccessfulRemoteDataObject$ } from '../../remote-data.utils';
 
 describe('ManageProjectVersionsMenuComponent', () => {
   let component: ManageProjectVersionsMenuComponent;

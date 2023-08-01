@@ -1,12 +1,12 @@
-import { ChartDateViewType } from './../../../core/working-plan.reducer';
-import { TranslateLoaderMock } from './../../../../shared/testing/translate-loader.mock';
+import { ChartDateViewType } from '../../../core/working-plan.reducer';
+import { TranslateLoaderMock } from '../../../../shared/testing/translate-loader.mock';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WorkingPlanChartDatesComponent } from './working-plan-chart-dates.component';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-import { getMockTranslateService } from './../../../../shared/mocks/translate.service.mock';
-import { WorkingPlanService } from '../../../../working-plan/core/working-plan.service';
-import { WorkingPlanStateService } from '../../../../working-plan/core/working-plan-state.service';
+import { getMockTranslateService } from '../../../../shared/mocks/translate.service.mock';
+import { WorkingPlanService } from '../../../core/working-plan.service';
+import { WorkingPlanStateService } from '../../../core/working-plan-state.service';
 import { of } from 'rxjs';
 
 describe('WorkingPlanChartDatesComponent', () => {

@@ -5,9 +5,9 @@
   <div class="sidenav-container" fxFlex fxLayout="row">
 
     <!-- steps -->
-   
+
     <!-- .....................................................................
-    First Column with Header (with Functions / Buttons) and 
+    First Column with Header (with Functions / Buttons) and
     Content (Header-Cells with Titles, Entity-Names, Status-Icons and Buttons)
     ...................................................................... -->
     <div class="sidenav chart-column names" [ngStyle]="sidebarNamesStyle" fxLayout="column">
@@ -17,7 +17,9 @@
           <div ngbDropdown #sortByDrop="ngbDropdown" class="d-inline-block" (openChange)="resetSortDropdown($event)">
 
             <!-- Dropdown for sorting in the header of the first column -->
-            <button [disabled]="(compareMode | async)" class="btn btn-outline-info btn-xs mr-2" id="sortBy" ngbDropdownToggle>{{'working-plan.chart.column.sortBy' | translate}} {{'working-plan.chart.column.sortBy.option.' + (sortSelected$ | async) | translate}}</button>
+            <button [disabled]="(compareMode | async) || isVersionOf || !(canAdd$ | async)"
+                    class="btn btn-outline-info btn-xs mr-2" id="sortBy"
+                    ngbDropdownToggle>{{'working-plan.chart.column.sortBy' | translate}} {{'working-plan.chart.column.sortBy.option.' + (sortSelected$ | async) | translate}}</button>
             <div ngbDropdownMenu class="block-change-start-date font-size-07 p-2" aria-labelledby="sortBy">
               <button type="button" class="close" data-dismiss="alert" attr.aria-label="{{'working-plan.chart.column.changeStartDateClose' | translate}}" (click)="sortByDrop.close()">
                 <span aria-hidden="true">&times;</span>
@@ -95,19 +97,19 @@
 
         <!-- Single Row - matTreeNodePaddingIndent is for the second level -->
         <mat-tree-node *matTreeNodeDef="let node"
-          [class.compare-node-status-new]="(compareMode | async) && node.compareStatus == ComparedVersionItemStatus.New"
-          [class.compare-node-status-deleted]="(compareMode | async) && node.compareStatus == ComparedVersionItemStatus.Removed"
-          cdkDrag [cdkDragData]="node"
-          [cdkDragDisabled]="!dragAndDropIsActive || isVersionOf || (isMoving() | async)"
-          class="tree-node-customization"
-          [class.calendar-title-cell-over]="chartChangeColorIsOver.get(node.id)"
-          [class.calendar-title-cell-now-added]="(hasBeenNowAdded(node.id) | async)"
-          matTreeNodeToggle
-          matTreeNodePadding
+                       [class.compare-node-status-new]="(compareMode | async) && node.compareStatus == ComparedVersionItemStatus.New"
+                       [class.compare-node-status-deleted]="(compareMode | async) && node.compareStatus == ComparedVersionItemStatus.Removed"
+                       cdkDrag [cdkDragData]="node"
+                       [cdkDragDisabled]="!dragAndDropIsActive || isVersionOf || (isMoving() | async) || !(canAdd$ | async)"
+                       class="tree-node-customization"
+                       [class.calendar-title-cell-over]="chartChangeColorIsOver.get(node.id)"
+                       [class.calendar-title-cell-now-added]="(hasBeenNowAdded(node.id) | async)"
+                       matTreeNodeToggle
+                       matTreeNodePadding
           [matTreeNodePaddingIndent]="27"
-          (mouseover)="chartChangeColor(node.id, true)"
-          (mouseout)="chartChangeColor(node.id, false)"
-          (cdkDragStarted)="dragStarted($event)">
+                       (mouseover)="chartChangeColor(node.id, true)"
+                       (mouseout)="chartChangeColor(node.id, false)"
+                       (cdkDragStarted)="dragStarted($event)">
 
           <div class="task-placeholder d-flex"
             [ngClass]="{
@@ -119,15 +121,16 @@
           </div>
 
           <!-- ...................................................
-          .row-sidebar: 
+          .row-sidebar:
           left grey sidebarwith drag'n drop and accordeon button
           .................................................... -->
-         
+
           <div [class.root-node-style]="node.level === 0" class="d-flex flex-column justify-content-between row-sidebar">
-            
+
             <!-- button "grip-vertical" -->
             <button mat-icon-button matTreeNodeToggle
-                    [disabled]="(compareMode | async) || isVersionOf || !dragAndDropIsActive || (isMoving() | async)" cdkDragHandle
+                    [disabled]="(compareMode | async) || isVersionOf || !dragAndDropIsActive || (isMoving() | async) || !(canAdd$ | async)"
+                    cdkDragHandle
                     class="btn btn-xs btn-link p-0 text-primary button-move" title="Drag & Drop">
               <i class="fas fa-grip-vertical{{(!dragAndDropIsActive || (isMoving() | async))?' opacity-50':''}}"></i>
             </button>
@@ -136,7 +139,7 @@
             <button *ngIf="treeControl.isExpandable(node)" mat-icon-button matTreeNodeToggle
                     class="btn btn-xs btn-link p-0 text-primary"
                     title="{{ (treeControl.isExpanded(node) ? 'working-plan.chart.button.collapse' : 'working-plan.chart.button.expand') | translate}}">
-              
+
               <i *ngIf="treeControl.isExpanded(node)" class="fas fa-chevron-up"></i>
               <i *ngIf="!treeControl.isExpanded(node)" class="fas fa-chevron-down"></i>
             </button>
@@ -144,12 +147,12 @@
           </div><!-- end .row-sidebar -->
 
           <!-- ..........................................
-          .row-header-left: 
+          .row-header-left:
           left part of row header with text and buttons
           ........................................... -->
 
           <div class="row-header-left mat-form-field auto-width mt-1{{node.level === 0?' pl-2':''}}">
-            
+
             <!-- Entity-Name and Title of Data -->
 
              <!-- Entity-Name -->
@@ -172,7 +175,7 @@
               <button *ngIf="canAddChildStep(node)" data-test="add-child-step"
                     class="btn btn-xs btn-link p-0 button-add"
                     title="{{'working-plan.chart.button.add' | translate}}"
-                    [disabled]="(compareMode | async) || isVersionOf"
+                    [disabled]="(compareMode | async) || isVersionOf || !(canAdd$ | async)"
                     (click)="addChildStep(node); $event.stopImmediatePropagation();">
                 <i class="fas fa-plus-circle"></i>&nbsp;{{'working-plan.chart.button.add' | translate}}
               </button>
@@ -191,7 +194,7 @@
                 <button mat-icon-button class="btn btn-xs btn-link p-0 text-danger align-self-end button-unlink" data-test="remove-step"
                   title="{{'working-plan.chart.button.remove' | translate}}"
                   [class.ml-1]="node.level !== 0"
-                  [disabled]="(compareMode | async) || (isProcessingWorkpackageRemove(node) | async) || isVersionOf"
+                  [disabled]="(compareMode | async) || (isProcessingWorkpackageRemove(node) | async) || isVersionOf || !(canAdd$ | async)"
                   (click)="deleteStep(node); $event.stopPropagation()">
                   <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)">
                     <i class='fas fa-thumbtack'></i>
@@ -218,16 +221,16 @@
         </div><!-- end .row-header-left-content -->
 
           <!-- ..........................................
-          .row-header-right: 
+          .row-header-right:
           right block with status icons
           ........................................... -->
 
           <div class="row-header-right d-flex flex-column">
-            
+
             <div class="sy-status-icons">
 
               <div class="sy-status-icon">
-                <!-- Status-Icon 
+                <!-- Status-Icon
                 defined in src/app/working-plan/working-plan-chart/container/wp-item-metadata-status.directive.ts -->
                 <span>
                   <i dsWPItemMetadataStatus [status]="node?.status"></i>
@@ -240,7 +243,7 @@
                   <i dsWPItemMetadataInternal [status]="node?.internalStatus"></i>
                 </span>
               </div>
-          
+
             </div> <!-- end .sy-status-icons -->
 
             <div class="d-flex sy-compare p-0">
@@ -255,7 +258,7 @@
                 <i class="fas fa-code-compare"></i>
               </button>
             </div>
-            
+
             <ds-working-plan-chart-item-edit-button
                   class="button-edit"
                   [compareMode]="compareMode"
@@ -274,9 +277,9 @@
     Second Column (header and content) with dates (start and end dates, responsible organization and status)
     ..................................................................................................... -->
 
-    <div 
-      class="sidenav chart-column responsible{{(this.sidebarResponsibleStatus)?'':' d-none'}}" 
-      [ngStyle]="sidebarResponsibleStyle" 
+    <div
+      class="sidenav chart-column responsible{{(this.sidebarResponsibleStatus)?'':' d-none'}}"
+      [ngStyle]="sidebarResponsibleStyle"
       fxLayout="column">
 
       <!-- header of second column (time period) -->
@@ -287,7 +290,7 @@
 
             <!-- Dropdown for sort by time period in the header of the second column -->
             <button class="btn btn-outline-secondary btn-xs mr-2 ml-2" id="changeAllStartDate" ngbDropdownToggle
-                    [disabled]="(compareMode | async) || isVersionOf">
+                    [disabled]="(compareMode | async) || isVersionOf || !(canAdd$ | async)">
               {{'working-plan.chart.column.changeStartDate' | translate}}
             </button>
 
@@ -358,7 +361,7 @@
                        [id]="node.id"
                        (mouseover)="chartChangeColor(node.id, true)"
                        (mouseout)="chartChangeColor(node.id, false)">
-          
+
           <!-- Form Group Start/End-Date -->
           <div class="ml-05 mt-1 font-size-07 sy-start-end-date-block">
             <!-- Headline Start / End-Dates -->
@@ -367,18 +370,19 @@
             <!-- Start-Date -->
             <mat-form-field *ngIf="node.type != 'milestone'" floatLabel="never" appearance="fill" class="p-0 sy-start-date-form">
               <mat-label>{{'working-plan.chart.column.dates.start' | translate}}</mat-label>
-              <input  [disabled]="(compareMode | async) || isVersionOf" 
-                      matInput type="text" 
-                      ngbDatepicker #startDate="ngbDatepicker" 
-                      (click)="startDate.toggle()" 
-                      container="body"
-                      [minDate]="node.level > 0 ? getDateStruct(getParentStep(node).dates?.start?.full) : null"
-                      [maxDate]="node.level > 0 ? getDateStruct(getParentStep(node).dates?.end?.full) : getDateStruct(node.dates?.end?.full)"
-                      [value]="(node.dates?.start?.full) ? (node.dates?.start?.full) : ''"
-                      (dateSelect)="updateDateRange(node, $event, node.dates?.end?.full)"/>
-              <mat-icon *ngIf="!(compareMode | async) && !isVersionOf"
+              <input [disabled]="(compareMode | async) || isVersionOf || !(canAdd$ | async)" matInput type="text"
+                     matInput type="text"
+                     ngbDatepicker #startDate="ngbDatepicker"
+                     container="body"
+                     [minDate]="node.level > 0 ? getDateStruct(getParentStep(node).dates?.start?.full) : null"
+                     [maxDate]="node.level > 0 ? getDateStruct(getParentStep(node).dates?.end?.full) : getDateStruct(node.dates?.end?.full)"
+                     [value]="(node.dates?.start?.full) ? (node.dates?.start?.full) : ''"
+                     (click)="startDate.toggle()"
+                     (dateSelect)="updateDateRange(node, $event, node.dates?.end?.full)"/>
+              <mat-icon *ngIf="!(compareMode | async) && !isVersionOf && (canAdd$ | async)"
                         matSuffix (click)="startDate.toggle()"
-                        class="cursor-pointer">edit_calendar</mat-icon>
+                        class="cursor-pointer">edit_calendar
+              </mat-icon>
             </mat-form-field>
 
             <br *ngIf="node.type != 'milestone'">
@@ -387,23 +391,24 @@
             <mat-form-field floatLabel="never" appearance="fill" class="p-0 sy-end-date-form">
               <mat-label>{{'working-plan.chart.column.dates.end' | translate}}</mat-label>
               <input matInput type="text" ngbDatepicker #endDate="ngbDatepicker" (click)="endDate.toggle()" container="body"
-                     [disabled]="(compareMode | async) || isVersionOf"
+                     [disabled]="(compareMode | async) || isVersionOf || !(canAdd$ | async)"
                      [minDate]="node.level > 0 ? getDateStruct(getParentStep(node).dates?.start?.full) : getDateStruct(node.dates?.start?.full)"
                      [maxDate]="node.level > 0 ? getDateStruct(getParentStep(node).dates?.end?.full) : null"
                      [value]="(node.dates?.end?.full) ? (node.dates?.end?.full) : ''"
                      (dateSelect)="updateDateRange(node, (node.type != 'milestone')?node.dates?.start?.full:$event, $event)"/>
-              <mat-icon *ngIf="!(compareMode | async) && !isVersionOf"
+              <mat-icon *ngIf="!(compareMode | async) && !isVersionOf && (canAdd$ | async)"
                         matSuffix (click)="endDate.toggle()"
-                        class="cursor-pointer">edit_calendar</mat-icon>
+                        class="cursor-pointer">edit_calendar
+              </mat-icon>
             </mat-form-field>
 
           </div><!-- End Form Group Start/End-Date -->
 
           <!-- input-field for responsible organization, see src/app/shared/authority-dropdown/authority-dropdown.component.html -->
           <div class="ml-05 mt-1 font-size-07 sy-responsible-organization-block">
-            <p class="font-weight-bold m-0 sy-responsible-organization-header">{{'working-plan.chart.column.responsible' | translate}}</p> 
+            <p class="font-weight-bold m-0 sy-responsible-organization-header">{{'working-plan.chart.column.responsible' | translate}}</p>
             <ds-authority-dropdown floatLabel="never" class="min-width-large"
-                                   [readOnly]="(compareMode | async) || isVersionOf"
+                                   [readOnly]="(compareMode | async) || isVersionOf || !(canAdd$ | async)"
                                    [fieldId]="'responsible'"
                                    [fieldName]="'responsible'"
                                    [vocabularyOptions]="(node.type != 'milestone') ? workpackageVocabularyOptions : milestoneVocabularyOptions"
@@ -416,11 +421,13 @@
             <p class="font-weight-bold m-0 sy-status-header">{{'working-plan.chart.column.status' | translate}}</p>
 
             <mat-form-field appearance="fill" floatLabel="never" class="mr-05 min-width-small sy-status-form">
-              <mat-select [disabled]="(compareMode | async) || isVersionOf" class="text-center" (selectionChange)="updateStepStatus(node, $event)" [(value)]="node.status">
+              <mat-select [disabled]="(compareMode | async) || isVersionOf || !(canAdd$ | async)" class="text-center" (selectionChange)="updateStepStatus(node, $event)" [(value)]="node.status">
                 <mat-select-trigger>
-                  <span><i dsWorkpackageStatusIcon [status]="node?.status"></i> {{getStatusTypeLabel(node?.status)}}</span>
+                  <span><i dsWorkpackageStatusIcon
+                           [status]="node?.status"></i> {{getStatusTypeLabel(node?.status)}}</span>
                 </mat-select-trigger>
-                <mat-option *ngFor="let statusType of (getStatusValues() | async)" [value]="statusType.value">{{statusType.display}}</mat-option>
+                <mat-option *ngFor="let statusType of (getStatusValues() | async)"
+                            [value]="statusType.value">{{statusType.display}}</mat-option>
               </mat-select>
             </mat-form-field>
 
@@ -431,7 +438,7 @@
     </div><!-- end second column -->
 
     <!-- ....................................................................................................
-    Third Column: Calendar-Table with headers, defined in 
+    Third Column: Calendar-Table with headers, defined in
     src/app/working-plan/working-plan-chart/container/working-plan-chart-dates/working-plan-chart-dates.component.html
     ..................................................................................................... -->
     <ds-working-plan-chart-dates class="w-100"

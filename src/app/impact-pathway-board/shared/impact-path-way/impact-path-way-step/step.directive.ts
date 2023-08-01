@@ -21,7 +21,7 @@ export class StepColorDirective {
     this.renderer.addClass(this.elem.nativeElement, this.getColorByType());
   }
 
-  /* changed on 230425 so that the class names are no longer color-related and 
+  /* changed on 230425 so that the class names are no longer color-related and
     all six columns can be designed independently. (rex 230425) */
   /*
   private getColorByType(): string {

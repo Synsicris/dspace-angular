@@ -5,11 +5,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-import { UploaderOptions } from '../../shared/uploader/uploader-options.model';
+import { UploaderOptions } from '../../shared/upload/uploader/uploader-options.model';
 import { EasyOnlineImportService } from '../../core/easy-online-import/easy-online-import.service';
 import { RestRequestMethod } from '../../core/data/rest-request-method';
 import { AuthService } from '../../core/auth/auth.service';
-import { UploaderComponent } from '../../shared/uploader/uploader.component';
+import { UploaderComponent } from '../../shared/upload/uploader/uploader.component';
 import { getItemPageRoute } from '../../item-page/item-page-routing-paths';
 import { Item } from '../../core/shared/item.model';
 import { NotificationsService } from '../../shared/notifications/notifications.service';

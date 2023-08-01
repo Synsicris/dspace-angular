@@ -22,6 +22,8 @@ import {
 import { RenderCrisLayoutBoxFor } from '../../../../decorators/cris-layout-box.decorator';
 import { getItemPageRoute } from '../../../../../item-page/item-page-routing-paths';
 import { ProjectVersionService } from '../../../../../core/project/project-version.service';
+import { take } from 'rxjs/operators';
+import { EditItemDataService } from '../../../../../core/submission/edititem-data.service';
 
 @Component({
   selector: 'ds-impact-pathways-box',
@@ -57,6 +59,11 @@ export class ImpactPathwaysBoxComponent extends CrisLayoutBoxModelComponent impl
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   /**
+   * A boolean representing edit modes for the community
+   */
+  canAddButton$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+
+  /**
    * The project community which the impact-pathways belong to
    */
   projectCommunityUUID: string;
@@ -69,6 +76,7 @@ export class ImpactPathwaysBoxComponent extends CrisLayoutBoxModelComponent impl
     protected projectVersionService: ProjectVersionService,
     protected router: Router,
     protected translateService: TranslateService,
+    protected editItemDataService: EditItemDataService,
     @Inject('boxProvider') public boxProvider: CrisLayoutBox,
     @Inject('itemProvider') public itemProvider: Item
   ) {
@@ -84,7 +92,11 @@ export class ImpactPathwaysBoxComponent extends CrisLayoutBoxModelComponent impl
       this.projectCommunityUUID = projectCommunity.uuid;
       this.retrieveImpactPathwayList(0);
     });
-
+    this.impactPathwayService.canCreateImpactPathwayItem(this.projectCommunityUUID).pipe(
+      take(1)
+    ).subscribe((canEdit: boolean) => {
+      this.canAddButton$.next(canEdit);
+    });
   }
 
   /**

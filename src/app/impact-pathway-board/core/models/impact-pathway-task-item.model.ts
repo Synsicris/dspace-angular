@@ -1,4 +1,4 @@
-import { uniqueId } from 'lodash';
+import uniqueId from 'lodash/uniqueId';
 import { QuestionsBoardType } from '../../../questions-board/core/models/questions-board-type';
 import { isEmpty } from '../../../shared/empty.util';
 

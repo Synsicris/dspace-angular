@@ -48,11 +48,13 @@ export class QuestionsBoardGuard extends HasPolicyEditGrantsGuard {
           return combineLatest([
               this.authorizationService.isAuthorized(FeatureID.HasEditGrantsOnItem, itemRD.payload.self),
               this.authorizationService.isAuthorized(FeatureID.HasVersioningReadGrantsOnItem, itemRD.payload.self),
+              this.authorizationService.isAuthorized(FeatureID.isReaderOfProject, itemRD.payload.self),
+              this.authorizationService.isAuthorized(FeatureID.isExternalreaderOfProject, itemRD.payload.self),
               this.authorizationService.isAuthorized(FeatureID.isFunderOrganizationalManagerOfProgramme, itemRD.payload.self),
               this.authorizationService.isAuthorized(FeatureID.AdministratorOf)
             ]
           ).pipe(
-            map(([hasEdit, hasVersioningRead, isAdmin, isFunderOrganizationalManager]) => hasEdit || hasVersioningRead || isFunderOrganizationalManager || isAdmin)
+            map(([hasEdit, hasVersioningRead, isReader, isExternalReader, isAdmin, isFunderOrganizationalManager]) => hasEdit || hasVersioningRead || isReader || isExternalReader || isFunderOrganizationalManager || isAdmin)
           );
         } else {
           return observableOf(false);

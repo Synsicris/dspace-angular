@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 
 import { combineLatest, from, Observable, of } from 'rxjs';
 import { concatMap, map, mergeMap, reduce, switchMap } from 'rxjs/operators';
-import { differenceWith, findIndex, unionWith } from 'lodash';
+import differenceWith from 'lodash/differenceWith';
+import findIndex from 'lodash/findIndex';
+import unionWith from 'lodash/unionWith';
 
 import { RelationshipDataService } from '../data/relationship-data.service';
 import { ItemDataService } from '../data/item-data.service';

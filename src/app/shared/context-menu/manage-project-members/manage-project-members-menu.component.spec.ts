@@ -1,5 +1,5 @@
 import { AuthorizationDataService } from './../../../core/data/feature-authorization/authorization-data.service';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 

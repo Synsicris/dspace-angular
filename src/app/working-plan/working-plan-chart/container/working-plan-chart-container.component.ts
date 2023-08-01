@@ -3,6 +3,7 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { MatSelectChange } from '@angular/material/select';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { BehaviorSubject, Observable, of as observableOf, Subscription } from 'rxjs';
 import { filter, map, take, withLatestFrom } from 'rxjs/operators';
@@ -10,7 +11,10 @@ import { ResizeEvent } from 'angular-resizable-element';
 import { NgbDate, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { CdkDragDrop, CdkDragSortEvent, CdkDragStart } from '@angular/cdk/drag-drop';
-import { findIndex } from 'lodash';
+import findIndex from 'lodash/findIndex';
+import { add, endOfMonth, endOfQuarter, endOfYear, format, max, min, subDays, eachQuarterOfInterval, getQuarter, eachDayOfInterval, eachYearOfInterval, eachMonthOfInterval } from 'date-fns';
+import { ScrollToConfigOptions, ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
+
 import {
   CreateSimpleItemModalComponent
 } from '../../../shared/create-simple-item-modal/create-simple-item-modal.component';
@@ -22,7 +26,7 @@ import {
   WorkpackageStep,
   WorkpackageTreeObject
 } from '../../core/models/workpackage-step.model';
-import { moment, WorkingPlanService, WpMetadata, WpStepMetadata } from '../../core/working-plan.service';
+import { WorkingPlanService, WpMetadata, WpStepMetadata } from '../../core/working-plan.service';
 import { WorkingPlanStateService } from '../../core/working-plan-state.service';
 import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
 import { hasValue, isEmpty, isNotEmpty, isNotNull } from '../../../shared/empty.util';
@@ -34,9 +38,7 @@ import { Item } from '../../../core/shared/item.model';
 import { EditItemMode } from '../../../core/submission/models/edititem-mode.model';
 import { ComparedVersionItemStatus } from '../../../core/project/project-version.service';
 import { CompareItemComponent } from '../../../shared/compare-item/compare-item.component';
-import { ActivatedRoute } from '@angular/router';
 import { ItemDetailPageModalComponent } from 'src/app/item-detail-page-modal/item-detail-page-modal.component';
-import { ScrollToConfigOptions, ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
 
 export const MY_FORMATS = {
   parse: {
@@ -117,21 +119,20 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   private defaultDates: any = {
     start: {
-      full: moment().format('YYYY-MM-DD'),
-      month: moment().format('YYYY-MM'),
-      year: moment().format('YYYY')
+      full: format(new Date(), 'yyyy-MM-dd'),
+      month: format(new Date(), 'yyyy-MM'),
+      year: format(new Date(), 'yyyy-MM')
     },
     end: {
-      full: moment().add(7, 'days').format('YYYY-MM-DD'),
-      month: moment().add(7, 'days').format('YYYY-MM'),
-      year: moment().add(7, 'days').format('YYYY')
+      full: format(add(new Date(), {days: 7}),'yyyy-MM-dd'),
+      month: format(add(new Date(), {days: 7}),'yyyy-MM'),
+      year: format(add(new Date(), {days: 7}),'yyyy')
     },
   };
 
-  dateFormat = 'YYYY-MM-DD';
-  dateMonthFormat = 'YYYY-MM';
-  dateYearFormat = 'YYYY';
-  moment = moment;
+  dateFormat = 'yyyy-MM-dd';
+  dateMonthFormat = 'yyyy-MM';
+  dateYearFormat = 'yyyy';
   dates: string[] = []; // all days in chart
   datesMonth: string[] = []; // all months in chart
   datesQuarter: string[] = []; // all quarters in chart
@@ -210,6 +211,8 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   ComparedVersionItemStatus = ComparedVersionItemStatus;
 
+  canAdd$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   private chartStatusTypeList$: BehaviorSubject<VocabularyEntry[]> = new BehaviorSubject<VocabularyEntry[]>([]);
   private subs: Subscription[] = [];
 
@@ -287,7 +290,9 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         });
       }
     });
-
+    this.workingPlanService.canCreateWorkpackage(this.projectCommunityId)
+      .pipe(take(1))
+      .subscribe(canAdd => this.canAdd$.next(canAdd));
     this.sortOptions$ = this.workingPlanService.getWorkpackageSortOptions();
   }
 
@@ -504,11 +509,11 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       }
 
       if (node.type === 'milestone') {
-        startDate = this.moment(node.dates.end.full, this.dateFormat);
+        startDate = format(new Date(node.dates.end.full), this.dateFormat);
       } else {
-        startDate = this.moment(node.dates.start.full, this.dateFormat);
+        startDate = format(new Date(node.dates.start.full), this.dateFormat);
       }
-      endDate = this.moment(node.dates.end.full, this.dateFormat);
+      endDate = format(new Date(node.dates.end.full), this.dateFormat);
       if (this.changeStartDateDirection === 'later') {
         startStringDate = startDate.add(this.changeStartDateDays, 'days').format(this.dateFormat);
         endStringDate = endDate.add(this.changeStartDateDays, 'days').format(this.dateFormat);
@@ -624,62 +629,55 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
     stepToProcess
       .forEach((step: any) => {
-        let start;
-        let compareStart;
-        let compareEnd;
-        const end = this.moment(step.dates.end.full, this.dateFormat);
+        let start: Date;
+        let compareStart: Date;
+        let compareEnd: Date;
+        const end = new Date(step.dates.end.full);
         if (isNotEmpty(step.dates.compareEnd)) {
-          compareEnd = this.moment(step.dates.compareEnd.full, this.dateFormat);
+          compareEnd = step.dates.compareEnd.full;
         }
 
         if (step.type === 'milestone') {
-          start = this.moment(this.moment(step.dates.end.full, this.dateFormat).subtract(1, 'days').format(this.dateFormat), this.dateFormat);
+          start = subDays(new Date(step.dates.end.full), 1);
           if (isNotEmpty(step.dates.compareStart)) {
-            compareStart = this.moment(this.moment(step.dates.compareEnd.full, this.dateFormat).subtract(1, 'days').format(this.dateFormat), this.dateFormat);
+            compareStart = subDays(new Date(step.dates.compareEnd.full), 1);
           }
         } else {
-          start = this.moment(step.dates.start.full, this.dateFormat);
+          start = new Date(step.dates.start.full);
           if (isNotEmpty(step.dates.compareStart)) {
-            compareStart = this.moment(step.dates.compareStart.full, this.dateFormat);
+            compareStart = new Date(step.dates.compareStart.full);
           }
         }
 
-        const rangeMinDate = isNotEmpty(step.dates.compareStart) ? moment.min(start, compareStart) : start;
-        const rangeMaxDate = isNotEmpty(step.dates.compareEnd) ? moment.max(end, compareEnd) : end;
-        const maxEndDate = rangeMaxDate.format(this.dateFormat);
-        const dateRange = moment.range(rangeMinDate, rangeMaxDate);
+        const rangeMinDate: Date = isNotEmpty(step.dates.compareStart) ? min([start, compareStart]) : start;
+        const rangeMaxDate: Date = isNotEmpty(step.dates.compareEnd) ? max([end, compareEnd]) : end;
 
         // Moment range sometimes does not include all the months, so use the end of the month to get the correct range
-        const endForMonth = this.datesMonth.length > 0 ? this.moment(this.datesMonth[this.datesMonth.length - 1]) : this.moment(maxEndDate).endOf('month');
-        const dateRangeForMonth = this.moment.range(start, endForMonth);
-
+        const endForMonth = this.datesMonth.length > 0 ? endOfMonth(new Date(this.datesMonth[this.datesMonth.length - 1])) : endOfMonth(rangeMaxDate);
         // Moment range sometimes does not include all the quarters, so use the end of the quarter to get the correct range
-        const endForQuarter = this.moment(maxEndDate).endOf('quarter');
-        const dateRangeForQuarter = this.moment.range(start, endForQuarter);
-
+        const endForQuarter = endOfQuarter(rangeMaxDate);
         // Moment range sometimes does not include all the years, so use the end of the year to get the correct range
-        const endForYear = this.moment(maxEndDate, this.dateFormat).endOf('year');
-        const dateRangeForYear = this.moment.range(start, endForYear);
+        const endForYear = endOfYear(rangeMaxDate);
 
-        const days = Array.from(dateRange.by('days'));
-        const months = Array.from(dateRangeForMonth.by('months'));
-        const quarters = Array.from(dateRangeForQuarter.by('quarters'));
-        const years = Array.from(dateRangeForYear.by('year'));
+        const days = eachDayOfInterval({ start: rangeMinDate, end: rangeMaxDate });
+        const months = eachMonthOfInterval({ start: start, end: endForMonth });
+        const quarters = eachQuarterOfInterval({ start: start, end: endForQuarter });
+        const years = eachYearOfInterval({ start: start, end: endForYear });
 
         this.dates = this.dates.concat(days
-          .map((d) => d.format(this.dateFormat))
+          .map((d) => format(d, this.dateFormat))
           .filter((d) => !this.dates.includes(d))).sort();
 
         this.datesMonth = this.datesMonth.concat(months
-          .map((d) => d.format(this.dateMonthFormat))
+          .map((d) => format(d, this.dateMonthFormat))
           .filter((d) => !this.datesMonth.includes(d))).sort();
 
         this.datesQuarter = this.datesQuarter.concat(quarters
-          .map((d) => d.format(this.dateYearFormat) + '-' + d.quarter().toString())
+          .map((d) => `${format(d, this.dateYearFormat)}-${getQuarter(d).toString()}`)
           .filter((d) => !this.datesQuarter.includes(d))).sort();
 
         this.datesYear = this.datesYear.concat(years
-          .map((d) => d.format(this.dateYearFormat))
+          .map((d) => format(d, this.dateYearFormat))
           .filter((d) => !this.datesYear.includes(d))).sort();
       });
     this.adjustDates();
@@ -794,14 +792,14 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
 
   getDatesMonthByYear(year: string): string[] {
     return this.datesMonth.filter((date) => {
-      const dateYear = moment(date).format('YYYY');
+      const dateYear = format(new Date(date), 'yyyy');
       return dateYear === year;
     });
   }
 
   getDatesQuarterByYear(year: string) {
     return this.datesQuarter.filter((date) => {
-      const dateYear = moment(date).format('YYYY');
+      const dateYear = format(new Date(date), 'yyyy');
       return dateYear === year;
     });
   }
@@ -832,21 +830,19 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
     let startDateObj: WorkpackageChartDate;
     let endDateObj: WorkpackageChartDate;
     if (endDate) {
-      const endMoment = this.moment(endDate); // create start moment
       endDateObj = {
-        full: endMoment.format(this.dateFormat),
-        month: endMoment.format(this.dateMonthFormat),
-        year: endMoment.format(this.dateYearFormat)
+        full: format(new Date(endDate), this.dateFormat),
+        month: format(new Date(endDate), this.dateMonthFormat),
+        year: format(new Date(endDate), this.dateYearFormat)
       };
       dates.end = endDateObj;
     }
 
     if (flatNode.type !== 'milestone' && startDate) {
-      startMoment = this.moment(startDate); // create start moment
       startDateObj = {
-        full: startMoment.format(this.dateFormat),
-        month: startMoment.format(this.dateMonthFormat),
-        year: startMoment.format(this.dateYearFormat)
+        full: format(new Date(startDate), this.dateFormat),
+        month: format(new Date(startDate), this.dateMonthFormat),
+        year: format(new Date(startDate), this.dateYearFormat)
       };
       dates.start = startDateObj;
     }
@@ -953,26 +949,23 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
    */
   private adjustDates(): void {
     if (this.datesMonth.length > 0) {
-      const dateFormat = 'YYYY-MM';
-      const firstDateMonth = moment(this.datesMonth[0], dateFormat);
-      const lastDateMonth = moment(this.datesMonth[this.datesMonth.length - 1], dateFormat);
+      const firstDateMonth = new Date(this.datesMonth[0]);
+      const lastDateMonth = new Date(this.datesMonth[this.datesMonth.length - 1]);
 
-      const beforeStart = moment(firstDateMonth.format('YYYY') + '-01', dateFormat);
-      const afterLimit = moment(lastDateMonth.format('YYYY') + '-12', dateFormat);
+      const beforeStart = new Date(format(firstDateMonth, `${this.dateYearFormat}-01`));
+      const afterLimit = new Date(format(lastDateMonth, `${this.dateYearFormat}-12`));
 
-      const beforeRange = moment.range(beforeStart, firstDateMonth);
-      const afterRange = moment.range(lastDateMonth, afterLimit);
+      const beforeRangeArray = eachMonthOfInterval({ start: beforeStart, end: firstDateMonth});
+      const afterRangeArray = eachMonthOfInterval({ start: lastDateMonth, end: afterLimit});
 
-      const beforeRangeArray = Array.from(beforeRange.by('months'));
-      const afterRangeArray = Array.from(afterRange.by('months'));
       this.datesMonth = this.datesMonth.concat(
         beforeRangeArray
-          .map((d) => d.format(this.dateMonthFormat))
+          .map((d) => format(new Date(d), this.dateMonthFormat))
           .filter((d) => this.datesMonth.indexOf(d) === -1)
       ).sort();
       this.datesMonth = this.datesMonth.concat(
         afterRangeArray
-          .map((d) => d.format(this.dateMonthFormat))
+          .map((d) => format(d, this.dateMonthFormat))
           .filter((d) => this.datesMonth.indexOf(d) === -1)
       ).sort();
     }
@@ -984,7 +977,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
       let afterStart = parseInt(lastDateQuarter[1], 10);
       const afterLimit = 4;
       for (beforeStart; beforeStart < beforeLimit; beforeStart++) {
-        this.datesQuarter.unshift(firstDateQuarter[0] + '-' + beforeStart);
+        this.datesQuarter.unshift(firstDateQuarter[0] + '-' + (+firstDateQuarter[1] - beforeStart));
       }
       for (afterStart++; afterStart <= afterLimit; afterStart++) {
         this.datesQuarter.push(lastDateQuarter[0] + '-' + afterStart);

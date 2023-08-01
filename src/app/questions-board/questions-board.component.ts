@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@a
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
-import { isEqual } from 'lodash';
 
 import { Item } from '../core/shared/item.model';
 import { Community } from '../core/shared/community.model';
@@ -13,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 import { VersionSelectedEvent } from '../shared/item-version-list/item-version-list.component';
 import { AlertRole, getProgrammeRoles } from '../shared/alert/alert-role/alert-role';
 import { ProjectAuthorizationService } from '../core/project/project-authorization.service';
+import { QuestionsBoardService } from './core/questions-board.service';
 
 @Component({
   selector: 'ds-questions-board',
@@ -29,7 +29,17 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
   /**
    * If the current user is a funder project manager
    */
+  @Input() isAdmin: boolean;
+
+  /**
+   * If the current user is a funder project manager
+   */
   @Input() isFunderProject: boolean;
+
+  /**
+   * If the current user is project reader
+   */
+  @Input() isProjectReader: boolean;
 
   /**
    * The prefix to use for the i18n keys
@@ -80,6 +90,7 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
   public funderRoles: AlertRole[];
 
   constructor(
+    protected questionsBoardService: QuestionsBoardService,
     protected questionsBoardStateService: QuestionsBoardStateService,
     protected aroute: ActivatedRoute,
     private projectAuthorizationService: ProjectAuthorizationService
@@ -87,6 +98,7 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.questionsBoardService.isAdmin = this.isAdmin;
     this.questionsBoardObjectId = this.questionsBoardObject?.id;
     this.questionsBoardStep$ = this.questionsBoardStateService.getQuestionsBoardStep(this.questionsBoardObjectId);
     this.subs.push(

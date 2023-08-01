@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { BehaviorSubject } from 'rxjs';
@@ -20,7 +20,7 @@ import { Item } from '../../core/shared/item.model';
   styleUrls: ['./wrapper-objectives.component.scss'],
   templateUrl: './wrapper-objectives.component.html'
 })
-export class WrapperObjectivesComponent implements OnDestroy {
+export class WrapperObjectivesComponent implements OnInit, OnDestroy {
   /**
    * The impact pathway step id
    */

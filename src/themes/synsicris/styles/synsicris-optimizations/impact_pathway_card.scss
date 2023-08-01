@@ -8,10 +8,10 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
   box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
 
   /* MARKING OF DELETED AND NEW DATA IN COMPARE MODE
-  Deleted or new data in the impact pathway did not get (as of dev version July 25, 2023) their own class in compare mode 
-  as in the work plan (there: .compare-node-status-new and .compare-node-status-deleted), but were instead marked 
+  Deleted or new data in the impact pathway did not get (as of dev version July 25, 2023) their own class in compare mode
+  as in the work plan (there: .compare-node-status-new and .compare-node-status-deleted), but were instead marked
   with the bootstrap classes for success and danger notices (.alert-succes and .alert-danger).
-  To be able to design them consistently with the same colors as in the routing via external stylesheets, 
+  To be able to design them consistently with the same colors as in the routing via external stylesheets,
   I added new classes .compare-status-new and .compare-status-deleted instead. (rex 230725) */
   &.compare-status-new .task-left-bar {
     background-color: var(--sy-compare-data-new-background);
@@ -19,11 +19,14 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
   &.compare-status-deleted .task-left-bar {
     background-color: var(--sy-compare-data-deleted-background);
   }
-  
+
   min-width:10rem; //underneath there are misrepresentations d
-  /* the original white background color of the cards does not come from the cards themselves, 
+  /* the original white background color of the cards does not come from the cards themselves,
   but seems to be a responsive layoer underneath, but I could not find out its origin */
-  background-color:var(--sy-color-gray-100);
+  // excluding the following classes from the white background color (ex. on compare mode)
+    &:not(.alert-danger):not(.alert-success):not(.task-disabled):not(.task-focus):not(.bg-gradient-light) {
+        background-color: var(--sy-color-gray-100);
+      }
 
   // left sidebar with drag'n drop icon
   .task-left-bar {
@@ -39,12 +42,12 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
   // right area of card with content and footer
   .task-right-bar {
     padding:0.6rem 0.6rem 0.4rem 0.6rem;
-    
 
-    // content 
+
+    // content
     .task-detail {
       padding:0 !important;
-      
+
       // status-icons beside the title of card
       .row-status-icons {
         position:relative;
@@ -55,13 +58,13 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
       } // end .row-status-icons
 
       /* Entity-Type
-      unclear why this area is called content even though it only contains the entity type, 
+      unclear why this area is called content even though it only contains the entity type,
       but have left it that way not knowing if this class has any special effects yet. */
       div.task-content {
         padding:0 !important;
 
         // additional class of Entity label, when the arrow-overlay is activated
-        &.task-overlay-hide {  
+        &.task-overlay-hide {
           //margin-bottom:1rem !important; // makes card higher for the additional overlay-text
           //transition: margin-bottom 100ms ease; // animation
         }
@@ -80,14 +83,14 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
         margin-bottom:1.2rem;
 
         div.task-title {
-          .sy-entity-title { 
+          .sy-entity-title {
             font-family:'Nunito-Bold';
             line-height:1.1rem;
           }
-        } 
+        }
 
       } // end div.task-header
-      
+
     } // end .task-detail
 
   // footer of IP-Card with icon-buttons
@@ -104,10 +107,10 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
       height:auto;
       width:auto;
       &[disabled]{ opacity:0; } // hides disabled action buttons completely, when overlay is active
-     
+
       span.span-icon-container i { font-size:1rem; }
       i.fa-save { color: var(--sy-color-blue-33) !important; } // makes black save-icon blue
-      
+
       // hover-Effect for icon-Buttons,
       &:hover { background-color:var(--sy-color-blue-94); }
 
@@ -115,13 +118,13 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
 
   } // end .task-actions
 
-  /* Overlay for Arrow Function in 
+  /* Overlay for Arrow Function in
   src/app/impact-pathway-board/shared/impact-path-way/impact-path-way-task/impact-path-way-task.component.html */
   .task-overlay {
 
     background-color:var(--sy-impact-pathway-arrow-overlay-background) !important;
     border-top:1px solid var(--sy-color-gray-96);
-    
+
     transition: background-color 200ms;
     left:-1.6rem; // Width of the drag'n drop sidebar, as the overlay drags over it on the left as well
     width:calc(100% + 1.6rem);
@@ -142,13 +145,13 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
         } // Text
 
       &.mat-checkbox-checked {
-       
+
         .mat-checkbox-frame {
           border-color:var(--sy-impact-pathway-arrows)!important;
           box-shadow:0 0 8px 1px var(--sy-color-magenta-50); // glow around checkbox
         }
         svg path {stroke:var(--sy-impact-pathway-arrows)!important;}
-  
+
       }
 
 
