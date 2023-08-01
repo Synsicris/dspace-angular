@@ -1,0 +1,60 @@
+/* --------------------------- General rules für @media print --------------------------- */
+// header with SynSICRIS-Logo and line
+header {
+  display:inline-block !important; 
+  width:5cm;
+  //border:1px solid red !important;
+  float:left !important;
+  nav.navbar {
+    //border-bottom:1px solid lime !important;
+    border:none !important;
+  }
+}
+
+// breadcrumbs               
+ds-themed-breadcrumbs  { 
+    display:inline-block!important; 
+    width:30cm;
+    position:absolute;
+    top:0;
+    left:5.1cm;
+    border:none !important;
+
+    ds-breadcrumbs nav.nav-breadcrumb {
+      //border:3px solid red !important;
+      float:left !important;
+      display:block !important;
+      margin:0 !important;
+      padding:0.5cm 0 0 0 !important;
+      width:100% !important;
+
+      ol.breadcrumb {
+        //border:3px solid lime !important;
+        margin:0 !important;
+        padding:0 !important;
+        width:100% !important;
+
+        li.breadcrumb-item a {
+          color:var(--sy-color-gray-36);
+        }
+        li.breadcrumb-item.separator a {
+          border:1px solid var(--sy-breadcrumb-tag-border-color);
+          i.fas {display:none;}
+        }
+      }
+    }
+
+  } 
+
+  // generate a line under logo and breadcrumb
+  .inner-wrapper  {
+    &:before {
+      position:absolute;
+      content:"";
+      display:block;
+      width:100%;
+      border-top:1px solid var(--sy-breadcrumb-tag-border-color);
+      margin-top:1.6cm;
+    }
+
+}

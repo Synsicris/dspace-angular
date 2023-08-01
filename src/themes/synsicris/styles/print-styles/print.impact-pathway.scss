@@ -1,48 +1,5 @@
 /* TODO: Remove comment when styles need to be applied only on print command  */
 
-/* --------------------------- General rules --------------------------- */
-
-ds-footer,
-ds-alert-role,
-ds-loading,
-ds-themed-breadcrumbs,
-button:not(.sidebar-panel-toggle),
-nav ds-link-menu-item,
-nav ds-auth-nav-menu,
-nav .navbar-nav a,
-.dropdown-toggle,
-span[tooltipclass] {
-  display: none !important;
-}
-
-p {
-  font-size: 12pt !important; /* recommanded */
-}
-
-a {
-  text-decoration: none !important;
-}
-
-/* --------------------------------------------------------------------- */
-#ipw i,
-#ipw .task-left-bar,
-#ipw .task-actions {
-  display: none !important;
-}
-
-#ipw ds-impact-path-way-step {
-  background-color: white !important;
-}
-
-.vertical-step {
-  border-left: 0px !important;
-  border-right: 1px dotted gray !important;
-}
-
-#ipw .task-container {
-  border: 0.6px solid gray;
-}
-
 /* set width in cm when working with print styles */
 #ipw {
   width: 35cm !important;/* fits the page in A4 format, also including the arrows */
@@ -50,11 +7,126 @@ a {
 
 #ipw ngx-domarrow .line {
   /* alternative solution to show the line, since the backgroud color is removed by print command */
-  border-bottom: 2px solid red !important;
+  border-bottom: 2px solid var(--sy-impact-pathway-arrows) !important;
 }
 
 #ipw ds-impact-path-way-task {
   // important to set a margin to avoid changing the position of the task
   // and the length of the arrow
   margin-bottom: 1em !important;
+}
+
+// complete content of IPW-site including the description field
+#ipw {
+
+  // line and margin under headline (hardcoded CSS classes with corresponding bootstrap classes (.margin-bottom, pb-2. mb-4 etc.))
+  div.border-bottom.mb-4.pb-2 {
+    border: none !important;
+    padding:0 !important;
+    margin:0 !important;
+
+    h1 {
+      margin:0 !important;
+      padding:0 !important;
+    }
+  }
+
+  // line above editable textarea
+  hr {display:none;}
+  
+  // description textarea beneath impact pathway
+  ds-editable-textarea {
+    display:none;
+  }
+
+  div.legend-symbols {
+    display: none !important;
+  }
+ 
+  // columns
+  ds-impact-path-way-step.vertical-step {   
+    
+    background-color: var(--sy-color-gray-99) !important; // columns are light grey to better see the cards
+    border:none !important;
+    padding:0 !important; // to center the card in the column
+
+    &.bg-step-1, &.bg-step-2, &.bg-step-3, &.bg-step-4, &.bg-step-5, &.bg-step-6 {
+      border:1px solid var(--sy-color-gray-36) !important;
+    }
+    &:nth-child(2), &:nth-child(4), &:nth-child(6) {margin-left: 12px !important;}
+    &:nth-child(2), &:nth-child(4) {border-right:none !important;}
+    &:nth-child(3), &:nth-child(5) {border-left: 2px dotted var(--sy-color-gray-68) !important;}
+
+    // headlines of columns
+    .title-content {
+      text-wrap: balance; //Balanced line lengths as of Chrome v114
+      .title-clamp { -webkit-line-clamp: 10; } // disables truncation
+      -moz-hyphens: auto; // hyphenation
+      -o-hyphens: auto;
+      -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+      hyphens: auto; 
+      line-height:1.1rem;
+    }
+
+    // inner column with cards 
+    // div.cdk-drop-list.d-flex.p-2.h-100.flex-column { }
+
+    // cards
+    .task-container {   
+      border:1px solid var(--sy-color-gray-36);
+      box-shadow:0 0 3px rgba(0,0,0,0.5);
+      
+      .task-header {
+        margin:0 !important
+      }
+
+      // bottom bar with functional icon-buttons
+      .task-actions {display:none;}
+
+      // left bar of card with drag'n drop icon
+      .task-left-bar {display:none;}
+
+      .task-right-bar {
+        padding:8px !important;
+
+        // hide speech-bubble-icon for comments
+        i.fas.fa-comment {
+          display:none !important;
+        }
+
+        // title of entity-data
+        div.task-header {
+          margin-top:5px !important;
+        }
+
+        // entity-name
+        div.task-content {
+          div.sy-entity-name p { 
+            font-size:0.8rem !important;
+            font-family:'Nunito-ExtraLight' !important;
+            line-height:1rem;
+          }
+        }
+
+      }
+      
+
+      .type-clamp, .title-clamp {
+        width:100% !important;
+        text-wrap: balance; //Balanced line lengths as of Chrome v114
+        -webkit-line-clamp: 10; // disables truncation
+        -moz-hyphens: auto; // hyphenation
+        -o-hyphens: auto;
+        -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+        hyphens: auto; 
+      } 
+    }
+
+  } // end .vertical-step (= column)
+
+
+
+
 }

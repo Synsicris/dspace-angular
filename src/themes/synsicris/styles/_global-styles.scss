@@ -70,7 +70,12 @@ ds-metric-donuts a {
 @import 'synsicris-optimizations/impact_pathway.scss';
 @import 'synsicris-optimizations/impact_pathway_card.scss';
 @import 'synsicris-optimizations/impact_pathway_editable_textarea.scss';
-@import 'synsicris-optimizations/print.scss';
+@import 'synsicris-optimizations/working-plan.scss';
+@import 'synsicris-optimizations/colors-global.scss';
+@import 'synsicris-optimizations/questions-board.scss';
+// @import 'synsicris-optimizations/legend_symbols.scss'; // deactivated for now, but kept for possible further development
+
+
 
 /* -----------------------------------------------------------
 HELPER TO SHOW THE CURRENT WINDOW SIZE (rex 220505)
@@ -105,28 +110,20 @@ HELP-TEXT
 .alert-info {}
 
 
-
 /* -----------------------------------------------------------
 BUTTONS (rex 230324)
  must first be verified more systematically throughout the application, because it leads to misrepresentations
 in the working plan, for example, as if the base rem values were different there,
 although rem actually refers to the font size in the body, i.e. it should be independent of individual components.
-
 therefore defined for impact pathway only for the time being - generalize later!
 ----------------------------------------------------------- */
 
 button.btn-link {
-  /*
-  padding:0.5rem !important;
-  height:auto;
-  width:auto;
-  */
   i {
     //font-size:1.2rem;
   }
   // hover-Effect for icon-Buttons,
   &:hover {
     //background-color:var(--sy-color-blue-94);
-
   }
 }

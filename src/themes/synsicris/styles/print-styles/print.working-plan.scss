@@ -1,33 +1,168 @@
 /* TODO: Remove comment when styles need to be applied only on print command  */
 
-/* --------------------------- General rules --------------------------- */
 
-ds-footer,
-ds-alert-role,
-ds-themed-breadcrumbs,
-button:not(.sidebar-panel-toggle),
-nav ds-link-menu-item,
-nav ds-auth-nav-menu,
-nav .navbar-nav a,
-.dropdown-toggle,
-span[tooltipclass] {
-  display: none !important;
+mat-toolbar  // toolbar above working plan with switch month/quartal/year
+  {display:none !important;}
+
+/* line and margin under headline 
+(Since the design in the HTML code is quasi hardcoded via the design-related CSS classes 
+such as pb-2 and mb-4 instead of semantic classes, and this must be left that way for the screen view, 
+it must unfortunately be defined so absurdly for the print view here ) */
+div.border-bottom.mb-4.pb-2 {
+  border: none !important;
+  padding:0 !important;
+  margin:0 !important;
+
+  h1 {
+    margin:0 !important;
+    padding:0 !important;
+  }
 }
 
-p {
-  font-size: 12pt !important; /* recommanded */
-}
+// grey input for date and status
+div.mat-form-field-infix {}
 
-a {
-  text-decoration: none !important;
-}
 
-/* ----------------------------------------------------------------------- */
+ds-working-plan-page {
 
-ds-working-plan-chart button {
-  display: none !important;
-}
+/* ------------------------------------------------------------------------
+ First Column: Header-Cells with Titles, Entity-Names, Status-Icons and Buttons
+ ------------------------------------------------------------------------ */
+ .chart-column.names.sidenav {
 
-.flex-fill .calendar-inner-cell[date-inside=true] {
-  background-color: #89b34d !important;
-}
+  mat-tree.tree {
+
+    mat-tree-node {
+
+      // show left thick border again
+      & > div:first-of-type {
+        
+        // first level rows
+        &.root-node-style {
+          border-left:10px solid var(--sy-color-gray-95); 
+        }
+        // second level rows
+        &:not(.root-node-style) {
+          border-left:10px solid var(--sy-color-gray-95); 
+        }
+      }
+
+      // right block with status icons
+      div.row-header-right {
+
+        div.sy-status-icons {
+        
+          // block with status-icon
+          div.sy-status-icon { }
+
+          // speech-bubble-icon for comments
+          div.sy-comment-icon {
+            display:none !important; // hides the comment-icon
+          }
+
+        } // end .sy-status-icons
+
+      } // end div.row-header-right
+
+    } // end mat-tree-node
+
+  } // end mat-tree.tree 
+
+
+
+ } // end  .chart-column.names.sidenav (first column)
+
+
+/* ------------------------------------------------------------------------
+Second Column: start and end dates, responsible organization and status
+------------------------------------------------------------------------ */
+.chart-column.responsible.sidenav {
+
+  /* for the middle column min-width 450px is defined (where exactly is not clear)
+  reduced to 320px, because the status dropdown is hidden for print  */
+  min-width: 320px !important; 
+
+  /* *********** */ 
+  /*
+  SPECIAL SOLUTION TO STYLE THE ORGANIZATION NAMES
+  Solution to show the title over an additional span-Tag in src/app/shared/authority-dropdown/authority-dropdown.component.html
+  because input elements are "replaced elements" and not in the scope of CSS
+  https://stackoverflow.com/questions/4574912/css-content-generation-before-or-after-input-elements#4574946
+
+  hide the input field and show the name of the organization instead via the additional span tag 
+  created for this purpose by displaying title as CSS-content 
+  - which allows you to design the name as you like, unlike the content of the scrollable textfield!
+  */
+  input#responsible {
+    display:none;
+    }
+  span.show-title-of-input:after {
+    content:attr(title);
+    display:block;
+    width:5.5cm;
+    height:1.9cm;
+    }
+  /* *********** */
+
+  // grey input for date and status to white
+  div.mat-form-field-infix {
+    /*background-color:var(--sy-color-gray-100) !important;
+    border-color:var(--sy-color-gray-100) !important;
+    */
+    background-color:rgba(255,255,255,0) !important; // XXXXX WARUM NICHT TRANSPARENT??
+    border-color:transparent !important;
+  }
+    div.sy-start-end-date-block {
+      font-size:12px !important;
+      p.sy-start-and-end-date-header {}
+      mat-form-field.sy-start-date-form {}
+      mat-form-field.sy-end-date-form {}
+      mat-icon {display:none !important;} // hide calendar icon
+    } // end div.sy-start-end-date-block 
+    
+    div.sy-responsible-organization-block {
+      font-size:12px !important;
+      p.sy-responsible-organization-header {}
+      ds-authority-dropdown {}
+      
+    } // end div.responsible-organization-block 
+
+    div.sy-status-block {
+      display:none !important; // hide the complete status-dropdown, decision of Birge Wolf 20.7.23
+      //font-size:12px !important;
+      p.sy-status-header { }
+
+      // Dropdown for status
+      mat-form-field.sy-status-form {
+
+        mat-select {
+
+          // status-icons
+          .mat-select-trigger {
+            .mat-select-arrow {
+              color:transparent !important; // If you hide dropdown arrow with display:none, text also disappears. Therefore only made invisible by color.
+            } 
+          }
+          // status-text
+          mat-option {}
+
+        } // end mat-select
+      } // end mat-form-field.status-form 
+    } // end div.status-block
+
+
+} // end .chart-column.responsible.sidenav (second column)
+
+/* ------------------------------------------------------------------------
+Third Column: Calendar-Table
+------------------------------------------------------------------------ */
+ds-working-plan-chart-dates {
+
+
+
+} // end ds-working-plan-chart-dates (third column)
+
+
+ 
+
+} // end ds-working-plan-page

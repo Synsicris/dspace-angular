@@ -1,3 +1,5 @@
+<!-- rex: Scrollable Dropdown for responsible organization in working plan -->
+
 <div #sdRef="ngbDropdown" ngbDropdown display="dynamic" placement="bottom-right" class="w-100">
   <div class="position-relative right-addon">
     <i *ngIf="!readOnly" ngbDropdownToggle class="position-absolute scrollable-dropdown-toggle" aria-hidden="true"></i>
@@ -17,6 +19,15 @@
            (focus)="onFocus($event)"
            (keypress)="$event.preventDefault()">
   </div>
+
+  <!-- Special solution to style the organization name for print styles:
+  puts the title of the input-field (name of the responsible organization) also into the title of the following span.show-title-of-input.
+  This allows the title to be output via css-content, while this is not possible in the input-field, 
+  because input-elements are replaced elements (see https://stackoverflow.com/questions/4574912/css-content-generation-before-or-after-input-elements#4574946)  
+  The Title is styled for print export in src/themes/synsicris/styles/print-styles/print.working-plan.scss
+  -->
+  <span class="show-title-of-input" [title]="hasValue(currentValue | async) ? (currentValue | async) : ''"></span>
+  <!-- End of special title solution -->
 
   <div ngbDropdownMenu
        class="dropdown-menu scrollable-dropdown-menu w-100"

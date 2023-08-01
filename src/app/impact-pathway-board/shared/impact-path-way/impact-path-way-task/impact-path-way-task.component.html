@@ -1,11 +1,25 @@
 <!-- ----------------------------
-Complete impact pathway Task-Card
+rex: Complete impact pathway Task-Card
 ----------------------------- -->
+
+<!-- Changed (rex 230725)
+Original code for the new and deleted data Status Dev version July 23, 2023:
+
+[class.alert-success]="compareMode && !!data.compareStatus && data.compareStatus=== ComparedVersionItemStatus.New"
+[class.alert-danger]="compareMode && !!data.compareStatus && data.compareStatus === ComparedVersionItemStatus.Removed"
+
+Deleted or new data do not get their own class (.compare-node-status-new and .compare-node-status-deleted) in compare mode as in the working plan, 
+but are instead marked with the bootstrap classes for success and danger notices (.alert-succes and .alert-danger).
+To make them consistent with the same colors as in the working plan via external stylesheets, I added new classes compare-status-new and compare-status-deleted instead:
+
+[class.compare-status-new]="compareMode && !!data.compareStatus && data.compareStatus=== ComparedVersionItemStatus.New"
+[class.compare-status-deleted]="compareMode && !!data.compareStatus && data.compareStatus === ComparedVersionItemStatus.Removed"
+-->
 <div class="task-container d-flex" id="{{taskHTMLDivId}}"
      [class.task-focus]="(selectable && selectStatus.value) || (hasFocus$ | async)"
      [class.bg-gradient-light]="!compareMode && isDisabled()"
-     [class.alert-success]="compareMode && !!data.compareStatus && data.compareStatus=== ComparedVersionItemStatus.New"
-     [class.alert-danger]="compareMode && !!data.compareStatus && data.compareStatus === ComparedVersionItemStatus.Removed"
+     [class.compare-status-new]="compareMode && !!data.compareStatus && data.compareStatus=== ComparedVersionItemStatus.New"
+     [class.compare-status-deleted]="compareMode && !!data.compareStatus && data.compareStatus === ComparedVersionItemStatus.Removed"
      [class.task-disabled]="!compareMode && isDisabled()"
      (click)="setFocus($event)">
 
@@ -25,7 +39,7 @@ Complete impact pathway Task-Card
       <!-- Entity-Label with info-icon (task-overlay-hide hides the title, when overlay is active) -->
       <div class="task-content p-1 d-flex justify-content-between"
            [class.task-overlay-hide]="(canShowRelationCheckBox() | async)">
-        <div class="task-type type-clamp">
+        <div class="task-type type-clamp sy-entity-name">
           <p title="{{data.type | dsEntityTypeTranslate}}">{{data.type | dsEntityTypeTranslate}}</p>
         </div>
 
@@ -36,11 +50,11 @@ Complete impact pathway Task-Card
         <!-- icons over each other: <div class="column-status-icons d-flex flex-column p-0 mr-2"> -->
         <div class="row-status-icons d-flex p-0 mr-1 ml-2">
           <!-- info-icon, the Icon is defined in src/app/shared/ipw-helpers/ipw-item-metadata-internal.directive.ts -->
-          <span class="status-icon ml-auto" *ngIf="data?.internalStatus" title="Please add a Tooltip for this icon!">
+          <span class="status-icon ml-auto" *ngIf="data?.internalStatus">
             <i dsIPWItemMetadataInternal [status]="data.internalStatus"></i>
           </span>
           <!-- changing status-icons -->
-          <span *ngIf="data?.status" class="status-icon pl-2" title="Please add a Tooltip for this icon!">
+          <span *ngIf="data?.status" class="status-icon pl-2">
             <i dsIPWItemMetadataStatus [status]="data.status"></i>
           </span>
         </div>
@@ -52,7 +66,7 @@ Complete impact pathway Task-Card
         <!-- Card Title -->
         <div class="task-title title-clamp text-info" (click)="openItemModal()">
           <!-- title text -->
-          <p title="{{data.title}}">{{data.title}}</p>
+          <p class=" sy-entity-title" title="{{data.title}}">{{data.title}}</p>
         </div>
 
 
@@ -156,11 +170,12 @@ Complete impact pathway Task-Card
         </button>
       </div>
 
-      <!-- not-equal -->
+      <!-- button for compare-mode -->
       <button *ngIf="compareMode && data.compareStatus === ComparedVersionItemStatus.Changed"
               class="btn btn-lg btn-link p-0 flex-shrink-1 mr-1"
               title="{{'impact-pathway.compare' | translate}}" (click)="openCompareModal()">
-        <i class="fas fa-not-equal"></i>
+        <!-- <i class="fas fa-not-equal"></i> changed compare-icon (230724 rex)-->
+        <i class="fas fa-code-compare"></i>
       </button>
 
       <!-- edit -->

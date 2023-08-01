@@ -64,10 +64,12 @@
 
   .placeholder-allowed {
     background-color: #92c642;
+  background-color:yellow;
   }
 
   .placeholder-denied {
     background-color: #CF4444;
+  background-color:violet;
   }
 
   // Buttons styles
@@ -108,7 +110,7 @@
     border-radius: .2rem;
   }
 
-  // distance edit to delete button (230317 red)
+// distance between edit button and delete button (230317 rex)
   ds-working-plan-chart-item-edit-button {
     margin-right: 1rem;
   }
@@ -131,9 +133,10 @@
   --borderColor: #BDBDBD;
   --highlightBorderColor: #FF9800;
 
+// first level rows
   .root-node-style {
-    background-color: #e9ecef;
-    border-right: 1px solid var(--borderColor);
+    //background-color: #e9ecef;
+    //border-right: 1px solid var(--borderColor);
     cursor: pointer;
   }
 
@@ -157,6 +160,7 @@
     background-color: white;
   }
 
+// Milestone
   .tree-node-end-of-the-year-customization {
     border-right: solid 2px #666666 !important;
   }
@@ -203,7 +207,7 @@
     line-height: var(--nodeHeight);
     height: var(--nodeHeight);
     min-height: var(--nodeHeight);
-    border-width: 0 0 4px 0;
+    border-width: 0 0px 1px 0;
     border-color: var(--borderColor);
     border-style: solid;
   }
@@ -214,10 +218,9 @@
     min-height: var(--nodeHeight);
   }
 
-  /** names */
+/** names : complete first column */
 
-  /* complete first column,
-  added "important" so that the expand-icon also still fits inside
+/* added "important" so that the expand-icon also still fits inside
   since this measure was probably overwritten again at another place and thus did not work (230311 rex) */
   .names {
     //width: 25rem; // original CSS, causes the expand arrow for the time column to disappeared
@@ -277,7 +280,7 @@
   /** responsible */
 
   .responsible {
-    width: 35rem;
+  // width: 35rem; // testweise deaktiviert rex
   }
 
   .responsible-field {
@@ -332,7 +335,6 @@
     background-color: var(--completeColor);
   }
 
-
   // MouseOver effect on the title cells on the left
   .calendar-title-cell-over {
     background-color: var(--overGrey);
@@ -341,10 +343,9 @@
   // Background color for new added nodes
   // changed 230603 rex (provisional until the new color concept)
   .calendar-title-cell-now-added {
-    //background-color: $recentGrey;
-    background-color: #F1FF9E;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+  //background-color:#F1FF9E;
+  //border-top:1px solid black;
+  //border-bottom:1px solid black;
   }
 
   .cursor-pointer {
@@ -352,10 +353,10 @@
   }
 
   .compare-node-status-new {
-    background-color: rgb(146, 198, 66, 0.3);
+  //background-color: rgb(146, 198, 66, 0.3);
   }
 
   .compare-node-status-deleted {
-    background-color: rgb(207, 68, 68, 0.3);
+  //background-color: rgb(207, 68, 68, 0.3);
   }
 }

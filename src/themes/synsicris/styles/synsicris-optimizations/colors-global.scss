@@ -1,0 +1,40 @@
+/* ---------------------------
+STATUS ICONS in VARIOUS AREAS
+defined for
+impact pathway: src/app/shared/ipw-helpers/ipw-item-metadata-status.directive.ts
+working plan: src/app/working-plan/working-plan-chart/container/wp-item-metadata-status.directive.ts
+exploition Plan and interim Report: src/app/questions-board/steps/tasks/questions-board-item-metadata-status.directive.ts
+-----------------------------*/
+.status-icon-new,
+.status-icon-changed,
+.status-icon-done,
+.status-icon-canceled,
+.status-icon-archieved,
+.status-icon-partlyarchieved {
+  color:var(--sy-color-magenta-25);
+}
+
+/* ---------------------------
+COMMENT-ICON in VARIOUS AREAS
+defined for
+impact pathway: src/app/shared/ipw-helpers/ipw-item-metadata-internal.directive.ts
+working plan: src/app/working-plan/working-plan-chart/container/wp-item-metadata-internal.directive.ts
+exploition Plan and interim Report: src/app/questions-board/steps/tasks/questions-board-item-metadata-internal.directive.ts
+-----------------------------*/
+.status-icon-comment {
+  color:var(--sy-color-orange-50);
+}
+
+/* ---------------------------
+BATCHES FOR COMPARE FUNCTION
+used in
+src/app/shared/item-version-list/item-version-list.component.html
+-----------------------------*/
+.badge-active-instance {
+  background-color:var(--sy-compare-badge-active-instance-background) !important; // khaki like second column IO
+}
+
+.badge-compared-instance {
+  background-color:var(--sy-compare-badge-compared-instance-background) !important; // grey
+}
+

@@ -1,0 +1,43 @@
+
+// complete content of IPW-site including the description field
+#ipw {
+
+   // due to the absolute position of the breadcrumb the arrows have moved up, so here they are moved back down with margin-top.
+   ngx-domarrow .line {
+    margin-top:1.5cm;
+  }
+  
+  // line and margin beneath headline (hardcoded CSS classes with corresponding bootstrap classes (.margin-bottom, pb-2. mb-4 etc.))
+  div.border-bottom.mb-4.pb-2 {
+    border-width:1px important;
+    h1 { }
+  }
+
+  // line above editable textarea
+  //hr {display:none;}
+  
+  // description textarea beneath impact pathway
+  ds-editable-textarea {
+    display:block !important;
+    width: 36.5cm !important;
+    textarea {
+      width:100% !important;
+      // Makes Placeholder invisible
+      &::-webkit-input-placeholder {color: transparent;}  /* WebKit browsers */
+      &:-moz-placeholder {color: transparent;} /* Mozilla Firefox 4 to 18 */
+      &::-moz-placeholder {color: transparent;}  /* Mozilla Firefox 19+ */
+      &:-ms-input-placeholder {color: transparent;}  /* Internet Explorer 10+ */
+      &::placeholder {color: transparent;}
+    }
+  }
+ 
+  // columns
+  ds-impact-path-way-step.vertical-step {   
+    
+    // cards
+    .task-container { }
+
+  } // end .vertical-step (= column)
+
+}
+

@@ -48,44 +48,49 @@ export class QbItemMetadataStatusDirective implements OnChanges {
       switch (this.status) {
         case ComparedVersionItemStatus.New:
           attributes = {
-            classNames: ['far', 'fa-plus-square'],
+            //classNames: ['far', 'fa-plus-square'],
+            classNames: ['far', 'fa-plus-square', 'status-icon-new'],
             title: this.translate.instant('questions-board.exploitation-plan.metadata-status.icon.title.status.new')
           };
           break;
         case ComparedVersionItemStatus.Changed:
           attributes = {
-            classNames: ['fas', 'fa-redo-alt'],
+            //classNames: ['fas', 'fa-redo-alt'],
+            classNames: ['fas', 'fa-redo-alt', 'status-icon-changed'],
             title: this.translate.instant('questions-board.exploitation-plan.metadata-status.icon.title.status.changed')
           };
           break;
         case ComparedVersionItemStatus.Done:
           attributes = {
-            classNames: ['far', 'fa-check-circle'],
+            //classNames: ['far', 'fa-check-circle'],
+            classNames: ['far', 'fa-check-circle', 'status-icon-done'],
             title: this.translate.instant('questions-board.exploitation-plan.metadata-status.icon.title.status.done')
           };
           break;
         case ComparedVersionItemStatus.Canceled:
           attributes = {
-            classNames: ['fas', 'fa-ban'],
+            classNames: ['fas', 'fa-ban', 'status-icon-canceled'],
             title: this.translate.instant('questions-board.exploitation-plan.metadata-status.icon.title.status.canceled')
           };
           break;
         case ComparedVersionItemStatus.Archieved:
           attributes = {
-            classNames: ['fas', 'fa-check-circle'],
+            //classNames: ['fas', 'fa-check-circle'],
+            classNames: ['fas', 'fa-check-circle', 'status-icon-archieved'],
             title: this.translate.instant('questions-board.exploitation-plan.metadata-status.icon.title.status.archieved')
           };
           break;
         case ComparedVersionItemStatus.PartlyArchieved:
           attributes = {
-            classNames: ['fas', 'fa-hourglass-half'],
+            //classNames: ['fas', 'fa-hourglass-half'],
+            classNames: ['fas', 'fa-hourglass-half', 'status-icon-partlyarchieved'],
             title: this.translate.instant('questions-board.exploitation-plan.metadata-status.icon.title.status.partly-archieved')
           };
           break;
       }
 
       if (hasValue(attributes)) {
-        attributes.classNames = attributes.classNames.concat('text-warning');
+        //attributes.classNames = attributes.classNames.concat('text-warning');
       }
     }
     return attributes;
@@ -101,44 +106,44 @@ export class QbItemMetadataStatusDirective implements OnChanges {
       switch (this.status) {
         case ComparedVersionItemStatus.New:
           attributes = {
-            classNames: ['far', 'fa-plus-square'],
+            classNames: ['far', 'fa-plus-square', 'status-icon-new'],
             title: this.translate.instant('questions-board.interim-report.metadata-status.icon.title.status.new')
           };
           break;
         case ComparedVersionItemStatus.Changed:
           attributes = {
-            classNames: ['fas', 'fa-redo-alt'],
+            classNames: ['fas', 'fa-redo-alt', 'status-icon-changed'],
             title: this.translate.instant('questions-board.interim-report.metadata-status.icon.title.status.changed')
           };
           break;
         case ComparedVersionItemStatus.Done:
           attributes = {
-            classNames: ['far', 'fa-check-circle'],
+            classNames: ['far', 'fa-check-circle', 'status-icon-done'],
             title: this.translate.instant('questions-board.interim-report.metadata-status.icon.title.status.done')
           };
           break;
         case ComparedVersionItemStatus.Canceled:
           attributes = {
-            classNames: ['fas', 'fa-ban'],
+            classNames: ['fas', 'fa-ban', 'status-icon-canceled'],
             title: this.translate.instant('questions-board.interim-report.metadata-status.icon.title.status.canceled')
           };
           break;
         case ComparedVersionItemStatus.Archieved:
           attributes = {
-            classNames: ['fas', 'fa-check-circle'],
+            classNames: ['fas', 'fa-check-circle', 'status-icon-archieved'],
             title: this.translate.instant('questions-board.interim-report.metadata-status.icon.title.status.archieved')
           };
           break;
         case ComparedVersionItemStatus.PartlyArchieved:
           attributes = {
-            classNames: ['fas', 'fa-hourglass-half'],
+            classNames: ['fas', 'fa-hourglass-half', 'status-icon-partlyarchieved'],
             title: this.translate.instant('questions-board.interim-report.metadata-status.icon.title.status.partly-archieved')
           };
           break;
       }
 
       if (hasValue(attributes)) {
-        attributes.classNames = attributes.classNames.concat('text-warning');
+        //attributes.classNames = attributes.classNames.concat('text-warning');
       }
     }
     return attributes;

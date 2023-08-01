@@ -1,9 +1,15 @@
+<!-- rex: Complete essential html code of the work plan except for the calendar table -->
+
 <ds-loading *ngIf="isProcessingWorkpackage() | async"></ds-loading>
 <div *ngIf="!(isProcessingWorkpackage() | async) && (workpackages | async)?.length > 0" fxLayout="column">
   <div class="sidenav-container" fxFlex fxLayout="row">
 
     <!-- steps -->
-    <!-- header of first column -->
+
+    <!-- .....................................................................
+    First Column with Header (with Functions / Buttons) and
+    Content (Header-Cells with Titles, Entity-Names, Status-Icons and Buttons)
+    ...................................................................... -->
     <div class="sidenav chart-column names" [ngStyle]="sidebarNamesStyle" fxLayout="column">
 
       <div class="sidenav-header d-flex justify-content-between">
@@ -48,14 +54,14 @@
 
         <div class="pr-1 space-children-mr">
 
-          <!-- button "-angle-double-down" to expand all lines -->
+          <!-- toggle-button to expand all rows of second level -->
           <button *ngIf="!isTreeExpanded" type="button" class="btn btn-link btn-xs"
                   title="{{'working-plan.chart.button.expandAll' | translate}}"
                   (click)="expandAll()">
             <i class="fas fa-angle-double-down"></i>
           </button>
 
-          <!-- button "-angle-double-up" to collapse all lines -->
+          <!-- toggle-button to collapse all rows of second level -->
           <button  *ngIf="isTreeExpanded" type="button" class="btn btn-link btn-xs"
                   title="{{'working-plan.chart.button.collapseAll' | translate}}"
                   (click)="collapseAll()">
@@ -74,6 +80,11 @@
 
       </div>
 
+      <!-- .....................................................................
+      First Column Table Content
+      ...................................................................... -->
+
+      <!-- Content first column with all table rows -->
       <mat-tree cdkDropList
         [cdkDropListData]="dataSource"
         (cdkDropListDropped)="drop($event)"
@@ -83,6 +94,8 @@
         [dataSource]="dataSource"
         [treeControl]="treeControl"
         [ngStyle]="sidebarNamesStyle">
+
+        <!-- Single Row - matTreeNodePaddingIndent is for the second level -->
         <mat-tree-node *matTreeNodeDef="let node"
                        [class.compare-node-status-new]="(compareMode | async) && node.compareStatus == ComparedVersionItemStatus.New"
                        [class.compare-node-status-deleted]="(compareMode | async) && node.compareStatus == ComparedVersionItemStatus.Removed"
@@ -93,10 +106,11 @@
                        [class.calendar-title-cell-now-added]="(hasBeenNowAdded(node.id) | async)"
                        matTreeNodeToggle
                        matTreeNodePadding
-                       [matTreeNodePaddingIndent]="24"
+          [matTreeNodePaddingIndent]="27"
                        (mouseover)="chartChangeColor(node.id, true)"
                        (mouseout)="chartChangeColor(node.id, false)"
                        (cdkDragStarted)="dragStarted($event)">
+
           <div class="task-placeholder d-flex"
             [ngClass]="{
               'placeholder-allowed': (isDragging | async) && (isDropAllowed | async),
@@ -106,8 +120,13 @@
             <i *ngIf="(isDragging | async) && !(isDropAllowed | async)" class="mt-3 ml-4 fas fa-exclamation fa-4x"></i>
           </div>
 
-          <!-- in this div is also included the accordion function (rex 230310) -->
-          <div [class.root-node-style]="node.level === 0" class="d-flex flex-column justify-content-between">
+          <!-- ...................................................
+          .row-sidebar:
+          left grey sidebarwith drag'n drop and accordeon button
+          .................................................... -->
+
+          <div [class.root-node-style]="node.level === 0" class="d-flex flex-column justify-content-between row-sidebar">
+
             <!-- button "grip-vertical" -->
             <button mat-icon-button matTreeNodeToggle
                     [disabled]="(compareMode | async) || isVersionOf || !dragAndDropIsActive || (isMoving() | async) || !(canAdd$ | async)"
@@ -115,120 +134,153 @@
                     class="btn btn-xs btn-link p-0 text-primary button-move" title="Drag & Drop">
               <i class="fas fa-grip-vertical{{(!dragAndDropIsActive || (isMoving() | async))?' opacity-50':''}}"></i>
             </button>
+
+            <!-- toggle-botton to expand and collapse the contained lines -->
             <button *ngIf="treeControl.isExpandable(node)" mat-icon-button matTreeNodeToggle
                     class="btn btn-xs btn-link p-0 text-primary"
                     title="{{ (treeControl.isExpanded(node) ? 'working-plan.chart.button.collapse' : 'working-plan.chart.button.expand') | translate}}">
-              <i *ngIf="treeControl.isExpanded(node)" class="fas fa-angle-double-right"></i>
-              <i *ngIf="!treeControl.isExpanded(node)" class="fas fa-angle-double-down"></i>
+
+              <i *ngIf="treeControl.isExpanded(node)" class="fas fa-chevron-up"></i>
+              <i *ngIf="!treeControl.isExpanded(node)" class="fas fa-chevron-down"></i>
             </button>
-          </div>
 
-          <div class="mat-form-field auto-width mt-1{{node.level === 0?' pl-2':''}}">
-            <p class="block-ellipsis">
-              <span (click)="openItemModal(node); $event.stopImmediatePropagation();">{{node.name}}</span>
+          </div><!-- end .row-sidebar -->
+
+          <!-- ..........................................
+          .row-header-left:
+          left part of row header with text and buttons
+          ........................................... -->
+
+          <div class="row-header-left mat-form-field auto-width mt-1{{node.level === 0?' pl-2':''}}">
+
+            <!-- Entity-Name and Title of Data -->
+
+             <!-- Entity-Name -->
+             <span class="{{(node.type === 'milestone')?'text-info':'text-success'}} font-weight-bold entity-text">
+              {{(node.type + '.listelement.badge') | translate}}
+            </span>
+            <br>
+
+            <!-- Title of Data (special truncated 2-row-solution with ellipsis) -->
+            <p class="block-ellipsis data-title-text">
+              <span (click)="openItemModal(node); $event.stopImmediatePropagation();">
+                {{node.name}}
+              </span>
             </p>
-            <br>
-            <span
-              class="{{(node.type === 'milestone')?'text-info':'text-success'}} font-weight-bold pt-2">{{(node.type + '.listelement.badge') | translate}}</span>
-            <br>
 
-            <!-- Button "Add" -->
-            <button *ngIf="canAddChildStep(node)" data-test="add-child-step"
-                    class="btn btn-xs btn-link p-0"
+            <!-- row with add-button and destructive buttons -->
+            <div class="task-actions-button-row d-flex justify-content-between">
+
+              <!-- Button "Add" for the first-level-row (new work or milestone) (not the top add button in table header!) -->
+              <button *ngIf="canAddChildStep(node)" data-test="add-child-step"
+                    class="btn btn-xs btn-link p-0 button-add"
                     title="{{'working-plan.chart.button.add' | translate}}"
                     [disabled]="(compareMode | async) || isVersionOf || !(canAdd$ | async)"
                     (click)="addChildStep(node); $event.stopImmediatePropagation();">
-              <i class="fas fa-plus-circle"></i>
-            </button>
-
-          </div>
-
-          <div class="mr-05 d-flex flex-column justify-content-between">
-
-
-            <div class="d-flex justify-content-end">
-
-              <!-- Status-Icon defined in src/app/working-plan/working-plan-chart/container/wp-item-metadata-status.directive.ts -->
-              <span>
-                <i dsWPItemMetadataStatus [status]="node?.status"></i>
-              </span>
-
-            <!-- original position 1 of button "unlink", now moved down to position 2 (rex 230310) -->
-            <!--
-              <button mat-icon-button class="btn btn-xs btn-link p-0 text-danger align-self-end" data-test="remove-step"
-                      title="{{'working-plan.chart.button.remove' | translate}}"
-                      [class.ml-1]="node.level !== 0"
-                      [disabled]="(compareMode | async) || (isProcessingWorkpackageRemove(node) | async) || isVersionOf"
-                      (click)="deleteStep(node); $event.stopPropagation()">
-                <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)">
-                  <i class='fas fa-unlink'></i>
-                </span>
-                <span *ngIf="(isProcessingWorkpackageRemove(node) | async)">
-                  <i class='fas fa-circle-notch fa-spin'></i>
-                </span>
+                <i class="fas fa-plus-circle"></i>&nbsp;{{'working-plan.chart.button.add' | translate}}
               </button>
+
+              <div class="destructive-buttons">
+
+                <!-- button "delete" -->
+                <ds-working-plan-chart-item-delete-button
+                  [compareMode]="compareMode"
+                  [isVersionOfAnItem]="isVersionOf"
+                  [node]="node"
+                  class="button-delete"
+                ></ds-working-plan-chart-item-delete-button>
+
+                <!-- button "unlink" -->
+                <button mat-icon-button class="btn btn-xs btn-link p-0 text-danger align-self-end button-unlink" data-test="remove-step"
+                  title="{{'working-plan.chart.button.remove' | translate}}"
+                  [class.ml-1]="node.level !== 0"
+                  [disabled]="(compareMode | async) || (isProcessingWorkpackageRemove(node) | async) || isVersionOf || !(canAdd$ | async)"
+                  (click)="deleteStep(node); $event.stopPropagation()">
+                  <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)">
+                    <i class='fas fa-thumbtack'></i>
+                  </span>
+                <span *ngIf="(isProcessingWorkpackageRemove(node) | async)">
+                    <i class='fas fa-circle-notch fa-spin'></i>
+                  </span>
+                </button>
+                <!-- end of new position of button "unlink" -->
+
+            </div><!-- end .destructive-buttons -->
+
+            <!--
+            <ds-working-plan-chart-item-edit-button
+              class="button-edit"
+              [compareMode]="compareMode"
+              [isVersionOfAnItem]="isVersionOf"
+              [node]="node"
+              ></ds-working-plan-chart-item-edit-button>
               -->
 
-            </div>
+          </div> <!-- end task-actions-button-row -->
 
+        </div><!-- end .row-header-left-content -->
 
-            <div class="d-flex justify-content-end">
-              <span class="pr-1">
+          <!-- ..........................................
+          .row-header-right:
+          right block with status icons
+          ........................................... -->
+
+          <div class="row-header-right d-flex flex-column">
+
+            <div class="sy-status-icons">
+
+              <div class="sy-status-icon">
+                <!-- Status-Icon
+                defined in src/app/working-plan/working-plan-chart/container/wp-item-metadata-status.directive.ts -->
+                <span>
+                  <i dsWPItemMetadataStatus [status]="node?.status"></i>
+                </span>
+              </div>
+
+              <!-- Comment-Icon -->
+              <div class="sy-comment-icon">
+                <span>
                   <i dsWPItemMetadataInternal [status]="node?.internalStatus"></i>
                 </span>
-            </div>
+              </div>
 
-            <div class="d-flex">
+            </div> <!-- end .sy-status-icons -->
 
-              <!-- button "not equal" -->
+            <div class="d-flex sy-compare p-0">
+              <!-- button for compare-mode -->
               <button *ngIf="(compareMode | async) && node.compareStatus === ComparedVersionItemStatus.Changed"
                       mat-icon-button
-                      class="btn btn-xs btn-link p-0 text-primary"
+                      class="btn btn-xs btn-link p-0 text-primary button-compare"
                       [class.ml-1]="node.level !== 0"
                       title="{{'working-plan.chart.button.compare' | translate}}"
                       (click)="openCompareModal(node); $event.stopImmediatePropagation();">
-                <i class="fas fa-not-equal"></i>
+                <!-- <i class="fas fa-not-equal"></i> changed compare-icon (230724 rex)-->
+                <i class="fas fa-code-compare"></i>
               </button>
-
-              <!-- button "edit" -->
-              <ds-working-plan-chart-item-edit-button
-                [compareMode]="compareMode"
-                [isVersionOfAnItem]="isVersionOf"
-                [node]="node"
-              ></ds-working-plan-chart-item-edit-button>
-
-              <!-- button "delete" -->
-              <ds-working-plan-chart-item-delete-button
-                [compareMode]="compareMode"
-                [isVersionOfAnItem]="isVersionOf"
-                [node]="node"
-              ></ds-working-plan-chart-item-delete-button>
-
-              <!-- new position 2 of button "unlink" with status-span,
-              to make it appear in a row with Edit and Delete,
-              removed from position 1 (rex 230310)  -->
-              <button mat-icon-button class="btn btn-xs btn-link p-0 text-danger align-self-end" data-test="remove-step"
-                      title="{{'working-plan.chart.button.remove' | translate}}"
-                      [class.ml-1]="node.level !== 0"
-                      [disabled]="(compareMode | async) || (isProcessingWorkpackageRemove(node) | async) || isVersionOf || !(canAdd$ | async)"
-                      (click)="deleteStep(node); $event.stopPropagation()">
-                <span *ngIf="!(isProcessingWorkpackageRemove(node) | async)">
-                  <i class='fas fa-thumbtack'></i>
-                </span>
-                <span *ngIf="(isProcessingWorkpackageRemove(node) | async)">
-                  <i class='fas fa-circle-notch fa-spin'></i>
-                </span>
-              </button>
-              <!-- end of new position of button "unlink" -->
-
             </div>
 
+            <ds-working-plan-chart-item-edit-button
+                  class="button-edit"
+                  [compareMode]="compareMode"
+                  [isVersionOfAnItem]="isVersionOf"
+                  [node]="node"
+            ></ds-working-plan-chart-item-edit-button>
+
           </div>
-        </mat-tree-node>
-      </mat-tree>
-    </div>
-    <!-- dates, organisations and statuses -->
-    <div class="sidenav chart-column responsible{{(this.sidebarResponsibleStatus)?'':' d-none'}}" [ngStyle]="sidebarResponsibleStyle" fxLayout="column">
+
+        </mat-tree-node><!-- end row first column -->
+      </mat-tree><!-- end content first column -->
+
+    </div><!-- end first column -->
+
+    <!-- ....................................................................................................
+    Second Column (header and content) with dates (start and end dates, responsible organization and status)
+    ..................................................................................................... -->
+
+    <div
+      class="sidenav chart-column responsible{{(this.sidebarResponsibleStatus)?'':' d-none'}}"
+      [ngStyle]="sidebarResponsibleStyle"
+      fxLayout="column">
 
       <!-- header of second column (time period) -->
       <div class="sidenav-header">
@@ -295,30 +347,48 @@
 
       </div> <!-- end sidenav-header -->
 
+      <!-- ....................................................................................................
+      Second Column: Content table rows
+      ..................................................................................................... -->
+
+      <!-- Content second row with all table rows -->
       <mat-tree class="tree pt-0" fxFlex [dataSource]="dataSource" [treeControl]="treeControl" [ngStyle]="sidebarResponsibleStyle">
+
+        <!-- Single Row  of second column -->
         <mat-tree-node *matTreeNodeDef="let node" class="tree-node-customization"
                        [class.calendar-title-cell-over]="chartChangeColorIsOver.get(node.id)"
                        [class.calendar-title-cell-now-added]="(hasBeenNowAdded(node.id) | async)"
                        [id]="node.id"
                        (mouseover)="chartChangeColor(node.id, true)"
                        (mouseout)="chartChangeColor(node.id, false)">
-          <div class="ml-05 mt-1 font-size-07">
-            <p class="font-weight-bold m-0">{{'working-plan.chart.column.dates' | translate}}</p>
-            <mat-form-field *ngIf="node.type != 'milestone'" floatLabel="never" appearance="fill" class="p-0">
+
+          <!-- Form Group Start/End-Date -->
+          <div class="ml-05 mt-1 font-size-07 sy-start-end-date-block">
+            <!-- Headline Start / End-Dates -->
+            <p class="font-weight-bold m-0 sy-start-and-end-date-header">{{'working-plan.chart.column.dates' | translate}}</p>
+
+            <!-- Start-Date -->
+            <mat-form-field *ngIf="node.type != 'milestone'" floatLabel="never" appearance="fill" class="p-0 sy-start-date-form">
               <mat-label>{{'working-plan.chart.column.dates.start' | translate}}</mat-label>
               <input [disabled]="(compareMode | async) || isVersionOf || !(canAdd$ | async)" matInput type="text"
-                     ngbDatepicker #startDate="ngbDatepicker" (click)="startDate.toggle()" container="body"
+                     matInput type="text"
+                     ngbDatepicker #startDate="ngbDatepicker"
+                     container="body"
                      [minDate]="node.level > 0 ? getDateStruct(getParentStep(node).dates?.start?.full) : null"
                      [maxDate]="node.level > 0 ? getDateStruct(getParentStep(node).dates?.end?.full) : getDateStruct(node.dates?.end?.full)"
                      [value]="(node.dates?.start?.full) ? (node.dates?.start?.full) : ''"
+                     (click)="startDate.toggle()"
                      (dateSelect)="updateDateRange(node, $event, node.dates?.end?.full)"/>
               <mat-icon *ngIf="!(compareMode | async) && !isVersionOf && (canAdd$ | async)"
                         matSuffix (click)="startDate.toggle()"
                         class="cursor-pointer">edit_calendar
               </mat-icon>
             </mat-form-field>
+
             <br *ngIf="node.type != 'milestone'">
-            <mat-form-field floatLabel="never" appearance="fill" class="p-0">
+
+            <!-- End-Date -->
+            <mat-form-field floatLabel="never" appearance="fill" class="p-0 sy-end-date-form">
               <mat-label>{{'working-plan.chart.column.dates.end' | translate}}</mat-label>
               <input matInput type="text" ngbDatepicker #endDate="ngbDatepicker" (click)="endDate.toggle()" container="body"
                      [disabled]="(compareMode | async) || isVersionOf || !(canAdd$ | async)"
@@ -331,9 +401,12 @@
                         class="cursor-pointer">edit_calendar
               </mat-icon>
             </mat-form-field>
-          </div>
-          <div class="ml-05 mt-1 font-size-07">
-            <p class="font-weight-bold m-0">{{'working-plan.chart.column.responsible' | translate}}</p>
+
+          </div><!-- End Form Group Start/End-Date -->
+
+          <!-- input-field for responsible organization, see src/app/shared/authority-dropdown/authority-dropdown.component.html -->
+          <div class="ml-05 mt-1 font-size-07 sy-responsible-organization-block">
+            <p class="font-weight-bold m-0 sy-responsible-organization-header">{{'working-plan.chart.column.responsible' | translate}}</p>
             <ds-authority-dropdown floatLabel="never" class="min-width-large"
                                    [readOnly]="(compareMode | async) || isVersionOf || !(canAdd$ | async)"
                                    [fieldId]="'responsible'"
@@ -342,11 +415,13 @@
                                    [initValue]="node.responsible"
                                    (change)="updateStepResponsible(node, $event)"></ds-authority-dropdown>
           </div>
-          <div class="ml-05 mt-1 font-size-07">
-            <p class="font-weight-bold m-0">{{'working-plan.chart.column.status' | translate}}</p>
-            <mat-form-field appearance="fill" floatLabel="never" class="mr-05 min-width-small">
-              <mat-select [disabled]="(compareMode | async) || isVersionOf || !(canAdd$ | async)" class="text-center"
-                          (selectionChange)="updateStepStatus(node, $event)" [(value)]="node.status">
+
+          <!-- DropDown for status -->
+          <div class="ml-05 mt-1 font-size-07 sy-status-block">
+            <p class="font-weight-bold m-0 sy-status-header">{{'working-plan.chart.column.status' | translate}}</p>
+
+            <mat-form-field appearance="fill" floatLabel="never" class="mr-05 min-width-small sy-status-form">
+              <mat-select [disabled]="(compareMode | async) || isVersionOf || !(canAdd$ | async)" class="text-center" (selectionChange)="updateStepStatus(node, $event)" [(value)]="node.status">
                 <mat-select-trigger>
                   <span><i dsWorkpackageStatusIcon
                            [status]="node?.status"></i> {{getStatusTypeLabel(node?.status)}}</span>
@@ -355,10 +430,17 @@
                             [value]="statusType.value">{{statusType.display}}</mat-option>
               </mat-select>
             </mat-form-field>
+
           </div>
-        </mat-tree-node>
-      </mat-tree>
-    </div>
+
+        </mat-tree-node><!-- end row second column -->
+      </mat-tree><!-- end content second column -->
+    </div><!-- end second column -->
+
+    <!-- ....................................................................................................
+    Third Column: Calendar-Table with headers, defined in
+    src/app/working-plan/working-plan-chart/container/working-plan-chart-dates/working-plan-chart-dates.component.html
+    ..................................................................................................... -->
     <ds-working-plan-chart-dates class="w-100"
                                  [chartChangeColorIsOver]="chartChangeColorIsOver"
                                  [compareMode]="compareMode"
@@ -369,7 +451,10 @@
                                  [milestonesMap]="milestonesMap"
                                  [treeControl]="treeControl"></ds-working-plan-chart-dates>
   </div>
+
 </div>
+
+<!-- purpose of this code unclear -->
 <div *ngIf="!(isProcessingWorkpackage() | async) && (workpackages | async)?.length == 0">
   <hr>
   <h3 class="text-center text-muted" ><span>{{'working-plan.chart.toolbar.no-workpackages' | translate}}</span></h3>

@@ -5,9 +5,20 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
 // on 1st level responsive, on 2nd level not
 .task-container {
 
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-  /* doesn't work, although rgba(rgb(0,0,0),0.5) works
-  box-shadow: 2px 2px 4px rgba(var(--sy-color-gray-0),0,5); */
+  box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
+
+  /* MARKING OF DELETED AND NEW DATA IN COMPARE MODE
+  Deleted or new data in the impact pathway did not get (as of dev version July 25, 2023) their own class in compare mode
+  as in the work plan (there: .compare-node-status-new and .compare-node-status-deleted), but were instead marked
+  with the bootstrap classes for success and danger notices (.alert-succes and .alert-danger).
+  To be able to design them consistently with the same colors as in the routing via external stylesheets,
+  I added new classes .compare-status-new and .compare-status-deleted instead. (rex 230725) */
+  &.compare-status-new .task-left-bar {
+    background-color: var(--sy-compare-data-new-background);
+  }
+  &.compare-status-deleted .task-left-bar {
+    background-color: var(--sy-compare-data-deleted-background);
+  }
 
   min-width:10rem; //underneath there are misrepresentations d
   /* the original white background color of the cards does not come from the cards themselves,
@@ -24,6 +35,7 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
     button.button-move {
       &:hover {background-color:transparent}
       i {font-size:0.9rem;}
+      &[disabled]{display:none !important;} // hide disabled button in compare-mode
     }
   }
 
@@ -57,7 +69,7 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
           //transition: margin-bottom 100ms ease; // animation
         }
 
-        .task-type {
+        .sy-entity-name {
           font-size:0.8rem;
           font-family:'Nunito-ExtraLight';
         }
@@ -71,8 +83,10 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
         margin-bottom:1.2rem;
 
         div.task-title {
-          font-family:'Nunito-Bold';
-          line-height:1.1rem;
+          .sy-entity-title {
+            font-family:'Nunito-Bold';
+            line-height:1.1rem;
+          }
         }
 
       } // end div.task-header
@@ -108,8 +122,7 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
   src/app/impact-pathway-board/shared/impact-path-way/impact-path-way-task/impact-path-way-task.component.html */
   .task-overlay {
 
-    background-color:var(--sy-color-blueviolet-95) !important;
-    //border-top:1px solid rgba(0,0,0,0.2);
+    background-color:var(--sy-impact-pathway-arrow-overlay-background) !important;
     border-top:1px solid var(--sy-color-gray-96);
 
     transition: background-color 200ms;
@@ -121,7 +134,7 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
     mat-checkbox {
 
         .mat-checkbox-frame {
-          border-color:var(--sy-color-blueviolet-53);
+          border-color:var(--sy-impact-pathway-arrows);
           background-color:var(--sy-color-gray-100)
         }
         label {
@@ -134,10 +147,10 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
       &.mat-checkbox-checked {
 
         .mat-checkbox-frame {
-          border-color:var(--sy-color-blueviolet-53)!important;
+          border-color:var(--sy-impact-pathway-arrows)!important;
           box-shadow:0 0 8px 1px var(--sy-color-magenta-50); // glow around checkbox
         }
-        svg path {stroke:var(--sy-color-blueviolet-53)!important;}
+        svg path {stroke:var(--sy-impact-pathway-arrows)!important;}
 
       }
 
