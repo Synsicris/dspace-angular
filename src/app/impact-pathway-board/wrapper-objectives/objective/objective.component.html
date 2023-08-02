@@ -9,16 +9,16 @@ Single Accordeon on Impact Pathway Level 2 of columns 2 and 3
         <ng-content select="panelIconStatus"></ng-content>
         in src/app/impact-pathway-board/shared/collapsable-panel/collapsable-panel.component.html -->
    <ng-container ngProjectAs="panelIconStatus">
+
     <!-- edit-button -->
     <button class="btn btn-sm btn-link flex-shrink-1 align-self-center text-primary"
             [disabled]="!(canEditButton$ | async) || isVersionOfAnItem"
             [title]="'impact-pathway.objectives.edit.btn.title' | translate">
       <span (click)="openEditModal(); $event.stopImmediatePropagation()">
-        <!-- smaller pen-icon (230429 rex) -->
-        <!-- <i class="fas fa-edit"></i> -->
-        <i class="fas fa-pen"></i>
+        <i class="fas fa-edit"></i>
       </span>
     </button>
+    
   </ng-container>
 
   <ng-container ngProjectAs="panelContent">

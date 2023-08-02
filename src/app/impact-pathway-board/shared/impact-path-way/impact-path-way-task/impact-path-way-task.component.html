@@ -15,7 +15,7 @@ To make them consistent with the same colors as in the working plan via external
 [class.compare-status-new]="compareMode && !!data.compareStatus && data.compareStatus=== ComparedVersionItemStatus.New"
 [class.compare-status-deleted]="compareMode && !!data.compareStatus && data.compareStatus === ComparedVersionItemStatus.Removed"
 -->
-<div class="task-container d-flex" id="{{taskHTMLDivId}}"
+<div class="task-container d-flex sy-card-impact-pathway" id="{{taskHTMLDivId}}"
      [class.task-focus]="(selectable && selectStatus.value) || (hasFocus$ | async)"
      [class.bg-gradient-light]="!compareMode && isDisabled()"
      [class.compare-status-new]="compareMode && !!data.compareStatus && data.compareStatus=== ComparedVersionItemStatus.New"
@@ -39,14 +39,12 @@ To make them consistent with the same colors as in the working plan via external
       <!-- Entity-Label with info-icon (task-overlay-hide hides the title, when overlay is active) -->
       <div class="task-content p-1 d-flex justify-content-between"
            [class.task-overlay-hide]="(canShowRelationCheckBox() | async)">
+
         <div class="task-type type-clamp sy-entity-name">
           <p title="{{data.type | dsEntityTypeTranslate}}">{{data.type | dsEntityTypeTranslate}}</p>
         </div>
 
         <!-- row with changing status-icons -->
-        <!-- -------------------------------------------- -->
-        <!-- TO DO: please add mouseover titles for icons -->
-        <!-- -------------------------------------------- -->
         <!-- icons over each other: <div class="column-status-icons d-flex flex-column p-0 mr-2"> -->
         <div class="row-status-icons d-flex p-0 mr-1 ml-2">
           <!-- info-icon, the Icon is defined in src/app/shared/ipw-helpers/ipw-item-metadata-internal.directive.ts -->
@@ -59,7 +57,7 @@ To make them consistent with the same colors as in the working plan via external
           </span>
         </div>
 
-      </div>
+      </div> <!-- end .task-content -->
 
       <div class="task-header pr-1 pt-2 d-flex justify-content-between">
 
@@ -69,10 +67,9 @@ To make them consistent with the same colors as in the working plan via external
           <p class=" sy-entity-title" title="{{data.title}}">{{data.title}}</p>
         </div>
 
+      </div> <!-- end .task-header -->
 
-      </div>
-
-    </div> <!-- end task-right-bar -->
+    </div> <!-- end .task-right-bar -->
 
     <!-- Card Footer with icon-buttons -->
 

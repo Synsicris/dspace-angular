@@ -26,8 +26,9 @@ button.btn:focus {
   box-shadow: none !important;
 }
 
+
 .task-header {
-  height: 70px;
+  //height: 70px; // forces 3 lines
   margin: 0;
 }
 
@@ -37,9 +38,17 @@ button.btn:focus {
 }
 
 .task-title p {
+  //font-size: 0.9em;
   margin: 0;
 }
 
+.task-title:hover p {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* truncate in the third line - not for all browsers
+https://css-tricks.com/almanac/properties/l/line-clamp/ */
 .title-clamp {
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -47,23 +56,28 @@ button.btn:focus {
 }
 
 .task-content {
-  height: 50px;
+  //height: 50px;
+  margin: 0;
 }
 
 .task-content p {
   font-size: 15px;
 }
 
+.task-type p {
+  //font-size: 0.7em;
+  margin: 0;
+}
+
+/* truncate the first line - not for all browsers
+https://css-tricks.com/almanac/properties/l/line-clamp/ */
 .type-clamp {
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  //-webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
 
-.task-type p {
-  font-size: 0.7em;
-  margin: 0;
-}
 
 .task-left-bar {
   background-color: var(--ds-top-footer-bg);
@@ -79,7 +93,7 @@ button.btn:focus {
   position: relative;
 
   .task-content {
-    padding: 15px 10px 10px 10px;
+    //padding: 15px 10px 10px 10px;
     flex-basis: 50%;
     flex-grow: 1;
     height: auto;
@@ -87,7 +101,7 @@ button.btn:focus {
 
   .task-actions {
     border-top: 1px solid var(--ds-top-footer-bg);
-    height: 50px;
+    //height: 50px;
     display: flex;
     justify-content: space-evenly;
 
@@ -98,16 +112,17 @@ button.btn:focus {
       text-decoration: none !important
     }
 
-    .span-icon-container {
-      height: 30px;
+    .span-icon-container{
+      //height: 30px;
       display: flex;
       justify-content: center;
       align-items: center;
     }
   }
+
 }
 
 .status-icon {
-  padding-right: 1.2rem;
-  font-size: 20px;
+  //padding-right: 1.2rem;
+  //font-size: 20px;
 }

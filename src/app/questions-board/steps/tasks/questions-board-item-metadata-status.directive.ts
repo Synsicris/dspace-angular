@@ -49,7 +49,8 @@ export class QbItemMetadataStatusDirective implements OnChanges {
         case ComparedVersionItemStatus.New:
           attributes = {
             //classNames: ['far', 'fa-plus-square'],
-            classNames: ['far', 'fa-plus-square', 'status-icon-new'],
+            //classNames: ['far', 'fa-plus-square', 'status-icon-new'],
+            classNames: ['far', 'fa-star', 'status-icon-new'],
             title: this.translate.instant('questions-board.exploitation-plan.metadata-status.icon.title.status.new')
           };
           break;
@@ -76,7 +77,7 @@ export class QbItemMetadataStatusDirective implements OnChanges {
         case ComparedVersionItemStatus.Archieved:
           attributes = {
             //classNames: ['fas', 'fa-check-circle'],
-            classNames: ['fas', 'fa-check-circle', 'status-icon-archieved'],
+            classNames: ['far', 'fa-check-circle', 'status-icon-archieved'],
             title: this.translate.instant('questions-board.exploitation-plan.metadata-status.icon.title.status.archieved')
           };
           break;
@@ -106,7 +107,8 @@ export class QbItemMetadataStatusDirective implements OnChanges {
       switch (this.status) {
         case ComparedVersionItemStatus.New:
           attributes = {
-            classNames: ['far', 'fa-plus-square', 'status-icon-new'],
+            //classNames: ['far', 'fa-plus-square', 'status-icon-new'],
+            classNames: ['far', 'fa-star', 'status-icon-new'],
             title: this.translate.instant('questions-board.interim-report.metadata-status.icon.title.status.new')
           };
           break;
@@ -130,7 +132,7 @@ export class QbItemMetadataStatusDirective implements OnChanges {
           break;
         case ComparedVersionItemStatus.Archieved:
           attributes = {
-            classNames: ['fas', 'fa-check-circle', 'status-icon-archieved'],
+            classNames: ['far', 'fa-check-circle', 'status-icon-archieved'],
             title: this.translate.instant('questions-board.interim-report.metadata-status.icon.title.status.archieved')
           };
           break;

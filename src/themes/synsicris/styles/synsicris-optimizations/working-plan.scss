@@ -262,6 +262,7 @@ ds-working-plan-chart-dates {
   .flex-fill .calendar-inner-cell[date-inside=true] {
     background-color: var(--sy-working-plan-compare-bar-active-instance-background) !important;
     height:8px !important;
+    border-bottom:1px solid var(--sy-color-gray-36); // dark line at the bottom to better distinguish the bar of the active instance from the bar of the comparison version
   }
 
   // depending on the selection only the div month, quarter or year appears

@@ -2,6 +2,10 @@
 Exploitation plan and interim report for both: report
 */
 
-.background-pinboard {
+// Pinboard
+.sy-background-pinboard {
   background-color:var(--sy-questions-board-pinboard);
 }
+
+// Cards defined in src/themes/synsicris/styles/synsicris-optimizations/task_card.scss
+// src/app/questions-board/steps/tasks/questions-board-task.component.html
