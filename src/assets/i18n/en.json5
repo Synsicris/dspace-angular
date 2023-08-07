@@ -2736,7 +2736,7 @@
 
   "impact-pathway.edit.description": "Edit description",
 
-  "impact-pathway.edit.textarea.placeholder": "To edit this content please use the button 'Edit title and description'",
+  "impact-pathway.edit.textarea.placeholder": "To edit this content please use the button 'Edit'",
 
   "impact-pathway.edit.item.title": "Edit item",
 
@@ -2752,7 +2752,7 @@
 
   "impact-pathway.objectives.edit.btn.title": "Edit title and description",
 
-  "impact-pathway.objectives.edit.textarea.placeholder": "To edit this content please use the button 'Edit title and description'",
+  "impact-pathway.objectives.edit.textarea.placeholder": "To edit this content please use the button 'Edit'",
 
   "impact-pathway.objectives.edit.page.title": "Edit objective",
 
@@ -3730,7 +3730,7 @@
 
   "item.submission.create": "Create Item",
 
-  "item.submission.create.successfully": "Item Created successfully",
+  "item.submission.create.successfully": "Item created successfully",
 
   "item.version.history.empty": "There are no other versions for this item yet.",
 
@@ -3842,7 +3842,7 @@
 
   "item.version.delete.modal.header": "Delete version",
 
-  "item.version.delete.modal.text": "Do you want to delete version {{version}}?",
+  "item.version.delete.modal.text": "Do you want to delete version \"{{version}}\"?",
 
   "item.version.delete.modal.button.confirm": "Delete",
 
@@ -3898,7 +3898,7 @@
 
   "item.version.synsicris.version.not_official": "Not Official",
 
-  "item-export.modal.header": "Item Export Process Launcher",
+  "item-export.modal.header": "Export information on the consortium",
 
   "item-export.modal.alert.info": "help",
 
@@ -3922,7 +3922,7 @@
 
   "item-export.form.format": "Format",
 
-  "item-export.form.format.tip": "Choose the export format",
+  "item-export.form.format.tip": "Choose the export format:",
 
   "item-export.form.btn.submit": "Export",
 
@@ -4520,7 +4520,7 @@
 
   "mydspace.new-submission-external-short": "Import metadata",
 
-  "mydspace.results.head": "Your submissions",
+  "mydspace.results.head": "My submissions",
 
   "mydspace.results.no-abstract": "No Abstract",
 
@@ -4818,7 +4818,7 @@
 
   "orgunit.page.titleprefix": "Organizational Unit: ",
 
-  "pagination.options.description": "Pagination options",
+  "pagination.options.description": "Customize pagination options",
 
   "pagination.results-per-page": "Results Per Page",
 
@@ -5136,7 +5136,7 @@
 
   "profile.card.researcher": "Researcher Profile",
 
-  "project.create.btn": "Create project",
+  "project.create.btn": "Create",
 
   "project.create.error": "There was an issue when generating the project, please try again later.",
 
@@ -7824,7 +7824,7 @@
 
   "submission.sections.upload.form.access-condition-label": "Access condition type",
 
-  "submission.sections.upload.form.access-condition-hint": "Select an access condition to apply on the bitstream once the item is deposited",
+  "submission.sections.upload.form.access-condition-hint": "Select an access condition to apply on the item once it is deposited",
 
   "submission.sections.upload.form.date-required": "Date is required.",
 
@@ -7970,7 +7970,7 @@
 
   "submission.workflow.generic.edit-help": "Select this option to change the item's metadata.",
 
-  "submission.workflow.generic.edit-grants": "Edit accrss right",
+  "submission.workflow.generic.edit-grants": "Change accrss right",
 
   "submission.workflow.generic.edit-grants-help": "Change the access right to the workspace of the project here.",
 
@@ -7978,7 +7978,7 @@
 
   "submission.workflow.generic.edit-grants.head": "Set access right to the workspace of the project",
 
-  "submission.workflow.generic.edit-grants.alert.info": "help",
+  "submission.workflow.generic.edit-grants.alert.info": "Help for Change access right",
 
   "submission.workflow.generic.edit-grants.label": "Set the access right",
 
@@ -8152,7 +8152,7 @@
 
   "view.version.badges.date": "Date",
 
-  "view.version.badges.official": "officiel",
+  "view.version.badges.official": "official",
 
   "view.version.badges.nonOfficial": "non-official",
 
@@ -8230,7 +8230,7 @@
 
   "supervisedWorkspace.search.results.head": "Supervised Items",
 
-  "workspace.search.results.head": "Your submissions",
+  "workspace.search.results.head": "My submissions",
 
   "workspace.alert.info": "help",
 
@@ -10922,7 +10922,7 @@
 
   "explore.index.synsicrisProjectStatus": "Status",
 
-  "explore.index.oairecerifFundingParent": "Related call",
+  "explore.index.oairecerifFundingParent": "Related programme",
 
   "explore.index.synsicrisSubjectSort": "Keywords Sorter",
 
@@ -11862,6 +11862,8 @@
 
   "register-page.registration.email.error.pattern": "Please fill in a valid email address",
 
-  "forgot-email.form.email.error.pattern": "Please fill in a valid email address"
+  "forgot-email.form.email.error.pattern": "Please fill in a valid email address",
+
+  "search.filters.applied.charts.graph-event-synsicris_subject_political.tab": "Policy level"
 
 }
