@@ -4190,7 +4190,7 @@
 
   "menu.section.browse_community_by_title": "By Title",
 
-  "menu.section.browse_by_projects": "<i class=\"fa-solid fa-magnifying-glass\"></i> Browse by Consortia",
+  "menu.section.browse_by_projects": "<i class=\"fa-solid fa-magnifying-glass\"></i> Search in all Consortia",
 
   "menu.section.explore_infrastructure": "Infrastructure",
 
@@ -4478,7 +4478,7 @@
 
   "metric-badges.download": "<span class=\"fa fa-download\" title=\"Downloads\">&nbsp;</span>",
 
-  "mydspace.breadcrumbs": "All items",
+  "mydspace.breadcrumbs": "All archived/cashed items",
 
   "mydspace.description": "",
 
@@ -4520,7 +4520,7 @@
 
   "mydspace.new-submission-external-short": "Import metadata",
 
-  "mydspace.results.head": "My submissions",
+  "mydspace.results.head": "My items",
 
   "mydspace.results.no-abstract": "No Abstract",
 
@@ -4542,11 +4542,11 @@
 
   "mydspace.search-form.placeholder": "Search in mydspace…",
 
-  "mydspace.show.allProjectItems": "All items in the project",
+  "mydspace.show.allProjectItems": "All archived items",
 
   "mydspace.show.workflow": "Workflow tasks",
 
-  "mydspace.show.workspace": "Your submissions",
+  "mydspace.show.workspace": "My cashed items",
 
   "mydspace.show.supervisedWorkspace": "Supervised items",
 
@@ -4560,7 +4560,7 @@
 
   "mydspace.status.workflow": "Workflow",
 
-  "mydspace.status.workspace": "Workspace",
+  "mydspace.status.workspace": "in Cache",
 
   "mydspace.title": "MyDSpace",
 
@@ -5406,7 +5406,7 @@
 
   "project-overview.page.header.project.title": "Project overview : ",
 
-  "project-overview.page.content.all-items": "<i class=\"fas fa-history\"></i> All items",
+  "project-overview.page.content.all-items": "<i class=\"fas fa-search\"></i> cashed/archived Items",
 
   "project-overview.page.content.card-project.title": "Project related uploads",
 
@@ -5910,7 +5910,7 @@
 
   "search.filters.applied.charts.graph-synsicris_type_functions.tab": "Usage options (multiple selection possible)",
 
-  "search.filters.applied.charts.graphphyobjtypeaccess.tab": "Accessibility",
+  "search.filters.applied.charts.graphphyobjtypeaccess.tab": "public Access",
 
   "search.filters.applied.charts.graphtargetgroupenterprise.tab": "Size of business",
 
@@ -5948,13 +5948,13 @@
 
   "search.filters.filter.synsicrisRelationProgramme.head": "Programme",
 
-  "search.filters.applied.charts.graphtargetgrouptype.tab": "Type",
+  "search.filters.applied.charts.graphtargetgrouptype.tab": "Area of activity",
 
   "search.filters.applied.charts.graphtargetgroupnace.tab": "Economic sector",
 
   "search.filters.applied.charts.graphtargetgrouppolitical.tab": "Policy level",
 
-  "search.filters.applied.charts.graphcoopparttype.tab": "Type",
+  "search.filters.applied.charts.graphcoopparttype.tab": "Area of activity",
 
   "search.filters.applied.charts.graphcooppartnace.tab": "Economic sector",
 
@@ -6060,13 +6060,13 @@
 
   "search.filters.filter.synsicrisRelationFundingobjective.head": "Funding Objective",
 
-  "search.filters.filter.synsicrisTypeAccess.head": "Access Type",
+  "search.filters.filter.synsicrisTypeAccess.head": "public Access",
 
   "search.filters.filter.synsicrisTypeEvidence.head": "Evidence Type",
 
   "search.filters.filter.synsicrisRelationFundingobjective.label": "Search Funding Objective",
 
-  "search.filters.filter.synsicrisTypeAccess.label": "Search Access Type",
+  "search.filters.filter.synsicrisTypeAccess.label": "Search Free Access",
 
   "search.filters.filter.synsicrisTypeEvidence.label": "Search Evidence Type",
 
@@ -7874,7 +7874,7 @@
 
   "submission.sections.accesses.form.discoverable-label": "Discoverable",
 
-  "submission.sections.accesses.form.access-condition-label": "Access condition type",
+  "submission.sections.accesses.form.access-condition-label": "Access condition type for the file",
 
   "submission.sections.accesses.form.access-condition-hint": "Select an access condition to apply on the item once it is deposited",
 
@@ -7922,7 +7922,7 @@
 
   "submission.sections.sherpa.publisher.policy": "Publisher Policy",
 
-  "submission.sections.sherpa.publisher.policy.description": "The below information was found via Sherpa Romeo. Based on the policies of your publisher, it provides advice regarding whether an embargo may be necessary and/or which files you are allowed to upload. If you have questions, please contact your site administrator via the feedback form in the footer.",
+  "submission.sections.sherpa.publisher.policy.description": "The below information was found via Sherpa Romeo. Based on the policies of your publisher, it provides advice regarding whether an embargo may be necessary and/or which files you are allowed to upload.",
 
   "submission.sections.sherpa.publisher.policy.openaccess": "Open Access pathways permitted by this journal's policy are listed below by article version. Click on a pathway for a more detailed view",
 
@@ -8230,7 +8230,7 @@
 
   "supervisedWorkspace.search.results.head": "Supervised Items",
 
-  "workspace.search.results.head": "My submissions",
+  "workspace.search.results.head": "My items",
 
   "workspace.alert.info": "help",
 
@@ -11586,7 +11586,7 @@
 
   "search.filters.applied.charts.RELATION.Project.projectpartner.title": "Graph",
 
-  "search.filters.applied.charts.graphprojparttype.tab": "Type",
+  "search.filters.applied.charts.graphprojparttype.tab": "Area of activity",
 
   "search.filters.applied.charts.graphprojpartnace.tab": "Economic sector",
 
@@ -11652,17 +11652,17 @@
 
   "search.filters.applied.charts.RELATION.Project.application.title": "Graph",
 
-  "search.filters.applied.charts.graphexpsocimpevidence.tab": "Basis",
+  "search.filters.applied.charts.graphexpsocimpevidence.tab": "Professional basis",
 
   "search.filters.applied.charts.graph-Funding-oairecerif_amount.tab": "Grant total",
 
-  "search.filters.applied.charts.graphUnexpectedResultType.tab": "Type",
+  "search.filters.applied.charts.graphUnexpectedResultType.tab": "related Publication",
 
   "search.filters.applied.charts.graph-application-synsicris_coverage_regional.tab": "Regional localisation/ outreach",
 
   "search.filters.applied.charts.secondStepSearchProjectItems.title": "Graph",
 
-  "search.filters.filter.synsicrisTypeAccess.placeholder": "Access Type",
+  "search.filters.filter.synsicrisTypeAccess.placeholder": "public Access",
 
   "search.filters.applied.charts.graphprojpartpersGender.tab": "Gender (Lead Admin)",
 
@@ -11848,9 +11848,9 @@
 
   "search.filters.filter.dctermsDateaccepted.max.label": "End",
 
-  "search.filters.applied.charts.graphpubldate.x_label": "Count",
+  "search.filters.applied.charts.graphpubldate.x_label": "Year",
 
-  "search.filters.applied.charts.graphpubldate.y_label": "Year",
+  "search.filters.applied.charts.graphpubldate.y_label": "Count",
 
   "search.filters.applied.charts.grapheventdate.x_label": "Year",
 
@@ -11864,6 +11864,30 @@
 
   "forgot-email.form.email.error.pattern": "Please fill in a valid email address",
 
-  "search.filters.applied.charts.graph-event-synsicris_subject_political.tab": "Policy level"
+  "search.filters.applied.charts.graph-event-synsicris_subject_political.tab": "Policy level",
+
+  "search.filters.applied.charts.graphprojpartpersGender.x_label": "Gender (Lead Admin)",
+
+  "search.filters.applied.charts.graphprojpartpersGender.y_label": "Number of persons",
+
+  "search.filters.applied.charts.graphprojpartpersadminGender.x_label": "Gender (Lead Consortium)",
+
+  "search.filters.applied.charts.graphprojpartpersadminGender.y_label": "Number of persons",
+
+  "search.filters.applied.charts.graphexpsocimpintensity.x_label": "Professional basis",
+
+  "search.filters.applied.charts.graphexpsocimpintensity.y_label": "Number of mentions",
+
+  "search.filters.applied.charts.graph-event-synsicris_type_contribution.x_label": "Type of Contribution",
+
+  "search.filters.applied.charts.graph-event-synsicris_type_contribution.y_label": "Number of mentions",
+
+  "search.filters.applied.charts.graph-product-dc_subject.x_label": "Keyword",
+
+  "search.filters.applied.charts.graph-product-dc_subject.y_label": "Number of metions",
+
+  "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_intensity.x_label": "Influence on the impact",
+
+  "search.filters.applied.graph-neg-side-effect-synsicris_type_intensity.y_label": "Number of mentions"
 
 }
