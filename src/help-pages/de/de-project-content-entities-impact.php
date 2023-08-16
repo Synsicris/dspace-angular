@@ -50,7 +50,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
 		</article>
     <article>
-    		<img src="img/de_project_about_entities_impact_Wirkungen_unterscheiden.png">
+    		<img src="img/de_project_content_entities_impact_Wirkungen unterscheiden.png">
 
     		</article>
 

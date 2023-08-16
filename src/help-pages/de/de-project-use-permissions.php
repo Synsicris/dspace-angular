@@ -36,7 +36,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
   <main>
 
 
-        <h1>Zugangsrechte zum (Teil-)Projekt</h1>
+        <h1>Bearbeitungsrechte einstellen</h1>
 
   		<article>
   		<h2>Bearbeitungsrechte beim Anlegen eines (Teil-)Projektes festlegen</h1>

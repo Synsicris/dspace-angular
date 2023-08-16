@@ -93,7 +93,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
     </ul>
     <br>
 
-    <img src="img/de_project_about_entities_proj_Import_von_Informationen.png">
+    <img src="img/de_project_content_entities_proj_Import_von_Informationen.png">
 
       <br>
 

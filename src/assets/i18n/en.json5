@@ -5140,7 +5140,7 @@
 
   "project.create.error": "There was an issue when generating the project, please try again later.",
 
-  "project.create.head": "New project",
+  "project.create.head": "Create new project",
 
   "project.create.grants.placeholder": "Please set the access rights",
 
@@ -5738,7 +5738,7 @@
 
   "search.breadcrumbs": "Search",
 
-  "search.search-form.placeholder": "Search the repository …",
+  "search.search-form.placeholder": "Search …",
 
   "search.filters.applied.f.author": "Author",
 
@@ -5814,11 +5814,11 @@
 
   "search.filters.applied.charts.graph-dc_audience.tab": "Audience",
 
-  "search.filters.applied.charts.graph-synsicris_type_patentuse.tab": "Type of Patent use",
+  "search.filters.applied.charts.graph-synsicris_type_patentuse.tab": "Type of exploitation",
 
   "search.filters.applied.charts.graph-synsicris_relation_call.tab": "Call/funding area",
 
-  "search.filters.applied.charts.graph-synsicris_type_project.tab": "Type project",
+  "search.filters.applied.charts.graph-synsicris_type_project.tab": "Type of project",
 
   "search.filters.applied.charts.graph-synsicris_duration.tab": "Duration (hours)",
 
@@ -5894,7 +5894,7 @@
 
   "search.filters.applied.charts.graph-synsicris_coverage_regional.tab": "Regional localisation / outreach",
 
-  "search.filters.applied.charts.graph-synsicris_type_contribution.tab": "Nature of the project's participation in an event",
+  "search.filters.applied.charts.graph-synsicris_type_contribution.tab": "Type of participation in an event",
 
   "search.filters.applied.charts.graphproceventpartner.tab": "involved Partner",
 
@@ -5918,7 +5918,7 @@
 
   "search.filters.applied.charts.graphexpsocimptransform.tab": "Area of transition",
 
-  "search.filters.applied.charts.graphexpsocimpintensity.tab": "Intensity",
+  "search.filters.applied.charts.graphexpsocimpintensity.tab": "Intensity of impact",
 
   "search.filters.applied.charts.graph-synsicris_type_researchquestion.tab": "Gender aspects in the research question",
 
@@ -6576,7 +6576,7 @@
 
   "orgunit.search.results.head": "Organizations Search Results",
 
-  "search.results.no-results": "Your search returned no results. Having trouble finding what you're looking for? Try putting\"",
+  "search.results.no-results": "Your search returned no results. Having trouble finding what you're looking for? Try putting",
 
   "search.results.no-results-link": "quotes around it",
 
@@ -7760,7 +7760,7 @@
 
   "submission.sections.submit.progressbar.describe.targetgroups_classification.info": "<i>Please classify the stakeholder group.</i>Your information characterises the stakeholder group more precisely and allows a cross-project evaluation of the information (e.g. for programme evaluations).",
 
-  "submission.sections.submit.progressbar.describe.gender": "#1 Key message on the reflection of the gender aspects within the project",
+  "submission.sections.submit.progressbar.describe.gender": "#1 Key message on the reflection of the gender aspects",
 
   "submission.sections.submit.progressbar.detect-duplicate": "Potential duplicates",
 
@@ -7836,7 +7836,7 @@
 
   "submission.sections.upload.form.from-hint": "Select the date from which the related access condition is applied",
 
-  "submission.sections.upload.form.from-placeholder": "From",
+  "submission.sections.upload.form.from-placeholder": "from",
 
   "submission.sections.upload.form.group-label": "Group",
 
@@ -7846,7 +7846,7 @@
 
   "submission.sections.upload.form.until-hint": "Select the date until which the related access condition is applied",
 
-  "submission.sections.upload.form.until-placeholder": "Until",
+  "submission.sections.upload.form.until-placeholder": "bis",
 
   "submission.sections.upload.header.policy.default.nolist": "Uploaded files in the {{collectionName}} collection will be accessible according to the following group(s): ",
 
@@ -8230,7 +8230,7 @@
 
   "supervisedWorkspace.search.results.head": "Supervised Items",
 
-  "workspace.search.results.head": "My items",
+  "workspace.search.results.head": "My cashed items",
 
   "workspace.alert.info": "help",
 
@@ -8788,13 +8788,13 @@
 
   "working-plan.chart.toolbar.date-view.quarter": "Quarter",
 
-  "working-plan.chart.toolbar.date-view.quarter.first": "First",
+  "working-plan.chart.toolbar.date-view.quarter.first": "First quater",
 
-  "working-plan.chart.toolbar.date-view.quarter.fourth": "Fourth",
+  "working-plan.chart.toolbar.date-view.quarter.fourth": "Fourth quater",
 
-  "working-plan.chart.toolbar.date-view.quarter.second": "Second",
+  "working-plan.chart.toolbar.date-view.quarter.second": "Second quater",
 
-  "working-plan.chart.toolbar.date-view.quarter.third": "Third",
+  "working-plan.chart.toolbar.date-view.quarter.third": "Third quater",
 
   "working-plan.chart.toolbar.date-view.year": "Year",
 
@@ -8978,7 +8978,7 @@
 
   "submission.sections.submit.progressbar.describe.agrovoc_keywords_parentprojects": "Keywords",
 
-  "submission.sections.submit.progressbar.describe.agrovoc_keywords_others": "#1 Adapt keywords",
+  "submission.sections.submit.progressbar.describe.agrovoc_keywords_others": "#2 Adapt keywords",
 
   "submission.sections.submit.progressbar.describe.statusacc1": "#2 Indicate changes compared to the proposal",
 
@@ -9804,13 +9804,13 @@
 
   "layout.field.label.Product.dc.publisher": "Publisher",
 
-  "layout.field.label.Product.dc.date.issued": "Date of issue",
+  "layout.field.label.Product.dc.date.issued": "Date issued",
 
   "layout.field.label.Product.dc.description.abstract": "Abstract",
 
   "layout.field.label.Product.dc.language.iso": "Language",
 
-  "layout.field.label.Product.dc.subject": "Key words",
+  "layout.field.label.Product.dc.subject": "Keywords",
 
   "layout.field.label.research_result.dc.title": "Title",
 
@@ -9848,7 +9848,7 @@
 
   "layout.field.label.Patent.synsicris.subject.ipc": "IPC class",
 
-  "layout.field.label.Patent.dcterms.dateAccepted": "Approval date",
+  "layout.field.label.Patent.dcterms.dateAccepted": "Date of making available to the public",
 
   "layout.field.label.Patent.dc.description.abstract": "Abstract",
 
@@ -9992,7 +9992,7 @@
 
   "submission.sections.submit.progressbar.describe.publications_references": "#2 Classification of the publication",
 
-  "submission.sections.submit.progressbar.describe.unexpected_results_publication": "##2 Assessment of possible publication in the case of \"negative results\"",
+  "submission.sections.submit.progressbar.describe.unexpected_results_publication": "#2 Assessment of possible publication in the case of \"negative results\"",
 
   "submission.sections.submit.progressbar.describe.exp_societalimpact_neg": "#1 Reflecting on possible negative side effects",
 
@@ -10896,9 +10896,9 @@
 
   "layout.field.label.spinoff.synsicris.amount.currencyfunding": "Currency",
 
-  "layout.field.label.exp_societalimpact.synsicris.type.intensity": "Impact intensity",
+  "layout.field.label.exp_societalimpact.synsicris.type.intensity": "Intensity of impact",
 
-  "layout.field.label.neg_sideeffect.synsicris.type.intensity": "Impact intensity",
+  "layout.field.label.neg_sideeffect.synsicris.type.intensity": "Intensity of impact",
 
   "layout.field.label.programme.synsicris.relation.guideline": "Funding guideline",
 
@@ -10972,9 +10972,9 @@
 
   "explore.index.synsicrisDcSubject": "Subject",
 
-  "explore.index.synsicrisDateFilled": "Date of Filling",
+  "explore.index.synsicrisDateFilled": "Date of filling",
 
-  "explore.index.dctermsDateaccepted": "Date of Acceptance",
+  "explore.index.dctermsDateaccepted": "Date of making available to the public",
 
   "explore.index.synsicrisTypeEasyimport": "Executing Organisation",
 
@@ -10988,7 +10988,7 @@
 
   "layout.box.header.physical_object_status": "Change since proposal submission",
 
-  "layout.box.header.physical_object_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.physical_object_internalacc": "Section for internal notes",
 
   "layout.field.label.physical_object.synsicris.type.internal": "Task",
 
@@ -11172,7 +11172,7 @@
 
   "search.filters.filter.synsicrisTypeInfluence.Label": "Search Influence on the impact",
 
-  "layout.box.header.open_researchquestion_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.open_researchquestion_internalacc": "Section for internal notes",
 
   "layout.field.label.Project.synsicris.type.internal": "Task",
 
@@ -11194,19 +11194,19 @@
 
   "layout.field.label.targetgroup.synsicris.description.internal": "Description",
 
-  "layout.box.header.stateofart_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.stateofart_internalacc": "Section for internal notes",
 
   "layout.field.label.stateofart.synsicris.type.internal": "Task",
 
   "layout.field.label.stateofart.synsicris.description.internal": "Description",
 
-  "layout.box.header.proj_objective_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.proj_objective_internalacc": "Section for internal notes",
 
   "layout.field.label.proj_objective.synsicris.type.internal": "Task",
 
   "layout.field.label.proj_objective.synsicris.description.internal": "Description",
 
-  "layout.box.header.ia_objective_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.ia_objective_internalacc": "Section for internal notes",
 
   "layout.field.label.ia_objective.synsicris.type.internal": "Task",
 
@@ -11234,27 +11234,27 @@
 
   "layout.box.header.Publication_internalacc": "Internal information (only for members of the consortium)",
 
-  "layout.field.label.Publication.synsicris.subject.agrovoc": "Key words",
+  "layout.field.label.Publication.synsicris.subject.agrovoc": "Keywords",
 
   "layout.field.label.Publication.synsicris.type.internal": "Task",
 
   "layout.field.label.Publication.synsicris.description.internal": "Description",
 
-  "layout.box.header.Product_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.Product_internalacc": "Section for internal notes",
 
   "layout.field.label.Product.synsicris.type.internal": "Task",
 
   "layout.field.label.Product.synsicris.description.internal": "Description",
 
-  "layout.field.label.Product.synsicris.subject.agrovoc": "Key words",
+  "layout.field.label.Product.synsicris.subject.agrovoc": "Keywords",
 
-  "layout.box.header.research_result_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.research_result_internalacc": "Section for internal notes",
 
   "layout.field.label.research_result.synsicris.type.internal": "Task",
 
   "layout.field.label.research_result.synsicris.description.internal": "Description",
 
-  "layout.box.header.unexpected_result_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.unexpected_result_internalacc": "Section for internal notes",
 
   "layout.field.label.unexpected_result.synsicris.type.internal": "Task",
 
@@ -11270,25 +11270,25 @@
 
   "layout.field.label.open_researchquestion.synsicris.description.internal": "Description",
 
-  "layout.box.header.award_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.award_internalacc": "Section for internal notes",
 
   "layout.field.label.award.synsicris.type.internal": "Task",
 
   "layout.field.label.award.synsicris.description.internal": "Description",
 
-  "layout.box.header.contribution_fundingprogramme_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.contribution_fundingprogramme_internalacc": "Section for internal notes",
 
   "layout.field.label.contribution_fundingprogramme.synsicris.type.internal": "Task",
 
   "layout.field.label.contribution_fundingprogramme.synsicris.description.internal": "Description",
 
-  "layout.box.header.application_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.application_internalacc": "Section for internal notes",
 
   "layout.field.label.application.synsicris.type.internal": "Task",
 
   "layout.field.label.application.synsicris.description.internal": "Description",
 
-  "layout.field.label.Project.synsicris.subject.agrovoc": "Key words",
+  "layout.field.label.Project.synsicris.subject.agrovoc": "Keywords",
 
   "search.filters.filter.synsicrisTypeEasyimport.label": "Search Executing Organisation (easy-Online)",
 
@@ -11318,11 +11318,11 @@
 
   "search.filters.filter.synsicrisTypeInfluence.label": "Search Influence on the impact",
 
-  "search.filters.filter.synsicrisTypeContribution.head": "Type of Contribution",
+  "search.filters.filter.synsicrisTypeContribution.head": "Type of participation",
 
-  "search.filters.filter.synsicrisTypeContribution.placeholder": "Type of Contribution",
+  "search.filters.filter.synsicrisTypeContribution.placeholder": "Type of participation",
 
-  "search.filters.filter.synsicrisTypeContribution.label": "Search Type of Contribution",
+  "search.filters.filter.synsicrisTypeContribution.label": "Search Type of participation",
 
   "search.filters.filter.synsicrisSubjectAgrovoc.head": "Keyword (Agrovoc)",
 
@@ -11336,17 +11336,17 @@
 
   "search.filters.filter.dcAudience.label": "Search Audience",
 
-  "search.filters.filter.synsicrisTypePatentuse.head": "Type of Utilization",
+  "search.filters.filter.synsicrisTypePatentuse.head": "Type of exploitation",
 
-  "search.filters.filter.synsicrisTypePatentuse.placeholder": "Type of Utilization",
+  "search.filters.filter.synsicrisTypePatentuse.placeholder": "Type of exploitation",
 
-  "search.filters.filter.synsicrisTypePatentuse.label": "Search Type of Utilization",
+  "search.filters.filter.synsicrisTypePatentuse.label": "Search Type of expoitation",
 
-  "search.filters.filter.dctermsDateaccepted.head": "Date of Acceptance",
+  "search.filters.filter.dctermsDateaccepted.head": "Date of making available to the public",
 
-  "search.filters.filter.dctermsDateaccepted.placeholder": "Date of Acceptance",
+  "search.filters.filter.dctermsDateaccepted.placeholder": "Date of making available to the public",
 
-  "search.filters.filter.dctermsDateaccepted.label": "Suche Date of Acceptance",
+  "search.filters.filter.dctermsDateaccepted.label": "Search Date of making available to the public",
 
   "search.filters.filter.synsicrisDuration.head": "Duration (hours)",
 
@@ -11410,13 +11410,13 @@
 
   "secondStepSearchProjectItemsForAdminAndFunders.search.results.head": "Search Results",
 
-  "layout.box.header.Project_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.Project_internalacc": "Section for internal notes",
 
-  "layout.box.header.funding_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.funding_internalacc": "Section for internal notes",
 
-  "layout.box.header.cooperationpartner_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.cooperationpartner_internalacc": "Section for internal notes",
 
-  "layout.box.header.targetgroup_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.targetgroup_internalacc": "Section for internal notes",
 
   "layout.field.label.innovationpotential.synsicris.type.level": "Readinesslevel",
 
@@ -11496,7 +11496,7 @@
 
   "search.filters.applied.charts.graph-event-synsicris_subject_urbanrural.tab": "Locating",
 
-  "search.filters.applied.charts.graph-event-synsicris_type_contribution.tab": "Type of Contribution",
+  "search.filters.applied.charts.graph-event-synsicris_type_contribution.tab": "Type of participation",
 
   "search.filters.applied.charts.RELATION.Project.Product.title": "Graph",
 
@@ -11508,7 +11508,7 @@
 
   "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_transform.tab": "Area of transition",
 
-  "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_intensity.tab": "Influence on the impact",
+  "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_intensity.tab": "Intensity of impact",
 
   "search.filters.applied.charts.graphprojpart_synsicris_subject_political.tab": "Policy level",
 
@@ -11806,13 +11806,13 @@
 
   "layout.field.label.ethic.synsicris.description.internal": "Description",
 
-  "layout.box.header.gender_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.gender_internalacc": "Section for internal notes",
 
   "layout.field.label.gender.synsicris.type.internal": "Task",
 
   "layout.field.label.gender.synsicris.description.internal": "Description",
 
-  "layout.box.header.condition_internalacc": "Internal information (only for members of the consortium)",
+  "layout.box.header.condition_internalacc": "Section for internal notes",
 
   "layout.field.label.condition.synsicris.type.internal": "Task",
 
@@ -11878,7 +11878,7 @@
 
   "search.filters.applied.charts.graphexpsocimpintensity.y_label": "Number of mentions",
 
-  "search.filters.applied.charts.graph-event-synsicris_type_contribution.x_label": "Type of Contribution",
+  "search.filters.applied.charts.graph-event-synsicris_type_contribution.x_label": "Type of participation",
 
   "search.filters.applied.charts.graph-event-synsicris_type_contribution.y_label": "Number of mentions",
 
@@ -11886,8 +11886,10 @@
 
   "search.filters.applied.charts.graph-product-dc_subject.y_label": "Number of metions",
 
-  "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_intensity.x_label": "Influence on the impact",
+  "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_intensity.x_label": "Intensity of impact",
 
-  "search.filters.applied.graph-neg-side-effect-synsicris_type_intensity.y_label": "Number of mentions"
+  "search.filters.applied.graph-neg-side-effect-synsicris_type_intensity.y_label": "Number of mentions",
+
+  "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_intensity.y_label": "Number of mentions"
 
 }
