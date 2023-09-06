@@ -6,3 +6,8 @@
 cdk-tree .btn:focus {
   box-shadow: none !important;
 }
+
+.break-line {
+  word-wrap: break-word;
+  white-space: normal;
+}
