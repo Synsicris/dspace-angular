@@ -634,7 +634,7 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         let compareEnd: Date;
         const end = new Date(step.dates.end.full);
         if (isNotEmpty(step.dates.compareEnd)) {
-          compareEnd = step.dates.compareEnd.full;
+          compareEnd = new Date(step.dates.compareEnd.full);
         }
 
         if (step.type === 'milestone') {
@@ -658,7 +658,6 @@ export class WorkingPlanChartContainerComponent implements OnInit, OnDestroy {
         const endForQuarter = endOfQuarter(rangeMaxDate);
         // Moment range sometimes does not include all the years, so use the end of the year to get the correct range
         const endForYear = endOfYear(rangeMaxDate);
-
         const days = eachDayOfInterval({ start: rangeMinDate, end: rangeMaxDate });
         const months = eachMonthOfInterval({ start: start, end: endForMonth });
         const quarters = eachQuarterOfInterval({ start: start, end: endForQuarter });
