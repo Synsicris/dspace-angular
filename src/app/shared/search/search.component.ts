@@ -235,6 +235,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   @Input() trackStatistics = false;
 
   /**
+   * Flag to show or hide the alert box on search results
+   */
+  showAlertBox = false;
+
+  /**
    * For chart regular expression
    */
   chartReg = new RegExp(/^chart./, 'i');

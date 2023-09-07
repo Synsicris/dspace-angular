@@ -117,6 +117,11 @@ export class SearchResultsComponent {
   @Input() showSearchResultNotice = false;
 
   /**
+   * A boolean representing if show alert box
+   */
+  @Input() showAlertBox = false;
+
+  /**
    * Emit when one of the listed object has changed.
    */
   @Output() contentChange = new EventEmitter<any>();

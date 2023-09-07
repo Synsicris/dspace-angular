@@ -9,7 +9,7 @@ import { environment } from '../environments/environment';
 import { RelationBoxConfiguration } from '../app/core/layout/models/box.model';
 import { add, format, sub } from 'date-fns';
 
-export const DATE_FORMAT = 'YYYY-MM-DD';
+export const DATE_FORMAT = 'yyyy-MM-dd';
 
 export interface RangeFilterGroup {
   [fkey: string]: { min?: string, max?: string }

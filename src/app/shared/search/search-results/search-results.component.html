@@ -5,7 +5,7 @@
 <div *ngIf="searchResults && searchResults?.hasSucceeded && !searchResults?.isLoading && searchResults?.payload?.page.length > 0" @fadeIn>
   <ds-alert *ngIf="showSearchResultNotice" [type]="searchResultNoticeType" [content]="searchResultNotice"></ds-alert>
 
-  <ds-alert [content]="configuration + '.alert.info'"></ds-alert>
+  <ds-alert *ngIf="showAlertBox" [content]="configuration + '.alert.info'"></ds-alert>
 
     <ds-viewable-collection
             [config]="searchConfig.pagination"
