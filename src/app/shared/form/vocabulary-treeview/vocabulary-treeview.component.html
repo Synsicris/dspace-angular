@@ -33,7 +33,7 @@
             <button type="button" class="btn btn-default" cdkTreeNodeToggle>
               <span class="fas fa-angle-right fa-2x invisible" aria-hidden="true"></span>
             </button>
-            <button class="btn btn-outline-link btn-sm text-left"
+            <button class="btn btn-outline-link btn-sm text-left break-line"
                     [class.text-success]="node.item?.value === selectedItem?.value"
                     [disabled]="!node.item?.selectable"
                     [ngbTooltip]="node.item?.otherInformation?.note"
@@ -53,7 +53,7 @@
                     aria-hidden="true"></span>
             </button>
 
-            <button class="btn btn-outline-link btn-sm text-left"
+            <button class="btn btn-outline-link btn-sm text-left break-line"
                     [class.text-success]="node.item?.value === selectedItem?.value"
                     [disabled]="!node.item?.selectable"
                     [ngbTooltip]="node.item?.otherInformation?.note"
