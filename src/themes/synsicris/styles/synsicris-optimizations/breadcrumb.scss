@@ -19,7 +19,7 @@ ds-breadcrumbs nav.nav-breadcrumb { // complete bar
     padding-top: var(--ds-content-spacing / 3);
     background-color: transparent; // Breadcrumb-Links had a background-color, that is not needed
   }
-  
+
   .breadcrumb-item-limiter {
     display: inline-block;
     max-width: var(--ds-breadcrumb-max-length); //truncating too long words
@@ -28,21 +28,17 @@ ds-breadcrumbs nav.nav-breadcrumb { // complete bar
       display: block;
     }
   }
-  
+
   li.breadcrumb-item {
-  
+
     display: flex;
-    //border:1px solid lime;
-  
-    /* so that all links appear in one line, entity tags without padding in li, 
-    because the link itself has a padding top */
-    padding:4px 8px 4px 0;
+    align-items: center;
+
     &.separator {
-      padding-top:1px;
       padding-right:0; // Distance between entity tag and record title
     }
-  
-    /* "/" between levels: to disable the "/", which is probably defined elsewhere, 
+
+    /* "/" between levels: to disable the "/", which is probably defined elsewhere,
     and only put a slash in front of the Entity-Tags .separator */
     &::before {
      content: quote("");
@@ -57,15 +53,11 @@ ds-breadcrumbs nav.nav-breadcrumb { // complete bar
       content: quote(">") !important; // replaced "/" */
       font-weight:bold;
       color:var(--sy-breadcrumb-divider-color) !important;
-      padding-top:7px; // so that the ">" appears in the same line with the links
     }
 
     &.Project, &.active {
       color: var(--ds-breadcrumb-link-active-color) !important;
     }
-
-    //seltsames Phaenomen, dass die aktiven Links ohne Tag davor nach oben rutschen, unterscheiden sich nur durch diese ng-reflect-ng-class="[object Object]
-    &.active[ng-reflect-ng-class="[object Object]"] span {padding-top:3px !important;}
 
     // Design of (links inside) Tag (= Entity-Name in Tag-Style)
     &.separator a {
@@ -76,20 +68,20 @@ ds-breadcrumbs nav.nav-breadcrumb { // complete bar
       //font-family:'Nunito-MediumItalic';
       font-family:'Nunito-Medium';
     }
-  
+
     // Colors entity-tag first level "Project" = Verbund
     &.Project.separator a {
       i.fas {color: var(--sy-breadcrumb-link-project-color) !important;} // without "!important! it gets the link color}
       border-color: var(--sy-breadcrumb-border-project-color);
     }
-  
+
     // Colors entity-tag second level "Funding" = Projekt
     &.Funding.separator a {
       i.fas {color: var(--sy-breadcrumb-link-funding-color) !important;} // without "!important! it gets the link color}
       border-color: var(--sy-breadcrumb-border-funding-color);
     }
-  
-  
+
+
   } // end li.breadcrumb-item
 
 } // end ds-breadcrumbs nav.nav-breadcrumb
