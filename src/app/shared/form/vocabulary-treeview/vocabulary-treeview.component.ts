@@ -206,8 +206,15 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit {
     this.translate.get(`search.filters.filter.${this.vocabularyOptions.name}.head`).pipe(
       map((type) => lowerCase(type)),
     ).subscribe(
-      (type) => this.description = this.translate.get('vocabulary-treeview.info', { type })
+      // (type) => this.description = this.translate.get('vocabulary-treeview.info', { type })
     );
+    this.description = this.translate.get('vocabulary-treeview.tree.description.' + this.vocabularyOptions.name);
+
+    // const descriptionLabel = 'vocabulary-treeview.tree.description.' + this.vocabularyOptions.name;
+    // this.description = this.translate.get(descriptionLabel).pipe(
+    //   filter((msg) => msg !== descriptionLabel),
+    //   startWith('')
+    // );
 
     this.loading = this.vocabularyTreeviewService.isLoading();
 
