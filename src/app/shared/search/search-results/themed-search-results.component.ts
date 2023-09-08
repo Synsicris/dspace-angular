@@ -22,7 +22,7 @@ import { AlertType } from '../../alert/aletr-type';
   templateUrl: '../../theme-support/themed.component.html',
 })
 export class ThemedSearchResultsComponent extends ThemedComponent<SearchResultsComponent> {
-  protected inAndOutputNames: (keyof SearchResultsComponent & keyof this)[] = ['linkType', 'notFoundMessageKey', 'searchResults', 'searchConfig', 'showCsvExport', 'sortConfig', 'useLabelsForExport', 'viewMode', 'configuration', 'disableHeader', 'selectable', 'context', 'hidePaginationDetail', 'selectionConfig', 'contentChange', 'deselectObject', 'selectObject', 'customData', 'customEvent', 'searchResultNotice', 'searchResultNoticeType', 'showSearchResultNotice'];
+  protected inAndOutputNames: (keyof SearchResultsComponent & keyof this)[] = ['linkType', 'notFoundMessageKey', 'searchResults', 'searchConfig', 'showCsvExport', 'sortConfig', 'useLabelsForExport', 'viewMode', 'configuration', 'disableHeader', 'selectable', 'context', 'hidePaginationDetail', 'selectionConfig', 'contentChange', 'deselectObject', 'selectObject', 'customData', 'customEvent', 'searchResultNotice', 'searchResultNoticeType', 'showSearchResultNotice', 'showAlertBox'];
   @Input() linkType: CollectionElementLinkType;
 
   /**
@@ -61,6 +61,8 @@ export class ThemedSearchResultsComponent extends ThemedComponent<SearchResultsC
   @Input() selectionConfig: SelectionConfig = null;
 
   @Input() customData: any;
+
+  @Input() showAlertBox = false;
 
   @Output() contentChange: EventEmitter<ListableObject> = new EventEmitter<ListableObject>();
 
