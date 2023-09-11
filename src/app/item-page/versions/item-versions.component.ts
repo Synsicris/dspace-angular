@@ -2,13 +2,7 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Item } from '../../core/shared/item.model';
 import { Version } from '../../core/shared/version.model';
 import { RemoteData } from '../../core/data/remote-data';
-import {
-  BehaviorSubject,
-  combineLatest,
-  Observable,
-  of,
-  Subscription,
-} from 'rxjs';
+import { BehaviorSubject, combineLatest, forkJoin, Observable, of, shareReplay, Subscription, } from 'rxjs';
 import { VersionHistory } from '../../core/shared/version-history.model';
 import {
   getAllSucceededRemoteData,
@@ -27,11 +21,7 @@ import { AlertType } from '../../shared/alert/aletr-type';
 import { followLink } from '../../shared/utils/follow-link-config.model';
 import { hasValue, hasValueOperator, isEmpty, isNull, isUndefined } from '../../shared/empty.util';
 import { PaginationService } from '../../core/pagination/pagination.service';
-import {
-  getItemEditVersionhistoryRoute,
-  getItemPageRoute,
-  getItemVersionRoute
-} from '../item-page-routing-paths';
+import { getItemEditVersionhistoryRoute, getItemPageRoute, getItemVersionRoute } from '../item-page-routing-paths';
 import { FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ItemVersionsSummaryModalComponent } from './item-versions-summary-modal/item-versions-summary-modal.component';
@@ -210,6 +200,9 @@ export class ItemVersionsComponent implements OnInit {
 
   processingEdit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   processingDelete$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  isAdmin$: Observable<boolean>;
+
   /**
    * Get version edit mode from envoirment
    */
@@ -447,18 +440,7 @@ export class ItemVersionsComponent implements OnInit {
       startWith(false),
     );
 
-    const isAdmin$ = combineLatest([
-      this.authorizationService.isAuthorized(FeatureID.IsCollectionAdmin),
-      this.authorizationService.isAuthorized(FeatureID.IsCommunityAdmin),
-      this.authorizationService.isAuthorized(FeatureID.AdministratorOf),
-    ]).pipe(
-      map(([isCollectionAdmin, isCommunityAdmin, isSiteAdmin]) => {
-        return isCollectionAdmin || isCommunityAdmin || isSiteAdmin;
-      }),
-      take(1),
-    );
-
-    return combineLatest([includeSubmitter$, isAdmin$]).pipe(
+    return combineLatest([includeSubmitter$, this.isAdmin$]).pipe(
       map(([includeSubmitter, isAdmin]) => {
         return includeSubmitter && isAdmin;
       })
@@ -583,6 +565,17 @@ export class ItemVersionsComponent implements OnInit {
           versions.forEach((item) => itemPageRoutes[item.uuid] = getItemPageRoute(item));
           return itemPageRoutes;
         })
+      );
+      this.isAdmin$ = forkJoin([
+        this.authorizationService.isAuthorized(FeatureID.IsCollectionAdmin).pipe(take(1)),
+        this.authorizationService.isAuthorized(FeatureID.IsCommunityAdmin).pipe(take(1)),
+        this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(take(1)),
+      ]).pipe(
+          map(
+              ([isCollectionAdmin, isCommunityAdmin, isSiteAdmin]) =>
+                  isCollectionAdmin || isCommunityAdmin || isSiteAdmin
+          ),
+          shareReplay(1)
       );
     }
   }

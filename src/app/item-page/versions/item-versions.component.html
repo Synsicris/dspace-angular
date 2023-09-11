@@ -244,7 +244,7 @@
                 <td class="version-row-element-summary" *ngIf="!isProjectReader">
                   <div class="float-right btn-group edit-field"
                        *ngIf="displayActions && version?.id !== itemVersion?.id">
-                    <ng-container *ngIf="isCoordinator">
+                    <ng-container *ngIf="isCoordinator || (isAdmin$ | async)">
                       <button
                         *ngIf="!isVersionVisible(versionItem)"
                         class="btn btn-sm version-row-element-delete btn-outline-primary"
