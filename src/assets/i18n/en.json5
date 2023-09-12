@@ -8882,6 +8882,8 @@
 
   "vocabulary-treeview.tree.description.coar": "Please characterize the type of publication by selecting.",
 
+  "vocabulary-treeview.tree.description.countries2": "Select a country to add as search filter",
+
   "submission.sections.submit.progressbar.describe.plan_publications.info": "Publications include all types of written, visual or audiovisual material produced and published in the project or made available to the funding agency. Enter here the information about a planned publication.",
 
   "submission.sections.submit.progressbar.describe.gender_reflection": "#1 Gender reflection",
