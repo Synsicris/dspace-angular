@@ -29,6 +29,7 @@ import { IsAdministratorResolver } from '../core/project/resolvers/is-administra
         canActivate: [AuthenticatedGuard, PrintStyleApplier],
         path: '',
         component: WorkingPlanPageComponent,
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         pathMatch: 'full',
         resolve: {
           workingPlan: WorkingPlanItemResolver,
