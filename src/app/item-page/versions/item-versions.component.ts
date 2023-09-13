@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Item } from '../../core/shared/item.model';
 import { Version } from '../../core/shared/version.model';
 import { RemoteData } from '../../core/data/remote-data';
-import { BehaviorSubject, combineLatest, forkJoin, Observable, of, shareReplay, Subscription, } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of, Subscription, } from 'rxjs';
 import { VersionHistory } from '../../core/shared/version-history.model';
 import {
   getAllSucceededRemoteData,
@@ -81,6 +81,11 @@ export class ItemVersionsComponent implements OnInit {
    * Whether or not to display the action buttons (delete/create/edit version)
    */
   @Input() displayActions: boolean;
+
+  /**
+   * Whether user is site administrator
+   */
+  @Input() isAdministrator = false;
 
   /**
    * Whether user is coordinator
@@ -175,9 +180,19 @@ export class ItemVersionsComponent implements OnInit {
   }>;
 
   /**
-   * The number of the version whose summary is currently being edited
+   * The number of the version whose summary or note is currently being edited
    */
   versionBeingEditedNumber: number;
+
+  /**
+   * The number of the version whose note is currently being edited
+   */
+  versionNoteBeingEditedNumber: number;
+
+  /**
+   * The number of the version whose summary is currently being edited
+   */
+  versionSummaryBeingEditedNumber: number;
 
   /**
    * The id of the version whose summary is currently being edited
@@ -247,6 +262,14 @@ export class ItemVersionsComponent implements OnInit {
   }
 
   /**
+   * True if the specified version is being edited
+   * (used to show input field and to change buttons for specified version)
+   */
+  isThisSummaryBeingEdited(version: Version): boolean {
+    return version?.version === this.versionSummaryBeingEditedNumber;
+  }
+
+  /**
    * Enables editing for the specified version
    */
   enableVersionEditing(version: Version): void {
@@ -256,11 +279,23 @@ export class ItemVersionsComponent implements OnInit {
   }
 
   /**
+   * Enables editing for the specified version
+   */
+  enableVersionSummaryEditing(version: Version): void {
+    this.versionBeingEditedSummary = version?.summary;
+    this.versionBeingEditedNumber = version?.version;
+    this.versionSummaryBeingEditedNumber = version?.version;
+    this.versionBeingEditedId = version?.id;
+  }
+
+  /**
    * Disables editing for the specified version and discards all pending changes
    */
   disableVersionEditing(): void {
     this.versionBeingEditedSummary = undefined;
     this.versionBeingEditedNumber = undefined;
+    this.versionNoteBeingEditedNumber = undefined;
+    this.versionSummaryBeingEditedNumber = undefined;
     this.versionBeingEditedId = undefined;
   }
 
@@ -566,17 +601,6 @@ export class ItemVersionsComponent implements OnInit {
           return itemPageRoutes;
         })
       );
-      this.isAdmin$ = forkJoin([
-        this.authorizationService.isAuthorized(FeatureID.IsCollectionAdmin).pipe(take(1)),
-        this.authorizationService.isAuthorized(FeatureID.IsCommunityAdmin).pipe(take(1)),
-        this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(take(1)),
-      ]).pipe(
-          map(
-              ([isCollectionAdmin, isCommunityAdmin, isSiteAdmin]) =>
-                  isCollectionAdmin || isCommunityAdmin || isSiteAdmin
-          ),
-          shareReplay(1)
-      );
     }
   }
 
@@ -757,7 +781,7 @@ export class ItemVersionsComponent implements OnInit {
    * (used to show input field and to change buttons for specified note)
    */
   isNoteBeingEdited(versionItem: Item, version: Version): boolean {
-    return this.versionBeingEditedNote !== undefined && this.versionBeingEditedNumber === version.version;
+    return this.versionNoteBeingEditedNumber === version.version;
   }
 
   /**
@@ -765,6 +789,7 @@ export class ItemVersionsComponent implements OnInit {
    */
   enableNoteEditing(versionItem: Item, version: Version): void {
     this.versionBeingEditedNumber = version.version;
+    this.versionNoteBeingEditedNumber = version.version;
     this.versionBeingEditedNote = !!versionItem.firstMetadataValue('synsicris.version.notes') ? versionItem.firstMetadataValue('synsicris.version.notes') : '';
   }
 
@@ -773,6 +798,7 @@ export class ItemVersionsComponent implements OnInit {
    */
   disableNoteEditing(): void {
     this.versionBeingEditedNumber = undefined;
+    this.versionNoteBeingEditedNumber = undefined;
     this.versionBeingEditedNote = undefined;
   }
 

@@ -1,6 +1,7 @@
 <div class="container">
     <ds-item-versions *ngIf="item$ | async"
                       [item]="item$ | async"
+                      [isAdministrator]="isAdministrator$ | async"
                       [isCoordinator]="isCoordinatorOfProject$ | async"
                       [isFunderManagerOrReader]="isFounderManagerOrReaderOfProject$ | async"
                       [isProjectFunder]="isFounderOfProject$ | async"
