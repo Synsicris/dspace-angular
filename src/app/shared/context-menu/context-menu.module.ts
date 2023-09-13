@@ -27,7 +27,6 @@ import { ProjectAdminInvitationMenuComponent } from './project-invitation/projec
 import {
   ProjectMembersInvitationMenuComponent
 } from './project-members-invitation/project-members-invitation-menu.component';
-import { GenerateReportMenuComponent } from './generate-report/generate-report-menu.component';
 import { EasyOnlineImportMenuComponent } from './easy-online-import/easy-online-import-menu.component';
 import { CreateProjectMenuComponent } from './create-project/create-project-menu.component';
 import { ViewProjectItemsMenuComponent } from './view-project-items/view-project-items-menu.component';
@@ -53,7 +52,6 @@ const COMPONENTS = [
   FullItemMenuComponent,
   OrcidViewPageMenuComponent,
   DeleteProjectMenuComponent,
-  GenerateReportMenuComponent,
   ProjectAdminInvitationMenuComponent,
   ProjectMembersInvitationMenuComponent,
   EasyOnlineImportMenuComponent,
@@ -81,7 +79,6 @@ const ENTRY_COMPONENTS = [
   FullItemMenuComponent,
   OrcidViewPageMenuComponent,
   DeleteProjectMenuComponent,
-  GenerateReportMenuComponent,
   ProjectAdminInvitationMenuComponent,
   ProjectMembersInvitationMenuComponent,
   EasyOnlineImportMenuComponent,
