@@ -1033,7 +1033,19 @@ function initCompare(state: ImpactPathwayState, action: InitCompareAction) {
   return Object.assign({}, state, {
     compareImpactPathwayId: action.payload.compareImpactPathwayId,
     compareMode: true,
-    compareProcessing: true
+    compareProcessing: true,
+    links: {
+      showLinks: true,
+      editing: false,
+      selectedTaskHTMLId: '',
+      selectedTaskId: '',
+      selectedTwoWay: false,
+      relatedImpactPathwayId: '',
+      relatedStepId: '',
+      stored: [],
+      toSave: [],
+      toDelete: []
+    },
   });
 }
 
