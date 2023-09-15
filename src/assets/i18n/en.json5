@@ -2082,6 +2082,14 @@
 
   "confirmation-modal.version.official.confirm": "Yes",
 
+  "confirmation-modal.clear-question-board.header": "Clear Interim Report Board",
+
+  "confirmation-modal.clear-question-board.info": "Are you sure you want to clear the interim report board? All the tasks and attachments will be deleted.",
+
+  "confirmation-modal.clear-question-board.cancel": "Cancel",
+
+  "confirmation-modal.clear-question-board.confirm": "Confirm",
+
   "comment.listelement.badge": "Comment",
 
   "dataset.listelement.badge": "Dataset",
@@ -6485,6 +6493,14 @@
   "questions-board.interim-report.metadata-status.icon.title.status.archieved": "Archieved",
 
   "questions-board.interim-report.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
+
+  "questions-board.clear-all-board.success": "All tasks for {{step}} have been deleted",
+
+  "questions-board.clear-all-board.error": "An error occurred while clearing the board",
+
+  "questions-board.clear-upload-files.success": "All files have been deleted",
+
+  "questions-board.clear-upload-files.error": "An error occurred while deleting files",
 
   "impact-pathway.metadata-internal.icon.title.status.done": "Done",
 

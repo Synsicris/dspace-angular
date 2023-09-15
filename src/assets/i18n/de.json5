@@ -3354,6 +3354,22 @@
   // TODO New key - Add a translation
   "confirmation-modal.pending-changes.confirm": "Verlassen",
 
+  // "confirmation-modal.clear-question-board.header": "Clear Interim Report Board",
+  // TODO New key - Add a translation
+  "confirmation-modal.clear-question-board.header": "Clear Interim Report Board",
+
+  // "confirmation-modal.clear-question-board.info": "Are you sure you want to clear the interim report board? All the tasks and attachments will be deleted.",
+  // TODO New key - Add a translation
+  "confirmation-modal.clear-question-board.info": "Are you sure you want to clear the interim report board? All the tasks and attachments will be deleted.",
+
+  // "confirmation-modal.clear-question-board.cancel": "Cancel",
+  // TODO New key - Add a translation
+  "confirmation-modal.clear-question-board.cancel": "Cancel",
+
+  // "confirmation-modal.clear-question-board.confirm": "Confirm",
+  // TODO New key - Add a translation
+  "confirmation-modal.clear-question-board.confirm": "Confirm",
+
   // "comment.listelement.badge": "Comment",
   "comment.listelement.badge": "Kommentar",
 
@@ -18801,6 +18817,22 @@
   // "questions-board.interim-report.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
   // TODO New key - Add a translation
   "questions-board.interim-report.metadata-status.icon.title.status.partly-archieved": "Partly Archieved",
+
+  // "questions-board.clear-all-board.success": "All tasks for {{step}} have been deleted",
+  // TODO New key - Add a translation
+  "questions-board.clear-all-board.success": "All tasks for {{step}} have been deleted",
+
+  // "questions-board.clear-all-board.error": "An error occurred while clearing the board",
+  // TODO New key - Add a translation
+  "questions-board.clear-all-board.error": "An error occurred while clearing the board",
+
+  // "questions-board.clear-upload-files.success": "All files have been deleted",
+  // TODO New key - Add a translation
+  "questions-board.clear-upload-files.success": "All files have been deleted",
+
+  // "questions-board.clear-upload-files.error": "An error occurred while deleting files",
+  // TODO New key - Add a translation
+  "questions-board.clear-upload-files.error": "An error occurred while deleting files",
 
   // "impact-pathway.metadata-internal.icon.title.status.done": "Done",
   // TODO New key - Add a translation

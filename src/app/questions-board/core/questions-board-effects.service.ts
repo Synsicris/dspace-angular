@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { of as observableOf } from 'rxjs';
-import { catchError, concatMap, delay, map, switchMap, take, tap } from 'rxjs/operators';
+import { from, of as observableOf, of } from 'rxjs';
+import { catchError, concatMap, delay, filter, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
@@ -15,6 +15,9 @@ import {
   AddQuestionsBoardTaskAction,
   AddQuestionsBoardTaskErrorAction,
   AddQuestionsBoardTaskSuccessAction,
+  ClearQuestionBoardStepsAction,
+  ClearQuestionBoardStepsErrorAction,
+  ClearQuestionBoardStepsSuccessAction,
   GenerateQuestionsBoardTaskAction,
   GenerateQuestionsBoardTaskErrorAction,
   GenerateQuestionsBoardTaskSuccessAction,
@@ -32,6 +35,9 @@ import {
   PatchQuestionsBoardStepMetadataErrorAction,
   PatchQuestionsBoardStepMetadataSuccessAction,
   QuestionsBoardActionTypes,
+  RemoveAllUploadedFilesFromQuestionsboardAction,
+  RemoveAllUploadedFilesFromQuestionsboardErrorAction,
+  RemoveAllUploadedFilesFromQuestionsboardSuccessAction,
   RemoveQuestionsBoardTaskAction,
   RemoveQuestionsBoardTaskErrorAction,
   RemoveQuestionsBoardTaskSuccessAction,
@@ -49,6 +55,8 @@ import { QuestionsBoardTask } from './models/questions-board-task.model';
 import { ComparedVersionItem, ProjectVersionService } from '../../core/project/project-version.service';
 import { QuestionsBoardStep } from './models/questions-board-step.model';
 import { MetadataValue } from '../../core/shared/metadata.models';
+import { QuestionsBoardStateService } from './questions-board-state.service';
+import { WorkspaceitemSectionUploadFileObject } from 'src/app/core/submission/models/workspaceitem-section-upload-file.model';
 
 /**
  * Provides effect methods for jsonPatch Operations actions
@@ -330,9 +338,80 @@ export class QuestionsBoardEffects {
     )
   ));
 
+  /**
+   * Remove all the tasks from all the steps of a questions board.
+   * Get all the steps from the questions board (store) and remove all the tasks
+   * by sending a PATCH request to the REST API for each step.
+   */
+  patchClearSteps$ = createEffect(() => this.actions$.pipe(
+    ofType(QuestionsBoardActionTypes.CLEAR_QUESTION_BOARD_STEPS),
+    switchMap((action: ClearQuestionBoardStepsAction) => {
+      return this.questionsBoardStateService.getQuestionsBoardStep(action.payload.questionsBoardId).pipe(
+        take(1),
+        switchMap((steps: QuestionsBoardStep[]) => from(steps)),
+        filter((step: QuestionsBoardStep) => step.tasks.length > 0),
+        concatMap((step: QuestionsBoardStep) =>
+          this.questionsBoardService.removeAllTasksFromStep(
+            this.questionsBoardService.getQuestionsBoardEditFormSection(),
+            this.questionsBoardService.getQuestionsBoardEditMode(),
+            step.id,
+            this.questionsBoardService.getQuestionsBoardRelationTasksMetadata()
+          )
+        ),
+        map((item: Item) => {
+          this.notificationsService.success(null, this.translate.get('questions-board.clear-all-board.success', { step: item.firstMetadataValue('dc.title') }));
+          return new ClearQuestionBoardStepsSuccessAction(action.payload.questionsBoardId);
+        }),
+        catchError((error: Error) => {
+          if (error) {
+            console.error(error.message);
+          }
+          return of(new ClearQuestionBoardStepsErrorAction()).pipe(
+            tap(() => {
+              this.notificationsService.error(null, this.translate.get('questions-board.clear-all-board.error'));
+            })
+          );
+        })
+      );
+    })));
+
+  /**
+   * Remove all uploaded files from a questions board
+   * Get all files from the questions board (store) and remove them one by one
+   * by sending a PATCH request to the REST API for all the files with the respective path
+   */
+  patchRemoveAllUploadedFiles$ = createEffect(() => this.actions$.pipe(
+    ofType(QuestionsBoardActionTypes.DELETE_ALL_UPLOADED_FILES_FROM_QUESTION_BOARD),
+    switchMap((action: RemoveAllUploadedFilesFromQuestionsboardAction) => {
+      return this.questionsBoardStateService.getFilesFromQuestionsBoard(action.payload.questionsBoardId).pipe(
+        take(1),
+        switchMap((files: WorkspaceitemSectionUploadFileObject[]) => from(files)),
+        mergeMap((file: WorkspaceitemSectionUploadFileObject) =>
+          this.questionsBoardService.removeBitstreamsFromQuestionBoard(
+            action.payload.questionsBoardId,
+            action.payload.uploadStepConfiguration)),
+        map(() => {
+          this.notificationsService.success(null, this.translate.get('questions-board.clear-upload-files.success'));
+          return new RemoveAllUploadedFilesFromQuestionsboardSuccessAction(action.payload.questionsBoardId);
+        }),
+        catchError((error: Error) => {
+          if (error) {
+            console.error(error.message);
+          }
+          return of(new RemoveAllUploadedFilesFromQuestionsboardErrorAction()).pipe(
+            tap(() => {
+              this.notificationsService.error(null, this.translate.get('questions-board.clear-upload-files.error'));
+            })
+          );
+        })
+      );
+    })
+  ));
+
   constructor(
     private actions$: Actions,
     private questionsBoardService: QuestionsBoardService,
+    private questionsBoardStateService: QuestionsBoardStateService,
     private itemAuthorityRelationService: ItemAuthorityRelationService,
     private itemService: ItemDataService,
     private projectItemService: ProjectItemService,
