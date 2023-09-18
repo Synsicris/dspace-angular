@@ -4500,7 +4500,7 @@
 
   // "impact-pathway.objectives.edit.btn.title": "Edit title and description",
   // TODO New key - Add a translation
-  "impact-pathway.objectives.edit.btn.title": "Bezeichnung und Beschreibung bearbeiten",
+  "impact-pathway.objectives.edit.btn.title": "Bearbeiten",
 
   // "impact-pathway.objectives.edit.page.title": "Edit objective",
   // TODO Source message changed - Revise the translation
@@ -12498,7 +12498,7 @@
   "submission.sections.submit.progressbar.describe.physical_objects_result.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf für Berichte.</br></br><i><b>Wählen Sie bitte aus, für welche Zwecke das Objekt von Dritten verwendet werden kann und geben Sie einen Kontakt für Anfragen an.</i></b>",
 
   // "submission.form.projects.info": "missing",
-  "submission.form.projects.info": "<b>Worum es hier geht:</b><ul><li>In einem Verbund arbeiten mehrere Organisationen/Antragsteller mit eigenen Projekten zusammen.</li><li>Die meisten Informationen werden hier aus den Projekten übertragen.</li><li>Sie ergänzen hier wichtige Angaben für die Funktion des Monitoring-Tools. Nutzen Sie diese Seite deshalb auch, wenn ein Verbund nur aus einem Projekt besteht.</li></ul><b>Dateien hochladen:</b><ul><li>Fügen Sie in unter <b>Optinal: Dateien hochladen</b> ein <b>Projektlogo</b> (falls vorhanden) und die Kapitel zum <b>Stand des Wissens inkl. eigener Vorarbeiten</b> sowie zu <b>Material und Methoden</b> hinzu.</li></ul>",
+  "submission.form.projects.info": "<b>Worum es hier geht:</b><ul><li>In einem Verbund arbeiten mehrere Organisationen/Antragsteller mit eigenen Projekten zusammen.</li><li>Die meisten Informationen werden hier aus den Projekten übertragen.</li><li>Sie ergänzen hier wichtige Angaben für die Funktion des Monitoring-Tools. Nutzen Sie diese Seite deshalb auch, wenn ein Verbund nur aus einem Projekt besteht.</li></ul><b>Dateien hochladen:</b><ul><li>Fügen Sie in unter <b>Optional: Dateien hochladen</b> ein <b>Projektlogo</b> (falls vorhanden) und die Kapitel zum <b>Stand des Wissens inkl. eigener Vorarbeiten</b> sowie zu <b>Material und Methoden</b> hinzu.</li></ul>",
 
   // "submission.form.projects-edit.info": "missing",
   "submission.form.projects-edit.info": "<b>Worum es hier geht:</b><ul><li>In einem Verbund arbeiten mehrere Organisationen/Antragsteller mit eigenen Projekten zusammen.</li><li>Die meisten Informationen werden hier aus den Projekten übertragen.</li><li>Sie ergänzen hier wichtige Angaben für die Funktion des Monitoring-Tools. Nutzen Sie diese Seite deshalb auch, wenn ein Verbund nur aus einem Projekt besteht.</li></ul><b>Dateien hochladen:</b><ul><li>Fügen Sie in unter <b>Optional: Dateien hochladen</b> ein <b>Projektlogo</b> (falls vorhanden) und die Kapitel zum <b>Stand des Wissens inkl. eigener Vorarbeiten</b> sowie zu <b>Material und Methoden</b> hinzu.</li></ul>",
@@ -12669,10 +12669,10 @@
   "submission.sections.submit.progressbar.describe.steps.info": "<i class=\"fas fa-exclamation-triangle\"></i> #1 - Geben Sie diese Informationen zur Antragstellung ein und aktualisieren Sie sie bei Bedarf im Verlauf des Vorhabens.</br></br><b><i>Unterscheiden Sie die einzelnen Einträge danach, dass jeweils die gleichen Beteiligten teilnehmen.</i></b></br></br><b>Wichtige Hinweise:</b><ul><li>Sie ordnen hier die beteiligten <b>Projektpartner, Kooperationspartner / Unterauftragnehmer</b> und <b>Akteursgruppen</b> zu. Diese sollten bereits eingetragen sein.</li></ul><b>Zur Unterscheidung:</b><ul><li>Wenn eine <b>Ausgründung</b> oder die <b>Anmeldung eines Schutzrechts</b> geplant ist, erfassen Sie dies bitte in der jeweiligen Kategorie.<li>Wenn <b>Veröffentlichungen</b> geplant sind, erfassen Sie dies bitte in der Kategorie <b>Geplante Veröffentlichungen</b>.</ul></li>",
 
   // "submission.form.innovationideas.info": "missing",
-  "submission.form.innovationideas.info": "<b>Worum es hier geht:</b><ul><li>Beschreiben Sie hier Ideen, wie die Ergebnisse des Vorhabens genutzt werden könnten, um zu möglichen Lösungen, Veränderungen oder Innovationen beizutragen.</li><li>Ideen sind noch wenig konkret, weit in der Zukunft liegend, in den Erfolgsaussichten unsicher oder imVorhaben derzeit nicht explizit angestrebte Möglichkeiten</ul></li>",
+  "submission.form.innovationideas.info": "<b>Worum es hier geht:</b><ul><li>Beschreiben Sie hier Ideen, wie die Ergebnisse des Vorhabens genutzt werden könnten, um zu möglichen Lösungen, Veränderungen oder Innovationen beizutragen.</li><li>Ideen sind noch wenig konkret, weit in der Zukunft liegend, in den Erfolgsaussichten unsicher oder im Vorhaben derzeit nicht explizit angestrebte Möglichkeiten</ul></li>",
 
   // "submission.form.innovationideas-edit.info": "missing",
-  "submission.form.innovationideas-edit.info": "<b>Worum es hier geht:</b><ul><li>Beschreiben Sie hier Ideen, wie die Ergebnisse des Vorhabens genutzt werden könnten, um zu möglichen Lösungen, Veränderungen oder Innovationen beizutragen.</li><li>Ideen sind noch wenig konkret, weit in der Zukunft liegend, in den Erfolgsaussichten unsicher oder imVorhaben derzeit nicht explizit angestrebte Möglichkeiten.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-applic.php\" target=\"_blank\">Kategorien zum Thema Anwendung  unterscheiden</a></ul></li>",
+  "submission.form.innovationideas-edit.info": "<b>Worum es hier geht:</b><ul><li>Beschreiben Sie hier Ideen, wie die Ergebnisse des Vorhabens genutzt werden könnten, um zu möglichen Lösungen, Veränderungen oder Innovationen beizutragen.</li><li>Ideen sind noch wenig konkret, weit in der Zukunft liegend, in den Erfolgsaussichten unsicher oder imVorhaben derzeit nicht explizit angestrebte Möglichkeiten.</li><li><i class=\"fas fa-external-link-alt\"></i> <a href=\"help/pages/de/de-project-content-entities-applic.php\" target=\"_blank\">Kategorien zum Thema Anwendung unterscheiden</a></ul></li>",
 
   // "submission.sections.submit.progressbar.describe.agrovoc_keywords_parentproject": "#1 Keywords",
   "submission.sections.submit.progressbar.describe.agrovoc_keywords_parentproject": "#1 Schlagworte/Keywords zuweisen",
@@ -14276,10 +14276,6 @@
   // "vocabulary-treeview.tree.description.destatis": "missing",
   "vocabulary-treeview.tree.description.destatis": "<i>Wählen Sie das Fachgebiet bitte so spezifisch wie möglich aus. </br>Nutzen Sie <b>></b> um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein. Über das Suchfeld wird nach passenden Worten in der Auswahlliste gesucht. </br><b>Auswählbar</b> sind nur die <b>schwarzen</b> Begriffe.</i>",
 
-  // "vocabulary-treeview.tree.description.countries2": "Select a country to add as search filter",
-  // TODO New key - Add a translation
-  "vocabulary-treeview.tree.description.countries2": "Select a country to add as search filter",
-
   // "submission.sections.submit.progressbar.exploitation_plan_step_type_1_task_form.info": "missing",
   "submission.sections.submit.progressbar.exploitation_plan_step_type_1_task_form.info": "<b><i>Legen Sie hier erst dann neue Einträge an, nachdem Sie unter „Vorhandene auswählen“ überprüft haben, ob die passenden Einträge bereits vorhanden sind.</i></b></br></br><b>Bereiche:</b><ul><li>Besonders relevant sind die Einträge zu <b>Patent oder Gebrauchsmuster</b>.</li><li>Wenn bereits Lizenzeinnahmen oder Erlöse aus dem Verkauf erzielt werden, wird dies in <b>Anwendung</b> erfasst.</li><li></b>Schutzrechtsanmeldungen Anderer</b>, die einer Verwertung durch die Antragsteller entgegenstehen, sind in <b>Rahmenbedingung</b> zu erfassen.</li><li>Einträge aus <b>weiterenKategorien</b> können ebenfalls relevant sein, wenn sie direkt mit der Anmeldung des Schutzrechtes im Zusammenhang stehen.</li></ul>",
 
@@ -14770,7 +14766,7 @@
   "layout.box.header.multiple_involved": "Beteiligte",
 
   // "layout.tab.header.multiple_involved": "Beteiligte",
-  "layout.tab.header.multiple_involved": "Beteiligte",
+  "layout.tab.header.multiple_involved": "Überblick Beteiligte",
 
   // "layout.tab.header.exploitationplans": "Exploitation plan",
   "layout.tab.header.exploitationplans": "Verwertungsplan",
@@ -18982,7 +18978,7 @@
   "layout.field.label.funding_import_funder.synsicris.subject.sortprimary": "Schlagwort Primärsorter",
 
   // "layout.box.header.Project_funder": "Consortium - Information from Import",
-  "layout.box.header.Project_funder": "Verbund - importierte Informationen",
+  "layout.box.header.Project_funder": "Verbund - Projektträgerinterne Informationen",
 
   // "layout.field.label.Project_funder.synsicris.subject.funderlabel1": "Project label transfer",
   "layout.field.label.Project_funder.synsicris.subject.funderlabel1": "Projektlabel Transfer",
@@ -19570,6 +19566,24 @@
   "submission.sections.upload.form.from-label": "Zugriff gewähren ab",
 
   // "submission.sections.upload.form.from-placeholder": "from",
-  "submission.sections.upload.form.from-placeholder": "ab"
+  "submission.sections.upload.form.from-placeholder": "ab",
+
+  // "submission.sections.submit.progressbar.describe.common_license": "Assign License",
+  "submission.sections.submit.progressbar.describe.common_license": "Lizenz (für Weiternutzung) zuweisen",
+
+  // "submission.sections.submit.progressbar.describe.common_license.info": "missing",
+  "submission.sections.submit.progressbar.describe.common_license.info": "Grundsätzlich unterliegt Ihr Material dem deutschen Urheberrecht. Das bedeutet, dass Dritte Ihre Veröffentlichung ohne Ihre Erlaubnis nur im Rahmen der gesetzlichen Ausnahmen (z.B. Zitatrecht) nutzen dürfen.</br>Um Nutzer*innen über das deutsche Urheberrecht hinausgehende Nutzungsrechte zu erteilen, können Sie Ihr Material mit einer offenen Lizenz versehen. Diese ermöglicht es Dritten, Ihr Material unter Einhaltung bestimmter Bedingungen frei zu nutzen, zu vervielfältigen, weiterzuverbreiten und zum Teil auch zu bearbeiten. </br><b>Wählen Sie hierfür eine der Creative Commons-Lizenzen.</b> Diese sind standardisiert, international verbreitet und eignen sich für fast alle Text- und Datentypen. </br></br>Für <b>Software</b> verwenden Sie hierfür eine der freien <b>Software-Lizenzen</b>.</br></br>Wenn Sie <b>Dritten keine weitergehenden Nutzungsrechte für Ihr Material</b> erteilen möchten, wählen Sie <b>In Copyright</b>.<b>Wichtige Hinweise:</b><ul><li>Sofern Sie für Ihr Werk bereits Rechte an Dritte abgetreten haben, ist die Vergabe einer offenen Lizenz eventuell nicht mehr möglich.</li><li>Nebenbedingungen sind bei standardisierten Lizenzen nicht erlaubt – Sie können also nicht eine der Lizenzen wählen und diese dann einschränken oder öffnen.</li><li>Wenn Sie sich für eine offene Lizenz entscheiden, binden Sie die Lizenzinformation nach Möglichkeit direkt in Ihrem Werk ein (vgl. <i class=\"fas fa-external-link-alt\"></i> <a href=\"https://wiki.creativecommons.org/wiki/Marking_your_work_with_a_CC_license\"target=\"_bank\"<Anleitung von Creative Commons)</a></li></ul>",
+
+  // "submission.sections.submit.progressbar.describe.common_license-edit.info": "missing",
+  "submission.sections.submit.progressbar.describe.common_license-edit.info": "Grundsätzlich unterliegt Ihr Material dem deutschen Urheberrecht. Das bedeutet, dass Dritte Ihre Veröffentlichung ohne Ihre Erlaubnis nur im Rahmen der gesetzlichen Ausnahmen (z.B. Zitatrecht) nutzen dürfen.</br>Um Nutzer*innen über das deutsche Urheberrecht hinausgehende Nutzungsrechte zu erteilen, können Sie Ihr Material mit einer offenen Lizenz versehen. Diese ermöglicht es Dritten, Ihr Material unter Einhaltung bestimmter Bedingungen frei zu nutzen, zu vervielfältigen, weiterzuverbreiten und zum Teil auch zu bearbeiten. </br><b>Wählen Sie hierfür eine der Creative Commons-Lizenzen.</b> Diese sind standardisiert, international verbreitet und eignen sich für fast alle Text- und Datentypen. </br></br>Für <b>Software</b> verwenden Sie hierfür eine der freien <b>Software-Lizenzen</b>.</br></br>Wenn Sie <b>Dritten keine weitergehenden Nutzungsrechte für Ihr Material</b> erteilen möchten, wählen Sie <b>In Copyright</b>.<b>Wichtige Hinweise:</b><ul><li>Sofern Sie für Ihr Werk bereits Rechte an Dritte abgetreten haben, ist die Vergabe einer offenen Lizenz eventuell nicht mehr möglich.</li><li>Nebenbedingungen sind bei standardisierten Lizenzen nicht erlaubt – Sie können also nicht eine der Lizenzen wählen und diese dann einschränken oder öffnen.</li><li>Wenn Sie sich für eine offene Lizenz entscheiden, binden Sie die Lizenzinformation nach Möglichkeit direkt in Ihrem Werk ein (vgl. <i class=\"fas fa-external-link-alt\"></i> <a href=\"https://wiki.creativecommons.org/wiki/Marking_your_work_with_a_CC_license\"target=\"_bank\"<Anleitung von Creative Commons)</a></li></ul>",
+
+  // "layout.field.label.Project_funder.synsicris.type.visibility": "Visibility",
+  "layout.field.label.Project_funder.synsicris.type.visibility": "Sichtbarkeit",
+
+  // "layout.box.help-text.multiple_involved_h": "Help Involved",
+  "layout.box.help-text.multiple_involved_h": "Hilfe Beteiligte",
+
+  // "layout.box.help-text.multiple_involved_h_funder": "Help Involved (Funder)",
+  "layout.box.help-text.multiple_involved_h_funder": "Hilfe Beteiligte (Förderer)"
 
 }
