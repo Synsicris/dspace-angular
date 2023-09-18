@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { from as observableFrom, of as observableOf } from 'rxjs';
-import { catchError, concatMap, map, mergeMap, reduce, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { from, from as observableFrom, of as observableOf } from 'rxjs';
+import { catchError, concatMap, filter, map, mergeMap, reduce, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
@@ -139,20 +139,30 @@ export class ImpactPathwayEffects {
    */
   @Effect() initCompare$ = this.actions$.pipe(
     ofType(ImpactPathwayActionTypes.INIT_COMPARE_IMPACT_PATHWAY),
-    switchMap((action: InitCompareAction) =>
-      this.projectVersionService.compareItemChildrenByMetadata(
+    switchMap((action: InitCompareAction) => {
+      let globalSteps: ImpactPathwayStep[] = [];
+      return this.projectVersionService.compareItemChildrenByMetadata(
         action.payload.baseImpactPathwayId,
         action.payload.compareImpactPathwayId,
         environment.impactPathway.impactPathwayStepRelationMetadata
       ).pipe(
         switchMap((compareItemList: ComparedVersionItem[]) => this.impactPathwayService.initCompareImpactPathwaySteps(compareItemList)),
-        map((steps: ImpactPathwayStep[]) => new InitCompareSuccessAction(action.payload.activeImpactPathwayId, steps)),
+        tap((steps: ImpactPathwayStep[]) => { globalSteps = steps; }),
+        mergeMap((steps: ImpactPathwayStep[]) =>
+          from(steps),
+        ),
+        filter((step: ImpactPathwayStep) => isNotEmpty(step.tasks)),
+        mergeMap((step: ImpactPathwayStep) =>
+          this.impactPathwayService.addImpactPathwayCompareLinksFromTaskItem(step, action.payload.baseImpactPathwayId)
+        ),
+        map(() => new InitCompareSuccessAction(action.payload.activeImpactPathwayId, globalSteps)),
         catchError((error: Error) => {
           if (error) {
             this.notificationsService.error(null, this.translate.get('impact-pathway.compare.error'));
           }
           return observableOf(new InitCompareErrorAction());
-        }))
+        }));
+    }
     ));
 
 

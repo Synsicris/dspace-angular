@@ -7,7 +7,8 @@ import {
   from as observableFrom,
   Observable,
   of as observableOf,
-  throwError as observableThrowError
+  throwError as observableThrowError,
+  from
 } from 'rxjs';
 import {
   catchError,
@@ -341,9 +342,24 @@ export class ImpactPathwayService {
           map((steps: ImpactPathwayStep[]) => this.initImpactPathwayStepFromCompareItem(
             compareItem,
             steps
-          ))
+          )),
         )),
-      reduce((acc: any, value: any) => [...acc, value], [])
+      reduce((acc: any, value: any) => [...acc, value], []),
+    );
+  }
+
+  /**
+   * Prepare the impact pathway Links from the tasks of a step
+   * on compare mode
+   * @param step step to prepare the links from
+   * @param impactPathwayId the impact pathway id
+   */
+  addImpactPathwayCompareLinksFromTaskItem(step: ImpactPathwayStep, impactPathwayId: string): Observable<RemoteData<Item>> {
+    return from(step.tasks).pipe(
+      mergeMap((task) => this.itemService.findById(task.id).pipe(
+        getFinishedRemoteData(),
+        tap((rd: RemoteData<Item>) => this.addImpactPathwayLinksFromTaskItem(rd.payload, impactPathwayId, step.id)),
+      )),
     );
   }
 

@@ -86,6 +86,7 @@ export interface ImpactPathwayState {
   targetTaskId: string;
   targetTaskIdBeforeCompare: string;
   links: ImpactPathwayLinks;
+  linksBeforeCompare: ImpactPathwayLinks;
   collapsed: any;
   compareMode: boolean;
   compareProcessing: boolean;
@@ -102,6 +103,18 @@ const impactPathwayInitialState: ImpactPathwayState = {
   targetTaskId: '',
   targetTaskIdBeforeCompare: '',
   links: {
+    showLinks: true,
+    editing: false,
+    selectedTaskHTMLId: '',
+    selectedTaskId: '',
+    selectedTwoWay: false,
+    relatedImpactPathwayId: '',
+    relatedStepId: '',
+    stored: [],
+    toSave: [],
+    toDelete: []
+  },
+  linksBeforeCompare: {
     showLinks: true,
     editing: false,
     selectedTaskHTMLId: '',
@@ -1034,6 +1047,7 @@ function initCompare(state: ImpactPathwayState, action: InitCompareAction) {
     compareImpactPathwayId: action.payload.compareImpactPathwayId,
     compareMode: true,
     compareProcessing: true,
+    linksBeforeCompare: state.links,
     links: {
       showLinks: true,
       editing: false,
@@ -1067,6 +1081,8 @@ function stopCompare(state: ImpactPathwayState, action: StopCompareImpactPathway
     compareImpactPathwayId: null,
     compareMode: false,
     compareProcessing: false,
+    links: state.linksBeforeCompare,
+    linksBeforeCompare: {}
   });
 }
 
@@ -1132,7 +1148,9 @@ function stopCompareStepTask(state: ImpactPathwayState, action: StopCompareImpac
     compareImpactPathwayId: null,
     compareMode: false,
     targetTaskId: state.targetTaskIdBeforeCompare,
-    targetTaskIdBeforeCompare: ''
+    targetTaskIdBeforeCompare: '',
+    links: state.linksBeforeCompare,
+    linksBeforeCompare: {}
   });
 }
 
@@ -1153,6 +1171,7 @@ function replaceImpactPathwayTaskSubtasks(state: ImpactPathwayState, action: Ini
     extractStoreElements(newState, action.payload.impactPathwayId, action.payload.impactPathwayStepId, null);
   let targetTaskId = newState.targetTaskId;
   let targetTaskIdBeforeCompare = newState.targetTaskId;
+  let linksBeforeCompare = newState.links;
   // if the step is not found it means we're comparing a version with the active instance, so they are switched
   if (stepIndex === -1) {
     stepIndex = newState.objects[action.payload.impactPathwayId].getStepIndex(action.payload.compareImpactPathwayStepId);
@@ -1175,7 +1194,8 @@ function replaceImpactPathwayTaskSubtasks(state: ImpactPathwayState, action: Ini
     }),
     objectsBeforeCompare,
     targetTaskId,
-    targetTaskIdBeforeCompare
+    targetTaskIdBeforeCompare,
+    linksBeforeCompare
   });
 }
 
