@@ -2520,7 +2520,7 @@
 
   "form.clear-help": "Click here to remove the selected value",
 
-  "form.copy": "Copy",
+  "form.copy": "Duplicate",
 
   "form.discard": "Discard",
 
@@ -4478,7 +4478,7 @@
 
   "metric-badges.download": "<span class=\"fa fa-download\" title=\"Downloads\">&nbsp;</span>",
 
-  "mydspace.breadcrumbs": "All archived/cashed items",
+  "mydspace.breadcrumbs": "All archived/cached items",
 
   "mydspace.description": "",
 
@@ -4546,7 +4546,7 @@
 
   "mydspace.show.workflow": "Workflow tasks",
 
-  "mydspace.show.workspace": "My cashed items",
+  "mydspace.show.workspace": "My cached items",
 
   "mydspace.show.supervisedWorkspace": "Supervised items",
 
@@ -9384,7 +9384,7 @@
 
   "layout.tab.header.Subprojects": "Participating projects / grantees",
 
-  "layout.tab.header.Involved": "Involved organisations",
+  "layout.tab.header.Involved": "Overview Involved",
 
   "layout.tab.header.exp_societalimpact": "Expected societal impacts",
 
@@ -10654,7 +10654,7 @@
 
   "layout.tab.header.person_leading": "What is the text here?",
 
-  "layout.tab.header.multiple_involved": "Overview all involved",
+  "layout.tab.header.multiple_involved": "All involved",
 
   "layout.box.header.neg_sideeffect_comment": "Comments - Possible negative side effect",
 
@@ -10724,7 +10724,7 @@
 
   "submission.sections.submit.progressbar.describe.open_researchquestions": "Open research questions",
 
-  "layout.box.header.multiple_involved": "Involved organisations",
+  "layout.box.header.multiple_involved": "Involved",
 
   "submission.sections.submit.progressbar.describe.internalacc.info": "This area is <b>only accessible to members of the consortium</b> and is <b>never visible to the sponsor</b>.</br>Here you can select tasks for editing the entry and leave notes for colleagues. </br>If you select <b>Edit</b>, <b><i class=\"fa-solid fa-comment\"></i></b> will appear on the map (in the impact pathway, working plan, exploitation plan or interim report).</br>If you select <b>Done</b>, <b><i class=\"fa-solid fa-comment\"></i></b> will disappear from the map.",
 
@@ -12026,7 +12026,7 @@
 
   "submission.sections.submit.progressbar.describe.common_license": "Assign License",
 
-  "layout.field.label.Project_funder.synsicris.type.visibility": "Visibility",
+  "layout.field.label.Project_funder.synsicris.type.visibility": "Settings public visibility",
 
   "layout.box.help-text.multiple_involved_h": "Help Involved",
 
