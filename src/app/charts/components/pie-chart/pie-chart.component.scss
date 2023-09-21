@@ -4,7 +4,7 @@
   width: 100%;
 }
 
-::ng-deep svg.ngx-charts {
+:host ::ng-deep svg.ngx-charts {
   padding-left: 7%;
 }
 
