@@ -56,7 +56,9 @@ import { ComparedVersionItem, ProjectVersionService } from '../../core/project/p
 import { QuestionsBoardStep } from './models/questions-board-step.model';
 import { MetadataValue } from '../../core/shared/metadata.models';
 import { QuestionsBoardStateService } from './questions-board-state.service';
-import { WorkspaceitemSectionUploadFileObject } from 'src/app/core/submission/models/workspaceitem-section-upload-file.model';
+import {
+  WorkspaceitemSectionUploadFileObject
+} from 'src/app/core/submission/models/workspaceitem-section-upload-file.model';
 
 /**
  * Provides effect methods for jsonPatch Operations actions
@@ -349,13 +351,16 @@ export class QuestionsBoardEffects {
       return this.questionsBoardStateService.getQuestionsBoardStep(action.payload.questionsBoardId).pipe(
         take(1),
         switchMap((steps: QuestionsBoardStep[]) => from(steps)),
-        filter((step: QuestionsBoardStep) => step.tasks.length > 0),
+        filter((step: QuestionsBoardStep) => step.tasks.length > 0 || isNotEmpty(step.description)),
         concatMap((step: QuestionsBoardStep) =>
           this.questionsBoardService.removeAllTasksFromStep(
             this.questionsBoardService.getQuestionsBoardEditFormSection(),
             this.questionsBoardService.getQuestionsBoardEditMode(),
             step.id,
-            this.questionsBoardService.getQuestionsBoardRelationTasksMetadata()
+            this.questionsBoardService.getQuestionsBoardRelationTasksMetadata(),
+            this.questionsBoardService.getQuestionsBoardDescriptionMetadata(),
+            step.tasks.length > 0,
+            isNotEmpty(step.description)
           )
         ),
         map((item: Item) => {

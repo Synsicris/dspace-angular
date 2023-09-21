@@ -76,6 +76,13 @@ export class QuestionsBoardService {
   }
 
   /**
+   * Return the metadata of the relation between question board step object and its tasks
+   */
+  getQuestionsBoardDescriptionMetadata(): string {
+    return this.questionsBoardConfig.questionsBoardDescriptionMetadata;
+  }
+
+  /**
    * Return the form name used for editing the question board object
    */
   getQuestionsBoardEditFormSection(): string {
@@ -381,18 +388,29 @@ export class QuestionsBoardService {
    * @param editMode the edit mode to be used
    * @param stepId the step id
    * @param relationChildMetadataName the metadata name of the relation between the parent and the child
+   * @param descriptionMetadataName the metadata name of the step description
+   * @param removeChildren whether or not remove children
+   * @param removeDescription whether or not remove description
    * @returns an observable of the updated item
    */
   removeAllTasksFromStep(
     patchPath: string,
     editMode: string,
     stepId: string,
-    relationChildMetadataName: string
+    relationChildMetadataName: string,
+    descriptionMetadataName: string,
+    removeChildren: boolean,
+    removeDescription: boolean
   ): Observable<Item> {
     return this.itemService.findById(stepId).pipe(
       getFirstSucceededRemoteDataPayload(),
       tap(() => {
-        this.itemService.removeMetadataPatch(patchPath, relationChildMetadataName);
+        if (removeChildren) {
+          this.itemService.removeMetadataPatch(patchPath, relationChildMetadataName);
+        }
+        if (removeDescription) {
+          this.itemService.removeMetadataPatch(patchPath, descriptionMetadataName);
+        }
       }),
       delay(200),
       mergeMap((parentItem: Item) => this.itemService.executeEditItemPatch(parentItem.id, editMode, patchPath).pipe(

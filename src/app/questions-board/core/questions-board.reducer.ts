@@ -1,5 +1,7 @@
 import isEqual from 'lodash/isEqual';
-import { WorkspaceitemSectionUploadFileObject } from '../../core/submission/models/workspaceitem-section-upload-file.model';
+import {
+  WorkspaceitemSectionUploadFileObject
+} from '../../core/submission/models/workspaceitem-section-upload-file.model';
 import {
   AddQuestionsBoardTaskSuccessAction,
   ClearQuestionBoardStepsSuccessAction,
@@ -566,7 +568,8 @@ function clearQuestionBoardSteps(state: QuestionsBoardState, action: ClearQuesti
   const newQuestionsBoard = Object.assign(new QuestionsBoard(), state.questionsBoard[action.payload.questionsBoardId], {
     steps: newState.questionsBoard[action.payload.questionsBoardId].steps.map((step) => {
       return Object.assign(new QuestionsBoardStep(), step, {
-        tasks: []
+        tasks: [],
+        description: undefined
       });
     })
   });
