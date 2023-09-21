@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, forkJoin } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
@@ -30,12 +30,13 @@ export class EasyOnlineImportMenuComponent extends ContextMenuEntryComponent imp
   /**
    * Modal reference
    */
-  private canMakeImport$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private canMakeImport$: Observable<boolean>;
 
   /**
    * A boolean representing if item is a version of original item
    */
   private isVersionOfAnItem$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
 
   /**
    * Initialize instance variables
@@ -55,7 +56,6 @@ export class EasyOnlineImportMenuComponent extends ContextMenuEntryComponent imp
   }
 
   ngOnInit(): void {
-
     this.aroute.data.pipe(
       map((data) => data.isVersionOfAnItem),
       filter((isVersionOfAnItem) => isVersionOfAnItem === true),
@@ -64,16 +64,22 @@ export class EasyOnlineImportMenuComponent extends ContextMenuEntryComponent imp
       this.isVersionOfAnItem$.next(isVersionOfAnItem);
     });
 
-    this.authorizationService.isAuthorized(FeatureID.isMemberOfFunding, this.contextMenuObject.self).pipe(
-      take(1)
-    ).subscribe((canMakeImport) => this.canMakeImport$.next(canMakeImport));
+    const isMemberOfFunding$ = this.authorizationService.isAuthorized(FeatureID.isMemberOfFunding, this.contextMenuObject.self);
+    const isAdministrator$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf, this.contextMenuObject.self);
+
+    this.canMakeImport$ = forkJoin([
+      isMemberOfFunding$.pipe(take(1)),
+      isAdministrator$.pipe(take(1)),
+    ]).pipe(
+        map(([isMemberOfFunding, isAdministrator]) => isMemberOfFunding || isAdministrator)
+      );
   }
 
   /**
    * Check if user can make import for this project
    */
   canMakeImport(): Observable<boolean> {
-    return this.canMakeImport$.asObservable();
+    return this.canMakeImport$;
   }
 
   /**
