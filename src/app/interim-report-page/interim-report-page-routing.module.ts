@@ -40,6 +40,7 @@ import { IsAdministratorResolver } from '../core/project/resolvers/is-administra
           breadcrumbKey: 'interim-report',
           showBreadcrumbsFluid: true
         },
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         resolve: {
           questionsBoard: QuestionsBoardItemResolver,
           projectCommunity: ProjectCommunityByItemResolver,

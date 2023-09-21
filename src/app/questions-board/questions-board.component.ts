@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
@@ -13,6 +13,9 @@ import { VersionSelectedEvent } from '../shared/item-version-list/item-version-l
 import { AlertRole, getProgrammeRoles } from '../shared/alert/alert-role/alert-role';
 import { ProjectAuthorizationService } from '../core/project/project-authorization.service';
 import { QuestionsBoardService } from './core/questions-board.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationModalComponent } from '../shared/confirmation-modal/confirmation-modal.component';
+import { QuestionsUploadStepComponent } from './steps/upload-step/questions-upload-step/questions-upload-step.component';
 
 @Component({
   selector: 'ds-questions-board',
@@ -66,6 +69,17 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
    */
   @Input() showUploadStep = false;
 
+  /**
+   * Flag to indicate if the clear board button should be shown
+   */
+  @Input() showClearBoardButton = false;
+
+  /**
+   * The upload step component reference
+   * @memberof QuestionsBoardComponent
+   */
+  @ViewChild('uploadFileStep') uploadFileStep: QuestionsUploadStepComponent;
+
   public questionsBoardObjectId: string;
 
   /**
@@ -93,7 +107,9 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
     protected questionsBoardService: QuestionsBoardService,
     protected questionsBoardStateService: QuestionsBoardStateService,
     protected aroute: ActivatedRoute,
-    private projectAuthorizationService: ProjectAuthorizationService
+    private projectAuthorizationService: ProjectAuthorizationService,
+    private modalService: NgbModal,
+    private chd: ChangeDetectorRef
   ) {
   }
 
@@ -137,6 +153,33 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
    */
   onVersionDeselected() {
     this.questionsBoardStateService.dispatchStopCompare(this.questionsBoardObject?.id);
+  }
+
+  /**
+   * Clear all questions board tasks from all the steps.
+   * If upload step is present, clear all files from upload step.
+   */
+  clearBoard() {
+    if (this.questionsBoardObject?.id) {
+      const modalRef = this.modalService.open(ConfirmationModalComponent);
+      modalRef.componentInstance.dso = this.questionsBoardObject;
+      modalRef.componentInstance.headerLabel = 'confirmation-modal.clear-question-board.header';
+      modalRef.componentInstance.infoLabel = 'confirmation-modal.clear-question-board.info';
+      modalRef.componentInstance.cancelLabel = 'confirmation-modal.clear-question-board.cancel';
+      modalRef.componentInstance.confirmLabel = 'confirmation-modal.clear-question-board.confirm';
+      modalRef.componentInstance.brandColor = 'danger';
+      modalRef.componentInstance.confirmIcon = 'fas fa-trash';
+      modalRef.componentInstance.response.pipe(take(1)).subscribe((confirm: boolean) => {
+        if (confirm) {
+          this.questionsBoardStateService.dispatchClearQuestionBoardSteps(this.questionsBoardObject.id);
+          if (this.showUploadStep && this.uploadFileStep?.uploadConfigId) {
+            this.questionsBoardStateService.dispatchRemoveQuestionBoardFiles(this.questionsBoardObject.id, this.uploadFileStep.uploadConfigId);
+            this.uploadFileStep.onFileEventChanges(true);
+            this.chd.detectChanges();
+          }
+        }
+      });
+    }
   }
 
   /**

@@ -1,7 +1,7 @@
 import { Inject, Injectable, InjectionToken } from '@angular/core';
 
 import { from as observableFrom, Observable, of as observableOf } from 'rxjs';
-import { concatMap, map, mapTo, mergeMap, reduce, switchMap } from 'rxjs/operators';
+import { concatMap, delay, map, mapTo, mergeMap, reduce, switchMap, tap } from 'rxjs/operators';
 
 import { RemoteData } from '../../core/data/remote-data';
 import { isEmpty, isNotEmpty, isNotNull } from '../../shared/empty.util';
@@ -26,6 +26,7 @@ import { CollectionDataService } from '../../core/data/collection-data.service';
 import { ComparedVersionItem, ProjectVersionService } from '../../core/project/project-version.service';
 import { QuestionsBoardConfig } from '../../../config/questions-board.config';
 import { environment } from '../../../environments/environment';
+import { JsonPatchOperationPathCombiner } from 'src/app/core/json-patch/builder/json-patch-operation-path-combiner';
 
 export const QUESTIONS_BOARD_CONFIG: InjectionToken<string> = new InjectionToken<string>('');
 
@@ -72,6 +73,13 @@ export class QuestionsBoardService {
    */
   getProjectRelationMetadata(): string {
     return this.questionsBoardConfig.questionsBoardRelationMetadata;
+  }
+
+  /**
+   * Return the metadata of the relation between question board step object and its tasks
+   */
+  getQuestionsBoardDescriptionMetadata(): string {
+    return this.questionsBoardConfig.questionsBoardDescriptionMetadata;
   }
 
   /**
@@ -371,6 +379,63 @@ export class QuestionsBoardService {
       oldQuestionsBoardStep.type,
       description,
       [...oldQuestionsBoardStep.tasks]
+    );
+  }
+
+  /**
+   * Update the item in order to remove the task from the step
+   * @param patchPath the path to the metadata to be patched
+   * @param editMode the edit mode to be used
+   * @param stepId the step id
+   * @param relationChildMetadataName the metadata name of the relation between the parent and the child
+   * @param descriptionMetadataName the metadata name of the step description
+   * @param removeChildren whether or not remove children
+   * @param removeDescription whether or not remove description
+   * @returns an observable of the updated item
+   */
+  removeAllTasksFromStep(
+    patchPath: string,
+    editMode: string,
+    stepId: string,
+    relationChildMetadataName: string,
+    descriptionMetadataName: string,
+    removeChildren: boolean,
+    removeDescription: boolean
+  ): Observable<Item> {
+    return this.itemService.findById(stepId).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      tap(() => {
+        if (removeChildren) {
+          this.itemService.removeMetadataPatch(patchPath, relationChildMetadataName);
+        }
+        if (removeDescription) {
+          this.itemService.removeMetadataPatch(patchPath, descriptionMetadataName);
+        }
+      }),
+      delay(200),
+      mergeMap((parentItem: Item) => this.itemService.executeEditItemPatch(parentItem.id, editMode, patchPath).pipe(
+        getFirstSucceededRemoteDataPayload()
+      ))
+    );
+  }
+
+  /**
+   * Removes bitstreams from the question board
+   * @param questionBoardId the question board id
+   * @param uploadStepConfiguration the upload step configuration
+   * @param fileID the file id
+   * @returns the updated item
+   */
+  removeBitstreamsFromQuestionBoard(questionBoardId: string, uploadStepConfiguration: string): Observable<RemoteData<Item>> {
+    const path = new JsonPatchOperationPathCombiner('sections', uploadStepConfiguration, 'files').getPath().path.slice(1);
+
+    return this.itemService.findById(questionBoardId).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      tap(() => {
+      this.itemService.removeMetadataPatch(path, '0');
+    }),
+    delay(200),
+      mergeMap((item) => this.itemService.executeEditItemPatch(item.id, this.getQuestionsBoardEditMode(), path))
     );
   }
 }
