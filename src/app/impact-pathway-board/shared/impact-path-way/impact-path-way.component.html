@@ -89,13 +89,13 @@ Definition of the entire page content of the impact pathway page
         </div>
       </ng-container>
     <ds-themed-loading *ngIf="(compareProcessing$ | async)"></ds-themed-loading>
-    
+
     <!-- row with legend and jump marker-->
     <div id="row-above-ip" class="d-flex justify-content-between">
 
-    <!-- LEGEND OF SYMBOLS 
-    Due to the decision of 20.7.2023 (Birge Wolf, Doris Lange), the idea of a symbol legend 
-    is not pursued at the moment and commented out again at this point. 
+    <!-- LEGEND OF SYMBOLS
+    Due to the decision of 20.7.2023 (Birge Wolf, Doris Lange), the idea of a symbol legend
+    is not pursued at the moment and commented out again at this point.
     Please do not delete, because this idea may be taken up again at a later time and developed further!
     Styles are defined in src/themes/synsicris/styles/synsicris-optimizations/legend_symbols.scss
     -->
@@ -134,8 +134,8 @@ Definition of the entire page content of the impact pathway page
       </ul>
     </div>
     -->
-    
-    <!-- Jump Marker to the description textfield --> 
+
+    <!-- Jump Marker to the description textfield -->
     <!-- <div class="d-inline-flex ml-auto mt-0 pt-0 mb-2" style="border:2px solid lime;"> -->
     <div class="d-inline-flex ml-auto mt-0 pt-0 mb-2">
       <button (click)="scroll(textfieldDescription)" class="btn btn-link">
@@ -171,6 +171,7 @@ Definition of the entire page content of the impact pathway page
       [formConfig]="formConfig$"
       [formSectionName]="getSectionName()"
       [itemId]="impactPathway.id"
+      [compareMode]="(compareMode | async)"
       [compareItemId]="(compareItem$ | async)?.id"
       [editPlaceholder]="'impact-pathway.edit.textarea.placeholder' | translate"
       [editTitle]="'impact-pathway.edit.title' | translate"

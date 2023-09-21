@@ -1,3 +1,5 @@
+import { FeatureID } from './../../../core/data/feature-authorization/feature-id';
+import { AuthorizationDataService } from './../../../core/data/feature-authorization/authorization-data.service';
 import { Component, Inject } from '@angular/core';
 
 import { rendersContextMenuEntriesForType } from '../context-menu.decorator';
@@ -8,6 +10,7 @@ import { DSpaceObject } from '../../../core/shared/dspace-object.model';
 import { ContextMenuEntryType } from '../context-menu-entry-type';
 import { Item } from '../../../core/shared/item.model';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 /**
  * This component renders a context menu option that provides to export an item.
@@ -22,9 +25,14 @@ export class FullItemMenuComponent extends ContextMenuEntryComponent {
   constructor(
     @Inject('contextMenuObjectProvider') protected injectedContextMenuObject: DSpaceObject,
     @Inject('contextMenuObjectTypeProvider') protected injectedContextMenuObjectType: DSpaceObjectType,
-    private router: Router
+    private router: Router,
+    private authorizationService: AuthorizationDataService,
   ) {
     super(injectedContextMenuObject, injectedContextMenuObjectType, ContextMenuEntryType.FullItem);
+  }
+
+  canShow(): Observable<boolean> {
+    return this.authorizationService.isAuthorized(FeatureID.AdministratorOf);
   }
 
   getItemFullPageRoute(object: DSpaceObject): string {

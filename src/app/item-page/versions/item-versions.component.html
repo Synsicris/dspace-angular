@@ -19,7 +19,7 @@
               <th scope="col">{{"item.version.history.table.version" | translate}}</th>
               <th scope="col" *ngIf="(showSubmitter() | async)">{{"item.version.history.table.editor" | translate}}</th>
 
-              <ng-container *ngIf="isCoordinator || isProjectFunder || isFunderManagerOrReader || isProjectReader">
+              <ng-container *ngIf="isAdministrator || isCoordinator || isProjectFunder || isFunderManagerOrReader || isProjectReader">
                 <th data-test="visibility-column" scope="col">{{"item.version.history.table.visibility" | translate}}
                 </th>
                 <th data-test="official-column" scope="col">{{"item.version.history.table.official" | translate}}</th>
@@ -27,8 +27,8 @@
 
               <th scope="col">{{"item.version.history.table.date" | translate}}</th>
               <th scope="col">{{"item.version.history.table.summary" | translate}}</th>
-              <th *ngIf="isProjectFunder || isFunderManagerOrReader" scope="col">{{"item.version.history.table.notes" | translate}}</th>
-              <th *ngIf="isCoordinator || isProjectFunder || isFunderManagerOrReader" scope="col">{{"item.version.history.table.actions" | translate}}</th>
+              <th *ngIf="isAdministrator || isProjectFunder || isFunderManagerOrReader" scope="col">{{"item.version.history.table.notes" | translate}}</th>
+              <th *ngIf="isAdministrator || isCoordinator || isProjectFunder || isFunderManagerOrReader" scope="col">{{"item.version.history.table.actions" | translate}}</th>
             </tr>
           </thead>
           <tbody>
@@ -44,7 +44,7 @@
 
                       <div class="left-column">
                         <ng-container
-                          *ngIf="isCoordinator || isProjectFunder || isFunderManagerOrReader || isProjectReader">
+                          *ngIf="isAdministrator || isCoordinator || isProjectFunder || isFunderManagerOrReader || isProjectReader">
                           <span
                             *ngIf="(( ((workspaceId$ | async) || (workflowId$ | async)) ||
                             ((isProjectFunder || isFunderManagerOrReader || isProjectReader) && !!version?.item && !isVersionVisible(versionItem)) &&
@@ -68,7 +68,7 @@
                         </ng-container>
 
                         <ng-container
-                          *ngIf="!isCoordinator && !isProjectFunder && !isFunderManagerOrReader && !isProjectReader">
+                          *ngIf="!isAdministrator && !isCoordinator && !isProjectFunder && !isFunderManagerOrReader && !isProjectReader">
                           <span
                             *ngIf="( ((workspaceId$ | async) || (workflowId$ | async)) || ((isProjectFunder || isFunderManagerOrReader || isProjectReader) && !!version?.item && !isVersionVisible(versionItem) && version?.id !== itemVersion?.id)); then versionNumberWithoutLink else versionNumberWithLink"></span>
                           <ng-template #versionNumberWithLink>
@@ -121,7 +121,7 @@
                   {{version?.submitterName}}
                 </td>
 
-                <ng-container *ngIf="isCoordinator || isProjectFunder || isFunderManagerOrReader || isProjectReader">
+                <ng-container *ngIf="isAdministrator || isCoordinator || isProjectFunder || isFunderManagerOrReader || isProjectReader">
                   <td class="version-row-element">
 
                     <ng-container *ngIf="(version.item | async)?.payload as versionItem">
@@ -153,7 +153,7 @@
                 <td class="version-row-element-summary">
                   <div class="float-left">
                     <ng-container
-                      *ngIf="isThisBeingEdited(version) && ((!isProjectFunder && !isCoordinator && !isFunderManagerOrReader && !isProjectReader) || (isCoordinator && isVersionNotVisible(versionItem) && version?.id !== itemVersion?.id)); then editSummary else showSummary"></ng-container>
+                      *ngIf="isThisSummaryBeingEdited(version) && ((!isProjectFunder && !isCoordinator && !isFunderManagerOrReader && !isProjectReader) || (isCoordinator && isVersionNotVisible(versionItem) && version?.id !== itemVersion?.id)); then editSummary else showSummary"></ng-container>
                     <ng-template #showSummary>{{version?.summary}}</ng-template>
                     <ng-template #editSummary>
                       <input class="form-control" type="text" [(ngModel)]="versionBeingEditedSummary"
@@ -164,9 +164,9 @@
                   <div class="float-right btn-group edit-field space-children-mr" *ngIf="displayActions">
                     <!--DISCARD EDIT -->
                     <ng-container
-                      *ngIf="(canEditVersion$(version) | async) && isThisBeingEdited(version) && ((!isProjectFunder && !isCoordinator && !isFunderManagerOrReader && !isProjectReader) || (isCoordinator && isVersionNotVisible(versionItem) && version?.id !== itemVersion?.id))">
+                      *ngIf="(canEditVersion$(version) | async) && isThisSummaryBeingEdited(version) && ((!isProjectFunder && !isCoordinator && !isFunderManagerOrReader && !isProjectReader) || (isCoordinator && isVersionNotVisible(versionItem) && version?.id !== itemVersion?.id))">
                       <button class="btn btn-sm"
-                              [ngClass]="isThisBeingEdited(version) ? 'btn-outline-warning' : 'btn-outline-primary'"
+                              [ngClass]="isThisSummaryBeingEdited(version) ? 'btn-outline-warning' : 'btn-outline-primary'"
                               (click)="disableVersionEditing()"
                               title="{{'item.version.history.table.action.discardSummary' | translate}}">
                         <i class="fas fa-undo-alt fa-fw"></i>
@@ -174,16 +174,20 @@
                     </ng-container>
                     <!--EDIT / SAVE-->
                     <ng-container
-                      *ngIf="(canEditVersion$(version) | async) && ((!isProjectFunder && !isCoordinator && !isFunderManagerOrReader && !isProjectReader) || (isCoordinator && isVersionNotVisible(versionItem) && version?.id !== itemVersion?.id))">
+                      *ngIf="(canEditVersion$(version) | async) &&
+                       (
+                         (!isAdministrator && !isProjectFunder && !isCoordinator && !isFunderManagerOrReader && !isProjectReader) ||
+                         ((isAdministrator || isCoordinator) && isVersionNotVisible(versionItem) && version?.id !== itemVersion?.id)
+                       )">
                       <button class="btn btn-outline-primary btn-sm version-row-element-edit"
-                              *ngIf="!isThisBeingEdited(version)"
+                              *ngIf="!isThisSummaryBeingEdited(version)"
                               [disabled]="isAnyBeingEdited() || isOperationPending(version)"
-                              (click)="enableVersionEditing(version)"
+                              (click)="enableVersionSummaryEditing(version)"
                               title="{{'item.version.history.table.action.editSummary' | translate}}">
                         <i class="fas fa-edit fa-fw"></i>
                       </button>
                       <button class="btn btn-outline-success btn-sm"
-                              *ngIf="isThisBeingEdited(version)"
+                              *ngIf="isThisSummaryBeingEdited(version)"
                               (click)="onSummarySubmit()"
                               title="{{'item.version.history.table.action.saveSummary' | translate}}">
                         <i class="fas fa-check fa-fw"></i>
@@ -194,7 +198,7 @@
                 <!-- END SUMMARY -->
 
                 <!-- NOTES -->
-                <td *ngIf="isProjectFunder || isFunderManagerOrReader" class="version-row-element-summary">
+                <td *ngIf="isAdministrator || isProjectFunder || isFunderManagerOrReader" class="version-row-element-note">
                   <div class="float-left">
                     <ng-container *ngIf="isNoteBeingEdited(versionItem,version); then editNote else showNote"></ng-container>
                     <ng-template #showNote>
@@ -210,7 +214,7 @@
 
                   <div class="float-right btn-group edit-field space-children-mr" *ngIf="displayActions && version?.id !== itemVersion?.id">
 
-                    <ng-container *ngIf="isProjectFunder">
+                    <ng-container *ngIf="isAdministrator || isProjectFunder">
                       <ng-container *ngIf="isNoteBeingEdited(versionItem,version)">
                         <button class="btn btn-sm"
                                 [ngClass]="isNoteBeingEdited(versionItem,version) ? 'btn-outline-warning' : 'btn-outline-primary'"
@@ -244,7 +248,7 @@
                 <td class="version-row-element-summary" *ngIf="!isProjectReader">
                   <div class="float-right btn-group edit-field"
                        *ngIf="displayActions && version?.id !== itemVersion?.id">
-                    <ng-container *ngIf="isCoordinator">
+                    <ng-container *ngIf="isCoordinator || isAdministrator">
                       <button
                         *ngIf="!isVersionVisible(versionItem)"
                         class="btn btn-sm version-row-element-delete btn-outline-primary"
@@ -257,7 +261,7 @@
                         </button>
                     </ng-container>
 
-                    <ng-container *ngIf="(isProjectFunder) && isVersionVisible(versionItem)" >
+                    <ng-container *ngIf="(isAdministrator || isProjectFunder) && isVersionVisible(versionItem)" >
                         <button class="btn btn-sm version-row-element-delete "
                                 [ngClass]="{'btn-outline-primary': (!isVersionOfficial(versionItem) || hasNoOfficialMetadata(versionItem)), 'btn-outline-warning': isVersionOfficial(versionItem)}"
                                 [disabled]="isAnyBeingEdited() || isOperationPending(version)"
@@ -273,7 +277,7 @@
                     <ng-container *ngIf="(canDeleteVersion$(version) | async) && version?.id !== itemVersion?.id">
 
                       <ng-container *ngIf="(!isCoordinator && !isProjectFunder && !isFunderManagerOrReader && !isProjectReader) ||
-                            ( (isCoordinator && !isVersionVisible(versionItem)) ||
+                            ((isCoordinator && !isVersionVisible(versionItem)) ||
                             (isProjectFunder || isFunderManagerOrReader) && !isVersionOfficial(versionItem))">
                         <button class="btn btn-sm btn-outline-danger version-row-element-delete"
                                 [attr.data-test]="'delete-'+version.id"
@@ -292,7 +296,7 @@
             </tr>
           </tbody>
         </table>
-        <div *ngIf="!isCoordinator && !isProjectFunder && !isFunderManagerOrReader && !isProjectReader;else official">*&nbsp;{{"item.version.history.selected" | translate}}
+        <div *ngIf="!isAdministrator && !isCoordinator && !isProjectFunder && !isFunderManagerOrReader && !isProjectReader;else official">*&nbsp;{{"item.version.history.selected" | translate}}
         </div>
         <ng-template #official>
           <div>*&nbsp;{{"item.version.history.official" | translate}}</div>

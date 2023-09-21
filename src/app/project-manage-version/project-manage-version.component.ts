@@ -23,6 +23,11 @@ export class ProjectManageVersionComponent implements OnInit {
   item$: BehaviorSubject<Item> = new BehaviorSubject<Item>(null);
 
   /**
+   * A boolean representing if user is site administrator
+   */
+  public isAdministrator$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
+
+  /**
    * A boolean representing if user is coordinator or founder for the current project
    */
   public isCoordinatorOfProject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
@@ -52,6 +57,10 @@ export class ProjectManageVersionComponent implements OnInit {
     const item$ = this.router.data.pipe(
       map((data: Params) => data.item.payload)
     );
+    const isAdministrator$ = item$.pipe(
+      switchMap((item: Item) => this.authorizationService.isAdmin())
+    );
+
     const isCoordinator$ = item$.pipe(
       switchMap((item: Item) => this.authorizationService.isCoordinator(item))
     );
@@ -71,9 +80,10 @@ export class ProjectManageVersionComponent implements OnInit {
       switchMap((item: Item) => this.authorizationService.isProjectReader(item))
     );
 
-    combineLatest([item$, isCoordinator$, isFunderOfProject$, isFunderManagerOfProject$, isFunderReaderOfProject$, isProjectReader$])
-      .subscribe(([item, isCoordinator, isFunderOfProject, isFunderManagerOfProject, isFunderReaderOfProject, isProjectReader]) => {
+    combineLatest([item$, isAdministrator$, isCoordinator$, isFunderOfProject$, isFunderManagerOfProject$, isFunderReaderOfProject$, isProjectReader$])
+      .subscribe(([item, isAdministrator, isCoordinator, isFunderOfProject, isFunderManagerOfProject, isFunderReaderOfProject, isProjectReader]) => {
         this.item$.next(item);
+        this.isAdministrator$.next(isAdministrator);
         this.isCoordinatorOfProject$.next(isCoordinator);
         this.isFounderOfProject$.next(isFunderOfProject);
         this.isFounderManagerOrReaderOfProject$.next(isFunderManagerOfProject || isFunderReaderOfProject);

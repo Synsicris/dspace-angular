@@ -14276,6 +14276,10 @@
   // "vocabulary-treeview.tree.description.destatis": "missing",
   "vocabulary-treeview.tree.description.destatis": "<i>Wählen Sie das Fachgebiet bitte so spezifisch wie möglich aus. </br>Nutzen Sie <b>></b> um die Listen aufzuklappen, oder geben Sie die ersten Buchstaben in das <b>Suchfeld</b> ein. Über das Suchfeld wird nach passenden Worten in der Auswahlliste gesucht. </br><b>Auswählbar</b> sind nur die <b>schwarzen</b> Begriffe.</i>",
 
+  // "vocabulary-treeview.tree.description.countries2": "Select a country to add as search filter",
+  // TODO New key - Add a translation
+  "vocabulary-treeview.tree.description.countries2": "Select a country to add as search filter",
+
   // "submission.sections.submit.progressbar.exploitation_plan_step_type_1_task_form.info": "missing",
   "submission.sections.submit.progressbar.exploitation_plan_step_type_1_task_form.info": "<b><i>Legen Sie hier erst dann neue Einträge an, nachdem Sie unter „Vorhandene auswählen“ überprüft haben, ob die passenden Einträge bereits vorhanden sind.</i></b></br></br><b>Bereiche:</b><ul><li>Besonders relevant sind die Einträge zu <b>Patent oder Gebrauchsmuster</b>.</li><li>Wenn bereits Lizenzeinnahmen oder Erlöse aus dem Verkauf erzielt werden, wird dies in <b>Anwendung</b> erfasst.</li><li></b>Schutzrechtsanmeldungen Anderer</b>, die einer Verwertung durch die Antragsteller entgegenstehen, sind in <b>Rahmenbedingung</b> zu erfassen.</li><li>Einträge aus <b>weiterenKategorien</b> können ebenfalls relevant sein, wenn sie direkt mit der Anmeldung des Schutzrechtes im Zusammenhang stehen.</li></ul>",
 
