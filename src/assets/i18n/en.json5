@@ -11540,6 +11540,10 @@
 
   "search.filters.applied.charts.graph-synsicris_subject_destatis.tab": "Discipline",
 
+  "search.filters.applied.charts.graphitem_dc-rights-uri.tab": "Rights URI",
+
+  "search.filters.filter.item-filter_dc-rights-uri.head": "Rights URI",
+
   "search.filters.filter.synsicrisDcContributorAuthor.head": "Author",
 
   "search.filters.filter.synsicrisDcContributorAuthor.label": "Search Author",

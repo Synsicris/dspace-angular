@@ -1,4 +1,4 @@
-<ds-working-plan *ngIf="(initialized | async) && workingPlan"
+<ds-working-plan *ngIf="(initialized | async) && workingPlan && (loadedPage | async)"
                  [hasAnyFunderRole]="hasAnyFunderRole"
                  [isAdmin]="isAdmin"
                  [isFunderProject]="isFunderProject"

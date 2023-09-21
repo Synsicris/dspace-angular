@@ -16,8 +16,10 @@ import { getFirstCompletedRemoteData } from '../../../../../core/shared/operator
 import { RemoteData } from '../../../../../core/data/remote-data';
 import { Item } from 'src/app/core/shared/item.model';
 import { APP_CONFIG, AppConfig } from '../../../../../../config/app-config.interface';
+import { Context } from '../../../../../core/shared/context.model';
 
 @listableObjectComponent('ProjectSearchResult', ViewMode.ListElement)
+@listableObjectComponent('ProjectSearchResult', ViewMode.ListElement, Context.BrowseMostElements)
 @Component({
   selector: 'ds-project-search-result-list-element',
   styleUrls: ['./project-search-result-list-element.component.scss'],

@@ -53,6 +53,8 @@ import { IsAdministratorResolver } from '../core/project/resolvers/is-administra
           {
             path: 'objectives/:objId',
             component: ObjectivesPageComponent,
+            canActivate: [PrintStyleApplier],
+            runGuardsAndResolvers: 'paramsOrQueryParamsChange',
             data: {
               title: 'impact-pathway.objectives.edit.page.title',
               breadcrumbKey: 'impact-pathway',

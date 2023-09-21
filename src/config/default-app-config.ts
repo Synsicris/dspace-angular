@@ -956,13 +956,6 @@ export class DefaultAppConfig implements AppConfig {
             type: DisplayItemMetadataType.Text
           }
         ]
-      },      {
-        metadata: [
-          {
-            name: 'synsicris.type.transform',
-            type: DisplayItemMetadataType.Text
-          }
-        ]
       },
       {
         metadata: [

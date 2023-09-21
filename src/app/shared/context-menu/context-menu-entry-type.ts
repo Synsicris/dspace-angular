@@ -10,7 +10,6 @@ export enum ContextMenuEntryType {
   RequestCorrection = 'requestcorrection',
   Statistics = 'statistics',
   Subscriptions = 'subscriptions',
-  Report = 'report',
   ItemVersion = 'itemversion',
   FullItem = 'fullitem',
   OrcidView = 'orcidview',
