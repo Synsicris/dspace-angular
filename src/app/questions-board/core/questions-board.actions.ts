@@ -49,7 +49,13 @@ export const QuestionsBoardActionTypes = {
   STOP_COMPARE_QUESTIONS_BOARD: type('dspace/questionsboard/STOP_COMPARE_QUESTIONS_BOARD'),
   UPLOAD_FILES_TO_QUESTION_BOARD: type('dspace/questionsboard/UPLOAD_FILES_TO_QUESTION_BOARD'),
   DELETE_UPLOADED_FILE_FROM_QUESTION_BOARD: type('dspace/questionsboard/DELETE_UPLOADED_FILE_FROM_QUESTION_BOARD'),
+  DELETE_ALL_UPLOADED_FILES_FROM_QUESTION_BOARD: type('dspace/questionsboard/DELETE_ALL_UPLOADED_FILES_FROM_QUESTION_BOARD'),
+  DELETE_ALL_UPLOADED_FILES_FROM_QUESTION_BOARD_SUCCESS: type('dspace/questionsboard/DELETE_ALL_UPLOADED_FILES_FROM_QUESTION_BOARD_SUCCESS'),
+  DELETE_ALL_UPLOADED_FILES_FROM_QUESTION_BOARD_ERROR: type('dspace/questionsboard/DELETE_ALL_UPLOADED_FILES_FROM_QUESTION_BOARD_ERROR'),
   EDIT_FILE_DATA_OF_QUESTION_BOARD: type('dspace/questionsboard/EDIT_FILE_DATA_OF_QUESTION_BOARD'),
+  CLEAR_QUESTION_BOARD_STEPS: type('dspace/questionsboard/CLEAR_QUESTION_BOARD_STEPS'),
+  CLEAR_QUESTION_BOARD_SUCCESS: type('dspace/questionsboard/CLEAR_QUESTION_BOARD_SUCCESS'),
+  CLEAR_QUESTION_BOARD_ERROR: type('dspace/questionsboard/CLEAR_QUESTION_BOARD_ERROR'),
 };
 
 /* tslint:disable:max-classes-per-file */
@@ -663,6 +669,98 @@ export class EditUploadedFileDataAction implements Action {
   }
 }
 
+/**
+ * A ngrx action for generate a ClearQuestionBoardStepsAction
+ */
+export class ClearQuestionBoardStepsAction implements Action {
+  type = QuestionsBoardActionTypes.CLEAR_QUESTION_BOARD_STEPS;
+  payload: {
+    questionsBoardId: string;
+  };
+
+  /**
+   * Create a new ClearQuestionBoardStepsAction
+   * @param questionsBoardId the questionsBoard's ID
+   */
+  constructor(questionsBoardId: string) {
+    this.payload = { questionsBoardId};
+  }
+}
+
+/**
+ * A ngrx action for generate success
+ */
+export class ClearQuestionBoardStepsSuccessAction implements Action{
+  type = QuestionsBoardActionTypes.CLEAR_QUESTION_BOARD_SUCCESS;
+
+  payload: {
+    questionsBoardId: string;
+  };
+
+  /**
+   * Create a new ClearQuestionBoardStepsSuccessAction
+   * @param questionsBoardId The questions board's ID
+   */
+  constructor(questionsBoardId: string) {
+    this.payload = { questionsBoardId };
+  }
+}
+
+/**
+ * A ngrx action for generate error
+ */
+export class  ClearQuestionBoardStepsErrorAction implements Action {
+  type = QuestionsBoardActionTypes.CLEAR_QUESTION_BOARD_ERROR;
+}
+
+/**
+ * A ngrx action for generate a RemoveAllUploadedFilesFromQuestionsboardAction
+ */
+export class RemoveAllUploadedFilesFromQuestionsboardAction implements Action {
+  type =  QuestionsBoardActionTypes.DELETE_ALL_UPLOADED_FILES_FROM_QUESTION_BOARD;
+
+  payload: {
+    questionsBoardId: string;
+    uploadStepConfiguration: string;
+  };
+
+  /**
+   * Create a new RemoveAllUploadedFilesFromQuestionsboardAction
+   * @param questionsBoardId the questionsBoard's ID
+   * @param uploadStepConfiguration the upload's configuration name
+   */
+  constructor(questionsBoardId: string, uploadStepConfiguration: string) {
+    this.payload = { questionsBoardId, uploadStepConfiguration };
+  }
+}
+
+/**
+ * A ngrx action for generate success
+ */
+export class RemoveAllUploadedFilesFromQuestionsboardSuccessAction implements Action {
+  type =  QuestionsBoardActionTypes.DELETE_ALL_UPLOADED_FILES_FROM_QUESTION_BOARD_SUCCESS;
+
+  payload: {
+    questionsBoardId: string;
+  };
+
+  /**
+   * Create a new RemoveAllUploadedFilesFromQuestionsboardSuccessAction
+   * @param questionsBoardId the questionsBoard's ID
+   */
+  constructor(questionsBoardId: string) {
+    this.payload = { questionsBoardId };
+  }
+}
+
+/**
+ * A ngrx action for generate error
+ */
+export class RemoveAllUploadedFilesFromQuestionsboardErrorAction implements Action {
+  type =  QuestionsBoardActionTypes.DELETE_ALL_UPLOADED_FILES_FROM_QUESTION_BOARD_ERROR;
+}
+
+
 /* tslint:enable:max-classes-per-file */
 
 /**
@@ -700,4 +798,10 @@ export type QuestionsBoardActions
   | ClearQuestionBoardAction
   | UploadFilesToQuestionBoardAction
   | EditUploadedFileDataAction
-  | DeleteUploadedFileFromQuestionsboardAction;
+  | DeleteUploadedFileFromQuestionsboardAction
+  | ClearQuestionBoardStepsAction
+  | ClearQuestionBoardStepsSuccessAction
+  | RemoveAllUploadedFilesFromQuestionsboardAction
+  | RemoveAllUploadedFilesFromQuestionsboardSuccessAction
+  | ClearQuestionBoardStepsErrorAction
+  | RemoveAllUploadedFilesFromQuestionsboardErrorAction;

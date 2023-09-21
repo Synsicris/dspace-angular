@@ -428,11 +428,11 @@ export const environment: BuildConfig = {
               filterType: 'range',
               minValue: {
                 operator: '-',
-                value: { day: 10 }
+                value: { days: 10 }
               },
               maxValue: {
                 operator: '+',
-                value: { day: 10 }
+                value: { days: 10 }
               }
             }
           }
@@ -603,7 +603,9 @@ export const environment: BuildConfig = {
     impactPathwayTasksFormSection: 'impact_pathway_task_form',
     impactPathwaysEditFormSection: 'impact_pathway-edit_form',
     impactPathwaysLinksEditFormSection: 'impact_pathway-edit_link_form',
+    impactPathwaysAdminEditMode: 'ADMIN_IMPACTPATHWAY',
     impactPathwaysEditMode: 'IMPACTPATHWAY',
+    impactPathwaysLinkAdminEditMode: 'ADMIN_IMPACTPATHWAY_LINK',
     impactPathwaysLinkEditMode: 'IMPACTPATHWAY_LINK',
     impactPathwayEntity: 'impactpathway',
     impactPathwayStepEntity: 'impactpathwaystep',
@@ -625,6 +627,7 @@ export const environment: BuildConfig = {
     workingPlanRelationMetadata: 'synsicris.relation.workingplan',
     workingPlanFormName: 'working_plan_form',
     workingPlanStepsFormName: 'working_plan_step_form',
+    workingPlanAdminEditMode: 'ADMIN_WORKINGPLAN',
     workingPlanEditMode: 'WORKINGPLAN',
     workingPlanEditFormSection: 'working_plan-edit_form',
     workingPlanStepStatusMetadata: 'synsicris.type.status',
@@ -647,6 +650,7 @@ export const environment: BuildConfig = {
   exploitationPlan: {
     questionsBoardFormPrefix: 'exploitation_plan',
     questionsBoardI18nPrefix: 'exploitation-plan',
+    questionsBoardDescriptionMetadata: 'dc.description',
     questionsBoardRelationMetadata: 'synsicris.relation.exploitationplan',
     questionsBoardStepEntityName: 'exploitationplanstep',
     questionsBoardStepRelationMetadata: 'exploitationplan.relation.step',
@@ -654,12 +658,14 @@ export const environment: BuildConfig = {
     questionsBoardPartnerMetadata: '',
     questionsBoardTaskFormSection: 'exploitation_plan_task_form',
     questionsBoardEditFormSection: 'exploitation_plan-edit_form',
+    questionsBoardAdminEditMode: 'ADMIN_EXPLOITATIONPLAN',
     questionsBoardEditMode: 'EXPLOITATIONPLAN',
     questionsBoardStepIcon: true
   },
   interimReport: {
     questionsBoardFormPrefix: 'interim_report',
     questionsBoardI18nPrefix: 'interim-report',
+    questionsBoardDescriptionMetadata: 'dc.description',
     questionsBoardRelationMetadata: 'synsicris.relation.interimreport',
     questionsBoardStepEntityName: 'interim_report_step',
     questionsBoardStepRelationMetadata: 'interimreport.relation.step',
@@ -667,6 +673,7 @@ export const environment: BuildConfig = {
     questionsBoardPartnerMetadata: '',
     questionsBoardTaskFormSection: 'interim_report_task_form',
     questionsBoardEditFormSection: 'interim_report-edit_form',
+    questionsBoardAdminEditMode: 'ADMIN_INTERIMREPORT',
     questionsBoardEditMode: 'INTERIMREPORT',
     questionsBoardStepIcon: false
   },
