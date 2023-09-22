@@ -16,6 +16,7 @@ import { ItemDataService } from '../../core/data/item-data.service';
 import { hasValue } from '../../shared/empty.util';
 import { Community } from '../../core/shared/community.model';
 import { AuthService } from '../../core/auth/auth.service';
+import { PrintViewService } from '../../shared/print-view/print-view.service';
 
 @Component({
   selector: 'ds-objectives-page',
@@ -61,14 +62,22 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
    */
   private sub: Subscription;
 
+  /**
+   * Used to know if the page is loaded
+   */
+  loadedPage: BehaviorSubject<boolean>;
+
+
   constructor(
     private authService: AuthService,
     private impactPathwayService: ImpactPathwayService,
     private itemService: ItemDataService,
     private route: ActivatedRoute,
     private router: Router,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private printService: PrintViewService,
   ) {
+    this.loadedPage = this.printService.loadedPage;
   }
 
   /**
@@ -142,6 +151,9 @@ export class ObjectivesPageComponent implements OnInit, OnDestroy {
       this.isAdmin = isAdmin;
       this.initialized.next(true);
     });
+
+    // preparing the view for printing (screenshots for report)
+    this.printService.preparePrintView('objectives');
   }
 
   ngOnDestroy(): void {

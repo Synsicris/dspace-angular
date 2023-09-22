@@ -1,31 +1,17 @@
-import {
-  AfterContentChecked,
-  ChangeDetectorRef,
-  Component,
-  Inject,
-  Input,
-  OnDestroy,
-  OnInit,
-  PLATFORM_ID,
-  ViewChild
-} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import {
   BehaviorSubject,
   combineLatest,
-  fromEvent,
   Observable,
   of as observableOf,
-  OperatorFunction,
-  Subscription
+  Subscription,
 } from 'rxjs';
-import { delay, filter, map, mergeMap, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
-import { fromPromise } from 'rxjs/internal/observable/innerFrom';
+import { filter, map, mergeMap, switchMap, take } from 'rxjs/operators';
 import { NgbAccordion, NgbModal, NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImpactPathway } from '../../core/models/impact-pathway.model';
-import { NativeWindowRef, NativeWindowService } from '../../../core/services/window.service';
 import { ImpactPathwayLink } from '../../core/impact-pathway.reducer';
 import { ImpactPathwayLinksService } from '../../core/impact-pathway-links.service';
 import { ImpactPathwayService } from '../../core/impact-pathway.service';
@@ -44,8 +30,7 @@ import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
 import { RemoteData } from '../../../core/data/remote-data';
 import { administratorRole, AlertRole, getProgrammeRoles } from '../../../shared/alert/alert-role/alert-role';
 import { ProjectAuthorizationService } from '../../../core/project/project-authorization.service';
-import isEqual from 'lodash/isEqual';
-import { isPlatformBrowser } from '@angular/common';
+import { PrintViewService } from '../../../shared/print-view/print-view.service';
 
 
 @Component({
@@ -53,7 +38,7 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrls: ['./impact-path-way.component.scss'],
   templateUrl: './impact-path-way.component.html'
 })
-export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDestroy {
+export class ImpactPathWayComponent implements OnInit, OnDestroy {
   /**
    * If the current user is a funder Organizational/Project manager
    */
@@ -87,8 +72,7 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
   formConfig$: Observable<SubmissionFormModel>;
   canDeleteImpactPathway$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   canShowRelations: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  loadedArrows: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  isPrinting$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  loadedArrows: BehaviorSubject<boolean>;
 
   /**
    * Array to track all subscriptions and unsubscribe them onDestroy
@@ -128,18 +112,16 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
    */
   public isCommentAccordionOpen = false;
 
-  constructor(@Inject(NativeWindowService) protected _window: NativeWindowRef,
-              @Inject(PLATFORM_ID) protected platformId: Object,
-              private authorizationService: AuthorizationDataService,
+  constructor(private authorizationService: AuthorizationDataService,
               private projectAuthorizationService: ProjectAuthorizationService,
-              private cdr: ChangeDetectorRef,
               private impactPathwayService: ImpactPathwayService,
               private impactPathwayLinksService: ImpactPathwayLinksService,
               private itemService: ItemDataService,
               private modalService: NgbModal,
               protected aroute: ActivatedRoute,
-              private router: Router,
-              protected editItemDataService: EditItemDataService) {
+              protected editItemDataService: EditItemDataService,
+              private printService: PrintViewService) {
+              this.loadedArrows = this.printService.loadedArrows;
   }
 
   ngOnInit() {
@@ -203,71 +185,13 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
       this.isVersionOfAnItem$.next(isVersionOfAnItem);
     });
 
-    const params$ =
-      this.aroute.queryParams
-        .pipe(
-          filter(params => isNotEmpty(params))
-        );
-
-    this.subs.push(
-      this.isPrinting$
-        .pipe(
-          filter(isPrinting => isPrinting === true),
-          this.reloadArrows()
-        )
-        .subscribe(() => this._window.nativeWindow.print())
-    );
-
-    if (isPlatformBrowser(this.platformId)) {
-      this.subs.push(
-        fromEvent(this._window.nativeWindow, 'beforeprint')
-          .subscribe((event: Event) => {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-            this.onPrint();
-          }),
-        fromEvent(this._window.nativeWindow, 'afterprint')
-          .pipe(
-            delay(100),
-            withLatestFrom(this.isPrinting$),
-            filter(([, isPrinting]) => isPrinting === true),
-            switchMap(() => fromPromise(this.router.navigate([], { queryParams: { view: 'default' } }))),
-            this.reloadArrows()
-          ).subscribe(() => this.isPrinting$.next(false))
-      );
-    }
-
-    this.subs.push(
-      params$
-        .pipe(
-          map(params => params?.print),
-          filter(printParam => isEqual(printParam, 'true') && this._window.nativeWindow)
-        )
-        .subscribe(() => this.isPrinting$.next(true))
-    );
-
+    // Preparing the view for printing (screenshots for reports)
+    this.printService.preparePrintView('ipw');
     this.impactPathwayStepEntityType = environment.impactPathway.impactPathwayStepEntity;
     this.funderRoles = getProgrammeRoles(this.impactPathWayItem, this.projectAuthorizationService);
     this.dismissRole = administratorRole(this.projectAuthorizationService);
   }
 
-  ngAfterContentChecked() {
-    if (this._window.nativeWindow) {
-      this.cdr.detectChanges();
-      this.loadedArrows.next(true);
-    }
-
-  }
-
-  reloadArrows(): OperatorFunction<any, any> {
-    return source =>
-      source.pipe(
-        tap(() => this.loadedArrows.next(false)),
-        delay(1),
-        tap(() => this.loadedArrows.next(true)),
-        delay(1),
-      );
-  }
 
   getRelations(): Observable<ImpactPathwayLink[]> {
     return this.impactPathwayLinksService.getAllLinks();
@@ -377,12 +301,4 @@ export class ImpactPathWayComponent implements AfterContentChecked, OnInit, OnDe
     this.isCommentAccordionOpen = event.nextState;
   }
 
-  /**
-   * On print button click
-   * add query param to url
-   * and reload the page to upload print styles
-   */
-  onPrint() {
-    this.router.navigate([], { queryParams: { view: 'print', print: true } });
-  }
 }

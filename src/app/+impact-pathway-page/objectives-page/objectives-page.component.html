@@ -1,4 +1,4 @@
-<ds-objectives-board *ngIf="(initialized | async) && objectivesItem && projectCommunityId"
+<ds-objectives-board *ngIf="(initialized | async) && objectivesItem && projectCommunityId && (loadedPage | async)"
                      [hasAnyFunderRole]="hasAnyFunderRole"
                      [isAdmin]="isAdmin"
                      [isFunderProject]="isFunderProject"

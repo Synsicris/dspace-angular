@@ -6,6 +6,7 @@ export interface QuestionsBoardConfig extends Config {
   questionsBoardRelationMetadata: string;
   questionsBoardStepRelationMetadata: string;
   questionsBoardStepEntityName: string;
+  questionsBoardDescriptionMetadata: string;
   questionsBoardTaskRelationMetadata: string;
   questionsBoardPartnerMetadata: string;
   questionsBoardTaskFormSection: string;

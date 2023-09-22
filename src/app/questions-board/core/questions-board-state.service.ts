@@ -23,6 +23,7 @@ import { QuestionsBoardTask } from './models/questions-board-task.model';
 import {
   AddQuestionsBoardTaskAction,
   ClearQuestionBoardAction,
+  ClearQuestionBoardStepsAction,
   ClearQuestionsBoardStepCollapseAction,
   DeleteUploadedFileFromQuestionsboardAction,
   EditUploadedFileDataAction,
@@ -30,6 +31,7 @@ import {
   InitCompareAction,
   OrderQuestionsBoardTasksAction,
   PatchQuestionsBoardStepMetadataAction,
+  RemoveAllUploadedFilesFromQuestionsboardAction,
   RemoveQuestionsBoardTaskAction,
   SetQuestionsBoardStepCollapseAction,
   StopCompareQuestionsBoardAction,
@@ -290,5 +292,22 @@ export class QuestionsBoardStateService {
     this.store.dispatch(
       new EditUploadedFileDataAction(questionsBoardId, fileUUID, data)
     );
+  }
+
+  /**
+   * Dispatch a new ClearQuestionBoardStepsAction
+   * @param questionsBoardId Questions board id
+   */
+  public dispatchClearQuestionBoardSteps(questionsBoardId: string){
+    this.store.dispatch(new ClearQuestionBoardStepsAction(questionsBoardId));
+  }
+
+  /**
+   * Dispatch a new RemoveAllUploadedFilesFromQuestionsboardAction
+   * @param questionsBoardId Questions board id
+   * @param uploadConfiguration Configuration of the upload step
+   */
+  public dispatchRemoveQuestionBoardFiles(questionsBoardId: string, uploadConfiguration: string){
+    this.store.dispatch(new RemoveAllUploadedFilesFromQuestionsboardAction(questionsBoardId, uploadConfiguration));
   }
 }
