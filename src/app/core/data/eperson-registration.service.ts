@@ -73,7 +73,7 @@ export class EpersonRegistrationService {
     registration.email = email;
     registration.groups = groups;
 
-    return this.fetchRegister(registration);
+    return this.fetchRegister(registration, null, 'register');
   }
 
   private fetchRegister(registration: Registration, captchaToken: string = null, type?: string): Observable<RemoteData<Registration>> {
