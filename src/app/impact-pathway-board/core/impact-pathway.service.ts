@@ -356,7 +356,7 @@ export class ImpactPathwayService {
    */
   addImpactPathwayCompareLinksFromTaskItem(step: ImpactPathwayStep, impactPathwayId: string): Observable<RemoteData<Item>> {
     return from(step.tasks).pipe(
-      mergeMap((task) => this.itemService.findById(task.id).pipe(
+      mergeMap((task) => this.itemService.findById(task.compareId).pipe(
         getFinishedRemoteData(),
         tap((rd: RemoteData<Item>) => this.addImpactPathwayLinksFromTaskItem(rd.payload, impactPathwayId, step.id)),
       )),
