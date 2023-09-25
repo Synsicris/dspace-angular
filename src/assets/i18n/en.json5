@@ -6462,11 +6462,11 @@
 
   "search.filters.entityType.exploitationplanstep.step_type_4": "ExploitationPlan",
 
-  "questions-board.exploitation-plan.metadata-internal.icon.title.status.exchange": "Note for further editing (internal)",
+  "questions-board.exploitation-plan.metadata-internal.icon.title.status.edit": "Note for further editing (internal)",
 
   "questions-board.exploitation-plan.metadata-internal.icon.title.status.done": "Done",
 
-  "questions-board.interim-report.metadata-internal.icon.title.status.exchange": "Note for further editing (internal)",
+  "questions-board.interim-report.metadata-internal.icon.title.status.edit": "Note for further editing (internal)",
 
   "questions-board.interim-report.metadata-internal.icon.title.status.done": "Done",
 
@@ -6504,9 +6504,7 @@
 
   "impact-pathway.metadata-internal.icon.title.status.done": "Done",
 
-  "impact-pathway.metadata-internal.icon.title.status.edit": "Edit",
-
-  "impact-pathway.metadata-internal.icon.title.status.exchange": "Note for further editing (internal)",
+  "impact-pathway.metadata-internal.icon.title.status.edit": "Note for further editing (internal)",
 
   "impact-pathway.metadata-status.icon.title.status.new": "new",
 
@@ -6522,7 +6520,7 @@
 
   "working-plan.item.metadata-internal.icon.title.status.done": "Done",
 
-  "working-plan.item.metadata-internal.icon.title.status.exchange": "Note for further editing (internal)",
+  "working-plan.item.metadata-internal.icon.title.status.edit": "Note for further editing (internal)",
 
   "working-plan.metadata-status.icon.title.status.new": "New",
 

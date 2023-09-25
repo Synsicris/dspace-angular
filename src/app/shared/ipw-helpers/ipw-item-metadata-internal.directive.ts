@@ -1,6 +1,8 @@
 import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
-import { InternalItemStatus } from './../../core/submission/edititem-data.service';
+
 import { TranslateService } from '@ngx-translate/core';
+
+import { InternalItemStatus } from '../../core/submission/edititem-data.service';
 import { addClassesAndTitle } from '../utils/renderer-utils';
 import { DirectiveAttributes } from '../utils/directive-attributes.interface';
 
@@ -38,15 +40,8 @@ export class IpwItemMetadataInternalDirective implements OnChanges {
           break;
         case InternalItemStatus.Edit:
           attributes = {
-            classNames: [],
+            classNames: ['fas', 'fa-comment', 'status-icon-comment'],
             title: this.translate.instant('impact-pathway.metadata-internal.icon.title.status.edit')
-          };
-          break;
-        case InternalItemStatus.Exchange:
-          attributes = {
-            //classNames: ['fas', 'fa-comment', 'text-warning'], // bubble without exclamation mark Version 5.15.4
-            classNames: ['fas', 'fa-comment', 'status-icon-comment'], // changed color-class from text-warning to individual class fpr comment-icon (rex 230726)
-            title: this.translate.instant('impact-pathway.metadata-internal.icon.title.status.exchange')
           };
           break;
       }
