@@ -12,7 +12,7 @@ import { LayoutBox } from '../../../../enums/layout-box.enum';
 import { CrisLayoutRelationBoxComponent } from '../relation/cris-layout-relation-box.component';
 import { CrisLayoutBox, RelationBoxConfiguration } from '../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../core/shared/item.model';
-import { ProjectDataService, VERSION_UNIQUE_ID } from '../../../../../core/project/project-data.service';
+import { VERSION_UNIQUE_ID } from '../../../../../core/project/project-data.service';
 import { hasValue } from '../../../../../shared/empty.util';
 import { environment } from '../../../../../../environments/environment';
 import { ItemDataService } from '../../../../../core/data/item-data.service';
@@ -24,6 +24,7 @@ import {
   RangeFilterGroup
 } from '../../../../../../config/layout-config.utils';
 import { flattenObject } from '../../../../../shared/object.util';
+import { ProjectVersionService } from '../../../../../core/project/project-version.service';
 
 @Component({
   selector: 'ds-cris-layout-comment-box',
@@ -51,7 +52,7 @@ export class CrisLayoutCommentBoxComponent extends CrisLayoutRelationBoxComponen
     public readonly authorizationService: AuthorizationDataService,
     public readonly cd: ChangeDetectorRef,
     public readonly itemService: ItemDataService,
-    public readonly projectService: ProjectDataService,
+    protected projectVersion: ProjectVersionService,
     protected readonly route: ActivatedRoute,
     protected readonly router: Router,
     private readonly location: Location,
@@ -60,7 +61,7 @@ export class CrisLayoutCommentBoxComponent extends CrisLayoutRelationBoxComponen
     @Inject('boxProvider') public boxProvider: CrisLayoutBox,
     @Inject('itemProvider') public itemProvider: Item
   ) {
-    super(cd, route, translateService, boxProvider, itemProvider);
+    super(cd, projectVersion, route, translateService, boxProvider, itemProvider);
   }
 
   ngOnInit(): void {
