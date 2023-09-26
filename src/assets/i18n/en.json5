@@ -2468,6 +2468,8 @@
 
   "footer.link.feedback": "Send Feedback",
 
+  "footer.link.development-funding": "Development/Funding",
+
   "forgot-email.form.header": "Forgot Password",
 
   "forgot-email.form.info": "Enter Register an account to subscribe to collections for email updates, and submit new items to DSpace.",
@@ -11910,6 +11912,24 @@
 
   "search.filters.applied.graph-neg-side-effect-synsicris_type_intensity.y_label": "Number of mentions",
 
-  "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_intensity.y_label": "Number of mentions"
+  "search.filters.applied.charts.graph-neg-side-effect-synsicris_type_intensity.y_label": "Number of mentions",
 
+  "development-funding.page.dev.title": "SynSICRIS: Development and Funding",
+  "development-funding.page.dev.text": "<p>We would like to express our sincere thanks to all those who have supported the development of the monitoring tool.</p><p>The monitoring tool was implemented in a joint project between the University of Kassel and Disy Informationssysteme GmbH. The technical development was carried out in cooperation with 4Science S.p.A. and The Library Code GmbH.</p>",
+  "development-funding.page.dev.link.uni-kassel": "University of Kassel / Organic Farming and Cropping Systems",
+  "development-funding.page.dev.link.disy": "Disy Informationssysteme GmbH",
+  "development-funding.page.dev.link.4science": "4Science S.p.A",
+  "development-funding.page.dev.link.tlc": "The Library Code GmbH",
+
+  "development-funding.page.funding.title": "Funding",
+  "development-funding.page.funding.text": "<p>The project was supported by funds of the Federal Ministry of Food and Agriculture (BMEL) based on a decision of the Parliament of the Federal Republic of Germany via the Federal Office for Agriculture and Food (BLE) under the innovation support programme.</p>",
+
+  "development-funding.page.partner.title": "Partner",
+  "development-funding.page.partner.text": "<p>Numerous people have contributed to the development of the monitoring tool in requirements analyses, tests and expert workshops. In addition, various partners have supported the project with their specific expertise.</p>",
+  "development-funding.page.partner.link.rex": "Rex-Publica UI/UX- und Info-Design",
+  "development-funding.page.partner.link.eresult": "eresult GmbH",
+  "development-funding.page.partner.link.userlutions": "Userlutions GmbH",
+  "development-funding.page.partner.link.zbmed": "ZB MED – Information Centre for Life Sciences",
+  "development-funding.page.partner.link.tib": "TIB – Leibniz Information Centre for Science and Technology and University Library",
+  "development-funding.page.partner.link.lib-kassel": "Kassel University Library",
 }

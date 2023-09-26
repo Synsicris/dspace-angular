@@ -19602,6 +19602,24 @@
   "submission.sections.upload.form.from-label": "Zugriff gewähren ab",
 
   // "submission.sections.upload.form.from-placeholder": "from",
-  "submission.sections.upload.form.from-placeholder": "ab"
+  "submission.sections.upload.form.from-placeholder": "ab",
 
+  "development-funding.page.dev.title": "SynSICRIS: Entwicklung und Förderung",
+  "development-funding.page.dev.text": "<p>Wir möchten unseren herzlichen Dank an alle Beteiligten ausdrücken, die die Entwicklung des Monitoring-Tools unterstützt haben.</p><p>Umgesetzt wurde das Monitoring-Tool in einem Verbundprojekt der Universität Kassel und der Disy Informationssysteme GmbH. Für die technische Entwicklung wurde mit 4Science S.p.A. und The Library Code GmbH zusammengearbeitet.</p>",
+  "development-funding.page.dev.link.uni-kassel": "Universität Kassel / FÖL",
+  "development-funding.page.dev.link.disy": "Disy Informationssysteme GmbH",
+  "development-funding.page.dev.link.4science": "4Science S.p.A",
+  "development-funding.page.dev.link.tlc": "The Library Code GmbH",
+
+  "development-funding.page.funding.title": "Förderung",
+  "development-funding.page.funding.text": "<p>Die Förderung des Vorhabens erfolgte aus Mitteln des Bundesministeriums für Ernährung und Landwirtschaft (BMEL) aufgrund eines Beschlusses des deutschen Bundestages. Die Projektträgerschaft erfolgte über die Bundesanstalt für Landwirtschaft und Ernährung (BLE) im Rahmen des Programms zur Innovationsförderung.</p>",
+
+  "development-funding.page.partner.title": "Partner",
+  "development-funding.page.partner.text": "<p>Zahlreiche Einzelpersonen haben in der Anforderungsanalyse, Erprobungen und Experten-Workshops dazu beigetragen, das Monitoring-Tool zu entwickeln. Außerdem haben verschiedene Partner das Projekt mit ihrer spezifischen Expertise unterstützt.</p>",
+  "development-funding.page.partner.link.rex": "Rex-Publica UI/UX- und Info-Design",
+  "development-funding.page.partner.link.eresult": "eresult GmbH",
+  "development-funding.page.partner.link.userlutions": "Userlutions GmbH",
+  "development-funding.page.partner.link.zbmed": "ZB MED – Informationszentrum Lebenswissenschaften",
+  "development-funding.page.partner.link.tib": "TIB – Leibniz-Informationszentrum Technik und Naturwissenschaften und Universitätsbibliothek",
+  "development-funding.page.partner.link.lib-kassel": "Universitätsbibliothek Kassel - Landesbibliothek und Murhardsche Bibliothek der Stadt Kassel"
 }
