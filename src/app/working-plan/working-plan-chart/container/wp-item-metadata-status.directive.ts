@@ -42,15 +42,14 @@ export class WpItemMetadataStatusDirective implements OnChanges {
       switch (this.status) {
         case ComparedVersionItemStatus.New:
           attributes = {
-            classNames: ['far', 'fa-plus-square', 'status-icon-new'],
-            //classNames: ['far', 'fa-star', 'status-icon-new'],
+            //classNames: ['far', 'fa-plus-square', 'status-icon-new'],
+            classNames: ['far', 'fa-star', 'status-icon-new'],
             title: this.translate.instant('working-plan.metadata-status.icon.title.status.new')
           };
           break;
         case ComparedVersionItemStatus.Changed:
           attributes = {
             classNames: ['fas', 'fa-redo-alt', 'status-icon-changed'],
-            //classNames: ['fas', 'fa-circle-notch', 'status-icon-changed'],
             title: this.translate.instant('working-plan.metadata-status.icon.title.status.changed')
           };
           break;

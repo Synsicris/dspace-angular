@@ -12,17 +12,17 @@
 
   /* ----------------- BASIC COLOUR PALETTE ---------------------------- */
 
-  
   --sy-color-blue-13:         rgb(5, 44, 59);        // #052C3B hsl(197,84,13)   $blue-dark tooltip text
   --sy-color-blue-29:         rgb(18,100,132);       // #126484 hsl(197,76,29)   sidebar links
   --sy-color-blue-33:         rgb(0, 121, 168);      // #0087A8 hsl(192,100,33)  links in breadcrumb
+  --sy-color-blue-36:         rgb(32,118,152);       // #207698 hsl(197,65,36)   buttons
   --sy-color-blue-43:         rgb(0, 146, 219);      // #0092DB hsl(200,100,43)  glow
   --sy-color-blue-89:         rgb(222,226,230);      // #dee2e6 hsl(210,14,89)   bg helptext, border legend
+  --sy-color-blue-92:         rgb(230,239,239);      // #E6EFEF hsl(180,22,92)   IP 4th and 5th column background
   --sy-color-blue-94:         rgb(228, 247, 253);    // #E4F7FD hsl(194,86,94)   tooltip bg of bubble and arrow (bright blue)
   --sy-color-blue-95:         rgb(239,244,247);      // #EFF4F7 hsl(203,33,95)   direct linktabs in sidebar bg
-
   --sy-color-blue-96:         rgb(243,245,246);      // #F3F5F6 hsl(210,14,93)   bg helptext, border legend
-
+  
   --sy-color-bluegray-31:     rgb(72,79,86);         // #484F56 hsl(210,9,31)    sidebar text colour of the active item
 
   --sy-color-blueviolet-53:   rgb(138,43,226);       // #8A2BE2 hsl(271,76,53)   Checkbox and Arrows in Impact Pathway
@@ -38,6 +38,7 @@
   --sy-color-gray-90:         rgb(230,230,230);      // #E6E6E6 hsl(60,0,90)     sidebar borders of tabs
   --sy-color-gray-95:         rgb(244,245,246);      // #F1F2F4 hsl(210,10,95)   level 1 (person) headerbox bg, sidebar expandible tabs bg
   --sy-color-gray-96:         rgb(251,251,251);      // #F4F5F6 hsl(210,11,96)   basic background color of content area
+  --sy-color-gray-97:         rgb(247,248,247);      // #F7F8F7 hsl(120,5,97)    IP 2nd and 3rd column background
   --sy-color-gray-98:         rgb(248,249,250);      // #F8F9FA hsl(210,17,98)   dropdown menu bg - TO BE CHECKED, IF NECCESSARY (no access to the specific forms actually 221209)
   --sy-color-gray-99:         rgb(252,252,252);      // #FCFCFC hsl(210,17,99)   background columns of print impact pathway
   --sy-color-gray-100:        rgb(255,255,255);      // #fff hsl(0,0,100)        bg footer, active and hover sidebar item
@@ -49,10 +50,11 @@
   //--sy-color-green-89:        rgb(230,243,213);      // #E6F3D5  hsl(87,60,74)   new items in Comparemode Working Plan and Impact Pathway
   --sy-color-green-97:        rgb(247,252,243);      // #F7FCF3 hsl(93,60,97)    level 2 (project) headerbox bg
 
-  --sy-color-khaki-68:        rgb(195,197,152);      // #C3C598 hsl(62,27,68)    Calender Bar in Working Plan; Compare Mode for bar and batch active instance
-  --sy-color-khaki-85:        rgb(223,227,207);      // #DFE3CF hsl(72,26,85)    IP 4th and 5th column background
+  --sy-color-khaki-59:        rgb(176,178,121);      // #B0B279 hsl(63,27,59)    Calender Bar in Working Plan; Compare Mode for bar and batch active instance
+  --sy-color-khaki-68:        rgb(195,197,152);      // #C3C598 hsl(62,27,68)    Not used
+  --sy-color-khaki-85:        rgb(223,227,207);      // #DFE3CF hsl(72,26,85)    Not used
   --sy-color-khaki-88:        rgb(238,239,211);      // #EEEFD3 hsl(62,47,88)    IP 2nd and 3rd column background
-  --sy-color-khaki-90:        rgb(229,232,227);      // #E5E8E3 hsl(96,10,90)    IP 1st and 6th column background
+  --sy-color-khaki-90:        rgb(229,232,227);      // #E5E8E3 hsl(96,10,90)   
 
   --sy-color-neon-81:         rgb(241,255,158);      // #F1FF9E hsl(69,100,81) new added rows in working plan
  
@@ -234,12 +236,12 @@
   --sy-table-cell-background-darker-2:       rgba(194,195,196,0.5); // first level rows
 
  // --------------- IMPACT PATHWAY ---------------------------- 
-  --sy-impact-pathway-column-1-background:              var(--sy-color-khaki-90);
+  --sy-impact-pathway-column-1-background:              var(--sy-color-gray-97);
   --sy-impact-pathway-column-2-background:              var(--sy-color-khaki-88);
   --sy-impact-pathway-column-3-background:              var(--sy-color-khaki-88);
-  --sy-impact-pathway-column-4-background:              var(--sy-color-khaki-85);
-  --sy-impact-pathway-column-5-background:              var(--sy-color-khaki-85);
-  --sy-impact-pathway-column-6-background:              var(--sy-color-khaki-90);
+  --sy-impact-pathway-column-4-background:              var(--sy-color-blue-92);
+  --sy-impact-pathway-column-5-background:              var(--sy-color-blue-92);
+  --sy-impact-pathway-column-6-background:              var(--sy-color-gray-97);
 
   --sy-impact-pathway-second-level-pinboard-background: var(--sy-color-khaki-88);
 
@@ -248,15 +250,15 @@
 
   // --------------- QUESTIONS BOARD ---------------------------- 
   // is used in interim report and exploitation plan
-  --sy-questions-board-pinboard:               var(--sy-color-khaki-88);
+  --sy-questions-board-pinboard:                        var(--sy-color-khaki-88);
 
  // ----------------- COMPARE-MODE ---------------------------- 
-  --sy-compare-data-deleted-background:           var(--sy-color-red-83);
-  --sy-compare-data-new-background:               var(--sy-color-green-74);
+  --sy-compare-data-deleted-background:                 var(--sy-color-red-83);
+  --sy-compare-data-new-background:                     var(--sy-color-green-74);
 
-  --sy-working-plan-compare-bar-active-instance-background:   var(--sy-color-khaki-68);;
+  --sy-working-plan-compare-bar-active-instance-background:   var(--sy-color-khaki-59);
   --sy-working-plan-compare-bar-compared-instance-background: var(--sy-color-gray-64);
 
-  --sy-compare-badge-active-instance-background:   var(--sy-color-khaki-68);
-  --sy-compare-badge-compared-instance-background: var(--sy-color-gray-64);
+  --sy-compare-badge-active-instance-background:         var(--sy-color-khaki-59);
+  --sy-compare-badge-compared-instance-background:       var(--sy-color-gray-64);
 }

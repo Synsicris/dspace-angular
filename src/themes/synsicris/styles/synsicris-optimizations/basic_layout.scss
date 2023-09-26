@@ -26,6 +26,13 @@ h1 {
 		  #cris-layout-leading {
   
 			margin-top:1.1rem !important; // covers otherwise breadcrumb
+
+			// dropdown Action button shouldn't be transparent 
+			// temporary solution until the button design can be solved more comprehensively.
+			button#context-menu.btn-outline-primary {
+				background-color:var(--sy-color-gray-100);
+				&:hover, &:active, &[aria-expanded="true"]{background-color:var(--sy-color-blue-36);}
+			}
   
 			// level 1 (person)
 			&.Person {

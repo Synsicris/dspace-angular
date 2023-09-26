@@ -1,38 +1,113 @@
 <!-- Cards for Exploitation Plan and Interim Report (rex 230726) -->
 
-<div class="task-container d-flex"
+<!-- Changed (rex 230801)
+Original code for the new and deleted data Status Dev version August 1, 2023:
+
+[class.alert-success]="compareMode && !!data.compareStatus && data.compareStatus=== ComparedVersionItemStatus.New"
+[class.alert-danger]="compareMode && !!data.compareStatus && data.compareStatus === ComparedVersionItemStatus.Removed">
+
+Deleted or new data do not get their own class (.compare-node-status-new and .compare-node-status-deleted) in compare mode as in the working plan,
+but are instead marked with the bootstrap classes for success and danger notices (.alert-succes and .alert-danger).
+To make them consistent with the same colors as in the working plan via external stylesheets, I added new classes compare-status-new and compare-status-deleted instead:
+
+[class.compare-status-new]="compareMode && !!data.compareStatus && data.compareStatus=== ComparedVersionItemStatus.New"
+[class.compare-status-deleted]="compareMode && !!data.compareStatus && data.compareStatus === ComparedVersionItemStatus.Removed">
+-->
+
+<div class="task-container sy-card-questions-board d-flex"
      [class.task-focus]="(selectable && selectStatus.value) || (hasFocus$ | async)"
-     [class.alert-success]="compareMode && !!data.compareStatus && data.compareStatus=== ComparedVersionItemStatus.New"
-     [class.alert-danger]="compareMode && !!data.compareStatus && data.compareStatus === ComparedVersionItemStatus.Removed">
+     [class.compare-status-new]="compareMode && !!data.compareStatus && data.compareStatus=== ComparedVersionItemStatus.New"
+     [class.compare-status-deleted]="compareMode && !!data.compareStatus && data.compareStatus === ComparedVersionItemStatus.Removed">
+
+  <!-- Left sidebar with Dragn' Drop Button -->
   <div class="task-left-bar">
+    <!-- Dragn' Drop Button -->
+    <!-- disabling of dragndrop button in compare mode didn't work before, adapted from IP card -->
+    <!-- <button class="btn btn-xs btn-link p-0 text-primary button-move align-self-start" title="Drag & Drop" [disabled]="isVersionOf"> -->
     <button class="btn btn-xs btn-link p-0 text-primary button-move align-self-start" title="Drag & Drop"
             [disabled]="!(canEdit() | async) || isVersionOf">
       <i class="fas fa-grip-vertical"></i>
     </button>
-  </div>
+  </div> <!-- end .task-left-bar -->
+
+  <!-- card without the left grip-column -->
   <div class="task-right-bar">
+
     <div class="task-detail p-1">
-      <div class="task-header d-flex justify-content-between">
-        <div class="task-title title-clamp font-weight-bold text-info" (click)="openItemModal()">
-          <p title="{{questionsBoardTask.title}}">{{questionsBoardTask.title}}</p>
-        </div>
-        <span *ngIf="data?.status" class="status-icon">
-          <i dsQBItemMetadataStatus [status]="data.status" [entityType]="questionEntityType"></i>
-        </span>
-      </div>
 
       <div class="task-content p-1 d-flex justify-content-between">
-        <div class="task-type type-clamp">
+
+        <div class="task-type type-clamp sy-entity-name">
           <p title="{{questionsBoardTask.type | dsEntityTypeTranslate}}">{{questionsBoardTask.type | dsEntityTypeTranslate}} </p>
         </div>
 
-        <span class="status-icon" *ngIf="data?.internalStatus">
-          <i dsQBItemMetadataInternal [status]="data.internalStatus" [entityType]="questionEntityType"></i>
-        </span>
-      </div>
+         <!-- row with changing status-icons -->
+        <div class="row-status-icons d-flex p-0 mr-1 ml-2">
+          <!-- info-icon -->
+          <span class="status-icon ml-auto" *ngIf="data?.internalStatus">
+            <i dsQBItemMetadataInternal [status]="data.internalStatus" [entityType]="questionEntityType"></i>
+          </span>
 
-    </div>
+          <!-- changing status-icons -->
+          <span *ngIf="data?.status" class="status-icon pl-2">
+            <i dsQBItemMetadataStatus [status]="data.status" [entityType]="questionEntityType"></i>
+          </span>
+
+        </div>
+
+      </div> <!-- end .task-content -->
+
+
+      <div class="task-header d-flex justify-content-between">
+        <!-- Data Title -->
+        <div class="task-title title-clamp font-weight-bold text-info" (click)="openItemModal()">
+          <p title="{{questionsBoardTask.title}}" class="sy-entity-title">{{questionsBoardTask.title}}</p>
+        </div>
+      </div> <!--end .task-header -->
+
+
+    </div> <!-- end .task-detail -->
+
     <div class="task-actions">
+
+      <div class="destructive-buttons d-flex mr-auto">
+
+        <!-- delete -->
+        <button *ngIf="(canEdit() | async)" class="btn btn-lg btn-link p-0 flex-shrink-1 text-danger"
+          title="{{'impact-pathway.delete.item.title' | translate}}"
+          [disabled]="compareMode || isVersionOf"
+          (click)="navigateToEditItemPage(); $event.stopPropagation()">
+          <span class="span-icon-container" *ngIf="!(isRedirectingToEdit$ | async)">
+            <i class="fas fa-trash"></i>
+          </span>
+          <span class="span-icon-container" *ngIf="(isRedirectingToEdit$ | async)">
+            <i class='fas fa-circle-notch fa-spin'></i>
+          </span>
+        </button>
+
+        <!-- unpin -->
+        <button *ngIf="(canEdit() | async)" class="btn btn-lg btn-link p-0 flex-shrink-1 text-danger"
+          title="{{'impact-pathway.remove.item.title' | translate}}"
+          [disabled]="compareMode || isVersionOf"
+          (click)="removeTask(); $event.stopPropagation()">
+          <span class="span-icon-container" *ngIf="!(isProcessingRemove() | async)">
+            <i class='fas fa-thumbtack'></i>
+          </span>
+          <span class="span-icon-container" *ngIf="(isProcessingRemove() | async)">
+            <i class='fas fa-circle-notch fa-spin'></i>
+          </span>
+        </button>
+
+      </div><!-- end div.destructive-buttons -->
+
+       <!-- compare -->
+       <button *ngIf="compareMode && data.compareStatus === ComparedVersionItemStatus.Changed" class="btn btn-lg btn-link p-0 flex-shrink-1 mr-1"
+          title="{{'impact-pathway.compare' | translate}}" (click)="openCompareModal()">
+          <!-- <i class="fas fa-not-equal"></i> changed compare-icon (230724 rex)-->
+          <i class="fas fa-code-compare"></i>
+        </button>
+
+      <!-- edit -->
       <button *ngIf="(canEdit() | async)" class="btn btn-lg btn-link p-0 flex-shrink-1"
               title="{{'impact-pathway.edit.item.title' | translate}}"
               [disabled]="compareMode || isVersionOf"
@@ -42,33 +117,8 @@
             class='fas fa-circle-notch fa-spin'></i></span>
       </button>
 
-      <button *ngIf="(canEdit() | async)" class="btn btn-lg btn-link p-0 flex-shrink-1 text-danger"
-              title="{{'impact-pathway.remove.item.title' | translate}}"
-              [disabled]="compareMode || isVersionOf"
-              (click)="removeTask(); $event.stopPropagation()">
-        <span class="span-icon-container" *ngIf="!(isProcessingRemove() | async)">
-          <i class='fas fa-thumbtack'></i></span>
-        <span class="span-icon-container" *ngIf="(isProcessingRemove() | async)">
-          <i class='fas fa-circle-notch fa-spin'></i></span>
-      </button>
 
-      <button *ngIf="(canEdit() | async)" class="btn btn-lg btn-link p-0 flex-shrink-1 text-danger"
-              title="{{'impact-pathway.delete.item.title' | translate}}"
-              [disabled]="compareMode || isVersionOf"
-              (click)="navigateToEditItemPage(); $event.stopPropagation()">
-        <span class="span-icon-container" *ngIf="!(isRedirectingToEdit$ | async)">
-          <i class="fas fa-trash"></i>
-        </span>
-        <span class="span-icon-container" *ngIf="(isRedirectingToEdit$ | async)">
-          <i class='fas fa-circle-notch fa-spin'></i>
-        </span>
-      </button>
+    </div> <!-- end .task-actions -->
 
-      <button *ngIf="compareMode && data.compareStatus === ComparedVersionItemStatus.Changed" class="btn btn-lg btn-link p-0 flex-shrink-1 mr-1"
-              title="{{'impact-pathway.compare' | translate}}" (click)="openCompareModal()">
-        <!-- <i class="fas fa-not-equal"></i> changed compare-icon (230724 rex)-->
-        <i class="fas fa-code-compare"></i>
-      </button>
-    </div>
-  </div>
-</div>
+  </div> <!-- end .task-right-bar -->
+</div> <!-- end .task-container -->

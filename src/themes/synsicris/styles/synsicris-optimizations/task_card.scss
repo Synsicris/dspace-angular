@@ -1,18 +1,23 @@
 /* -----------------------------------------------------------
-IMPACT PATHWAY TASK CONTAINER (CARD)
+TASK CONTAINER (CARD) FOR IMPACT PATHWAY, EXPLOITATION PLAN AND INTERIM REPORT
 ----------------------------------------------------------- */
-// card (defined in src/app/impact-pathway-board/shared/impact-path-way/impact-path-way-task/impact-path-way-task.component.html)
-// on 1st level responsive, on 2nd level not
-.task-container {
-
+// card
+.task-container.sy-card-impact-pathway, // for impact pathway 1st and 2nd level defined in src/app/impact-pathway-board/shared/impact-path-way/impact-path-way-task/impact-path-way-task.component.html)
+.task-container.sy-card-questions-board // for exploitation plan and interim report defined in rc/app/questions-board/steps/tasks/questions-board-task.component.html
+{
   box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
+
+  min-width:12rem !important; //underneath there are misrepresentations
+  /* the original white background color of the cards does not come from the cards themselves,
+  but seems to be a responsive layer underneath, but I could not find out its origin */
+  background-color:var(--sy-color-gray-100);
 
   /* MARKING OF DELETED AND NEW DATA IN COMPARE MODE
   Deleted or new data in the impact pathway did not get (as of dev version July 25, 2023) their own class in compare mode
   as in the work plan (there: .compare-node-status-new and .compare-node-status-deleted), but were instead marked
   with the bootstrap classes for success and danger notices (.alert-succes and .alert-danger).
   To be able to design them consistently with the same colors as in the routing via external stylesheets,
-  I added new classes .compare-status-new and .compare-status-deleted instead. (rex 230725) */
+  I added new classes .compare-status-new and .compare-status-deleted instead in src/app/impact-pathway-board/shared/impact-path-way/impact-path-way-task/impact-path-way-task.component.html. (rex 230725) */
   &.compare-status-new .task-left-bar {
     background-color: var(--sy-compare-data-new-background);
   }
@@ -51,6 +56,7 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
       // status-icons beside the title of card
       .row-status-icons {
         position:relative;
+        padding:0 !important;
         margin-top:-0.2rem !important;
         .status-icon {
           i {font-size:0.9rem;}
@@ -70,7 +76,7 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
         }
 
         .sy-entity-name {
-          font-size:0.8rem;
+          font-size:0.9rem !important;
           font-family:'Nunito-ExtraLight';
         }
 
@@ -85,7 +91,8 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
         div.task-title {
           .sy-entity-title {
             font-family:'Nunito-Bold';
-            line-height:1.1rem;
+            line-height:1.1rem !important;
+            hyphens: auto;
           }
         }
 
@@ -107,8 +114,9 @@ IMPACT PATHWAY TASK CONTAINER (CARD)
       height:auto;
       width:auto;
       &[disabled]{ opacity:0; } // hides disabled action buttons completely, when overlay is active
+      i {font-size:0.9rem !important;}
 
-      span.span-icon-container i { font-size:1rem; }
+      span.span-icon-container i { font-size:1rem !important; }
       i.fa-save { color: var(--sy-color-blue-33) !important; } // makes black save-icon blue
 
       // hover-Effect for icon-Buttons,
