@@ -10,19 +10,19 @@ ds-working-plan-page {
     button.button-add-workpackage {
       i {font-size:110%;} // make large +-button smaller
       &[disabled]{display:none !important;} // hide buttons in compare-mode
-    } 
+    }
   }
 
 /* ------------------------------------------------------------------------
- First Column with Header (with Functions / Buttons) and 
+ First Column with Header (with Functions / Buttons) and
  Content (Header-Cells with Titles, Entity-Names, Status-Icons and Buttons)
  ------------------------------------------------------------------------ */
 .chart-column.names.sidenav {
 
   // header of second column (with dropdown time period and tottle-button to hide the second column)
-  div.sidenav-header { 
+  div.sidenav-header {
     // hide disabled sort-buttons in compare-mode
-    button#sortBy[disabled]{display:none !important;} 
+    button#sortBy[disabled]{display:none !important;}
   }
 
   // Content with all table rows
@@ -37,7 +37,7 @@ ds-working-plan-page {
         border-top:1px solid var(--sy-table-border-color);
         border-bottom:1px solid var(--sy-table-border-color);
       }
-      
+
       // distinction first and second level of data rows: if first div is .rootnodestyle, it's a first level row
       & > div:first-of-type {
 
@@ -45,7 +45,7 @@ ds-working-plan-page {
         // left bar with drag'n drop button
         // stronger left border
         border-left: 1px solid var(--sy-table-border-color);
-        
+
         // softer right border
         border-right: 1px dotted var(--sy-table-border-color);
 
@@ -68,10 +68,10 @@ ds-working-plan-page {
       &.compare-node-status-deleted > div:first-of-type {
         background-color:var(--sy-compare-data-deleted-background);
       }
-      
+
 
       // left sidebar of first level row with dragn'drop button and toggle open/close-button
-      .row-sidebar { 
+      .row-sidebar {
         // hides the disabled drag'n drop button in compare-mode (opacity instead of display to prevent to change positions of buttons)
         .mat-button-disabled {opacity:0 !important;}
       }
@@ -119,7 +119,7 @@ ds-working-plan-page {
 
       } // end row-header-left
 
-  
+
       // right block with status icons and edit icon
       div.row-header-right {
         width:2rem; // to ensure a consistent width even if there are no status icons
@@ -129,7 +129,7 @@ ds-working-plan-page {
         div.sy-status-icons {
           margin-bottom: auto; // positions status-icons at the top
           margin-left:4px;
-        
+
           // block with status-icon
           div.sy-status-icon {
             margin-bottom: auto; // positions status-icon at the top
@@ -153,7 +153,7 @@ ds-working-plan-page {
 
         div.sy-compare {
           margin-top:auto; // positions compare-button at the bottom
-          button.button-compare {}   
+          button.button-compare {}
         }
 
       } // end .row-header-right
@@ -161,13 +161,13 @@ ds-working-plan-page {
 
     } // end mat-tree-node for single row
   } // end mat-tree for all rows
- 
+
 
 } // end .chart-column.names
 
 
 /* ------------------------------------------------------------------------
-Second Column with Header (with Functions / Buttons) and 
+Second Column with Header (with Functions / Buttons) and
 Content (start and end dates, responsible organization and status)
 ------------------------------------------------------------------------ */
 .chart-column.responsible.sidenav {
@@ -176,7 +176,7 @@ Content (start and end dates, responsible organization and status)
   div.sidenav-header {
     button#changeAllStartDate[disabled]{display:none !important;}
   }
- 
+
   // Content with all table rows
   mat-tree.tree {
 
@@ -193,14 +193,14 @@ Content (start and end dates, responsible organization and status)
         // not yet found a way to style or hide the background of start- and end-date, so that the text does not stick to the edge
         mat-form-field.sy-start-date-form div.mat-form-field-wrapper mat-form-field-flex {
           /*
-          padding:4px !important; 
+          padding:4px !important;
           border:1px solid lime;
           border: 1px solid lime;
           */
-        } 
+        }
         mat-form-field.sy-end-date-form div.mat-form-field-wrapper mat-form-field-flex {
           /*
-          padding:4px !important; 
+          padding:4px !important;
           background-color: red;
           border: 1px solid red;
           */
@@ -209,10 +209,10 @@ Content (start and end dates, responsible organization and status)
         mat-icon {
           color:var(--sy-link-icon-color) !important; // make iconbutton link-blue ...
           font-size:0.9rem; // ... and smaller
-        } 
+        }
 
-      } // end div.sy-start-end-date-block 
-      
+      } // end div.sy-start-end-date-block
+
       div.sy-responsible-organization-block {
         p.sy-responsible-organization-header {
           font-weight:normal;
@@ -221,7 +221,7 @@ Content (start and end dates, responsible organization and status)
         }
         ds-authority-dropdown {}
 
-      } // end div.sy-responsible-organization-block 
+      } // end div.sy-responsible-organization-block
 
       div.sy-status-block {
         p.sy-status-header {
@@ -232,14 +232,14 @@ Content (start and end dates, responsible organization and status)
 
         // Dropdown for status
         mat-form-field.sy-status-form {
-         
+
           mat-select {
             // status-icons
            .mat-select-trigger {}
 
             // status-text
             mat-option {}
-            
+
           }
         }
       } // end div.sy-status-block
@@ -251,9 +251,9 @@ Content (start and end dates, responsible organization and status)
 
 
 /* ------------------------------------------------------------------------
-Third Column: Calendar-Table with headers, defined in 
+Third Column: Calendar-Table with headers, defined in
 src/app/working-plan/working-plan-chart/container/working-plan-chart-dates/working-plan-chart-dates.component.html
-Styles, especially all colors, are in 
+Styles, especially all colors, are in
 src/app/working-plan/working-plan-chart/container/working-plan-chart-dates/working-plan-chart-dates.component.scss
 ------------------------------------------------------------------------ */
 ds-working-plan-chart-dates {
@@ -291,7 +291,7 @@ ds-working-plan-chart-dates {
       }
 
       &.sy-quarterly.sy-row-years {}
-      
+
       // removes some lines from table header
       .sy-row-years, .sy-row-years .calendar-cell-heading {
         border:none !important;
@@ -299,7 +299,7 @@ ds-working-plan-chart-dates {
       }
 
       // replaces the left and right borders of all calendar columns with zebra table
-      .sy-row-months .calendar-cell-heading , 
+      .sy-row-months .calendar-cell-heading ,
       .sy-row-quarters .calendar-cell-heading,
       &.sy-annually.sy-row-years .calendar-cell {
         border-left:none !important;
@@ -319,12 +319,6 @@ ds-working-plan-chart-dates {
           // replaces vertical borders with zebra table
           border-left:none !important;
           border-right:none !important;
-
-          // calendar bar for compared old version
-          //.calendar-node-customization .calendar-cell-wrapper .calendar-inner-cell .calendar-inner-cell-compare {
-          .calendar-inner-cell-compare {
-            background-color:var(--sy-working-plan-compare-bar-compared-instance-background) !important; 
-          }
 
         &:nth-child(odd) {background-color:var(--sy-table-cell-background-darker-1);}
         }
