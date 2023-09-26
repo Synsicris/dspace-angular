@@ -118,7 +118,7 @@ export class ImpactPathWayTaskComponent implements OnInit, OnDestroy {
   }
 
   public buildHTMLDivId() {
-    return `task-${this.impactPathwayStepId}-${this.data.id}`;
+    return this.data.compareId ? `task-${this.impactPathwayStepId}-${this.data.compareId}` : `task-${this.impactPathwayStepId}-${this.data.id}`;
   }
 
   public canShowRelationButton(isTwoWayRelation: boolean): Observable<boolean> {

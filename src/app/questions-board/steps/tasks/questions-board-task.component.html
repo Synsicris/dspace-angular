@@ -6,7 +6,7 @@ Original code for the new and deleted data Status Dev version August 1, 2023:
 [class.alert-success]="compareMode && !!data.compareStatus && data.compareStatus=== ComparedVersionItemStatus.New"
 [class.alert-danger]="compareMode && !!data.compareStatus && data.compareStatus === ComparedVersionItemStatus.Removed">
 
-Deleted or new data do not get their own class (.compare-node-status-new and .compare-node-status-deleted) in compare mode as in the working plan, 
+Deleted or new data do not get their own class (.compare-node-status-new and .compare-node-status-deleted) in compare mode as in the working plan,
 but are instead marked with the bootstrap classes for success and danger notices (.alert-succes and .alert-danger).
 To make them consistent with the same colors as in the working plan via external stylesheets, I added new classes compare-status-new and compare-status-deleted instead:
 
@@ -18,13 +18,14 @@ To make them consistent with the same colors as in the working plan via external
      [class.task-focus]="(selectable && selectStatus.value) || (hasFocus$ | async)"
      [class.compare-status-new]="compareMode && !!data.compareStatus && data.compareStatus=== ComparedVersionItemStatus.New"
      [class.compare-status-deleted]="compareMode && !!data.compareStatus && data.compareStatus === ComparedVersionItemStatus.Removed">
-     
+
   <!-- Left sidebar with Dragn' Drop Button -->
   <div class="task-left-bar">
     <!-- Dragn' Drop Button -->
     <!-- disabling of dragndrop button in compare mode didn't work before, adapted from IP card -->
     <!-- <button class="btn btn-xs btn-link p-0 text-primary button-move align-self-start" title="Drag & Drop" [disabled]="isVersionOf"> -->
-    <button class="btn btn-xs btn-link p-0 text-primary button-move align-self-start" title="Drag & Drop" [disabled]="isVersionOf || compareMode">
+    <button class="btn btn-xs btn-link p-0 text-primary button-move align-self-start" title="Drag & Drop"
+            [disabled]="!(canEdit() | async) || isVersionOf">
       <i class="fas fa-grip-vertical"></i>
     </button>
   </div> <!-- end .task-left-bar -->
@@ -85,7 +86,7 @@ To make them consistent with the same colors as in the working plan via external
         </button>
 
         <!-- unpin -->
-        <button class="btn btn-lg btn-link p-0 flex-shrink-1 text-danger"
+        <button *ngIf="(canEdit() | async)" class="btn btn-lg btn-link p-0 flex-shrink-1 text-danger"
           title="{{'impact-pathway.remove.item.title' | translate}}"
           [disabled]="compareMode || isVersionOf"
           (click)="removeTask(); $event.stopPropagation()">

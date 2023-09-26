@@ -1,18 +1,19 @@
-import { ChartData } from './../../charts/models/chart-data';
-import { PaginationComponentOptions } from './../../shared/pagination/pagination-component-options.model';
-import { SearchFilter } from './../../shared/search/models/search-filter.model';
-import { PaginatedSearchOptions } from './../../shared/search/models/paginated-search-options.model';
-import { AlertType } from './../../shared/alert/aletr-type';
-import { ChartType } from './../../charts/models/chart-type';
+import { ChartData } from '../../charts/models/chart-data';
+import { PaginationComponentOptions } from '../../shared/pagination/pagination-component-options.model';
+import { SearchFilter } from '../../shared/search/models/search-filter.model';
+import { PaginatedSearchOptions } from '../../shared/search/models/paginated-search-options.model';
+import { AlertType } from '../../shared/alert/aletr-type';
+import { ChartType } from '../../charts/models/chart-type';
 import { mergeMap, switchMap, tap } from 'rxjs/operators';
-import { FacetValues } from './../../shared/search/models/facet-values.model';
-import { ChartSeries } from './../../charts/models/chart-series';
-import { RemoteData } from './../../core/data/remote-data';
-import { getFirstCompletedRemoteData } from './../../core/shared/operators';
-import { SearchFilterConfig } from './../../shared/search/models/search-filter-config.model';
-import { SearchConfigurationService } from './../../core/shared/search/search-configuration.service';
+import { FacetValues } from '../../shared/search/models/facet-values.model';
+import { ChartSeries } from '../../charts/models/chart-series';
+import { RemoteData } from '../../core/data/remote-data';
+import { getFirstCompletedRemoteData } from '../../core/shared/operators';
+import { SearchFilterConfig } from '../../shared/search/models/search-filter-config.model';
+import { SearchConfigurationService } from '../../core/shared/search/search-configuration.service';
 import { SearchService } from '../../core/shared/search/search.service';
-import { isNull, isEqual } from 'lodash';
+import isNull from 'lodash/isNull';
+import isEqual from 'lodash/isEqual';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import {
   Component,

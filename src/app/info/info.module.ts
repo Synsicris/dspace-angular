@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { EndUserAgreementComponent } from './end-user-agreement/end-user-agreement.component';
 import { InfoRoutingModule } from './info-routing.module';
-import { EndUserAgreementContentComponent } from './end-user-agreement/end-user-agreement-content/end-user-agreement-content.component';
+import {
+  EndUserAgreementContentComponent
+} from './end-user-agreement/end-user-agreement-content/end-user-agreement-content.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { PrivacyContentComponent } from './privacy/privacy-content/privacy-content.component';
 import { ThemedEndUserAgreementComponent } from './end-user-agreement/themed-end-user-agreement.component';
@@ -13,6 +15,7 @@ import { FeedbackFormComponent } from './feedback/feedback-form/feedback-form.co
 import { ThemedFeedbackComponent } from './feedback/themed-feedback.component';
 import { FeedbackGuard } from '../core/feedback/feedback.guard';
 import { MarkdownViewerModule } from '../shared/markdown-viewer/markdown-viewer.module';
+import { DevelopmentFundingComponent } from './development-funding/development-funding.component';
 
 
 const DECLARATIONS = [
@@ -24,7 +27,8 @@ const DECLARATIONS = [
   ThemedPrivacyComponent,
   FeedbackComponent,
   FeedbackFormComponent,
-  ThemedFeedbackComponent
+  ThemedFeedbackComponent,
+  DevelopmentFundingComponent
 ];
 
 @NgModule({

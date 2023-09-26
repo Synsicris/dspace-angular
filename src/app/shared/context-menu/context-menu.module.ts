@@ -1,4 +1,3 @@
-import { SharedModule } from './../shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -20,15 +19,14 @@ import { StatisticsMenuComponent } from './statistics/statistics-menu.component'
 import { SubscriptionMenuComponent } from './subscription/subscription-menu.component';
 import { SubscriptionsModule } from '../subscriptions/subscriptions.module';
 import { ItemVersionMenuComponent } from './item-version/item-version-menu.component';
-import { ItemVersionContainerComponent } from './item-version/item-version-container/item-version-container.component';
 import { FullItemMenuComponent } from './full-item/full-item-menu.component';
 import { OrcidViewPageMenuComponent } from './orcid-view-page/orcid-view-page-menu.component';
+import { SharedModule } from '../shared.module';
 import { DeleteProjectMenuComponent } from './delete-project/delete-project-menu.component';
 import { ProjectAdminInvitationMenuComponent } from './project-invitation/project-admin-invitation-menu.component';
 import {
   ProjectMembersInvitationMenuComponent
 } from './project-members-invitation/project-members-invitation-menu.component';
-import { GenerateReportMenuComponent } from './generate-report/generate-report-menu.component';
 import { EasyOnlineImportMenuComponent } from './easy-online-import/easy-online-import-menu.component';
 import { CreateProjectMenuComponent } from './create-project/create-project-menu.component';
 import { ViewProjectItemsMenuComponent } from './view-project-items/view-project-items-menu.component';
@@ -51,11 +49,9 @@ const COMPONENTS = [
   StatisticsMenuComponent,
   SubscriptionMenuComponent,
   ItemVersionMenuComponent,
-  ItemVersionContainerComponent,
   FullItemMenuComponent,
   OrcidViewPageMenuComponent,
   DeleteProjectMenuComponent,
-  GenerateReportMenuComponent,
   ProjectAdminInvitationMenuComponent,
   ProjectMembersInvitationMenuComponent,
   EasyOnlineImportMenuComponent,
@@ -83,7 +79,6 @@ const ENTRY_COMPONENTS = [
   FullItemMenuComponent,
   OrcidViewPageMenuComponent,
   DeleteProjectMenuComponent,
-  GenerateReportMenuComponent,
   ProjectAdminInvitationMenuComponent,
   ProjectMembersInvitationMenuComponent,
   EasyOnlineImportMenuComponent,
@@ -112,9 +107,6 @@ const MODULE = [
   ],
   exports: [
     COMPONENTS
-  ],
-  entryComponents: [
-    ENTRY_COMPONENTS
   ]
 })
 export class ContextMenuModule {

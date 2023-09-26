@@ -13,7 +13,7 @@ import { CollectionListEntry } from '../../collection-dropdown/collection-dropdo
 import { EntityTypeDataService } from '../../../core/data/entity-type-data.service';
 import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
 import { getFirstCompletedRemoteData } from '../../../core/shared/operators';
-import { isEmpty } from '../../empty.util';
+import { isEmpty, isNotEmpty } from '../../empty.util';
 import { PERSON_ENTITY, ProjectDataService, VERSION_UNIQUE_ID } from '../../../core/project/project-data.service';
 import { environment } from '../../../../environments/environment';
 import {
@@ -24,6 +24,7 @@ import { RemoteData } from '../../../core/data/remote-data';
 import { FeatureID } from '../../../core/data/feature-authorization/feature-id';
 import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
 import { CommentUtilsService } from '../shared/comment-utils.service';
+import { ProjectVersionService } from '../../../core/project/project-version.service';
 
 @Component({
   selector: 'ds-comment-create',
@@ -84,6 +85,7 @@ export class CommentCreateComponent implements OnInit {
     private entityTypeService: EntityTypeDataService,
     private modalService: NgbModal,
     private projectService: ProjectDataService,
+    private projectVersionService: ProjectVersionService,
     private route: ActivatedRoute,
     private router: Router,
     private readonly commentService: CommentUtilsService
@@ -114,7 +116,7 @@ export class CommentCreateComponent implements OnInit {
       return of(false);
     } else {
       const isVersionOfAnItem$ = this.route.data.pipe(
-        map((data) => data.isVersionOfAnItem),
+        map((data) => isNotEmpty(data?.isVersionOfAnItem) ? data.isVersionOfAnItem : this.projectVersionService.isVersionOfAnItem(this.item)),
         filter((isVersionOfAnItem) => isVersionOfAnItem === true),
         take(1)
       );

@@ -46,6 +46,8 @@ ds-metric-donuts a {
 .card-header > button > span, .card-header > button > div > span {
   font-size: 22px;
   font-weight: bold;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 .synsi-list::before {
@@ -53,7 +55,7 @@ ds-metric-donuts a {
 }
 
 .pie-label {
-  font-size: 16px !important;
+  font-size: 15px !important;
 }
 
 // from here on rex

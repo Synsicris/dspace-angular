@@ -23,6 +23,7 @@ import {
   PROFILE_MODULE_PATH,
   REGISTER_PATH,
   REQUEST_COPY_MODULE_PATH,
+  STATISTICS_PAGE_PATH,
   WORKFLOW_ITEM_MODULE_PATH,
 } from './app-routing-paths';
 import { COLLECTION_MODULE_PATH } from './collection-page/collection-page-routing-paths';
@@ -44,6 +45,7 @@ import { ServerCheckGuard } from './core/server-check/server-check.guard';
 import { MenuResolver } from './menu.resolver';
 import { ThemedPageErrorComponent } from './page-error/themed-page-error.component';
 import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-routing-paths';
+import { RedirectService } from './redirect/redirect.service';
 
 @NgModule({
   imports: [
@@ -305,7 +307,7 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
               .then((m) => m.ProjectOverviewPageModule)
           },
           {
-            path: 'statistics',
+            path: STATISTICS_PAGE_PATH,
             loadChildren: () => import('./statistics-page/statistics-page-routing.module')
               .then((m) => m.StatisticsPageRoutingModule),
           },
@@ -344,7 +346,7 @@ import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-rout
             loadChildren: () => import('./graph-page/graph.module')
               .then(m => m.GraphModule)
           },
-          { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent },
+          { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent, canActivate: [RedirectService] },
         ]
       }
     ], {

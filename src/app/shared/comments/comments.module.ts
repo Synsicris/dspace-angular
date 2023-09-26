@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CommentListComponent } from './comment-list-box/comment-list.component';
 import { CommentCreateComponent } from './comment-create/comment-create.component';
-import { TranslateModule } from '@ngx-translate/core';
 
 const COMPONENTS = [
   CommentCreateComponent,

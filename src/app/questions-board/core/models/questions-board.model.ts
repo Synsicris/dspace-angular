@@ -1,5 +1,5 @@
 import { WorkspaceitemSectionUploadFileObject } from './../../../core/submission/models/workspaceitem-section-upload-file.model';
-import { findIndex } from 'lodash';
+import findIndex  from 'lodash/findIndex';
 
 import { QuestionsBoardStep } from './questions-board-step.model';
 

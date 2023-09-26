@@ -1,4 +1,5 @@
-import { findIndex, remove } from 'lodash';
+import findIndex from 'lodash/findIndex';
+import remove from 'lodash/remove';
 
 import { isNotEmpty } from '../../../shared/empty.util';
 import { environment } from '../../../../environments/environment';

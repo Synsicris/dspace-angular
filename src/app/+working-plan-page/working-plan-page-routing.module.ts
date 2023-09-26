@@ -20,6 +20,7 @@ import {
 import { FunderReaderByProjectResolver } from '../core/project/resolvers/funder-reader-by-project.resolver';
 import { ProjectDataService } from '../core/project/project-data.service';
 import { PrintStyleApplier } from '../core/shared/print-style-applier';
+import { IsAdministratorResolver } from '../core/project/resolvers/is-administrator.resolver';
 
 @NgModule({
   imports: [
@@ -28,11 +29,13 @@ import { PrintStyleApplier } from '../core/shared/print-style-applier';
         canActivate: [AuthenticatedGuard, PrintStyleApplier],
         path: '',
         component: WorkingPlanPageComponent,
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         pathMatch: 'full',
         resolve: {
           workingPlan: WorkingPlanItemResolver,
           projectItem: ProjectItemPageResolver,
           projectCommunity: ProjectCommunityByProjectItemResolver,
+          isAdmin: IsAdministratorResolver,
           isVersionOfAnItem: VersionOfAnItemResolver,
           isFunderOrganizationalManger: FunderOrganizationalManagerByProjectResolver,
           isFunderProject: FunderProjectManagerByProjectResolver,
@@ -47,6 +50,7 @@ import { PrintStyleApplier } from '../core/shared/print-style-applier';
     FunderOrganizationalManagerByProjectResolver,
     FunderProjectManagerByProjectResolver,
     FunderReaderByProjectResolver,
+    IsAdministratorResolver,
     ProjectDataService,
     ProjectItemI18nBreadcrumbResolver,
     ProjectItemI18nBreadcrumbsService,

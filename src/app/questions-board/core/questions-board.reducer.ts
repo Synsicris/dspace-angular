@@ -1,7 +1,10 @@
-import { isEqual } from 'lodash';
-import { WorkspaceitemSectionUploadFileObject } from './../../core/submission/models/workspaceitem-section-upload-file.model';
+import isEqual from 'lodash/isEqual';
+import {
+  WorkspaceitemSectionUploadFileObject
+} from '../../core/submission/models/workspaceitem-section-upload-file.model';
 import {
   AddQuestionsBoardTaskSuccessAction,
+  ClearQuestionBoardStepsSuccessAction,
   DeleteUploadedFileFromQuestionsboardAction,
   EditUploadedFileDataAction,
   InitCompareAction,
@@ -10,6 +13,7 @@ import {
   OrderQuestionsBoardTasksAction,
   QuestionsBoardActions,
   QuestionsBoardActionTypes,
+  RemoveAllUploadedFilesFromQuestionsboardSuccessAction,
   RemoveQuestionsBoardTaskSuccessAction,
   SetQuestionsBoardStepCollapseAction,
   StopCompareQuestionsBoardAction,
@@ -105,6 +109,8 @@ export function questionsBoardReducer(state = initialState, action: QuestionsBoa
     case QuestionsBoardActionTypes.ADD_QUESTIONS_BOARD_TASK_ERROR:
     case QuestionsBoardActionTypes.GENERATE_QUESTIONS_BOARD_TASK_ERROR:
     case QuestionsBoardActionTypes.INIT_QUESTIONS_BOARD_ERROR:
+    case QuestionsBoardActionTypes.CLEAR_QUESTION_BOARD_ERROR:
+    case QuestionsBoardActionTypes.DELETE_ALL_UPLOADED_FILES_FROM_QUESTION_BOARD_ERROR:
     case QuestionsBoardActionTypes.REMOVE_QUESTIONS_BOARD_TASK_ERROR: {
       return Object.assign({}, state, {
         processing: false
@@ -155,6 +161,21 @@ export function questionsBoardReducer(state = initialState, action: QuestionsBoa
 
     case QuestionsBoardActionTypes.DELETE_UPLOADED_FILE_FROM_QUESTION_BOARD: {
       return deleteFile(state, action as DeleteUploadedFileFromQuestionsboardAction);
+    }
+
+    case QuestionsBoardActionTypes.CLEAR_QUESTION_BOARD_STEPS:
+    case QuestionsBoardActionTypes.DELETE_ALL_UPLOADED_FILES_FROM_QUESTION_BOARD:  {
+      return Object.assign({}, state, {
+        processing: true
+      });
+    }
+
+    case QuestionsBoardActionTypes.CLEAR_QUESTION_BOARD_SUCCESS: {
+      return clearQuestionBoardSteps(state, action as ClearQuestionBoardStepsSuccessAction);
+    }
+
+    case QuestionsBoardActionTypes.DELETE_ALL_UPLOADED_FILES_FROM_QUESTION_BOARD_SUCCESS: {
+      return removeAllUploadsFromQuestionBoard(state, action as RemoveAllUploadedFilesFromQuestionsboardSuccessAction);
     }
 
     default: {
@@ -535,4 +556,49 @@ function deleteFile(state: QuestionsBoardState, action:  DeleteUploadedFileFromQ
 
   return state;
 }
+
+/**
+ * Clear the steps' tasks from a question board.
+ * @param state the current state
+ * @param action an ClearQuestionBoardStepsSuccessAction action
+ * @returns the new state, with the steps' tasks cleared.
+ */
+function clearQuestionBoardSteps(state: QuestionsBoardState, action: ClearQuestionBoardStepsSuccessAction): QuestionsBoardState {
+  const newState = Object.assign({}, state);
+  const newQuestionsBoard = Object.assign(new QuestionsBoard(), state.questionsBoard[action.payload.questionsBoardId], {
+    steps: newState.questionsBoard[action.payload.questionsBoardId].steps.map((step) => {
+      return Object.assign(new QuestionsBoardStep(), step, {
+        tasks: [],
+        description: undefined
+      });
+    })
+  });
+
+  return Object.assign({}, state, {
+    questionsBoard: Object.assign({}, state.questionsBoard, {
+      [action.payload.questionsBoardId]: newQuestionsBoard
+    }),
+    processing: false
+  });
+}
+
+/**
+ * Delete all the uploaded files from a question board.
+ * @param state the current state
+ * @param action an RemoveAllUploadedFilesFromQuestionsboardSuccessAction action
+ * @returns the new state, with the uploads cleared.
+ */
+function removeAllUploadsFromQuestionBoard(state: QuestionsBoardState, action: RemoveAllUploadedFilesFromQuestionsboardSuccessAction): QuestionsBoardState {
+  const questionBoard = state.questionsBoard[action.payload.questionsBoardId];
+  return Object.assign({}, state, { processing: true }, {
+    questionsBoard: Object.assign({}, state.questionsBoard, {
+      [action.payload.questionsBoardId]: Object.assign( new QuestionsBoard(), {
+         ...questionBoard,
+        uploads: []
+      })
+    })
+  });
+}
+
+
 

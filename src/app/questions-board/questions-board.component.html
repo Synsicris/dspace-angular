@@ -2,15 +2,19 @@
   <ds-comcol-page-header [name]="(messagePrefix + '.page.title' | translate )">
     <ds-view-version-badges *ngIf="questionsBoardObject && (isVersionOfAnItem$ | async)" [item]="questionsBoardObject"></ds-view-version-badges>
   </ds-comcol-page-header>
-  <ds-item-version-list *ngIf="questionsBoardObject"
-                        [btnClass]="'btn-md'"
-                        [showOnlyVisible]="hasAnyFunderRole"
-                        [targetItemId]="questionsBoardObjectId"
-                        [targetItem]="questionsBoardObject"
-                        (versionSelected)="onVersionSelected($event)"
-                        (versionDeselected)="onVersionDeselected()" >
-  </ds-item-version-list>
-
+  <div class="d-flex flex-row ">
+    <ds-item-version-list *ngIf="questionsBoardObject"
+                          [btnClass]="'btn-md'"
+                          [showOnlyVisible]="hasAnyFunderRole"
+                          [targetItemId]="questionsBoardObjectId"
+                          [targetItem]="questionsBoardObject"
+                          (versionSelected)="onVersionSelected($event)"
+                          (versionDeselected)="onVersionDeselected()" >
+    </ds-item-version-list>
+    <button *ngIf="showClearBoardButton" class="btn btn-danger ml-1" (click)="clearBoard()">
+      <i class="fa-solid fa-ban"></i>
+    </button>
+  </div>
 </div>
 <ds-loading *ngIf="(isLoading() | async)"></ds-loading>
 <div *ngIf="!(isLoading() | async)">
@@ -20,7 +24,6 @@
     [collapsible]="true"
     [alertRoles]="funderRoles"
   ></ds-alert-role>
-
   <ds-questions-board-step *ngFor="let step of (questionsBoardStep$ | async)"
                            [messagePrefix]="messagePrefix"
                            [questionsBoardStep]="step"
@@ -28,12 +31,15 @@
                            [fundingCommunity]="fundingCommunity"
                            [compareMode]="(compareMode | async)"
                            [isFunderProject]="isFunderProject"
+                           [isProjectReader]="isProjectReader"
                            [isVersionOfAnItem]="(isVersionOfAnItem$ | async)">
   </ds-questions-board-step>
   <ng-container *ngIf="showUploadStep">
-    <ds-questions-upload-step [questionsBoardObject]="questionsBoardObject"
+    <ds-questions-upload-step #uploadFileStep
+                              [questionsBoardObject]="questionsBoardObject"
                               [messagePrefix]="messagePrefix"
-                              [hasAnyFunderRole]="hasAnyFunderRole">
+                              [hasAnyFunderRole]="hasAnyFunderRole"
+                              [isProjectReader]="isProjectReader">
     </ds-questions-upload-step>
   </ng-container>
 </div>

@@ -1,4 +1,5 @@
-import { findIndex, remove } from 'lodash';
+import findIndex from 'lodash/findIndex';
+import remove from 'lodash/remove';
 import { ImpactPathwayTask } from './impact-pathway-task.model';
 
 export class ImpactPathwayStep {

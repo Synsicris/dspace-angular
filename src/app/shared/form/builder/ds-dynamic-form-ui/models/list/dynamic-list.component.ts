@@ -9,7 +9,8 @@ import {
   DynamicFormLayoutService,
   DynamicFormValidationService
 } from '@ng-dynamic-forms/core';
-import { findKey, uniqueId } from 'lodash';
+import findKey from 'lodash/findKey';
+import uniqueId from 'lodash/uniqueId';
 
 import { hasValue, isNotEmpty } from '../../../../../empty.util';
 import { DynamicListCheckboxGroupModel } from './dynamic-list-checkbox-group.model';

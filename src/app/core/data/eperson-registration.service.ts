@@ -14,6 +14,7 @@ import { RemoteData } from './remote-data';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { HttpOptions } from '../dspace-rest/dspace-rest.service';
 import { HttpHeaders } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -55,11 +56,11 @@ export class EpersonRegistrationService {
    * @param email
    * @param captchaToken the value of x-recaptcha-token header
    */
-  registerEmail(email: string, captchaToken: string = null): Observable<RemoteData<Registration>> {
+  registerEmail(email: string, captchaToken: string = null, type?: string): Observable<RemoteData<Registration>> {
     const registration = new Registration();
     registration.email = email;
 
-    return this.fetchRegister(registration);
+    return this.fetchRegister(registration, captchaToken, type);
   }
 
   /**
@@ -72,10 +73,10 @@ export class EpersonRegistrationService {
     registration.email = email;
     registration.groups = groups;
 
-    return this.fetchRegister(registration);
+    return this.fetchRegister(registration, null, 'register');
   }
 
-  private fetchRegister(registration: Registration, captchaToken: string = null): Observable<RemoteData<Registration>> {
+  private fetchRegister(registration: Registration, captchaToken: string = null, type?: string): Observable<RemoteData<Registration>> {
     const requestId = this.requestService.generateRequestId();
 
     const href$ = this.getRegistrationEndpoint();
@@ -86,6 +87,11 @@ export class EpersonRegistrationService {
       headers = headers.append('x-recaptcha-token', captchaToken);
     }
     options.headers = headers;
+
+    if (hasValue(type)) {
+      options.params = type ?
+        new HttpParams({ fromString: 'accountRequestType=' + type }) : new HttpParams();
+    }
 
     href$.pipe(
       find((href: string) => hasValue(href)),

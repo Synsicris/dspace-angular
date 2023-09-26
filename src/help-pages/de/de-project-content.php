@@ -40,8 +40,8 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 	<main>
 <h1>Wichtigste Infos zu den Inhalten</h1>
 
-    <h2>Inhalte im Monitoring-Tool: Kategorisiert erfassen und individuell strukturieren</h2>
-    <p>Im Monitoring-Tool erfassen Sie die Informationen zum Vorhaben in einzelnen Einträgen, die jeweils zu einer bestimmten Kategorie (z.B. Arbeitspaket, Veranstaltung) gehören (<a href="de-project-content-entities.php">Überblick über die Kategorien im SynSICRIS-Monitoring-Tool</a>).</p>
+    <h2>Inhalte im Monitoring-Tool: kategorisiert erfassen und individuell strukturieren</h2>
+    <p>Im Monitoring-Tool erfassen Sie die Informationen zum Vorhaben in einzelnen Einträgen, die jeweils zu einer bestimmten Kategorie (z.B. Arbeitspaket, Veranstaltung) gehören (<a href="de-project-content-entities.php">Inhalte - erster Überblick</a>).</p>
     <p>Im Arbeitsplan, im Wirkungspfad und im Verwertungsplan können Sie die einzelnen Einträge strukturieren (siehe <a href="de-project-content-structure.php">Inhalte strukturieren</a>).</p>
     <p>Außerdem bekommen Sie Hinweise zu einzelnen Gruppen von Kategorien, die Ihnen dabei helfen, Informationen in die richtige Kategorie einzuordnen.</p>
 

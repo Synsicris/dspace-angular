@@ -10,7 +10,7 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
 import { RequestService } from '../data/request.service';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { ObjectCacheService } from '../cache/object-cache.service';
-import { getAllSucceededRemoteDataPayload, getFirstCompletedRemoteData, getPaginatedListPayload } from '../shared/operators';
+import { getAllSucceededRemoteDataPayload, getPaginatedListPayload } from '../shared/operators';
 import { EditItemMode } from './models/edititem-mode.model';
 import { RemoteData } from '../data/remote-data';
 import { PaginatedList } from '../data/paginated-list.model';

@@ -1,14 +1,14 @@
 import { ProfilePageMetadataFormComponent } from './profile-page-metadata-form.component';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { VarDirective } from '../../shared/utils/var.directive';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { EventEmitter, NO_ERRORS_SCHEMA } from '@angular/core';
 import { EPerson } from '../../core/eperson/models/eperson.model';
 import { FormBuilderService } from '../../shared/form/builder/form-builder.service';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { EPersonDataService } from '../../core/eperson/eperson-data.service';
-import { cloneDeep } from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
 import { of as observableOf } from 'rxjs';
 import { TranslateLoaderMock } from 'src/app/shared/mocks/translate-loader.mock';

@@ -62,9 +62,10 @@
     	<ul class="use nav2">
         	<li><a href="de-project-use-items.php" id="nav-use-items"><span>Einträge anlegen</span></a></li>
 						<li><a href="de-project-use-role.php" id="nav-use-role"><span>Rollen und Rechte verwalten</span></a></li>
-						<li><a href="de-project-use-permissions.php" id="nav-use-permissions"><span>Zugangsrechte zum Projekt</span></a></li>
+						<li><a href="de-project-use-permissions.php" id="nav-use-permissions"><span>Bearbeitungsrechte einstellen</span></a></li>
             <li><a href="de-project-use-versioning.php" id="nav-use-versioning"><span>Versionierung</span></a></li>
             <li><a href="de-project-use-export.php" id="nav-use-export"><span>Export und Drucken</span></a></li> <!-- unterschiedliche Titel -->
+						<li><a href="de-project-use-search.php" id="nav-use-search"><span>2-Schritt-Suche</span></a></li> 
         </ul>
     </li>
     <li><a href="de-project-step.php" id="nav-step" class="folder"><span>Schritt-für-Schritt-Anleitungen</span></a> <!-- unterschiedliche Titel -->
@@ -80,14 +81,14 @@
     	<ul class="pages nav2">
         	<li><a href="de-project-pages-actor.php" id="nav-pages-actor"><span>Akteursgruppen</span></a></li>
             <li><a href="de-project-pages-ethics.php" id="nav-pages-ethics"><span>Ethische Reflexion</span></a></li>
-            <li><a href="de-project-pages-impacts.php" id="nav-pages-impacts"><span>Erwartete<!-- gesellschaftliche --> Wirkungen</span></a></li>
-            <li><a href="de-project-pages-gender.php" id="nav-pages-gender"><span>Geschlechteraspekte</span></a></li>
+            <li><a href="de-project-pages-impacts.php" id="nav-pages-impacts"><span><!--Erwartete-->Gesellschaftliche Wirkungen</span></a></li>
+            <li><a href="de-project-pages-gender.php" id="nav-pages-gender"><span><!--Reflexion der -->Geschlechtergerechtigkeit</span></a></li>
 						<li><a href="de-project-pages-publication.php" id="nav-pages-publication"><span>Tipps zum Import</span></a></li>
-						<li><a href="de-project-pages-solution.php" id="nav-pages-solution"><span>Lösung/Veränderung/Innovation</span></a></li>
+						<li><a href="de-project-pages-solution.php" id="nav-pages-solution"><span>Lösung / Veränderung / Innovation</span></a></li>
         </ul>
     </li>
 
-    <li><a href="de-project-funder.php" id="nav-funder" class="folder"><span>Informationen für den Förderer</span></a>
+    <li><a href="de-project-funder.php" id="nav-funder" class="folder"><span>Informationen für Förderer</span></a>
 			<ul class="funder nav2">
 				<li><a href="de-project-funder-role.php" id="nav-funder-role"><span>Rollen und Rechte verwalten</span></a></li>
 				<li><a href="de-project-funder-comment.php" id="nav-funder-comment"><span>Kommentarfunktion</span></a></li>

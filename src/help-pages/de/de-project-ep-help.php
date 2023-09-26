@@ -4,18 +4,18 @@
 <html lang="de">
 
 <head>
-<?php 
-include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte) 
+<?php
+include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta, Stil, Scripte)
 ?>
- 
-    <title>Titel eintragen (SynSICRIS-Hilfe)</title>   
-  
+
+    <title>Titel eintragen (SynSICRIS-Hilfe)</title>
+
 </head>
- 
+
   <body class="ep" id="ep-help">
-  
+
   <?php include("includes/header.inc.php"); echo "\n"; // Header ("SynSICRIS Hilfe") ?>
-	
+
 	 <?php /* Alte Navigation kann geloescht werden.
 	 <h1>&nbsp;</h1>
 	 <!-- Platzhalter deutsch / englisch für Auswahl anderer Sprache -->
@@ -31,9 +31,9 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 	  <n3><strong>Hilfe</strong></n3><br>
 	  <n2><a href="de-project-details-pages.php">Bereiche</a></n2> <!-- Datei fehlt -->
 	  */ ?>
-  
+
   <?php include("includes/sidenav.inc.php"); echo "\n"; // Seitennavigation ?>
-  
+
 	<main>
 
 
@@ -42,7 +42,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
 		<article>
 		<h1>Beispiele wirtschaftliche Verwertung</h1>
-    <p>(Entwicklungen) / Innovationen / Verbesserungen im Bereich:</p>
+    <p><strong>(Entwicklungen) / Innovationen / Verbesserungen im Bereich:</strong></p>
       <ul>
         <li>Produkte/Waren oder Dienstleistungen (inkl. Demonstratoren, Prototypen oder Modelle, die weiter zu Waren oder Dienstleistungen entwickelt werden können (ggf. auch mit neuen Partnern))</li>
         <li>Produktionsprozesse (inkl. technischer Tests, Analysen, Zertifizierung)</li>
@@ -53,7 +53,9 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
         <li>Verwaltung und Management (z.B. Verbesserung von Arbeitsstrukturen oder –abläufen, Reduzierung von Arbeitsunfällen)</li>
       </ul>
 
-      Beispiele für wirtschaftlichen Nutzen oder Erfolg
+<br>
+
+    <p><strong>Beispiele für wirtschaftlichen Nutzen oder Erfolg:</strong></p>
         <ul>
           <li>Identifizierung von Marktpotentialen oder Schaffung bzw. Erschließung neuer oder Sicherung bestehender Märkte</li>
           <li>Stärkung im Wettbewerb durch Wissensvorsprung</li>
@@ -152,6 +154,6 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
 
 	<?php include("includes/footer.inc.php"); echo "\n";?>
-    
+
   </body>
 </html>

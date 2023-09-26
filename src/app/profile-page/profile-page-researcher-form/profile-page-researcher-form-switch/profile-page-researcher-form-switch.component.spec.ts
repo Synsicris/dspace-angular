@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfilePageResearcherFormSwitchComponent } from './profile-page-researcher-form-switch.component';
 
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 describe('ProfilePageResearcherFormSwitchComponent', () => {
   let component: ProfilePageResearcherFormSwitchComponent;

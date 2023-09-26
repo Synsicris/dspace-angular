@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+
 import { NgbDropdown, NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
-import { findIndex, uniqueId } from 'lodash';
+import findIndex  from 'lodash/findIndex';
+import uniqueId from 'lodash/uniqueId';
 
 import { FacetValue } from '../../../../search/models/facet-value.model';
 import { SearchFilterConfig } from '../../../../search/models/search-filter-config.model';

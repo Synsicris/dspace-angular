@@ -1,4 +1,3 @@
-import { QuestionsBoardStateService } from './../questions-board/core/questions-board-state.service';
 import { NgModule } from '@angular/core';
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
@@ -65,11 +64,16 @@ import { PublisherPolicyComponent } from './sections/sherpa-policies/publisher-p
 import {
   PublicationInformationComponent
 } from './sections/sherpa-policies/publication-information/publication-information.component';
+import { UploadModule } from '../shared/upload/upload.module';
 import {
   MetadataInformationComponent
 } from './sections/sherpa-policies/metadata-information/metadata-information.component';
+import { SectionFormOperationsService } from './sections/form/section-form-operations.service';
+import { SubmissionSectionIdentifiersComponent } from './sections/identifiers/section-identifiers.component';
 import { SubmissionSectionCorrectionComponent } from './sections/correction/section-correction.component';
+import { MyDspaceSearchModule } from '../my-dspace-page/my-dspace-search.module';
 import { ImpactPathwayCoreModule } from '../impact-pathway-board/core/impact-pathway-core.module';
+import { QuestionsBoardStateService } from '../questions-board/core/questions-board-state.service';
 
 const ENTRY_COMPONENTS = [
   // put only entry components that use custom decorator
@@ -101,6 +105,7 @@ const DECLARATIONS = [
   SubmissionSectionUploadFileComponent,
   SubmissionSectionUploadFileEditComponent,
   SubmissionSectionUploadFileViewComponent,
+  SubmissionSectionIdentifiersComponent,
   SubmissionImportExternalComponent,
   ThemedSubmissionImportExternalComponent,
   SubmissionImportExternalSearchbarComponent,
@@ -121,21 +126,27 @@ const DECLARATIONS = [
     StoreModule.forFeature('submission', submissionReducers, storeModuleConfig as StoreConfig<SubmissionState, Action>),
     EffectsModule.forFeature(submissionEffects),
     JournalEntitiesModule.withEntryComponents(),
+    MyDspaceSearchModule.withEntryComponents(),
     ResearchEntitiesModule.withEntryComponents(),
     FormModule,
     NgbModalModule,
     NgbCollapseModule,
     NgbAccordionModule,
+    UploadModule,
     ImpactPathwayCoreModule
   ],
   declarations: DECLARATIONS,
-  exports: DECLARATIONS,
+  exports: [
+    ...DECLARATIONS,
+    FormModule,
+  ],
   providers: [
     SectionUploadService,
     SectionsService,
     SubmissionUploadsConfigDataService,
     SubmissionAccessesConfigDataService,
     SectionAccessesService,
+    SectionFormOperationsService,
     DetectDuplicateService,
     QuestionsBoardStateService
   ]

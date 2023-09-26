@@ -1,7 +1,7 @@
-import { isEqual } from 'lodash';
+import isEqual from 'lodash/isEqual';
 import {
   WorkspaceitemSectionUploadFileObject
-} from './../../../core/submission/models/workspaceitem-section-upload-file.model';
+} from '../../../core/submission/models/workspaceitem-section-upload-file.model';
 import { ChangeDetectorRef, Component, Inject, QueryList, ViewChildren } from '@angular/core';
 
 import { BehaviorSubject, combineLatest as observableCombineLatest, Observable, Subscription } from 'rxjs';
@@ -325,7 +325,7 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
         switchMap((submissionUploader: SubmissionUploadFilesComponent) => {
           this.submissionUploader = submissionUploader;
           return this.submissionUploader?.uploader?.onCompleteItem.pipe(
-            map((completeItems) => {
+            map((completeItems: any) => {
               if (hasValue(completeItems) && isNotEmpty(completeItems) && !this.editBitstreamModalOpenedOnce) {
                 const fileEntries = this.fileEntryRef.toArray();
                 if (isNotEmpty(fileEntries)) {

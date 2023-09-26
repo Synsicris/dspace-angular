@@ -162,7 +162,7 @@ export class EditSimpleItemModalComponent implements OnInit {
   private parsedFormData(formData): MetadataMap {
     if (this.formModel.length > Object.keys(formData).length) {
       this.formModel.forEach((model: DynamicRowGroupModel) => {
-        if (Object.keys(formData).indexOf(model.group[0].name) === -1) {
+        if (Object.keys(formData).indexOf(model.group[0].name) === -1 && this.allFormData[model.group[0].name]) {
           const addFormData: any = this.allFormData[model.group[0].name];
           formData = Object.assign({}, formData, { [model.group[0].name]: [Object.assign({}, addFormData[0], { value: null }) as FormFieldMetadataValueObject] });
         }

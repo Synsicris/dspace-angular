@@ -15,30 +15,36 @@ import { map } from 'rxjs/operators';
  * management rights
  */
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ProjectVersionAdministratorGuard extends SomeFeatureAuthorizationGuard {
-  constructor(protected authorizationService: AuthorizationDataService,
-    protected router: Router,
-    protected authService: AuthService,
-    protected aroute: ActivatedRoute,
-    protected itemService: ItemDataService,) {
-    super(authorizationService, router, authService);
-  }
+    constructor(protected authorizationService: AuthorizationDataService,
+                protected router: Router,
+                protected authService: AuthService,
+                protected aroute: ActivatedRoute,
+                protected itemService: ItemDataService,) {
+        super(authorizationService, router, authService);
+    }
 
-  /**
-   * Check group management rights
-   */
-  getFeatureIDs(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FeatureID[]> {
-    return observableOf([FeatureID.isCoordinatorOfProject, FeatureID.isFunderOfProject, FeatureID.isReaderOfProject]);
-  }
+    /**
+     * Check group management rights
+     */
+    getFeatureIDs(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FeatureID[]> {
+        return observableOf([
+            FeatureID.AdministratorOf,
+            FeatureID.isCoordinatorOfProject,
+            FeatureID.isFunderOfProject,
+            FeatureID.isReaderOfProject,
+            FeatureID.isExternalreaderOfProject
+        ]);
+    }
 
-  getObjectUrl(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<string> {
-    return this.itemService.findById(route.params.id).pipe(
-      getFirstSucceededRemoteDataPayload(),
-      map((project: Item) => {
-        return project._links.self.href;
-      })
-    );
-  }
+    getObjectUrl(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<string> {
+        return this.itemService.findById(route.params.id).pipe(
+            getFirstSucceededRemoteDataPayload(),
+            map((project: Item) => {
+                return project._links.self.href;
+            })
+        );
+    }
 }

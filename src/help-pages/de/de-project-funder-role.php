@@ -36,13 +36,20 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 
 
 
-      <h1>Rollen und Rechte verwalten</h1>
+      <h1>Rollen und Rechte der Förderer verwalten</h1>
 
 		<article>
 
 		<img src="img/de_project_funder_role_RechteRollenmanagement.png">
 
 		</article>
+
+    <article>
+    <p> Es gibt drei Rollen, die mit unterschiedlich weitreichenden Rechten verbunden sind:</p>
+
+    <img src="img/de_project_funder_role_drei_Rollen.png">
+
+    </article>
 
 
     </main>

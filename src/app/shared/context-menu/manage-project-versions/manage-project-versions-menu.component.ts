@@ -39,6 +39,10 @@ export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponen
    */
   public isReaderOfProject$: Observable<boolean>;
   /**
+   * A boolean representing if user is administrator of the current project
+   */
+  public isAdminstrator$: Observable<boolean>;
+  /**
    * A boolean representing if user is coordinator or founder for the current project
    */
   public mainVersion: Item;
@@ -89,15 +93,24 @@ export class ManageProjectVersionsMenuComponent extends ContextMenuEntryComponen
 
     this.isCoordinatorOfProject$ = this.authorizationService.isAuthorized(FeatureID.isCoordinatorOfProject, this.contextMenuObject.self);
     this.isFounderOfProject$ = this.authorizationService.isAuthorized(FeatureID.isFunderOfProject, this.contextMenuObject.self);
-    this.isReaderOfProject$ = this.authorizationService.isAuthorized(FeatureID.isReaderOfProject, this.contextMenuObject.self);
+    this.isAdminstrator$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf, this.contextMenuObject.self);
+    this.isReaderOfProject$ =
+      forkJoin([
+        this.authorizationService.isAuthorized(FeatureID.isReaderOfProject, this.contextMenuObject.self),
+        this.authorizationService.isAuthorized(FeatureID.isExternalreaderOfProject, this.contextMenuObject.self)
+      ])
+        .pipe(
+          map(([reader, externalReader]) => reader || externalReader)
+        );
     this.isAuthorized$ =
       forkJoin([
         this.isCoordinatorOfProject$.pipe(take(1)),
         this.isFounderOfProject$.pipe(take(1)),
-        this.isReaderOfProject$.pipe(take(1))
+        this.isReaderOfProject$.pipe(take(1)),
+        this.isAdminstrator$.pipe(take(1))
       ])
         .pipe(
-          map(([coordinator, funder, reader]) => coordinator || funder || reader)
+          map(([coordinator, funder, reader, isAdminstrator]) => coordinator || funder || reader || isAdminstrator)
         );
   }
 

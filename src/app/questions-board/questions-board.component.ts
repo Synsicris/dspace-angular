@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
-import { isEqual } from 'lodash';
 
 import { Item } from '../core/shared/item.model';
 import { Community } from '../core/shared/community.model';
@@ -13,6 +12,10 @@ import { ActivatedRoute } from '@angular/router';
 import { VersionSelectedEvent } from '../shared/item-version-list/item-version-list.component';
 import { AlertRole, getProgrammeRoles } from '../shared/alert/alert-role/alert-role';
 import { ProjectAuthorizationService } from '../core/project/project-authorization.service';
+import { QuestionsBoardService } from './core/questions-board.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationModalComponent } from '../shared/confirmation-modal/confirmation-modal.component';
+import { QuestionsUploadStepComponent } from './steps/upload-step/questions-upload-step/questions-upload-step.component';
 
 @Component({
   selector: 'ds-questions-board',
@@ -29,7 +32,17 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
   /**
    * If the current user is a funder project manager
    */
+  @Input() isAdmin: boolean;
+
+  /**
+   * If the current user is a funder project manager
+   */
   @Input() isFunderProject: boolean;
+
+  /**
+   * If the current user is project reader
+   */
+  @Input() isProjectReader: boolean;
 
   /**
    * The prefix to use for the i18n keys
@@ -56,6 +69,17 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
    */
   @Input() showUploadStep = false;
 
+  /**
+   * Flag to indicate if the clear board button should be shown
+   */
+  @Input() showClearBoardButton = false;
+
+  /**
+   * The upload step component reference
+   * @memberof QuestionsBoardComponent
+   */
+  @ViewChild('uploadFileStep') uploadFileStep: QuestionsUploadStepComponent;
+
   public questionsBoardObjectId: string;
 
   /**
@@ -80,13 +104,17 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
   public funderRoles: AlertRole[];
 
   constructor(
+    protected questionsBoardService: QuestionsBoardService,
     protected questionsBoardStateService: QuestionsBoardStateService,
     protected aroute: ActivatedRoute,
-    private projectAuthorizationService: ProjectAuthorizationService
+    private projectAuthorizationService: ProjectAuthorizationService,
+    private modalService: NgbModal,
+    private chd: ChangeDetectorRef
   ) {
   }
 
   ngOnInit(): void {
+    this.questionsBoardService.isAdmin = this.isAdmin;
     this.questionsBoardObjectId = this.questionsBoardObject?.id;
     this.questionsBoardStep$ = this.questionsBoardStateService.getQuestionsBoardStep(this.questionsBoardObjectId);
     this.subs.push(
@@ -125,6 +153,33 @@ export class QuestionsBoardComponent implements OnInit, OnDestroy {
    */
   onVersionDeselected() {
     this.questionsBoardStateService.dispatchStopCompare(this.questionsBoardObject?.id);
+  }
+
+  /**
+   * Clear all questions board tasks from all the steps.
+   * If upload step is present, clear all files from upload step.
+   */
+  clearBoard() {
+    if (this.questionsBoardObject?.id) {
+      const modalRef = this.modalService.open(ConfirmationModalComponent);
+      modalRef.componentInstance.dso = this.questionsBoardObject;
+      modalRef.componentInstance.headerLabel = 'confirmation-modal.clear-question-board.header';
+      modalRef.componentInstance.infoLabel = 'confirmation-modal.clear-question-board.info';
+      modalRef.componentInstance.cancelLabel = 'confirmation-modal.clear-question-board.cancel';
+      modalRef.componentInstance.confirmLabel = 'confirmation-modal.clear-question-board.confirm';
+      modalRef.componentInstance.brandColor = 'danger';
+      modalRef.componentInstance.confirmIcon = 'fas fa-trash';
+      modalRef.componentInstance.response.pipe(take(1)).subscribe((confirm: boolean) => {
+        if (confirm) {
+          this.questionsBoardStateService.dispatchClearQuestionBoardSteps(this.questionsBoardObject.id);
+          if (this.showUploadStep && this.uploadFileStep?.uploadConfigId) {
+            this.questionsBoardStateService.dispatchRemoveQuestionBoardFiles(this.questionsBoardObject.id, this.uploadFileStep.uploadConfigId);
+            this.uploadFileStep.onFileEventChanges(true);
+            this.chd.detectChanges();
+          }
+        }
+      });
+    }
   }
 
   /**

@@ -53,7 +53,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
     </article>
 
         <br>
-        
+
 		<article>
       Es gibt vier Rollen, die mit unterschiedlich weitreichenden Rechten verbunden sind:
 
@@ -63,7 +63,7 @@ include("../includes/head-content.inc.php"); echo "\n"; // Angaben im Head (Meta
 		</article>
 
     <article>
-  <img src="img/de_project_use_role_Rollen_in_Verbund_und_Projekt.png">
+  <img src="img/de_project_use_role_vier_Rollen.png">
     </article>
 
 

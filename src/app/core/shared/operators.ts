@@ -1,5 +1,5 @@
-import { combineLatest as observableCombineLatest, Observable, interval } from 'rxjs';
-import { filter, find, map, switchMap, take, takeWhile, debounce, debounceTime } from 'rxjs/operators';
+import { combineLatest as observableCombineLatest, interval, Observable } from 'rxjs';
+import { debounce, debounceTime, filter, find, map, switchMap, take, takeWhile } from 'rxjs/operators';
 import { hasNoValue, hasValue, hasValueOperator, isNotEmpty } from '../../shared/empty.util';
 import { SearchResult } from '../../shared/search/models/search-result.model';
 import { PaginatedList } from '../data/paginated-list.model';
@@ -157,6 +157,10 @@ export const getAllSucceededRemoteData = <T>() =>
   (source: Observable<RemoteData<T>>): Observable<RemoteData<T>> =>
     source.pipe(filter((rd: RemoteData<T>) => rd.hasSucceeded));
 
+export const getAllSucceededNotStaledRemoteData = <T>() =>
+  (source: Observable<RemoteData<T>>): Observable<RemoteData<T>> =>
+    source.pipe(filter((rd: RemoteData<T>) => rd.isSuccess));
+
 export const toDSpaceObjectListRD = <T extends DSpaceObject>() =>
   (source: Observable<RemoteData<PaginatedList<SearchResult<T>>>>): Observable<RemoteData<PaginatedList<T>>> =>
     source.pipe(
@@ -226,7 +230,7 @@ export const metadataFieldsToString = () =>
             map((schema: MetadataSchema) => ({ field, schema }))
           );
         });
-        return observableCombineLatest(fieldSchemaArray);
+        return isNotEmpty(fieldSchemaArray) ? observableCombineLatest(fieldSchemaArray) : [[]];
       }),
       map((fieldSchemaArray: { field: MetadataField, schema: MetadataSchema }[]): string[] => {
         return fieldSchemaArray.map((fieldSchema: { field: MetadataField, schema: MetadataSchema }) => fieldSchema.schema.prefix + '.' + fieldSchema.field.toString());

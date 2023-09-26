@@ -8,7 +8,7 @@ import { of as observableOf } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { cold } from 'jasmine-marbles';
 
-import { MYDSPACE_ROUTE, MyDSpacePageComponent, SEARCH_CONFIG_SERVICE } from './my-dspace-page.component';
+import { MyDSpacePageComponent, SEARCH_CONFIG_SERVICE } from './my-dspace-page.component';
 import { SearchService } from '../core/shared/search/search.service';
 import { MyDSpaceConfigurationService } from './my-dspace-configuration.service';
 import { MyDSpaceConfigurationValueType } from './my-dspace-configuration-value-type';

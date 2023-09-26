@@ -65,10 +65,11 @@ export class ItemExportService {
     searchOptions: SearchOptions,
     entityType: string,
     format: ItemExportFormat,
-    itemList: string[] = []
+    itemList: string[] = [],
+    updateScreenshots: boolean
   ): Observable<number> {
     if (molteplicity === ItemExportFormatMolteplicity.SINGLE) {
-      return this.itemExportFormatService.doExport(item.uuid, format);
+      return this.itemExportFormatService.doExport(item.uuid, format, updateScreenshots);
     } else {
       return this.itemExportFormatService.doExportMulti(entityType, format, searchOptions, itemList);
     }

@@ -10,7 +10,8 @@ import { Community } from '../../../../../core/shared/community.model';
 import { ActivatedRoute } from '@angular/router';
 import { RemoteData } from '../../../../../core/data/remote-data';
 import { filter, map, take } from 'rxjs/operators';
-import { hasValue } from '../../../../../shared/empty.util';
+import { hasValue, isNotEmpty } from '../../../../../shared/empty.util';
+import { ProjectVersionService } from '../../../../../core/project/project-version.service';
 
 @Component({
   selector: 'ds-cris-layout-search-box',
@@ -60,6 +61,7 @@ export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent 
   protected subscriptions: Subscription[] = [];
 
   constructor(public cd: ChangeDetectorRef,
+              protected projectVersion: ProjectVersionService,
               protected route: ActivatedRoute,
               protected translateService: TranslateService,
               @Inject('boxProvider') public boxProvider: CrisLayoutBox,
@@ -99,6 +101,7 @@ export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent 
    */
   protected initCanCreateItems$(): Observable<boolean> {
     return this.route.data.pipe(
+      map((data) => isNotEmpty(data?.isVersionOfAnItem) ? data.isVersionOfAnItem : this.projectVersion.isVersionOfAnItem(this.item)),
       map((data) => data.isVersionOfAnItem !== true),
       filter((isVersionOfAnItem) => hasValue(isVersionOfAnItem)),
       take(1)

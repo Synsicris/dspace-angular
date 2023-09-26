@@ -4,7 +4,7 @@
       <!-- big add button for new work package above the table -->
       <button class="btn btn-link text-decoration-none button-add-workpackage"
               title="{{'working-plan.chart.toolbar.add-btn' | translate}}"
-              [disabled]="(compareMode | async) || isVersionOf"
+              [disabled]="!(canAdd$ | async) || (compareMode | async) || isVersionOf"
               (click)="createWorkpackage()">
         <i class="fas fa-plus-circle fa-2x"></i>&nbsp;{{'working-plan.chart.toolbar.add-btn' | translate}}
       </button>

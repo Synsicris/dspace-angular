@@ -23,6 +23,11 @@ export class ProjectManageVersionComponent implements OnInit {
   item$: BehaviorSubject<Item> = new BehaviorSubject<Item>(null);
 
   /**
+   * A boolean representing if user is site administrator
+   */
+  public isAdministrator$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
+
+  /**
    * A boolean representing if user is coordinator or founder for the current project
    */
   public isCoordinatorOfProject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
@@ -37,6 +42,11 @@ export class ProjectManageVersionComponent implements OnInit {
    */
   public isFounderManagerOrReaderOfProject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
 
+  /**
+   * A boolean representing if user is reader of the current project
+   */
+  public isProjectReader$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
+
   constructor(
     protected authorizationService: ProjectAuthorizationService,
     protected router: ActivatedRoute) {
@@ -47,6 +57,10 @@ export class ProjectManageVersionComponent implements OnInit {
     const item$ = this.router.data.pipe(
       map((data: Params) => data.item.payload)
     );
+    const isAdministrator$ = item$.pipe(
+      switchMap((item: Item) => this.authorizationService.isAdmin())
+    );
+
     const isCoordinator$ = item$.pipe(
       switchMap((item: Item) => this.authorizationService.isCoordinator(item))
     );
@@ -62,12 +76,18 @@ export class ProjectManageVersionComponent implements OnInit {
       switchMap((item: Item) => this.authorizationService.isFunderReaderOfProgramme(item))
     );
 
-    combineLatest([item$, isCoordinator$, isFunderOfProject$, isFunderManagerOfProject$, isFunderReaderOfProject$])
-      .subscribe(([item, isCoordinator, isFunderOfProject, isFunderManagerOfProject, isFunderReaderOfProject]) => {
+    const isProjectReader$ = item$.pipe(
+      switchMap((item: Item) => this.authorizationService.isProjectReader(item))
+    );
+
+    combineLatest([item$, isAdministrator$, isCoordinator$, isFunderOfProject$, isFunderManagerOfProject$, isFunderReaderOfProject$, isProjectReader$])
+      .subscribe(([item, isAdministrator, isCoordinator, isFunderOfProject, isFunderManagerOfProject, isFunderReaderOfProject, isProjectReader]) => {
         this.item$.next(item);
+        this.isAdministrator$.next(isAdministrator);
         this.isCoordinatorOfProject$.next(isCoordinator);
         this.isFounderOfProject$.next(isFunderOfProject);
         this.isFounderManagerOrReaderOfProject$.next(isFunderManagerOfProject || isFunderReaderOfProject);
+        this.isProjectReader$.next(isProjectReader);
       });
   }
 

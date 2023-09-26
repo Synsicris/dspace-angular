@@ -1,6 +1,6 @@
 import { Config } from './config.interface';
 import { FilterType } from '../app/shared/search/models/filter-type.model';
-import { MomentInputObject } from 'moment';
+
 
 export interface UrnConfig extends Config {
   name: string;
@@ -66,7 +66,7 @@ export interface DefaultSearchOperator<T> {
   value: T;
 }
 
-export type DefaultRangeSearchFilterValue = DefaultSearchOperator<MomentInputObject>;
+export type DefaultRangeSearchFilterValue = DefaultSearchOperator<Duration>;
 
 export interface DefaultRangeSearchFilterConfig extends DefaultSearchFilterConfig {
   filterType: 'range';

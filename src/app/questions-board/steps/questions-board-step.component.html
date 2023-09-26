@@ -16,16 +16,17 @@
             [dismissRoles]="funderRoles$ | async"
           ></ds-alert-role>
           <!-- removed the class for light grey background bg-light and insterted the class .background-pinboard for exploitation plan and interim report (rex 230717) -->
-          <div class="p-0 m-0 mb-2 rounded sy-background-pinboard"> 
+          <div class="p-0 m-0 mb-2 rounded sy-background-pinboard">
             <ds-questions-board-step-container [messagePrefix]="messagePrefix"
                                                [questionEntityType]="questionBoardEntityType"
                                                [questionsBoardStep]="questionsBoardStep"
                                                [isVersionOfAnItem]="isVersionOfAnItem"
                                                [projectCommunityId]="projectCommunityId"
                                                [fundingCommunity]="fundingCommunity"
-                                               [compareMode]="compareMode"></ds-questions-board-step-container>
+                                               [compareMode]="compareMode"
+                                               [isProjectReader]="isProjectReader"></ds-questions-board-step-container>
           </div>
-          <!-- here Accordeons of exploiting plan and interim report --> 
+          <!-- here Accordions of exploiting plan and interim report -->
           <ds-view-simple-item-form *ngIf="hasCheckbox && questionsBoardStep"
                                     [compareMode]="compareMode"
                                     [editMode]="getEditMode()"
@@ -35,7 +36,7 @@
                                     [formSectionName]="getSectionName()"
                                     [itemId]="questionsBoardStep.id"
                                     [compareItemId]="questionsBoardStep.compareId"
-                                    [disabled]="compareMode || isVersionOfAnItem"
+                                    [disabled]="isProjectReader || compareMode || isVersionOfAnItem"
                                     (itemUpdate)="updateQuestionsBoardStep($event)"></ds-view-simple-item-form>
 
           <ds-editable-textarea *ngIf="!hasCheckbox && questionsBoardStep"
@@ -48,7 +49,7 @@
                                 [editTitle]="messagePrefix + '.edit.btn.title' | translate"
                                 [fieldTitle]="messagePrefix + '.description.title' | translate"
                                 [content]="questionsBoardStep.description"
-                                [disabled]="compareMode || isVersionOfAnItem"
+                                [disabled]="isProjectReader || compareMode || isVersionOfAnItem"
                                 (contentChange)="updateQuestionsBoardStep($event)"></ds-editable-textarea>
         </div>
       </div>

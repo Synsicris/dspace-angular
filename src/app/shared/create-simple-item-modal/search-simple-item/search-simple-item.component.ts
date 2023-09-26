@@ -3,7 +3,8 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, O
 import { BehaviorSubject, combineLatest, from as observableFrom, Observable, Subscription } from 'rxjs';
 import { concatMap, debounceTime, map, scan, switchMap, tap } from 'rxjs/operators';
 import { NgbActiveModal, NgbDropdownConfig, NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
-import { findIndex } from 'lodash';
+import findIndex  from 'lodash/findIndex';
+
 import { hasValue, isEmpty, isNotEmpty } from '../../empty.util';
 import { PaginatedList } from '../../../core/data/paginated-list.model';
 import { SortDirection, SortOptions } from '../../../core/cache/models/sort-options.model';

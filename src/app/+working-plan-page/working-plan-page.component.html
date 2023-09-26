@@ -1,6 +1,7 @@
-<ds-working-plan *ngIf="(initialized | async)"
-                  [hasAnyFunderRole]="hasAnyFunderRole"
-                  [isFunderProject]="isFunderProject"
-                  [isVersionOf]="isVersionOf"
-                  [projectCommunityId]="projectCommunityId"
-                  [workingPlan]="workingPlanRD.payload" ></ds-working-plan>
+<ds-working-plan *ngIf="(initialized | async) && workingPlan && (loadedPage | async)"
+                 [hasAnyFunderRole]="hasAnyFunderRole"
+                 [isAdmin]="isAdmin"
+                 [isFunderProject]="isFunderProject"
+                 [isVersionOf]="isVersionOf"
+                 [projectCommunityId]="projectCommunityId"
+                 [workingPlan]="workingPlan"></ds-working-plan>

@@ -8,6 +8,7 @@ import { PaginatedSearchOptions } from '../../../../../shared/search/models/pagi
 import { RenderCrisLayoutBoxFor } from '../../../../decorators/cris-layout-box.decorator';
 import { CrisLayoutBox } from '../../../../../core/layout/models/box.model';
 import { Item } from '../../../../../core/shared/item.model';
+import { ViewMode } from '../../../../../core/shared/view-mode.model';
 
 
 @Component({
@@ -51,7 +52,8 @@ export class CrisLayoutPersonProjectsBoxComponent extends CrisLayoutBoxModelComp
     this.paginatedSearchOptions = new PaginatedSearchOptions({
       configuration: discoveryConfigurationName,
       pagination: pagination,
-      sort: new SortOptions('lastModified', SortDirection.DESC)
+      sort: new SortOptions('lastModified', SortDirection.DESC),
+      view: ViewMode.ListElement
     });
   }
 }

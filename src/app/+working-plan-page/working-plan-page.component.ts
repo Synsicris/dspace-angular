@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { BehaviorSubject, combineLatest } from 'rxjs';
@@ -13,12 +13,14 @@ import { Item } from '../core/shared/item.model';
 import { WorkingPlanStateService } from '../working-plan/core/working-plan-state.service';
 import { environment } from '../../environments/environment';
 import { ProjectVersionService } from '../core/project/project-version.service';
+import { PrintViewService } from '../shared/print-view/print-view.service';
+import { NativeWindowRef, NativeWindowService } from '../core/services/window.service';
 
 @Component({
   selector: 'ds-working-plan-page',
   templateUrl: './working-plan-page.component.html'
 })
-export class WorkingPlanPageComponent implements OnInit {
+export class WorkingPlanPageComponent implements OnInit, AfterContentChecked {
 
   initialized: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -26,6 +28,11 @@ export class WorkingPlanPageComponent implements OnInit {
    * If the current user is a funder Organizational/Project manager
    */
   hasAnyFunderRole: boolean;
+
+  /**
+   * If the current user is an administrator
+   */
+  isAdmin: boolean;
 
   /**
    * If the current user is a funder project manager
@@ -50,24 +57,37 @@ export class WorkingPlanPageComponent implements OnInit {
   /**
    * The working-plan item to displayed on this page
    */
-  workingPlanRD: RemoteData<Item>;
+  workingPlan: Item;
+
+  /**
+   * A boolean representing if the page is loaded or not
+   */
+  loadedPage: BehaviorSubject<boolean>;
 
   constructor(
+    @Inject(NativeWindowService) protected _window: NativeWindowRef,
     private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
     private projectVersionService: ProjectVersionService,
-    private workingPlanStateService: WorkingPlanStateService
-  ) { }
+    private workingPlanStateService: WorkingPlanStateService,
+    private printService: PrintViewService,
+  ) {
+    this.loadedPage = this.printService.loadedPage;
+  }
 
   /**
    * Initialize instance variables
    */
   ngOnInit(): void {
-
+    this.printService.preparePrintView('wp');
 
     const hasAnyFunderRole$ = this.route.data.pipe(
       map((data) => (data.isFunderOrganizationalManger || data.isFunderProject || data.isFunderReader) as boolean)
+    );
+
+    const isAdmin$ = this.route.data.pipe(
+      map((data) => data.isAdmin as boolean)
     );
 
     const isFunderProject$ = this.route.data.pipe(
@@ -108,14 +128,21 @@ export class WorkingPlanPageComponent implements OnInit {
       })
     );
 
-    combineLatest([projectItemId$, projectCommunityId$, workingPlanRD$, hasAnyFunderRole$, isFunderProject$]).pipe(take(1))
-      .subscribe(([projectItemId, projectCommunityId, workingPlanRD, hasAnyFunderRole, isFunderProject]) => {
+    combineLatest([projectItemId$, projectCommunityId$, workingPlanRD$, hasAnyFunderRole$, isFunderProject$, isAdmin$]).pipe(take(1))
+      .subscribe(([projectItemId, projectCommunityId, workingPlanRD, hasAnyFunderRole, isFunderProject, isAdmin]) => {
         this.projectItemId = projectItemId;
         this.projectCommunityId = projectCommunityId;
-        this.workingPlanRD = workingPlanRD;
+        this.workingPlan = workingPlanRD.hasSucceeded ? workingPlanRD.payload : null;
         this.hasAnyFunderRole = hasAnyFunderRole;
         this.isFunderProject = isFunderProject;
+        this.isAdmin = isAdmin;
         this.initialized.next(true);
       });
+  }
+
+  ngAfterContentChecked() {
+    if (this._window.nativeWindow) {
+      this.loadedPage.next(true);
+    }
   }
 }

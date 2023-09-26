@@ -57,6 +57,20 @@ export const environment: BuildConfig = {
       defaultTime: 0,
       maxBufferSize: 100,
       timePerMethod: { [RestRequestMethod.PATCH]: 3 } as any // time in seconds
+    },
+    // In-memory cache of server-side rendered pages. Disabled in test environment (max=0)
+    serverSide: {
+      debug: false,
+      botCache: {
+        max: 0,
+        timeToLive: 24 * 60 * 60 * 1000, // 1 day
+        allowStale: true,
+      },
+      anonymousCache: {
+        max: 0,
+        timeToLive: 10 * 1000, // 10 seconds
+        allowStale: true,
+      }
     }
   },
 
@@ -80,6 +94,7 @@ export const environment: BuildConfig = {
 
   // Form settings
   form: {
+    spellCheck: true,
     // NOTE: Map server-side validators to comparative Angular form validators
     validatorMap: {
       required: 'required',
@@ -137,16 +152,29 @@ export const environment: BuildConfig = {
           },
           {
             value: 500,
-            style: 'text-info'
-          },
-          {
-            value: 400,
             style: 'text-warning'
           },
           {
+            value: 400,
+            style: 'text-danger'
+          },
+          {
+            value: 300,
+            style: 'text-dark'
+          },
+          {
+            value: 200,
+            style: 'text-dark'
+          },
+          {
+            value: 100,
+            style: 'text-dark'
+          },
+          // default configuration
+          {
             value: 'default',
             style: 'text-muted'
-          },
+          }
         ]
       }
     },
@@ -255,7 +283,13 @@ export const environment: BuildConfig = {
       undoTimeout: 10000 // 10 seconds
     },
     // Show the item access status label in items lists
-    showAccessStatuses: false
+    showAccessStatuses: false,
+    bitstream: {
+      // Number of entries in the bitstream list in the item view page.
+      // Rounded to the nearest size in the list of selectable sizes on the
+      // settings menu.  See pageSizeOptions in 'pagination-component-options.model.ts'.
+      pageSize: 5
+    }
   },
   collection: {
     edit: {
@@ -302,6 +336,15 @@ export const environment: BuildConfig = {
     enabled: false,
     mathjax: false,
   },
+
+  vocabularies: [
+    {
+      filter: 'subject',
+      vocabulary: 'srsc',
+      enabled: true
+    }
+  ],
+
   crisLayout: {
     urn: [
       {
@@ -385,11 +428,11 @@ export const environment: BuildConfig = {
               filterType: 'range',
               minValue: {
                 operator: '-',
-                value: { day: 10 }
+                value: { days: 10 }
               },
               maxValue: {
                 operator: '+',
-                value: { day: 10 }
+                value: { days: 10 }
               }
             }
           }
@@ -424,10 +467,13 @@ export const environment: BuildConfig = {
       'cris.cms.footer',
     ]
   },
-  addThisPlugin: {
-    siteId: '',
-    scriptUrl: 'http://s7.addthis.com/js/300/addthis_widget.js#pubid=',
-    socialNetworksEnabled: false
+  addToAnyPlugin: {
+    scriptUrl: 'https://static.addtoany.com/menu/page.js',
+    socialNetworksEnabled: false,
+    buttons: ['btn1', 'btn2'],
+    showPlusButton: true,
+    showCounters: true,
+    title: 'DSpace CRIS 7 demo',
   },
   metricVisualizationConfig: [
     {
@@ -514,6 +560,15 @@ export const environment: BuildConfig = {
       }
     ]
   },
+
+  searchResult: {
+    additionalMetadataFields: [
+      {
+        entityType: 'default',
+        metadataConfiguration: []
+      }
+    ]
+  },
   projects: {
     projectsGrantsOptionsVocabularyName: 'item_shared',
     projectsEntityAdminEditMode: 'ADMIN_EDIT',
@@ -521,6 +576,10 @@ export const environment: BuildConfig = {
     projectsEntityFunderEditMode: 'FUNDER_EDIT',
     projectVersionUniqueIdMetadata: 'synsicris.uniqueid',
     excludeComparisonMetadata: ['dspace.entity.type'],
+    projectEditGrantsForm: 'edit_grants',
+    projectEditGrantsMetadata: 'cris.project.shared',
+    projectEditGrantsAdminMode: 'ADMIN_EDIT_GRANTS',
+    projectEditGrantsMode: 'EDIT_GRANTS',
     projectsBrowse: {
       adminAndFunders: {
         firstStepSearchQueryConfigurationName: 'firstStepSearchProjectsForAdminAndFunders',
@@ -544,7 +603,9 @@ export const environment: BuildConfig = {
     impactPathwayTasksFormSection: 'impact_pathway_task_form',
     impactPathwaysEditFormSection: 'impact_pathway-edit_form',
     impactPathwaysLinksEditFormSection: 'impact_pathway-edit_link_form',
+    impactPathwaysAdminEditMode: 'ADMIN_IMPACTPATHWAY',
     impactPathwaysEditMode: 'IMPACTPATHWAY',
+    impactPathwaysLinkAdminEditMode: 'ADMIN_IMPACTPATHWAY_LINK',
     impactPathwaysLinkEditMode: 'IMPACTPATHWAY_LINK',
     impactPathwayEntity: 'impactpathway',
     impactPathwayStepEntity: 'impactpathwaystep',
@@ -566,6 +627,7 @@ export const environment: BuildConfig = {
     workingPlanRelationMetadata: 'synsicris.relation.workingplan',
     workingPlanFormName: 'working_plan_form',
     workingPlanStepsFormName: 'working_plan_step_form',
+    workingPlanAdminEditMode: 'ADMIN_WORKINGPLAN',
     workingPlanEditMode: 'WORKINGPLAN',
     workingPlanEditFormSection: 'working_plan-edit_form',
     workingPlanStepStatusMetadata: 'synsicris.type.status',
@@ -588,6 +650,7 @@ export const environment: BuildConfig = {
   exploitationPlan: {
     questionsBoardFormPrefix: 'exploitation_plan',
     questionsBoardI18nPrefix: 'exploitation-plan',
+    questionsBoardDescriptionMetadata: 'dc.description',
     questionsBoardRelationMetadata: 'synsicris.relation.exploitationplan',
     questionsBoardStepEntityName: 'exploitationplanstep',
     questionsBoardStepRelationMetadata: 'exploitationplan.relation.step',
@@ -595,12 +658,14 @@ export const environment: BuildConfig = {
     questionsBoardPartnerMetadata: '',
     questionsBoardTaskFormSection: 'exploitation_plan_task_form',
     questionsBoardEditFormSection: 'exploitation_plan-edit_form',
+    questionsBoardAdminEditMode: 'ADMIN_EXPLOITATIONPLAN',
     questionsBoardEditMode: 'EXPLOITATIONPLAN',
     questionsBoardStepIcon: true
   },
   interimReport: {
     questionsBoardFormPrefix: 'interim_report',
     questionsBoardI18nPrefix: 'interim-report',
+    questionsBoardDescriptionMetadata: 'dc.description',
     questionsBoardRelationMetadata: 'synsicris.relation.interimreport',
     questionsBoardStepEntityName: 'interim_report_step',
     questionsBoardStepRelationMetadata: 'interimreport.relation.step',
@@ -608,6 +673,7 @@ export const environment: BuildConfig = {
     questionsBoardPartnerMetadata: '',
     questionsBoardTaskFormSection: 'interim_report_task_form',
     questionsBoardEditFormSection: 'interim_report-edit_form',
+    questionsBoardAdminEditMode: 'ADMIN_INTERIMREPORT',
     questionsBoardEditMode: 'INTERIMREPORT',
     questionsBoardStepIcon: false
   },
@@ -689,4 +755,5 @@ export const environment: BuildConfig = {
     commentRelationProjectVersionMetadata: 'synsicris.relation.commentProjectVersion',
     commentRelationBoardMetadata: 'synsicris.relation.commentBoard',
   }
+
 };

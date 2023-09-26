@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { trigger } from '@angular/animations';
 
-import { uniqueId } from 'lodash';
+import uniqueId from 'lodash/uniqueId';
 
 import { AlertType } from './aletr-type';
 import { fadeOutLeave, fadeOutState } from '../animations/fade';
@@ -40,7 +40,7 @@ export class AlertComponent implements OnInit {
   /**
    * A boolean representing if alert is collapsible
    */
-  @Input() collapsible = false;
+  @Input() collapsible = true;
 
   /**
    * A boolean representing if alert is rendered already collapsed

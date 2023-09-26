@@ -3,7 +3,10 @@
     <ds-search-export-csv *ngIf="showCsvExport" [searchConfig]="searchConfig" [useLabelsForExport]="useLabelsForExport"></ds-search-export-csv>
 </div>
 <div *ngIf="searchResults && searchResults?.hasSucceeded && !searchResults?.isLoading && searchResults?.payload?.page.length > 0" @fadeIn>
-    <ds-alert *ngIf="showSearchResultNotice" [type]="searchResultNoticeType" [content]="searchResultNotice"></ds-alert>
+  <ds-alert *ngIf="showSearchResultNotice" [type]="searchResultNoticeType" [content]="searchResultNotice"></ds-alert>
+
+  <ds-alert *ngIf="showAlertBox" [content]="configuration + '.alert.info'"></ds-alert>
+
     <ds-viewable-collection
             [config]="searchConfig.pagination"
             [sortConfig]="searchConfig.sort"
