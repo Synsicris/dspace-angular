@@ -15,17 +15,17 @@ export const _isVersionOfComparator: (versionItem: Item, targetItem: Item) => bo
 
 export function hasVersion(targetItem: Item, versionItem: Item): boolean {
   let compareResult = false;
-  let versionItemUniqueId = versionItem.firstMetadataValue(environment.projects.projectVersionUniqueIdMetadata);
-  let targetItemUniqueId = targetItem.firstMetadataValue(environment.projects.projectVersionUniqueIdMetadata);
+  let versionItemUniqueId = versionItem?.firstMetadataValue(environment.projects.projectVersionUniqueIdMetadata);
+  let targetItemUniqueId = targetItem?.firstMetadataValue(environment.projects.projectVersionUniqueIdMetadata);
   // both versioned
   if (versionItemUniqueId != null && targetItemUniqueId != null) {
     compareResult = targetItemUniqueId.startsWith(versionItemUniqueId.split('_')[0]) ||
       versionItemUniqueId.startsWith(targetItemUniqueId.split('_')[0]);
   } else if (versionItemUniqueId != null) {
-    const targetId = targetItem.id;
+    const targetId = targetItem?.id;
     compareResult = versionItemUniqueId?.startsWith(targetId);
   } else {
-    const targetId = versionItem.id;
+    const targetId = versionItem?.id;
     compareResult = targetItemUniqueId?.startsWith(targetId);
   }
   return compareResult;

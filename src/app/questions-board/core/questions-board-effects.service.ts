@@ -324,6 +324,7 @@ export class QuestionsBoardEffects {
         catchError((error: Error) => {
           if (error) {
             this.notificationsService.error(null, this.translate.get('exploitation-plan.compare.error'));
+            console.error(error);
           }
           return observableOf(new InitCompareErrorAction());
         }))

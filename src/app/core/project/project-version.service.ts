@@ -265,7 +265,7 @@ export class ProjectVersionService {
               getFirstCompletedRemoteData(),
               getRemoteDataPayload()
             )),
-            reduce((acc: any, value: any) => [...acc, value], []),
+            reduce((acc: any, value: any) => isNotEmpty(value) ? [...acc, value] : acc, []),
           );
         } else {
           return of([]);
@@ -286,7 +286,7 @@ export class ProjectVersionService {
                 getFirstCompletedRemoteData(),
                 getRemoteDataPayload()
               )),
-              reduce((acc: any, value: any) => [...acc, value], []),
+              reduce((acc: any, value: any) => isNotEmpty(value) ? [...acc, value] : acc, []),
             );
           } else {
             return of([]);
@@ -309,7 +309,7 @@ export class ProjectVersionService {
     return unionList.map((targetItem) => {
       let versionedItem: Item = null;
       let versionedItemIndex = findIndex(itemAddedList, (entry) => {
-        return targetItem.id === entry.id;
+        return targetItem?.id === entry?.id;
       });
       let status = ComparedVersionItemStatus.New;
       if (versionedItemIndex === -1) {

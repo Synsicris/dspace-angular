@@ -24,7 +24,7 @@ export class QuestionsBoardDirective {
   /* removed the colored icons for the exploitation plan */
 
   private getIconClassByType(): string[] {
-    let iconClasses: string[];
+    let iconClasses: string[] = [];
     switch (this.questionsBoardType) {
       case QuestionsBoardType.Question1:
         //iconClasses = ['far', 'fa-copyright', 'text-danger'];

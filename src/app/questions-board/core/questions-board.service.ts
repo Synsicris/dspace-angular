@@ -227,6 +227,7 @@ export class QuestionsBoardService {
 
   initQuestionsBoardTasksFromParentItem(questionsBoardObjectId: string, parentItem: Item, buildLinks = true): Observable<QuestionsBoardTask[]> {
     const relatedTaskMetadata = Metadata.all(parentItem.metadata, this.getQuestionsBoardRelationTasksMetadata());
+    const isVersion = this.projectVersionService.isVersionOfAnItem(parentItem);
     if (isEmpty(relatedTaskMetadata)) {
       return observableOf([]);
     } else {
@@ -237,7 +238,7 @@ export class QuestionsBoardService {
             if (rd.hasSucceeded) {
               return observableOf(this.initQuestionsBoardTask(rd.payload, parentItem.id));
             } else {
-              if (rd.statusCode === 404) {
+              if (rd.statusCode === 404 && !isVersion) {
                 // NOTE if a task is not found probably it has been deleted without unlinking it from parent step, so unlink it
                 return this.itemAuthorityRelationService.removeChildRelationFromParent(
                   this.getQuestionsBoardEditFormSection(),
@@ -329,11 +330,11 @@ export class QuestionsBoardService {
    *    the tasks or steps related to the object
    */
   public initQuestionsBoardStepFromCompareItem(compareObj: ComparedVersionItem, parentId, tasks: QuestionsBoardStep[] | QuestionsBoardTask[] = []): QuestionsBoardStep {
-    const type = compareObj.item.firstMetadataValue('dc.title');
-    const description = compareObj.item.firstMetadataValue('dc.description');
+    const type = compareObj.item?.firstMetadataValue('dc.title');
+    const description = compareObj.item?.firstMetadataValue('dc.description');
     return Object.assign(new QuestionsBoardStep(), {
-      id: compareObj.item.id,
-      compareId: compareObj.versionItem.id,
+      id: compareObj.item?.id,
+      compareId: compareObj.versionItem?.id,
       parentId: parentId,
       type: type,
       tasks: tasks,
@@ -350,16 +351,16 @@ export class QuestionsBoardService {
    *    the tasks or steps related to the object
    */
   public initQuestionsBoardTaskFromCompareItem(compareObj: ComparedVersionItem, parentId?: string, tasks: QuestionsBoardTask[] = []): QuestionsBoardTask {
-    const type = compareObj.item.firstMetadataValue('dspace.entity.type');
-    const description = compareObj.item.firstMetadataValue('dc.description');
-    const internalStatus = compareObj.item.firstMetadataValue('synsicris.type.internal');
-    const status = compareObj.item.firstMetadataValue('synsicris.type.status');
+    const type = compareObj.item?.firstMetadataValue('dspace.entity.type');
+    const description = compareObj.item?.firstMetadataValue('dc.description');
+    const internalStatus = compareObj.item?.firstMetadataValue('synsicris.type.internal');
+    const status = compareObj.item?.firstMetadataValue('synsicris.type.status');
     return Object.assign(new QuestionsBoardTask(), {
-      id: compareObj.item.id,
+      id: compareObj.item?.id,
       compareId: compareObj.versionItem?.id,
       compareStatus: compareObj.status,
       parentId: parentId,
-      title: compareObj.item.name,
+      title: compareObj.item?.name,
       type,
       tasks: tasks,
       description,
