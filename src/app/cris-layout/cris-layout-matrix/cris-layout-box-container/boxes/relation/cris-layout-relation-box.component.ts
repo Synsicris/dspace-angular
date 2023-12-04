@@ -102,7 +102,7 @@ export class CrisLayoutRelationBoxComponent extends CrisLayoutBoxModelComponent 
   protected initCanCreateItems$(): Observable<boolean> {
     return this.route.data.pipe(
       map((data) => isNotEmpty(data?.isVersionOfAnItem) ? data.isVersionOfAnItem : this.projectVersion.isVersionOfAnItem(this.item)),
-      map((data) => data.isVersionOfAnItem !== true),
+      map((isVersionOfAnItem) => isVersionOfAnItem !== true),
       filter((isVersionOfAnItem) => hasValue(isVersionOfAnItem)),
       take(1)
     );

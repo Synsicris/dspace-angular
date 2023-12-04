@@ -21,7 +21,7 @@
                   [scope]="projectScope?.uuid"
                   (refresh)="refresh()"></ds-item-create>
 
-  <ds-item-import-metadata-external
+  <ds-item-import-metadata-external *ngIf="canCreateItems$ | async"
                   additionalSearchFormOptions
                   [targetEntityType]="getTargetEntity()"
                   [item]="item"
