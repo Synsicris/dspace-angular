@@ -5,10 +5,10 @@ import {
   BehaviorSubject,
   combineLatest as combineLatestObservable,
   from as observableFrom,
+  from,
   Observable,
   of as observableOf,
-  throwError as observableThrowError,
-  from
+  throwError as observableThrowError
 } from 'rxjs';
 import {
   catchError,
@@ -356,7 +356,7 @@ export class ImpactPathwayService {
    */
   addImpactPathwayCompareLinksFromTaskItem(step: ImpactPathwayStep, impactPathwayId: string): Observable<RemoteData<Item>> {
     return from(step.tasks).pipe(
-      mergeMap((task) => this.itemService.findById(task.compareId).pipe(
+      mergeMap((task) => this.itemService.findById(task.compareId || task.id).pipe(
         getFinishedRemoteData(),
         tap((rd: RemoteData<Item>) => this.addImpactPathwayLinksFromTaskItem(rd.payload, impactPathwayId, step.id)),
       )),

@@ -1,7 +1,18 @@
 import { Injectable } from '@angular/core';
 
 import { from, from as observableFrom, of as observableOf } from 'rxjs';
-import { catchError, concatMap, filter, map, mergeMap, reduce, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import {
+  catchError,
+  concatMap,
+  filter,
+  map,
+  mergeMap,
+  reduce,
+  switchMap,
+  tap,
+  toArray,
+  withLatestFrom
+} from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
@@ -149,11 +160,13 @@ export class ImpactPathwayEffects {
         switchMap((compareItemList: ComparedVersionItem[]) => this.impactPathwayService.initCompareImpactPathwaySteps(compareItemList)),
         tap((steps: ImpactPathwayStep[]) => { globalSteps = steps; }),
         mergeMap((steps: ImpactPathwayStep[]) =>
-          from(steps),
-        ),
-        filter((step: ImpactPathwayStep) => isNotEmpty(step.tasks)),
-        mergeMap((step: ImpactPathwayStep) =>
-          this.impactPathwayService.addImpactPathwayCompareLinksFromTaskItem(step, action.payload.baseImpactPathwayId)
+          from(steps).pipe(
+            filter((step: ImpactPathwayStep) => isNotEmpty(step.tasks)),
+            mergeMap((step: ImpactPathwayStep) =>
+              this.impactPathwayService.addImpactPathwayCompareLinksFromTaskItem(step, action.payload.baseImpactPathwayId)
+            ),
+            toArray()
+          ),
         ),
         map(() => new InitCompareSuccessAction(action.payload.activeImpactPathwayId, globalSteps)),
         catchError((error: Error) => {
